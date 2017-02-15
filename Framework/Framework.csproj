@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2DFE87D1-D682-4435-A5E0-301D906DF76A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>B1PP</RootNamespace>
+    <AssemblyName>B1PP.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\B1PP.Framework.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\B1PP.Framework.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SAPBusinessOneSDK, Version=1.0.0.1, Culture=neutral, PublicKeyToken=c7c3cb60e45d119f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\sap\SAPBusinessOneSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connections\ActionResult.cs" />
+    <Compile Include="Connections\ConnectionException.cs" />
+    <Compile Include="Connections\ConnectionFactory.cs" />
+    <Compile Include="Connections\ConnectionString.cs" />
+    <Compile Include="Connections\DiApiConnection.cs" />
+    <Compile Include="Connections\DiApiConnectionSettings.cs" />
+    <Compile Include="Connections\IConnection.cs" />
+    <Compile Include="Connections\InsistentConnection.cs" />
+    <Compile Include="Connections\StandardConnection.cs" />
+    <Compile Include="Connections\UiApiConnection.cs" />
+    <Compile Include="Connections\Utilities.cs" />
+    <Compile Include="Database\AdapterBase.cs" />
+    <Compile Include="Database\AddUserField.cs" />
+    <Compile Include="Database\AddUserObject.cs" />
+    <Compile Include="Database\AddUserObjectErrorArgs.cs" />
+    <Compile Include="Database\AddUserTable.cs" />
+    <Compile Include="Database\AddUserTableErrorEventArgs.cs" />
+    <Compile Include="Database\ArchiveDateFieldAttribute.cs" />
+    <Compile Include="Database\AssemblySchemaInitializer.cs" />
+    <Compile Include="Database\Attributes\ApproveServiceAttribute.cs" />
+    <Compile Include="Database\Attributes\ChildUserTableAttribute.cs" />
+    <Compile Include="Database\Attributes\ExcludeFindColumnAttribute.cs" />
+    <Compile Include="Database\Attributes\FieldNameAttribute.cs" />
+    <Compile Include="Database\Attributes\ObjectServices.cs" />
+    <Compile Include="Database\Attributes\UserFieldAttribute.cs" />
+    <Compile Include="Database\Attributes\UserFieldDefaultValueAttribute.cs" />
+    <Compile Include="Database\Attributes\UserFieldEnumValuesAttribute.cs" />
+    <Compile Include="Database\Attributes\UserFieldOptionalAttribute.cs" />
+    <Compile Include="Database\Attributes\UserFieldValidValueAttribute.cs" />
+    <Compile Include="Database\Attributes\UserObjectAttribute.cs" />
+    <Compile Include="Database\Attributes\UserObjectServicesAttribute.cs" />
+    <Compile Include="Database\Attributes\UserTableAttribute.cs" />
+    <Compile Include="Database\B1EnumConverter.cs" />
+    <Compile Include="Database\B1EnumConvertException.cs" />
+    <Compile Include="Database\DocumentRecord.cs" />
+    <Compile Include="Database\DocumentRecordLine.cs" />
+    <Compile Include="Database\EnumConverter.cs" />
+    <Compile Include="Database\FileContents.cs" />
+    <Compile Include="Database\SimpleRecord.cs" />
+    <Compile Include="Database\ISimpleAutoIncrementRecord.cs" />
+    <Compile Include="Database\ISimpleRecord.cs" />
+    <Compile Include="Database\ManifestResourceReader.cs" />
+    <Compile Include="Database\PropertyUserFieldAdapter.cs" />
+    <Compile Include="Database\SchemaManager.cs" />
+    <Compile Include="Database\SetPropertyException.cs" />
+    <Compile Include="Database\SimpleAutoIncrementRecord.cs" />
+    <Compile Include="Database\SystemFieldAttribute.cs" />
+    <Compile Include="Database\TypeUserObjectAdapter.cs" />
+    <Compile Include="Database\TypeUserTableAdapter.cs" />
+    <Compile Include="Database\UnableToReadException.cs" />
+    <Compile Include="Database\UpdateUserField.cs" />
+    <Compile Include="Database\UserFieldAdapter.cs" />
+    <Compile Include="Database\UserFieldErrorEventArgs.cs" />
+    <Compile Include="Database\UserObjectAdapter.cs" />
+    <Compile Include="Database\UserTableAdapter.cs" />
+    <Compile Include="Database\Utilities.cs" />
+    <Compile Include="Data\Column.cs" />
+    <Compile Include="Data\DateTimeValueArg.cs" />
+    <Compile Include="Data\DisposableRecordset.cs" />
+    <Compile Include="Data\DoubleValueArg.cs" />
+    <Compile Include="Data\IColumn.cs" />
+    <Compile Include="Data\InstanceFactory.cs" />
+    <Compile Include="Data\IntegerValueArg.cs" />
+    <Compile Include="Data\IQueryArg.cs" />
+    <Compile Include="Data\IRecordsetReader.cs" />
+    <Compile Include="Data\MultipleDateTimeValuesArg.cs" />
+    <Compile Include="Data\MultipleDoubleValuesArg.cs" />
+    <Compile Include="Data\MultipleIntValuesArg.cs" />
+    <Compile Include="Data\MultipleStringValuesArg.cs" />
+    <Compile Include="Data\Query.cs" />
+    <Compile Include="Data\QueryArgBase.cs" />
+    <Compile Include="Data\QueryHelper.cs" />
+    <Compile Include="Data\StringValueArg.cs" />
+    <Compile Include="Data\XmlRecordsetReader.cs" />
+    <Compile Include="Extensions\Common\DoubleExtensions.cs" />
+    <Compile Include="Extensions\Common\IntegerExtensions.cs" />
+    <Compile Include="Extensions\Common\TypeExtensions.cs" />
+    <Compile Include="Extensions\SDK\DI\CompanyExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\ApplicationExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\DataTableExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\DbDataSourceExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\DbDataSourcesExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\FormExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\InvalidSpecificItemTypeException.cs" />
+    <Compile Include="Extensions\SDK\UI\ItemNotFoundException.cs" />
+    <Compile Include="Extensions\SDK\UI\ItemsExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\MatrixExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\UserDataSourceExtensions.cs" />
+    <Compile Include="Extensions\Types\Id.cs" />
+    <Compile Include="Extensions\Types\IdTypeConverter.cs" />
+    <Compile Include="Forms\B1Ids.cs" />
+    <Compile Include="Forms\CenterFormPreProcessor.cs" />
+    <Compile Include="Forms\Events\AfterAction.cs" />
+    <Compile Include="Forms\Events\ApplicationEvents\B1ApplicationEventDispatcher.cs" />
+    <Compile Include="Forms\Events\ApplicationEvents\IApplicationInstance.cs" />
+    <Compile Include="Forms\Events\B1EventFilterManager.cs" />
+    <Compile Include="Forms\Events\B1EventsManager.cs" />
+    <Compile Include="Forms\Events\B1SystemFormTypeAttribute.cs" />
+    <Compile Include="Forms\Events\BeforeAction.cs" />
+    <Compile Include="Forms\Events\ClassHelper.cs" />
+    <Compile Include="Forms\Events\ErrorEventArgs.cs" />
+    <Compile Include="Forms\Events\EventHandlerAlreadyExistsException.cs" />
+    <Compile Include="Forms\Events\EventListener.cs" />
+    <Compile Include="Forms\Events\FormDataEvents\B1FormDataEventDispatcher.cs" />
+    <Compile Include="Forms\Events\FormDataEvents\FormDataEventHandlerAttribute.cs" />
+    <Compile Include="Forms\Events\FormDataEvents\FormDataEventListener.cs" />
+    <Compile Include="Forms\Events\FormDataEvents\IFormDataEventListener.cs" />
+    <Compile Include="Forms\Events\HandlerAddedEventArgs.cs" />
+    <Compile Include="Forms\Events\HandlersCollection.cs" />
+    <Compile Include="Forms\Events\IEventFilterManager.cs" />
+    <Compile Include="Forms\Events\IEventListener.cs" />
+    <Compile Include="Forms\Events\IFilterable.cs" />
+    <Compile Include="Forms\Events\IFormInstance.cs" />
+    <Compile Include="Forms\Events\ISystemFormInstance.cs" />
+    <Compile Include="Forms\Events\ItemEvents\B1ItemEventDispatcher.cs" />
+    <Compile Include="Forms\Events\ItemEvents\ColumnsAttribute.cs" />
+    <Compile Include="Forms\Events\ItemEvents\FormItemEventListener.cs" />
+    <Compile Include="Forms\Events\ItemEvents\FormModesAttribute.cs" />
+    <Compile Include="Forms\Events\ItemEvents\IItemEventListener.cs" />
+    <Compile Include="Forms\Events\ItemEvents\ItemEventHandlerAttribute.cs" />
+    <Compile Include="Forms\Events\ItemEvents\ItemEventSignature.cs" />
+    <Compile Include="Forms\Events\LayoutKeyEvents\B1LayoutKeyEventDispatcher.cs" />
+    <Compile Include="Forms\Events\LayoutKeyEvents\ILayoutKeyEventListener.cs" />
+    <Compile Include="Forms\Events\LayoutKeyEvents\LayoutKeyEventHandlerAttribute.cs" />
+    <Compile Include="Forms\Events\LayoutKeyEvents\LayoutKeyEventListener.cs" />
+    <Compile Include="Forms\Events\MenuEvents\B1MenuEventDispatcher.cs" />
+    <Compile Include="Forms\Events\MenuEvents\EventHandlerAlreadyExistsException.cs" />
+    <Compile Include="Forms\Events\MenuEvents\FormMenuEventListener.cs" />
+    <Compile Include="Forms\Events\MenuEvents\IFormMenuEventListener.cs" />
+    <Compile Include="Forms\Events\MenuEvents\IMainMenuEventListener.cs" />
+    <Compile Include="Forms\Events\MenuEvents\IMainMenuInstance.cs" />
+    <Compile Include="Forms\Events\MenuEvents\MainMenuEventListener.cs" />
+    <Compile Include="Forms\Events\MenuEvents\MenuEventHandlerAttribute.cs" />
+    <Compile Include="Forms\Events\MethodInfoExtensions.cs" />
+    <Compile Include="Forms\Events\RightClickEvents\B1RightClickEventDispatcher.cs" />
+    <Compile Include="Forms\Events\RightClickEvents\IRightClickEventListener.cs" />
+    <Compile Include="Forms\Events\RightClickEvents\IRightClickEventSink.cs" />
+    <Compile Include="Forms\Events\RightClickEvents\RightClickEventHandlerAttribute.cs" />
+    <Compile Include="Forms\Events\RightClickEvents\RightClickEventListener.cs" />
+    <Compile Include="Forms\Events\RightClickEvents\RightClickEventSinkAlreadyExistsException.cs" />
+    <Compile Include="Forms\Events\Signature.cs" />
+    <Compile Include="Forms\Events\SystemFormLoadListener.cs" />
+    <Compile Include="Forms\Events\XmlEventFilter.cs" />
+    <Compile Include="Forms\FormLoader.cs" />
+    <Compile Include="Forms\IFormPreProcessor.cs" />
+    <Compile Include="Forms\ImageBaseDirectoryPreProcessor.cs" />
+    <Compile Include="Forms\NotFoundException.cs" />
+    <Compile Include="Forms\StatusBarMessage.cs" />
+    <Compile Include="Forms\SystemFormLoader.cs" />
+    <Compile Include="Forms\UserFormLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework.csproj.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

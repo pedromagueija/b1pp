@@ -1,0 +1,2934 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>B1PP.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:B1PP.Connections.ConnectionException">
+            <summary>
+            Represents an error while attempting to connect to SAP Business One.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Connections.ConnectionException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.ConnectionException" /> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.ConnectionException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.ConnectionException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.ConnectionException" /> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">
+            The class name is null or <see cref="P:System.Exception.HResult" /> is zero
+            (0).
+            </exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="info" /> parameter is null. </exception>
+        </member>
+        <member name="T:B1PP.Connections.ConnectionFactory">
+            <summary>
+            Creates different types of connections. 
+            It does not connect or manage the lifetime of the connections.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionFactory.CreateDiApiConnection(B1PP.Connections.DiApiConnectionSettings)">
+            <summary>
+            Creates the DI API connection.
+            </summary>
+            <param name="settings">The DI API connection settings.</param>
+            <returns>
+            A new DI API connection.
+            </returns>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionFactory.CreateStandardConnection">
+            <summary>
+            Creates the standard connection.
+            </summary>
+            <returns>
+            A new standard (UI and DI API) connection.
+            </returns>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionFactory.CreateUiApiConnection">
+            <summary>
+            Creates the UI API connection.
+            </summary>
+            <returns>
+            A new UI API connection.
+            </returns>
+        </member>
+        <member name="T:B1PP.Connections.ConnectionString">
+            <summary>
+            Represents the connection string used to connect to Business One.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.ConnectionString.DevConnectionString">
+            <summary>
+            Gets the development connection string.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.ConnectionString.commandLineArgs">
+            <summary>
+            Command line arguments.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionString.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.ConnectionString" /> class.
+            </summary>
+            <param name="commandLineArgs">The command line arguments.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the command line args is null.
+            </exception>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionString.GetConnectionString">
+            <summary>
+            Gets the connection string for Business One.
+            </summary>
+            <returns>
+            The <see cref="T:System.String" /> to use to connect to Business One.
+            </returns>
+            <remarks>
+            The command line arguments are checked to decide which connection string to use.
+            </remarks>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionString.op_Implicit(B1PP.Connections.ConnectionString)~System.String">
+            <summary>
+            Performs an implicit conversion from <see cref="T:B1PP.Connections.ConnectionString" /> to <see cref="T:System.String" />.
+            </summary>
+            <param name="connectionString">The connection string.</param>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionString.BusinessOneConnectionString">
+            <summary>
+            Returns the connection string from Business One on the command line args.
+            </summary>
+            <returns>
+            The first argument on the command line arguments (according to Business One documentation).
+            </returns>
+        </member>
+        <member name="M:B1PP.Connections.ConnectionString.IsBusinessOneConnectionString">
+            <summary>
+            Checks if the second argument is a match for a connection string.
+            </summary>
+            <returns>
+            True if there is a match, false otherwise.
+            </returns>
+        </member>
+        <member name="T:B1PP.Connections.DiApiConnection">
+            <summary>
+            Provides a connection to the DI API only.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnection.settings">
+            <summary>
+            The connection settings.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnection.Application">
+            <summary>
+            Gets the application.
+            </summary>
+            <remarks>
+            Relevant only on connection that support the Application, null otherwise.
+            </remarks>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnection.Company">
+            <summary>
+            Gets the company.
+            </summary>
+            <remarks>
+            Relevant only on connection that support the Company, null otherwise.
+            </remarks>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnection.Connected">
+            <summary>
+            Gets a value indicating whether this <see cref="T:B1PP.Connections.IConnection" /> is connected.
+            </summary>
+            <value>
+            <c>true</c> if connected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnection.Connect">
+            <summary>
+            Connects to SAP Business One.
+            </summary>
+            <exception cref="T:B1PP.Connections.ConnectionException">
+            Thrown when a connection cannot be established.
+            </exception>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnection.Disconnect">
+            <summary>
+            Disconnects from SAP Business One.
+            </summary>
+        </member>
+        <member name="T:B1PP.Connections.DiApiConnectionSettings">
+            <summary>
+            These settings will be used when establishing the connection to the DI API.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnectionSettings.companyDb">
+            <summary>
+            The company database (e.g.: SBODEMOUS).
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnectionSettings.dbPassword">
+            <summary>
+            The database password.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnectionSettings.dbUserName">
+            <summary>
+            The database user name.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnectionSettings.licenseServer">
+            <summary>
+            The license server.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnectionSettings.password">
+            <summary>
+            The company password.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnectionSettings.server">
+            <summary>
+            The server.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.DiApiConnectionSettings.userName">
+            <summary>
+            The company user name.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.CompanyDb">
+            <summary>
+            Gets or sets the company database name.
+            </summary>
+            <value>
+            Company database name (e.g.: SBODEMOUS).
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.DbPassword">
+            <summary>
+            Gets or sets the database password. Relevant only when UseTrusted is false.
+            </summary>
+            <value>
+            Password of the database server user.
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.DbServerType">
+            <summary>
+            Gets or sets the type of the database server.
+            </summary>
+            <value>
+            Database server type.
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.DbUserName">
+            <summary>
+            Gets or sets the name of the database user. Relevant only when UseTrusted is false.
+            </summary>
+            <value>
+            The database username (e.g.: sa).
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.Language">
+            <summary>
+            Gets or sets the language.
+            </summary>
+            <value>
+            The language to use during the connection.
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.LicenseServer">
+            <summary>
+            Gets or sets the license server. The format should be &lt;server:port&gt;.
+            </summary>
+            <value>
+            License server address in &lt;server:port&gt; format;
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.Password">
+            <summary>
+            Gets or sets the company password.
+            </summary>
+            <value>
+            Company username password.
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.Server">
+            <summary>
+            Gets or sets the database server.
+            </summary>
+            <value>
+            The database server. Use the same has your DI API configuration.
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.UserName">
+            <summary>
+            Gets or sets the name of the company user.
+            </summary>
+            <value>
+            Company username (e.g.: manager).
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.DiApiConnectionSettings.UseTrusted">
+            <summary>
+            Gets or sets a value indicating whether to establish a trusted connection.
+            </summary>
+            <value>
+            Uses windows authentication to establish the connection.
+            </value>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:B1PP.Connections.DiApiConnectionSettings" /> class from being created.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.CreateEmptySettings">
+            <summary>
+            Creates empty settings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.CreateStandardSettings(System.String,System.String,System.String,System.String,System.String,SAPbobsCOM.BoSuppLangs,System.String,SAPbobsCOM.BoDataServerTypes,System.String)">
+            <summary>
+            Creates the standard settings.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="dbUserName">Name of the database user.</param>
+            <param name="dbPassword">The database password.</param>
+            <param name="userName">Company username.</param>
+            <param name="password">Company password.</param>
+            <param name="language">The language.</param>
+            <param name="licenseServer">The license server in &lt;ServerName:Port&gt; format.</param>
+            <param name="dbServerType">Type of the database server.</param>
+            <param name="companyDb">The company database.</param>
+            <returns></returns>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.CreateTrustedSettings(System.String,System.String,System.String,SAPbobsCOM.BoSuppLangs,System.String,SAPbobsCOM.BoDataServerTypes,System.String)">
+            <summary>
+            Creates connection settings using trusted connection.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="userName">Company username.</param>
+            <param name="password">Company password.</param>
+            <param name="language">The language.</param>
+            <param name="licenseServer">The license server in &lt;ServerName:Port&gt; format.</param>
+            <param name="dbServerType">Type of the database server.</param>
+            <param name="companyDb">The company database.</param>
+            <returns></returns>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.Load(System.String)">
+            <summary>
+            Loads from configuration file.
+            </summary>
+            <param name="path">The configuration file path.</param>
+            <returns>
+            The settings loaded from the file.
+            </returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Thrown when the file cannot be found.
+            </exception>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.ToCompany">
+            <summary>
+            Returns a company object populated with the current settings.
+            </summary>
+            <returns>
+            A pre-populated company object.
+            </returns>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:B1PP.Connections.DiApiConnectionSettings.Deserialize(System.String)">
+            <summary>
+            Deserializes the file at the path into a <see cref="T:B1PP.Connections.DiApiConnectionSettings" />.
+            </summary>
+            <param name="path">The path to the configuration file.</param>
+            <returns>
+            The <see cref="T:B1PP.Connections.DiApiConnectionSettings" />.
+            </returns>
+        </member>
+        <member name="T:B1PP.Connections.IConnection">
+            <summary>
+            Represents a connection to SAP Business One.
+            A connection can be obtained from the <see cref="T:B1PP.Connections.ConnectionFactory"/>.
+            </summary>
+            <example>
+            How to perform a standard (UI and DI API) connection to SAP Business One.
+            <code>
+            IConnection connection = ConnectionFactory.CreateStandardConnection();
+            connection.Connect();
+            // Your code
+            connection.Disconnect(); 
+            </code>
+            </example>
+        </member>
+        <member name="P:B1PP.Connections.IConnection.Application">
+            <summary>
+            Returns the <see cref="T:SAPbouiCOM.Application"/> object, or null when the connection<para/>
+            type does not support it (e.g.: DI API only connections).
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.IConnection.Company">
+            <summary>
+            Returns the <see cref="T:SAPbouiCOM.Company"/> object, or null when the connection<para/>
+            type does not support it (e.g.: UI API only connections).
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.IConnection.Connected">
+            <summary>
+            Gets a value indicating whether this <see cref="T:B1PP.Connections.IConnection"/> is connected.
+            </summary>
+            <value>
+              <c>true</c> if connected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:B1PP.Connections.IConnection.Connect">
+            <summary>
+            Establishes the connection to SAP Business One.<para/>
+            Note that without connection both <see cref="P:B1PP.Connections.IConnection.Application"/> and <see cref="P:B1PP.Connections.IConnection.Company"/> are <see langword="null" />.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.IConnection.Disconnect">
+            <summary>
+            Disconnects from SAP Business One.<para/>
+            Note that without after disconnecting both <see cref="P:B1PP.Connections.IConnection.Application"/> and <see cref="P:B1PP.Connections.IConnection.Company"/> are <see langword="null" />.
+            </summary>
+        </member>
+        <member name="T:B1PP.Connections.InsistentConnection">
+            <summary>
+            Extends a connection with retry capabilities.
+            </summary>
+            <seealso cref="T:B1PP.Connections.IConnection" />
+        </member>
+        <member name="F:B1PP.Connections.InsistentConnection.connection">
+            <summary>
+            The actual connection.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.InsistentConnection.Audit">
+            <summary>
+            Gets the error messages.
+            </summary>
+            <value>
+            The error messages.
+            </value>
+        </member>
+        <member name="P:B1PP.Connections.InsistentConnection.Application">
+            <summary>
+            Returns the <see cref="T:SAPbouiCOM.Application" /> object, or null when the connection
+            <para />
+            type does not support it (e.g.: DI API only connections).
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.InsistentConnection.Company">
+            <summary>
+            Returns the <see cref="T:SAPbouiCOM.Company" /> object, or null when the connection
+            <para />
+            type does not support it (e.g.: UI API only connections).
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.InsistentConnection.Connected">
+            <summary>
+            Gets a value indicating whether this <see cref="T:B1PP.Connections.IConnection" /> is connected.
+            </summary>
+            <value>
+            <c>true</c> if connected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:B1PP.Connections.InsistentConnection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.InsistentConnection" /> class.
+            </summary>
+            <remarks>
+            By default the <see cref="T:B1PP.Connections.InsistentConnection" /> will use a <see cref="T:B1PP.Connections.StandardConnection" /> as its connection.
+            </remarks>
+        </member>
+        <member name="M:B1PP.Connections.InsistentConnection.#ctor(B1PP.Connections.IConnection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.InsistentConnection" /> class.
+            </summary>
+            <param name="connection">The connection type.</param>
+            <remarks>
+            By default the <see cref="T:B1PP.Connections.InsistentConnection" /> will use a <see cref="T:B1PP.Connections.StandardConnection" /> as its connection.
+            </remarks>
+            ///
+        </member>
+        <member name="M:B1PP.Connections.InsistentConnection.Connect">
+            <summary>
+            Establishes the connection to SAP Business One.
+            <para />
+            Note that without connection both <see cref="P:B1PP.Connections.InsistentConnection.Application" /> and <see cref="P:B1PP.Connections.InsistentConnection.Company" /> are <see langword="null" />.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.InsistentConnection.Disconnect">
+            <summary>
+            Disconnects from SAP Business One.
+            <para />
+            Note that without after disconnecting both <see cref="P:B1PP.Connections.InsistentConnection.Application" /> and <see cref="P:B1PP.Connections.InsistentConnection.Company" /> are
+            <see langword="null" />.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.InsistentConnection.ConnectAndAudit">
+            <summary>
+            Attempts to connect and audits any failures.
+            </summary>
+        </member>
+        <member name="T:B1PP.Connections.StandardConnection">
+            <summary>
+            Provides access to the Application and Company objects from Business One
+            <para />
+            by establishing a connection to the API.
+            <para />
+            When disconnected the Application and Company objects will be null.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.StandardConnection.connectionString">
+            <summary>
+            Gets the connection string.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.StandardConnection.Application">
+            <summary>
+            Gets the application.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.StandardConnection.Company">
+            <summary>
+            Gets the company.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.StandardConnection.Connected">
+            <summary>
+            Gets a value indicating whether this <see cref="T:B1PP.Connections.IConnection" /> is connected.
+            </summary>
+            <value>
+              <c>true</c> if connected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:B1PP.Connections.StandardConnection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.StandardConnection" /> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.StandardConnection.Connect">
+            <summary>
+            Connects this instance.
+            </summary>
+            <exception cref="T:B1PP.Connections.ConnectionException">
+            Thrown when an error connecting to Business One occurs.
+            </exception>
+        </member>
+        <member name="M:B1PP.Connections.StandardConnection.Disconnect">
+            <summary>
+            Disconnects from SAP Business One.
+            </summary>
+        </member>
+        <member name="T:B1PP.Connections.UiApiConnection">
+            <summary>
+            Provides a connection to the UI API only.
+            </summary>
+        </member>
+        <member name="F:B1PP.Connections.UiApiConnection.connectionString">
+            <summary>
+            Gets the connection string.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.UiApiConnection.Application">
+            <summary>
+            Gets the application.
+            </summary>
+        </member>
+        <member name="P:B1PP.Connections.UiApiConnection.Company">
+            <summary>
+            Gets the company.
+            </summary>
+            <remarks>
+            Relevant only on connection that support the Company, null otherwise.
+            </remarks>
+        </member>
+        <member name="P:B1PP.Connections.UiApiConnection.Connected">
+            <summary>
+            Gets a value indicating whether this <see cref="T:B1PP.Connections.IConnection" /> is connected.
+            </summary>
+            <value>
+            <c>true</c> if connected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:B1PP.Connections.UiApiConnection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Connections.UiApiConnection" /> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.UiApiConnection.Connect">
+            <summary>
+            Connects this instance.
+            </summary>
+            <exception cref="T:B1PP.Connections.ConnectionException">
+            Thrown when an error connecting to Business One occurs.
+            </exception>
+        </member>
+        <member name="M:B1PP.Connections.UiApiConnection.Disconnect">
+            <summary>
+            Disconnects from SAP Business One.
+            </summary>
+        </member>
+        <member name="T:B1PP.Connections.Utilities">
+            <summary>
+            Common utilities used in the project.
+            </summary>
+        </member>
+        <member name="M:B1PP.Connections.Utilities.Release(System.Object[])">
+            <summary>
+            Releases the COM objects.
+            </summary>
+            <param name="objects">COM objects to release.</param>
+        </member>
+        <member name="M:B1PP.Connections.Utilities.NotComObj(System.Object)">
+            <summary>
+            Checks if the object is a COM object.
+            </summary>
+            <param name="o">The object to check.</param>
+            <returns>True if the object is a COM object, false otherwise.</returns>
+        </member>
+        <member name="M:B1PP.Connections.Utilities.ReleaseOne(System.Object)">
+            <summary>
+            Releases the COM object.
+            </summary>
+            <param name="o">The object to release.</param>
+        </member>
+        <member name="T:B1PP.Database.AdapterBase">
+            <summary>
+            Common code to extract values from XML and fill in the Metadata objects.
+            </summary>
+        </member>
+        <member name="M:B1PP.Database.AdapterBase.GetPropertyValue(System.Xml.Linq.XAttribute,System.Type)">
+            <summary>
+            Extracts the value from the <paramref name="attribute"/> and<para/>
+            performs necessary conversions, e.g.: to B1 enumerations, when required.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <param name="propertyType">The type of the property.</param>
+            <returns>
+            The value for the property.
+            </returns>
+        </member>
+        <member name="M:B1PP.Database.AdapterBase.PopulateProperties``1(System.Collections.Generic.IEnumerable{System.Xml.Linq.XAttribute},System.Object)">
+            <summary>
+            Populates the properties.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="attributes">The attributes.</param>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="T:B1PP.Database.AddUserField">
+            <summary>
+            Adds a user field to the database.
+            </summary>
+            <remarks>
+            The user field object is released after being added
+            according to SAP recommendations.
+            </remarks>
+        </member>
+        <member name="T:B1PP.Database.Attributes.ApproveServiceAttribute">
+            <summary>
+            Activates the user defined object service "Approve".
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="P:B1PP.Database.Attributes.ApproveServiceAttribute.TemplateId">
+            <summary>
+            Gets the workflow manager template identifier.
+            </summary>
+            <value>
+            The workflow manager template identifier.
+            </value>
+        </member>
+        <member name="M:B1PP.Database.Attributes.ApproveServiceAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.Attributes.ApproveServiceAttribute"/> class.
+            </summary>
+            <param name="templateId">The workflow manager template identifier.</param>
+        </member>
+        <member name="M:B1PP.Database.Attributes.ApproveServiceAttribute.Apply(SAPbobsCOM.UserObjectsMD)">
+            <summary>
+            Activates the approve service.
+            </summary>
+            <param name="userObject">The user object.</param>
+        </member>
+        <member name="T:B1PP.Database.Attributes.ChildUserTableAttribute">
+            <summary>
+            Marks a member as being a relationship to a child table.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="P:B1PP.Database.Attributes.ChildUserTableAttribute.TableName">
+            <summary>
+            Gets the name of the child table.
+            </summary>
+            <value>
+            The name of the child table.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.Attributes.ChildUserTableAttribute.ObjectName">
+            <summary>
+            Gets the name of the child object.
+            </summary>
+            <value>
+            The name of the child object.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.Attributes.ChildUserTableAttribute.LogTableName">
+            <summary>
+            Gets the name of the child log table.
+            </summary>
+            <value>
+            The name of the child log table.
+            </value>
+        </member>
+        <member name="M:B1PP.Database.Attributes.ChildUserTableAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.Attributes.ChildUserTableAttribute"/> class.
+            </summary>
+            <param name="tableName">Name of the child table.</param>
+            <param name="objectName">Name of the child object.</param>
+            <param name="logTableName">Name of the child log table.</param>
+        </member>
+        <member name="T:B1PP.Database.Attributes.ExcludeFindColumnAttribute">
+            <summary>
+            Skips marked members as being FindColumns on a user defined object.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="T:B1PP.Database.Attributes.FieldNameAttribute">
+            <summary>
+            Sets the name and description of a user field.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="P:B1PP.Database.Attributes.FieldNameAttribute.FieldName">
+            <summary>
+            Gets the name of the field.
+            </summary>
+            <value>
+            The name of the field.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.Attributes.FieldNameAttribute.FieldDescription">
+            <summary>
+            Gets the field description.
+            </summary>
+            <value>
+            The field description.
+            </value>
+        </member>
+        <member name="M:B1PP.Database.Attributes.FieldNameAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.Attributes.FieldNameAttribute"/> class.
+            </summary>
+            <param name="fieldName">Name of the field.</param>
+            <param name="fieldDescription">The field description.</param>
+        </member>
+        <member name="M:B1PP.Database.Attributes.FieldNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.Attributes.FieldNameAttribute"/> class.
+            </summary>
+            <param name="fieldName">Name of the field.</param>
+        </member>
+        <member name="T:B1PP.Database.Attributes.ObjectServices">
+            <summary>
+            Services provided by the User Defined Object.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.Find">
+            <summary>
+            The find service allows to find records.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.Delete">
+            <summary>
+            The delete service allows removal of records.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.Cancel">
+            <summary>
+            The cancel service allows marking of a record as canceled.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.Close">
+            <summary>
+            The close service allows marking of a record as closed.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.Log">
+            <summary>
+            The log service allows auditing of changes to records.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.ManageSeries">
+            <summary>
+            The manage series service allows series to be managed within SAP Business One.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.YearTransfer">
+            <summary>
+            The year transfer service allows year transfer copying.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.ObjectServices.Default">
+            <summary>
+            Default selection of services (Find and Delete).
+            </summary>
+        </member>
+        <member name="T:B1PP.Database.Attributes.UserFieldAttribute">
+            <summary>
+            Marks a property or field as a user field.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="F:B1PP.Database.Attributes.UserFieldAttribute.MaxAlphaTypeSize">
+            <summary>
+            The maximum alpha type size.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.UserFieldAttribute.MaxNumericTypeSize">
+            <summary>
+            The maximum numeric type size.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.UserFieldAttribute.DefaultAlphaTypeSize">
+            <summary>
+            The default alpha type size.
+            </summary>
+        </member>
+        <member name="F:B1PP.Database.Attributes.UserFieldAttribute.DefaultNumericTypeSize">
+            <summary>
+            The default numeric type size.
+            </summary>
+        </member>
+        <member name="P:B1PP.Database.Attributes.UserFieldAttribute.Type">
+            <summary>
+            Gets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.Attributes.UserFieldAttribute.SubType">
+            <summary>
+            Gets the subtype.
+            </summary>
+            <value>
+            The subtype.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.Attributes.UserFieldAttribute.Size">
+            <summary>
+            Gets the size.
+            </summary>
+            <value>
+            The size. Relevant only for Alpha and Numeric types.
+            <para />
+            Valid sizes are:
+            <para />
+            Alpha [1..254]
+            <para />
+            Numeric [1..11]
+            </value>
+        </member>
+        <member name="M:B1PP.Database.Attributes.UserFieldAttribute.#ctor(SAPbobsCOM.BoFieldTypes,SAPbobsCOM.BoFldSubTypes)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.Attributes.UserFieldAttribute" /> class.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="subtype">The subtype.</param>
+            <exception cref="T:System.ArgumentException">
+            Thrown when the size provided for the type is invalid.
+            <para />
+            Valid sizes are:
+            <para />
+            Alpha [1..254]
+            <para />
+            Numeric [1..11]
+            </exception>
+        </member>
+        <member name="M:B1PP.Database.Attributes.UserFieldAttribute.#ctor(SAPbobsCOM.BoFieldTypes,SAPbobsCOM.BoFldSubTypes,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.Attributes.UserFieldAttribute" /> class.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="subtype">The subtype.</param>
+            <param name="size">The size.</param>
+            <exception cref="T:System.ArgumentException">
+            Thrown when the size provided for the type is invalid.
+            <para />
+            Valid sizes are:
+            <para />
+            Alpha [1..254]
+            <para />
+            Numeric [1..11]
+            </exception>
+        </member>
+        <member name="M:B1PP.Database.Attributes.UserFieldAttribute.Apply(SAPbobsCOM.UserFieldsMD)">
+            <summary>
+            Applies the type, subtype and size to the user field.
+            </summary>
+            <param name="field">The field.</param>
+        </member>
+        <member name="T:B1PP.Database.Attributes.UserFieldEnumValuesAttribute">
+            <summary>
+            Allows using an enumeration type as the list of valid values for a user field.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="M:B1PP.Database.Attributes.UserFieldEnumValuesAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.Attributes.UserFieldEnumValuesAttribute"/> class.
+            </summary>
+            <param name="type">The type of the enumeration.</param>
+            <exception cref="T:System.ArgumentException">
+            Thrown when the type passed in is not an Enum.
+            </exception>
+        </member>
+        <member name="T:B1PP.Database.Attributes.UserFieldOptionalAttribute">
+            <summary>
+            Allows marking of a field as being optional (nullable on the database).
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="M:B1PP.Database.Attributes.UserFieldOptionalAttribute.Apply(SAPbobsCOM.UserFieldsMD)">
+            <summary>
+            Applies the optional attribute to the specified field.
+            </summary>
+            <param name="field">The field to make optional.</param>
+        </member>
+        <member name="T:B1PP.Database.Attributes.UserObjectAttribute">
+            <summary>
+            Marks a type as being linked with a User Defined Object.
+            </summary>
+            <remarks>
+            Using spaces or other special characters in the name of the object can affect the ability to
+            serialize for GeneralData. Due to this implication, spaces are removed from the name.
+            </remarks>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="P:B1PP.Database.Attributes.UserTableAttribute.TablePrefix">
+            <summary>
+            Gets the table prefix.
+            </summary>
+            <value>
+            The table prefix.
+            </value>
+        </member>
+        <member name="M:B1PP.Database.B1EnumConverter.Convert(System.Type,System.String)">
+            <summary>
+            Converts a string representation of an Enumeration value to its Enumeration value.
+            </summary>
+            <param name="type">Type of the Enumeration.</param>
+            <param name="value">String representation of the Enumeration value.</param>
+            <returns>An object that represents the Enumeration value.</returns>
+            <exception cref="T:B1PP.Database.B1EnumConvertException">Thrown when the conversion fails.</exception>
+        </member>
+        <member name="T:B1PP.Database.DocumentRecord">
+            <summary>
+            Standard Business One data for document type records.
+            </summary>
+        </member>
+        <member name="M:B1PP.Database.ManifestResourceReader.ReadText(System.String)">
+            <summary>
+            Reads the file contents.
+            </summary>
+            <param name="resourceName">Name of the resource.</param>
+            <returns>
+            The file contents as a string.
+            </returns>
+            <exception cref="T:B1PP.Database.UnableToReadException">
+            Thrown when the resource cannot be read.
+            </exception>
+        </member>
+        <member name="T:B1PP.Database.PropertyUserFieldAdapter">
+            <summary>
+            Converts a property into a user field.
+            </summary>
+        </member>
+        <member name="M:B1PP.Database.PropertyUserFieldAdapter.#ctor(System.String,System.Reflection.PropertyInfo,SAPbobsCOM.UserFieldsMD)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.PropertyUserFieldAdapter"/> class.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <param name="property">The property.</param>
+            <param name="field">The field.</param>
+        </member>
+        <member name="M:B1PP.Database.PropertyUserFieldAdapter.Execute">
+            <summary>
+            Executes this instance.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the <see cref="T:B1PP.Database.Attributes.UserFieldAttribute"/> is not present in the given property.
+            </exception>
+        </member>
+        <member name="T:B1PP.Database.SetPropertyException">
+            <summary>
+            Represents an error that occurred while attempting to set a value on a property.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Database.SetPropertyException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.SetPropertyException"/> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Database.SetPropertyException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.SetPropertyException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Database.SetPropertyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.SetPropertyException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Database.SetPropertyException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.SetPropertyException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult" /> is zero (0).</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="info" /> parameter is null.</exception>
+        </member>
+        <member name="T:B1PP.Database.SystemFieldAttribute">
+            <summary>
+            Marks a property or field as a system field.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="T:B1PP.Database.UpdateUserField">
+            <summary>
+            Updates a user field on the database.
+            </summary>
+            <remarks>
+            The user field object is released after being added
+            according to SAP recommendations.
+            </remarks>
+        </member>
+        <member name="E:B1PP.Database.UpdateUserField.OnError">
+            <summary>
+            Occurs when the update fails.
+            </summary>
+        </member>
+        <member name="M:B1PP.Database.UpdateUserField.Execute">
+            <summary>
+            Executes the update action and releases the object.
+            </summary>
+        </member>
+        <member name="T:B1PP.Database.UserFieldErrorEventArgs">
+            <summary>
+            Contains details about errors regarding actions with UserFields.
+            </summary>
+            <seealso cref="T:System.EventArgs" />
+        </member>
+        <member name="P:B1PP.Database.UserFieldErrorEventArgs.TableName">
+            <summary>
+            Gets or sets the name of the table.
+            </summary>
+            <value>
+            The name of the table.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.UserFieldErrorEventArgs.FieldName">
+            <summary>
+            Gets or sets the name of the field.
+            </summary>
+            <value>
+            The name of the field.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.UserFieldErrorEventArgs.ErrorDescription">
+            <summary>
+            Gets or sets the error description.
+            </summary>
+            <value>
+            The error description.
+            </value>
+        </member>
+        <member name="P:B1PP.Database.UserFieldErrorEventArgs.ErrorCode">
+            <summary>
+            Gets or sets the error code.
+            </summary>
+            <value>
+            The error code.
+            </value>
+        </member>
+        <member name="T:B1PP.Database.UserObjectAdapter">
+            <summary>
+            Converts an xml representation of a UserObject into a UserObjectsMD object.
+            </summary>
+        </member>
+        <member name="M:B1PP.Database.UserObjectAdapter.#ctor(SAPbobsCOM.IUserObjectsMD,System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Database.UserObjectAdapter"/> class.
+            </summary>
+            <param name="userObject">The user object.</param>
+            <param name="root">The XML user object.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="userObject"/> or <paramref name="root"/> are null.
+            </exception>
+        </member>
+        <member name="M:B1PP.Database.Utilities.SplitByCaps(System.String)">
+            <summary>
+            Splits the text by caps e.g.: "SplitByCaps" becomes "Split By Caps".
+            </summary>
+            <param name="text">The text.</param>
+            <returns>
+            The text split by caps.
+            </returns>
+        </member>
+        <member name="T:B1PP.Data.Column">
+            <summary>
+            Stores information about a column.
+            </summary>
+            <seealso cref="T:B1PP.Data.IColumn" />
+        </member>
+        <member name="P:B1PP.Data.Column.Name">
+            <summary>
+            Gets the column name.
+            </summary>
+            <value>
+            The column name.
+            </value>
+        </member>
+        <member name="P:B1PP.Data.Column.Type">
+            <summary>
+            Gets the column type.
+            </summary>
+            <value>
+            The column type.
+            </value>
+        </member>
+        <member name="M:B1PP.Data.Column.#ctor(System.String,SAPbobsCOM.BoFieldTypes)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.Column"/> class.
+            </summary>
+            <param name="name">The column name.</param>
+            <param name="type">The column type.</param>
+        </member>
+        <member name="T:B1PP.Data.DateTimeValueArg">
+            <summary>
+            Represents a query parameter of DateTime type.
+            </summary>
+            <remarks>
+            The DateTime will be converted automatically to the universal SQL date format ('yyyyMMdd').
+            </remarks>
+            <seealso cref="T:B1PP.Data.QueryArgBase"/>
+        </member>
+        <member name="P:B1PP.Data.DateTimeValueArg.Value">
+            <summary>
+            Gets the value to replace the placeholder with.
+            </summary>
+            <returns>
+            The <see cref="T:System.DateTime"/> as a <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.DateTimeValueArg.#ctor(System.String,System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.DateTimeValueArg" /> class.
+            </summary>
+            <param name="placeHolder">The place holder.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:B1PP.Data.DisposableRecordset">
+            <summary>
+            Disposable recordset decorator.
+            </summary>
+            <seealso cref="T:SAPbobsCOM.IRecordset" />
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="T:B1PP.Data.DoubleValueArg">
+            <summary>
+            Represents a query parameter of type double.
+            </summary>
+            <remarks>
+            The value will be represented as an invariant value (e.g.: 123.123).
+            </remarks>
+        </member>
+        <member name="P:B1PP.Data.DoubleValueArg.Value">
+            <summary>
+            Gets the value to replace the placeholder with.
+            </summary>
+        </member>
+        <member name="M:B1PP.Data.DoubleValueArg.#ctor(System.String,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.DoubleValueArg"/> class.
+            </summary>
+            <param name="placeHolder">The place holder.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:B1PP.Data.IColumn">
+            <summary>
+            Stores information about a column.
+            </summary>
+        </member>
+        <member name="P:B1PP.Data.IColumn.Name">
+            <summary>
+            Gets the column name.
+            </summary>
+            <value>
+            The column name.
+            </value>
+        </member>
+        <member name="P:B1PP.Data.IColumn.Type">
+            <summary>
+            Gets the column type.
+            </summary>
+            <value>
+            The column type.
+            </value>
+        </member>
+        <member name="T:B1PP.Data.IntegerValueArg">
+            <summary>
+            Represents a query parameter of type int.
+            </summary>
+            <remarks>
+            The value will be represented as an invariant value (e.g.: 123).
+            </remarks>
+        </member>
+        <member name="P:B1PP.Data.IntegerValueArg.Value">
+            <summary>
+            Gets the value to replace the placeholder with.
+            </summary>
+        </member>
+        <member name="M:B1PP.Data.IntegerValueArg.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.IntegerValueArg"/> class.
+            </summary>
+            <param name="placeHolder">The place holder.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:B1PP.Data.IQueryArg">
+            <summary>
+            Represents a query parameter composed of a placeholder,
+            <para />
+            which will be replaced by the value on the query statement.
+            </summary>
+        </member>
+        <member name="P:B1PP.Data.IQueryArg.PlaceHolder">
+            <summary>
+            Gets the place holder.
+            </summary>
+            <remarks>
+            Typically an @placeHolderName format is used, but you can use any placeholder.
+            </remarks>
+        </member>
+        <member name="P:B1PP.Data.IQueryArg.Value">
+            <summary>
+            Gets the value to replace the placeholder with.
+            </summary>
+        </member>
+        <member name="T:B1PP.Data.IRecordsetReader">
+            <summary>
+            Allows reading of a recordset object contents.
+            </summary>
+        </member>
+        <member name="M:B1PP.Data.IRecordsetReader.GetBool(System.String)">
+            <summary>
+            Gets a boolean value from the reader.
+            </summary>
+            <param name="columnName">The item identifier.</param>
+            <returns>The boolean value.</returns>
+            <exception cref="T:System.ArgumentException">Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.</exception>
+            <exception cref="T:System.FormatException">Thrown when column value is not True or False literals.</exception>
+        </member>
+        <member name="M:B1PP.Data.IRecordsetReader.GetDateTime(System.String)">
+            <summary>
+            Gets a date time from the reader.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            The <see cref="T:System.DateTime" /> value.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
+            </exception>
+            <exception cref="T:System.FormatException">
+            Triggered when the value contained in <paramref name="columnName" /> is empty or not a date.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.IRecordsetReader.GetDouble(System.String)">
+            <summary>
+            Gets a double from the reader.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            The double value.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
+            </exception>
+            <exception cref="T:System.OverflowException">
+            The value contained in <paramref name="columnName" /> represents a number that is less than
+            <see cref="F:System.Double.MinValue" /> or greater than <see cref="F:System.Double.MaxValue" />.
+            </exception>
+            <exception cref="T:System.FormatException">
+            The value contained in <paramref name="columnName" /> does not represent a number in a
+            valid format.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.IRecordsetReader.GetInt(System.String)">
+            <summary>
+            Gets an integer from the reader.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            The integer value.
+            </returns>
+            <exception cref="T:System.OverflowException">
+            The value contained in <paramref name="columnName" /> represents a number less than
+            <see cref="F:System.Int32.MinValue" /> or greater than <see cref="F:System.Int32.MaxValue" />.
+            </exception>
+            <exception cref="T:System.FormatException">
+            The value contained in <paramref name="columnName" /> is not of the correct format.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.IRecordsetReader.GetString(System.String)">
+            <summary>
+            Gets the value as a string.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            Value as a string.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.IRecordsetReader.MoveNext">
+            <summary>
+            Moves to the next record.
+            </summary>
+            <returns>
+            True if there is another record, false otherwise.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+            </exception>
+        </member>
+        <member name="P:B1PP.Data.IRecordsetReader.Columns">
+            <summary>
+            Returns the columns names.
+            </summary>
+            <value>
+            The columns names.
+            </value>
+        </member>
+        <member name="T:B1PP.Data.MultipleDateTimeValuesArg">
+            <summary>
+            Represents multiple date time values that can be used as parameters for a query.
+            </summary>
+            <remarks>
+            The DateTime values will be converted automatically to the universal SQL date format ('yyyyMMdd').
+            </remarks>
+            <seealso cref="T:B1PP.Data.QueryArgBase" />
+        </member>
+        <member name="P:B1PP.Data.MultipleDateTimeValuesArg.Value">
+            <summary>
+            Gets the value to replace the placeholder with.
+            </summary>
+            <returns>
+            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> as a <see cref="T:System.String"/>, e.g.: '20010101', '20121231'
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.MultipleDateTimeValuesArg.#ctor(System.String,System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.MultipleDateTimeValuesArg"/> class.
+            </summary>
+            <param name="placeHolder">The place holder.</param>
+            <param name="values">The values.</param>
+        </member>
+        <member name="T:B1PP.Data.Query">
+            <summary>
+            Facilitates the querying operations by acting as a simple facade.<para/>
+            It also allows a fluent usage.
+            <example>
+            var q = new Query(company);
+            q.SetStatement(sql).With("parameter", "value);
+            </example>
+            </summary>
+            <seealso cref="T:B1PP.Data.QueryHelper" />
+        </member>
+        <member name="P:B1PP.Data.Query.Statement">
+            <summary>
+            Gets or sets the query statement.
+            </summary>
+            <value>
+            The statement without any processing.
+            </value>
+        </member>
+        <member name="P:B1PP.Data.Query.PreparedStatement">
+            <summary>
+            Gets the prepared statement.
+            </summary>
+            <value>
+            The prepared statement with all parameters set to their corresponding values.
+            </value>
+        </member>
+        <member name="M:B1PP.Data.Query.#ctor(SAPbobsCOM.Company)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.Query"/> class.
+            </summary>
+            <param name="company">The company.</param>
+        </member>
+        <member name="M:B1PP.Data.Query.AddArgument(B1PP.Data.IQueryArg)">
+            <summary>
+            Adds an argument to the argument list.
+            </summary>
+            <param name="arg">The argument to add.</param>
+        </member>
+        <member name="M:B1PP.Data.Query.SetStatement(System.String)">
+            <summary>
+            Sets the query statement.
+            </summary>
+            <param name="statement">The statement.</param>
+            <returns>
+            The current object so you can continue chaining calls.
+            </returns>
+        </member>
+        <member name="T:B1PP.Data.QueryArgBase">
+            <summary>
+            Base query argument.
+            </summary>
+            <seealso cref="T:B1PP.Data.IQueryArg" />
+        </member>
+        <member name="P:B1PP.Data.QueryArgBase.PlaceHolder">
+            <summary>
+            Gets the place holder.
+            </summary>
+            <remarks>
+            Typically a @placeHolderName format is used, but you can use any placeholder.
+            </remarks>
+        </member>
+        <member name="P:B1PP.Data.QueryArgBase.Value">
+            <summary>
+            Gets the value to replace the placeholder with.
+            </summary>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.Escape(System.String)">
+            <summary>
+            Simple escape function for a string.
+            </summary>
+            <param name="value">
+            The string to escape.
+            </param>
+            <returns>
+            The <see cref="T:System.String" /> escaped.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.SingleQuote(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new enumerable with single quote around the strings.
+            </summary>
+            <param name="list">
+            An enumerable with the strings.
+            </param>
+            <returns>
+            A new enumerable with all strings single quoted
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.SingleQuote(System.String)">
+            <summary>
+            Surrounds a string with single quotes.
+            </summary>
+            <param name="s">
+            The string.
+            </param>
+            <returns>
+            A new single quoted string.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.ToSqlParameter(System.String)">
+            <summary>
+            Converts a string into an SQL parameter string.
+            </summary>
+            <param name="value">
+            The string with the value to be used.
+            </param>
+            <returns>
+            An escaped and single quoted string representing the value.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.ToSqlParameter(System.DateTime)">
+            <summary>
+            Converts a string into an SQL parameter string.
+            </summary>
+            <param name="value">
+            The string with the value to be used.
+            </param>
+            <returns>
+            An escaped and single quoted string representing the value.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.ToSqlParameter(System.Int32)">
+            <summary>
+            Converts a int into an SQL parameter string.
+            </summary>
+            <param name="value">
+            The int with the value to be used.
+            </param>
+            <returns>
+            An escaped and single quoted string representing the value.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.ToSqlParameter(System.Double)">
+            <summary>
+            Converts a double into an SQL parameter string.
+            </summary>
+            <param name="value">
+            The double with the value to be used.
+            </param>
+            <returns>
+            An escaped and single quoted string representing the value.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.ToUnicode(System.String)">
+            <summary>
+            Adds the unicode marker (N) to the string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The value prefixed by N.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.QueryArgBase.ToUnicode(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds the unicode marker (N) to multiple string values.
+            </summary>
+            <param name="values">The values.</param>
+            <returns>
+            All values prefixed by N.
+            </returns>
+        </member>
+        <member name="T:B1PP.Data.StringValueArg">
+            <summary>
+            Represents a query parameter of type string.
+            </summary>
+            <remarks>
+            The value will be quoted and escaped.
+            </remarks>
+        </member>
+        <member name="P:B1PP.Data.StringValueArg.Value">
+            <summary>
+            Gets the value to replace the placeholder with.
+            </summary>
+        </member>
+        <member name="M:B1PP.Data.StringValueArg.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.StringValueArg"/> class.
+            </summary>
+            <param name="placeHolder">The place holder.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:B1PP.Data.XmlRecordsetReader">
+            <summary>
+            Allows you to read the data in the recordset.
+            </summary>
+        </member>
+        <member name="F:B1PP.Data.XmlRecordsetReader.SapNamespace">
+            <summary>
+            The sap namespace.
+            </summary>
+        </member>
+        <member name="F:B1PP.Data.XmlRecordsetReader.xmlDoc">
+            <summary>
+            The xml doc.
+            </summary>
+        </member>
+        <member name="F:B1PP.Data.XmlRecordsetReader.currentRow">
+            <summary>
+            The current row node.
+            </summary>
+        </member>
+        <member name="F:B1PP.Data.XmlRecordsetReader.rowEnumerator">
+            <summary>
+            The enumerator.
+            </summary>
+        </member>
+        <member name="F:B1PP.Data.XmlRecordsetReader.columns">
+            <summary>
+            The columns names.
+            </summary>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Data.XmlRecordsetReader" /> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.GetDateTime(System.String)">
+            <summary>
+            Gets a date time from the reader.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            The <see cref="T:System.DateTime" /> value.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist.
+            </exception>
+            <exception cref="T:System.FormatException">
+            Triggered when the value contained in <paramref name="columnName" /> is empty or not a date.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.GetDouble(System.String)">
+            <summary>
+            Gets a double from the reader.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            The double value.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
+            </exception>
+            <exception cref="T:System.OverflowException">
+            The value contained in <paramref name="columnName" /> represents a number that is less than
+            <see cref="F:System.Double.MinValue" /> or greater than <see cref="F:System.Double.MaxValue" />.
+            </exception>
+            <exception cref="T:System.FormatException">
+            The value contained in <paramref name="columnName" /> does not represent a number in a
+            valid format.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.GetInt(System.String)">
+            <summary>
+            Gets an integer from the reader.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            The integer value.
+            </returns>
+            <exception cref="T:System.OverflowException">
+            The value contained in <paramref name="columnName" /> represents a number less than
+            <see cref="F:System.Int32.MinValue" /> or greater than <see cref="F:System.Int32.MaxValue" />.
+            </exception>
+            <exception cref="T:System.FormatException">The value contained in <paramref name="columnName" /> is not of the correct format. </exception>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.GetBool(System.String)">
+            <summary>
+            Gets a boolean value from the reader.
+            </summary>
+            <param name="columnName">The item identifier.</param>
+            <returns>The boolean value.</returns>
+            <exception cref="T:System.ArgumentException">Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.</exception>
+            <exception cref="T:System.FormatException">Thrown when column value is not True or False literals.</exception>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.GetString(System.String)">
+            <summary>
+            Gets the value as a string.
+            </summary>
+            <param name="columnName">
+            The item id.
+            </param>
+            <returns>
+            Value as a string.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
+            </exception>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.MoveNext">
+            <summary>
+            Moves to the next record.
+            </summary>
+            <returns>
+            True if there is another record, false otherwise.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+        </member>
+        <member name="P:B1PP.Data.XmlRecordsetReader.Columns">
+            <summary>
+            Returns the columns names.
+            </summary>
+            <value>
+            The columns names.
+            </value>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.CreateNew(SAPbobsCOM.IRecordset)">
+            <summary>
+            Creates a new <see cref="T:B1PP.Data.XmlRecordsetReader" /> to read the given <paramref name="data" />.
+            </summary>
+            <param name="data">The recordset to be read.</param>
+            <returns>
+            The record set reader.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="data" /> is <see langword="null" />.</exception>
+            <exception cref="T:System.Xml.XPath.XPathException">The XPath expression contains a prefix. </exception>
+            <exception cref="T:System.Xml.XmlException">There is a load or parse error in the XML. In this case, the document remains empty. </exception>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.ExtractXmlFromRecordset(SAPbobsCOM.IRecordset)">
+            <summary>
+            Extracts the XML from recordset.
+            </summary>
+            <param name="data">The record set with the data.</param>
+            <returns>
+            A string that represents the data.
+            </returns>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.GetItemXmlNode(System.String)">
+            <summary>
+            Gets the item XML node.
+            </summary>
+            <param name="columnName">The item identifier.</param>
+            <returns>The XML node if it exists, or <see langword="null" /> if it doesn't.</returns>
+        </member>
+        <member name="M:B1PP.Data.XmlRecordsetReader.Load(SAPbobsCOM.IRecordset)">
+            <summary>
+            Loads the record set data.
+            </summary>
+            <param name="data">
+            The record set with the data.
+            </param>
+            <exception cref="T:System.Xml.XmlException">
+            There is a load or parse error in the XML.<para/>
+            In this case, the document remains empty.
+            </exception>
+            <exception cref="T:System.Xml.XPath.XPathException">
+            The XPath expression contains a prefix.
+            </exception>
+        </member>
+        <member name="F:B1PP.Extensions.Common.DoubleExtensions.Tolerance">
+            <summary>
+            The tolerance suitable for Business One, where the maximum decimal places is 6.
+            </summary>
+        </member>
+        <member name="M:B1PP.Extensions.Common.DoubleExtensions.AsString(System.Double)">
+            <summary>
+            Returns the value as an invariant string.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            Value as an invariant string.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.Common.DoubleExtensions.IsEqual(System.Double,System.Double,System.Double)">
+            <summary>
+            True when the values are the same, False otherwise.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="other">The value to compare with.</param>
+            <param name="tolerance">Threshold where values are considered to be the same.</param>
+            <returns>
+            True when the values are the same, False otherwise.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.Common.DoubleExtensions.IsEqual(System.Double,System.Double)">
+            <summary>
+            True when the values are the same, False otherwise.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="other">The value to compare with.</param>
+            <returns>
+            True when the values are the same, False otherwise.
+            </returns>
+        </member>
+        <member name="T:B1PP.Extensions.Common.TypeExtensions">
+            <summary>
+            Common type extension methods.
+            </summary>
+        </member>
+        <member name="M:B1PP.Extensions.Common.TypeExtensions.Implements(System.Type,System.Type)">
+            <summary>
+            Checks if a type implements the given interface.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="interfaceType">Type of the interface.</param>
+            <returns>
+            True if the type implements the interface, false otherwise.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.Common.TypeExtensions.CreateInstance``1(System.Type)">
+            <summary>
+            Creates an instance of the current type and casts it to <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">
+            Type to cast the new instance to.
+            </typeparam>
+            <param name="type">The current type.</param>
+            <returns>
+            A new instance of the given type cast to the given <typeparamref name="T"/> type.
+            </returns>
+        </member>
+        <member name="T:B1PP.Extensions.SDK.UI.ApplicationExtensions">
+            <summary>
+            Common application object actions.
+            </summary>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ApplicationExtensions.Create``1(SAPbouiCOM.Application,SAPbouiCOM.BoCreatableObjectType)">
+            <summary>
+            Creates an instance of the object. This method casts the object to the given T type.
+            </summary>
+            <typeparam name="T">The type of the object to create.</typeparam>
+            <param name="application">The application.</param>
+            <param name="type">The enum type of the object we wish to create.</param>
+            <returns>An instance of the given object.</returns>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ApplicationExtensions.CreateForm(SAPbouiCOM.Application,System.String,System.String,System.String)">
+            <summary>
+            Creates a form using the xml document and unique id provided.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="formType">The form type identifier. Must not be empty or null.</param>
+            <param name="formUniqueId">The form unique identifier. Must not be empty or null.</param>
+            <param name="formXml">The form xml definition. Must not be empty or null.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="formType"/>, <paramref name="formUniqueId"/> or <paramref name="formXml"/> are null or empty.
+            </exception>
+            <returns>The created form.</returns>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ApplicationExtensions.SetFilterFromXml(SAPbouiCOM.Application,System.String)">
+            <summary>
+            Sets the Business One event filters from XML.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="xmlFilters">The XML filters.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ApplicationExtensions.ShowInfo(SAPbouiCOM.Application,System.String)">
+            <summary>
+            Shows a information status bar message. Empty messages are ignored.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="message">The message.</param>
+            <remarks>A message containing only whitespace characters is considered empty.</remarks>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ApplicationExtensions.Apply(SAPbouiCOM.Application,System.String)">
+            <summary>
+            Applies the specified XML.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="xml">The XML.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.FormExtensions.Get``1(SAPbouiCOM.Form,System.String)">
+            <summary>
+            Gets a specific item from the items collection.
+            </summary>
+            <typeparam name="T">The type to convert the item to.</typeparam>
+            <param name="form">The form that contains the item.</param>
+            <param name="itemId">The id of the item.</param>
+            <returns>The specific item.</returns>
+            <exception cref="T:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException">Thrown when the item cannot be cast to the given type.</exception>
+            <exception cref="T:B1PP.Extensions.SDK.UI.ItemNotFoundException">Thrown when the item is not found in the collection.</exception>
+        </member>
+        <member name="T:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException">
+            <summary>
+            Represents an error when converting a specific item to a requested type 
+            (e.g. converting a combo-box to a text edit).
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException"/> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:B1PP.Extensions.SDK.UI.ItemNotFoundException">
+            <summary>
+            Represents an error when an item does not exist on the form's item collection.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ItemNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.ItemNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ItemNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.ItemNotFoundException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ItemNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.ItemNotFoundException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ItemNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.SDK.UI.ItemNotFoundException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.ItemsExtensions.Get``1(SAPbouiCOM.Items,System.String)">
+            <summary>
+            Gets a specific item from the items collection.
+            </summary>
+            <typeparam name="T">The type to convert the item to.</typeparam>
+            <param name="items">The items collection.</param>
+            <param name="itemId">The id of the item.</param>
+            <returns>The specific item.</returns>
+            <exception cref="T:B1PP.Extensions.SDK.UI.InvalidSpecificItemTypeException">Thrown when the item cannot be cast to the given type.</exception>
+            <exception cref="T:B1PP.Extensions.SDK.UI.ItemNotFoundException">Thrown when the item is not found in the collection.</exception>
+        </member>
+        <member name="T:B1PP.Extensions.SDK.UI.MatrixExtensions">
+            <summary>
+            Helpful methods for the <see cref="T:SAPbouiCOM.Matrix"/> object.
+            </summary>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.MatrixExtensions.GetColumnIndex(SAPbouiCOM.Matrix,System.String)">
+            <summary>
+            Gets the index of the column.
+            This method is chatty.
+            </summary>
+            <param name="matrix">The matrix.</param>
+            <param name="columnId">The column identifier.</param>
+            <returns>
+            The column index.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Throw when <paramref name="columnId"/> is empty, null or doesn't exist in the matrix.
+            </exception>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.GetDouble(SAPbouiCOM.UserDataSources,System.String)">
+            <summary>
+            Returns the double value in the datasource or null if none is found.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <returns>
+            The double value in the datasource or null if none is found.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the value in the datasource cannot be converted to a double.
+            </exception>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.GetDouble(SAPbouiCOM.UserDataSources,System.String,System.Double)">
+            <summary>
+            Returns the double value in the datasource or null if none is found.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <param name="defaultValue">The value to return when the datasource is empty.</param>
+            <returns>
+            The double value in the datasource or null if none is found.
+            </returns>
+            <remarks>
+            Note that if the value in the datasource cannot be cast to a double an exception will be thrown.
+            <para />
+            The default value will not be returned.
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the value in the datasource cannot be converted to a double.
+            </exception>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.GetInt(SAPbouiCOM.UserDataSources,System.String,System.Int32)">
+            <summary>
+            Returns the integer value in the datasource or null if none is found.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <param name="defaultValue">The value to return when the datasource is empty.</param>
+            <returns>
+            The integer value in the datasource or null if none is found.
+            </returns>
+            <remarks>
+            Note that if the value in the datasource cannot be cast to an integer an exception will be thrown.
+            <para />
+            The default value will not be returned.
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the value in the datasource cannot be converted to an integer.
+            </exception>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.GetInt(SAPbouiCOM.UserDataSources,System.String)">
+            <summary>
+            Returns the integer value in the datasource or null if none is found.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <returns>
+            The integer value in the datasource or null if none is found.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the value in the datasource cannot be converted to an integer.
+            </exception>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.GetString(SAPbouiCOM.UserDataSources,System.String)">
+            <summary>
+            Returns the string value in the datasource.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <returns>
+            The string on the datasource.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.SetValue(SAPbouiCOM.UserDataSources,System.String,System.String)">
+            <summary>
+            Sets the string value on the user data source.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <param name="value">The value.</param>
+            <remarks>If value is null an empty string will be used instead.</remarks>
+            ///
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.SetValue(SAPbouiCOM.UserDataSources,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Sets the integer value on the user data source.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.SetValue(SAPbouiCOM.UserDataSources,System.String,System.Nullable{System.Double})">
+            <summary>
+            Sets the double value on the user data source.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.SetValue(SAPbouiCOM.UserDataSources,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Sets the DateTime value on the user data source.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.FormatMessage(System.String,System.String,System.Type)">
+            <summary>
+            Formats the message to display in case of error.
+            </summary>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <param name="data">The data.</param>
+            <param name="type">The type.</param>
+            <returns>
+            Formatted message.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.SDK.UI.UserDataSourcesExtensions.IsEmpty(SAPbouiCOM.UserDataSources,System.String)">
+            <summary>
+            Determines whether the specified user data source is empty.
+            </summary>
+            <param name="datasource">The datasource.</param>
+            <param name="userDataSourceId">The user data source identifier.</param>
+            <returns>True when empty, false otherwise.</returns>
+        </member>
+        <member name="T:B1PP.Extensions.Types.Id">
+            <summary>
+            Represents an integer id of a record in SAP Business One.
+            </summary>
+            <remarks>
+            This class facilitates the int/string duality present in B1. Sometimes an integer is prefered,
+            sometimes a string is prefered. This object can be implicit converted to and from strings or ints.
+            </remarks>
+        </member>
+        <member name="P:B1PP.Extensions.Types.Id.Value">
+            <summary>
+            Gets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="M:B1PP.Extensions.Types.Id.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.Types.Id"/> class.
+            </summary>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">
+            Thrown when the string does not represent a valid int.
+            </exception>
+        </member>
+        <member name="M:B1PP.Extensions.Types.Id.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Extensions.Types.Id"/> class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:B1PP.Extensions.Types.Id.op_Implicit(System.String)~B1PP.Extensions.Types.Id">
+            <summary>
+            Performs an implicit conversion from <see cref="T:System.String"/> to <see cref="T:B1PP.Extensions.Types.Id"/>.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.Types.Id.op_Implicit(System.Int32)~B1PP.Extensions.Types.Id">
+            <summary>
+            Performs an implicit conversion from <see cref="T:System.Int32"/> to <see cref="T:B1PP.Extensions.Types.Id"/>.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.Types.Id.op_Implicit(B1PP.Extensions.Types.Id)~System.String">
+            <summary>
+            Performs an implicit conversion from <see cref="T:B1PP.Extensions.Types.Id"/> to <see cref="T:System.String"/>.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.Types.Id.op_Implicit(B1PP.Extensions.Types.Id)~System.Int32">
+            <summary>
+            Performs an implicit conversion from <see cref="T:B1PP.Extensions.Types.Id"/> to <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:B1PP.Extensions.Types.Id.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance
+            by calling the implicit string conversion.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:B1PP.Extensions.Types.IdTypeConverter">
+            <summary>
+            Standard type converter for the <see cref="T:B1PP.Extensions.Types.Id" /> type.
+            </summary>
+            <seealso cref="T:System.ComponentModel.TypeConverter" />
+        </member>
+        <member name="T:B1PP.Forms.Events.ApplicationEvents.IApplicationInstance">
+            <summary>
+            Manages application events.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ApplicationEvents.IApplicationInstance.OnAddonStopped">
+            <summary>
+            Called when the addon is requested to stop by SAP Business One.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ApplicationEvents.IApplicationInstance.OnCompanyChanged">
+            <summary>
+            Called when the company is changed in SAP Business One.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ApplicationEvents.IApplicationInstance.OnFontChanged">
+            <summary>
+            Called when the font is changed in SAP Business One.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ApplicationEvents.IApplicationInstance.OnLanguageChanged">
+            <summary>
+            Called when the language is changed in SAP Business One.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ApplicationEvents.IApplicationInstance.OnShutdown">
+            <summary>
+            Called when SAP Business One is closed.
+            </summary>
+        </member>
+        <member name="T:B1PP.Forms.Events.B1EventFilterManager">
+            <summary>
+            Manage what events that are processed by the addon, by setting filters on sent events.
+            <para />
+            It is recommended that addons only process (and receive) events that it handles,
+            <para />
+            and all other events should be filtered out.
+            </summary>
+        </member>
+        <member name="F:B1PP.Forms.Events.B1EventFilterManager.XmlFilter">
+            <summary>
+            Helper to handle the xml filter format.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventFilterManager.Include(SAPbouiCOM.BoEventTypes,System.String)">
+            <summary>
+            Includes the specified event type on the sending list.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <param name="formType">Type of the form.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventFilterManager.Initialize(SAPbouiCOM.Application)">
+            <summary>
+            Initializes the event filter manager. This is done by disabling all events.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventFilterManager.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventFilterManager.DisableEventSending">
+            <summary>
+            Disables the event sending. After calling this the addon should not receive any events,
+            <para />
+            except for Application events.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventFilterManager.SetEventSending">
+            <summary>
+            Sets the event sending with the included events, if any.
+            </summary>
+        </member>
+        <member name="T:B1PP.Forms.Events.B1EventsManager">
+            <summary>
+            Manages events from SAP Business One.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventsManager.#ctor(SAPbouiCOM.Application,B1PP.Forms.Events.ApplicationEvents.IApplicationInstance,B1PP.Forms.Events.MenuEvents.IMainMenuInstance)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.B1EventsManager" /> class.
+            </summary>
+            <param name="application">
+            The application.
+            </param>
+            <param name="applicationInstance">
+            The instance responsible for application event handling.
+            </param>
+            <param name="mainMenu">
+            The main menu instance.
+            </param>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventsManager.Initialize">
+            <summary>
+            Starts up the events managing system.
+            </summary>
+        </member>
+        <member name="E:B1PP.Forms.Events.B1EventsManager.OnError">
+            <summary>
+            Triggered when an event handler throws an exception
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.B1EventsManager.Terminate">
+            <summary>
+            Terminates the event managing system.
+            </summary>
+        </member>
+        <member name="T:B1PP.Forms.Events.B1SystemFormTypeAttribute">
+            <summary>
+            Use this attribute to mark a class with the system form type it represents.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="M:B1PP.Forms.Events.B1SystemFormTypeAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.B1SystemFormTypeAttribute"/> class.
+            </summary>
+            <param name="formType">Type of the form.</param>
+            <exception cref="T:System.ArgumentException">
+            Thrown when <paramref name="formType"/> is null.
+            </exception>
+        </member>
+        <member name="F:B1PP.Forms.Events.ClassHelper.EligibleMethods">
+            <summary>
+            The eligible methods traits.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ClassHelper.FindAnnotatedMethods``1(System.Object)">
+            <summary>
+            Finds methods annotated with the given attribute on the given instance.
+            </summary>
+            <typeparam name="T">Type of the attribute.</typeparam>
+            <param name="instance">The instance to search.</param>
+            <returns>
+            An enumeration of the methods with the attribute.
+            </returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.ClassHelper.HasAttribute``1">
+            <summary>
+            Determines whether this instance has attribute T.
+            </summary>
+            <typeparam name="T">The type of the attribute.</typeparam>
+            <returns>
+            True when the method is annotated with the T attribute, false otherwise.
+            </returns>
+        </member>
+        <member name="T:B1PP.Forms.Events.EventHandlerAlreadyExistsException">
+            <summary>
+            Represents an error where a handler is already registered,
+            <para />
+            and an attempt is made to register it again.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Forms.Events.EventHandlerAlreadyExistsException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.EventHandlerAlreadyExistsException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.EventHandlerAlreadyExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.EventHandlerAlreadyExistsException.CreateFromKey(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+            <param name="key">The key of the event handler.</param>
+        </member>
+        <member name="T:B1PP.Forms.Events.EventListener">
+            <summary>
+            Scans the given object for event handlers and subscribes them with the appropriate listeners.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.EventListener.#ctor(B1PP.Forms.Events.IFormInstance)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.EventListener"/> class.
+            </summary>
+            <param name="form">The form.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.EventListener.#ctor(B1PP.Forms.Events.IFormInstance,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.EventListener"/> class.
+            </summary>
+            <param name="form">The form.</param>
+            <param name="subordinates">Other objects that contain.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.EventListener.Subscribe">
+            <summary>
+            Subscribes this instance.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.EventListener.Unsubscribe">
+            <summary>
+            Unsubscribes this instance.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.FormDataEvents.B1FormDataEventDispatcher.Subscribe(SAPbouiCOM.Application)">
+            <summary>
+            Subscribes to the specified application item events.
+            </summary>
+            <param name="application">The application to subscribe to.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="application" /> is null.</exception>
+            <exception cref="T:System.InvalidOperationException">Cannot subscribe twice to 'Application.ItemEvent'.</exception>
+        </member>
+        <member name="M:B1PP.Forms.Events.FormDataEvents.B1FormDataEventDispatcher.Unsubscribe">
+            <summary>
+            Unsubscribing will remove all event listeners.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.FormDataEvents.FormDataEventHandlerAttribute.Equals(B1PP.Forms.Events.FormDataEvents.FormDataEventHandlerAttribute)">
+            <summary>Indicates whether the current object is equal to another object of the same type.</summary>
+            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.FormDataEvents.FormDataEventHandlerAttribute.Equals(System.Object)">
+            <summary>Returns a value that indicates whether this instance is equal to a specified object.</summary>
+            <returns>true if <paramref name="obj" /> equals the type and value of this instance; otherwise, false.</returns>
+            <param name="obj">An <see cref="T:System.Object" /> to compare with this instance or null. </param>
+        </member>
+        <member name="M:B1PP.Forms.Events.FormDataEvents.FormDataEventHandlerAttribute.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="T:B1PP.Forms.Events.HandlerAddedEventArgs">
+            <summary>
+            Information about the handler that was just added.
+            </summary>
+        </member>
+        <member name="P:B1PP.Forms.Events.HandlerAddedEventArgs.EventType">
+            <summary>
+            Gets the type of the event.
+            </summary>
+            <value>
+            The type of the event.
+            </value>
+        </member>
+        <member name="P:B1PP.Forms.Events.HandlerAddedEventArgs.FormType">
+            <summary>
+            Gets the type of the form.
+            </summary>
+            <value>
+            The type of the form.
+            </value>
+        </member>
+        <member name="M:B1PP.Forms.Events.HandlerAddedEventArgs.#ctor(SAPbouiCOM.BoEventTypes,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.HandlerAddedEventArgs" /> class.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <param name="formType">Type of the form.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when formType is null.
+            </exception>
+        </member>
+        <member name="T:B1PP.Forms.Events.IEventFilterManager">
+            <summary>
+            Allows adding filters to the SAP Business One Event Filter (improves addon performance).
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.IEventFilterManager.Include(SAPbouiCOM.BoEventTypes,System.String)">
+            <summary>
+            Includes the specified event type on the sending list.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <param name="formType">Type of the form.</param>
+        </member>
+        <member name="T:B1PP.Forms.Events.IFilterable">
+            <summary>
+            Marks a type as being eligible for SAP Business One event filtering.
+            </summary>
+            <remarks>
+            Filtering is done by raising the HandlerAdded event, every time an SAP Business One
+            <para />
+            event handler is added.
+            </remarks>
+        </member>
+        <member name="E:B1PP.Forms.Events.IFilterable.HandlerAdded">
+            <summary>
+            Occurs when an SAP Business One event handler is added.
+            </summary>
+        </member>
+        <member name="T:B1PP.Forms.Events.ISystemFormInstance">
+            <summary>
+            Represents a system form instance.
+            </summary>
+            <seealso cref="T:B1PP.Forms.Events.IFormInstance" />
+        </member>
+        <member name="M:B1PP.Forms.Events.ISystemFormInstance.Initialize">
+            <summary>
+            Initializes this instance.
+            </summary>
+            <remarks>
+            Use this method to register any events you may need.
+            </remarks>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.B1ItemEventDispatcher.Subscribe(SAPbouiCOM.Application)">
+            <summary>
+            Subscribes to the specified application item events.
+            </summary>
+            <param name="application">The application to subscribe to.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="application" /> is null.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Cannot subscribe twice to 'Application.ItemEvent'.
+            </exception>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.B1ItemEventDispatcher.Unsubscribe">
+            <summary>
+            Unsubscribing will remove all event listeners.
+            </summary>
+        </member>
+        <member name="T:B1PP.Forms.Events.ItemEvents.ColumnsAttribute">
+            <summary>
+            Allows you to set which columns will the method run for.
+            </summary>
+            <remarks>
+            </remarks>
+            <example>
+            <code>
+            [ItemEventHandler(@"itemId", BoEventTypes.et_MATRIX_LINK_PRESSED)]
+            [Columns(@"columnId")]
+            private void OnAfterColumnLinkPressed(ItemEvent e)
+            {
+              // the code in this method only runs for columnId;
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:B1PP.Forms.Events.ItemEvents.ColumnsAttribute.None">
+            <summary>
+            Represents no columns.
+            </summary>
+        </member>
+        <member name="F:B1PP.Forms.Events.ItemEvents.ColumnsAttribute.columnIds">
+            <summary>
+            Stores the column id list set by the user.
+            </summary>
+        </member>
+        <member name="P:B1PP.Forms.Events.ItemEvents.ColumnsAttribute.ColumnIds">
+            <summary>
+            Gets the column ids.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.ColumnsAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.ItemEvents.ColumnsAttribute" /> class.
+            </summary>
+            <param name="values">The column ids.</param>
+            <remarks>
+            Any empty id will be ignored.
+            </remarks>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.FormItemEventListener.Subscribe">
+            <summary>
+            Subscribes the objects own handlers and the subordinate object handlers.
+            </summary>
+        </member>
+        <member name="F:B1PP.Forms.Events.ItemEvents.FormModesAttribute.Default">
+            <summary>
+            The default forms modes: Add, Ok and Update.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.FormModesAttribute.#ctor(SAPbouiCOM.BoFormMode[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.ItemEvents.FormModesAttribute"/> class.
+            </summary>
+            <param name="modes">The modes.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="modes" /> is <see langword="null" />.
+            </exception>
+        </member>
+        <member name="T:B1PP.Forms.Events.ItemEvents.IItemEventListener">
+            <summary>
+            Represents an item event listener that is notified 
+            when the item event matches the id of the identifier. 
+            </summary>
+        </member>
+        <member name="P:B1PP.Forms.Events.ItemEvents.IItemEventListener.Id">
+            <summary>
+            Gets the identifier of the listener.<para/>
+            This id should be a form id, form type or an event type.
+            </summary>
+            <value>
+            The identifier of the listener.
+            </value>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.IItemEventListener.OnItemEvent(SAPbouiCOM.ItemEvent@,System.Boolean@)">
+            <summary>
+            Called when an item event is triggered.
+            </summary>
+            <param name="e">The event arguments.</param>
+            <param name="bubbleEvent">The BubbleEvent flag.</param>
+        </member>
+        <member name="T:B1PP.Forms.Events.ItemEvents.ItemEventHandlerAttribute">
+            <summary>
+            Used to mark a method as an item event handler.
+            <para />
+            Before item event signature: <b>bool OnBeforeItemEvent(ItemEvent e);</b>
+            <para />
+            After item event signature: <b>void OnAfterItemEvent(ItemEvent e);</b>
+            <para />
+            To stop Business One from processing the event return false on the before event.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.ItemEventHandlerAttribute.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.ItemEventHandlerAttribute.Equals(B1PP.Forms.Events.ItemEvents.ItemEventHandlerAttribute)">
+            <summary>Indicates whether the current object is equal to another object of the same type.</summary>
+            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.ItemEventHandlerAttribute.Equals(System.Object)">
+            <summary>Returns a value that indicates whether this instance is equal to a specified object.</summary>
+            <returns>true if <paramref name="obj" /> equals the type and value of this instance; otherwise, false.</returns>
+            <param name="obj">An <see cref="T:System.Object" /> to compare with this instance or null. </param>
+        </member>
+        <member name="M:B1PP.Forms.Events.ItemEvents.ItemEventHandlerAttribute.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.LayoutKeyEvents.LayoutKeyEventHandlerAttribute.Equals(B1PP.Forms.Events.LayoutKeyEvents.LayoutKeyEventHandlerAttribute)">
+            <summary>Indicates whether the current object is equal to another object of the same type.</summary>
+            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.LayoutKeyEvents.LayoutKeyEventHandlerAttribute.Equals(System.Object)">
+            <summary>Returns a value that indicates whether this instance is equal to a specified object.</summary>
+            <returns>true if <paramref name="obj" /> equals the type and value of this instance; otherwise, false.</returns>
+            <param name="obj">An <see cref="T:System.Object" /> to compare with this instance or null. </param>
+        </member>
+        <member name="M:B1PP.Forms.Events.LayoutKeyEvents.LayoutKeyEventHandlerAttribute.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.MenuEvents.B1MenuEventDispatcher.Subscribe(SAPbouiCOM.Application)">
+            <summary>
+            Subscribe to Menu Events from the application.
+            </summary>
+            <param name="application">The application.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="application"/> is null.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when trying to call subscribe twice or more.
+            </exception>
+        </member>
+        <member name="T:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException">
+            <summary>
+            Represents an error where a handler is already registered,
+            <para />
+            and an attempt is made to register it again.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException.CreateFromKey(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.MenuEvents.EventHandlerAlreadyExistsException" /> class.
+            </summary>
+            <param name="key">The key of the event handler.</param>
+        </member>
+        <member name="T:B1PP.Forms.Events.MethodInfoExtensions">
+            <summary>
+            Extension methods that provide useful utilities in the SAP Business One context.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.MethodInfoExtensions.CreateAfterEventDelegate(System.Reflection.MethodInfo,System.Object)">
+            <summary>
+            Creates an after event delegate using the method information provided and the object instance.
+            </summary>
+            <param name="method">The method information to be used as a delegate.</param>
+            <param name="instance">The object instance.</param>
+            <returns>
+            An after event delegate.
+            </returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.MethodInfoExtensions.CreateAfterEventDelegate``1(System.Reflection.MethodInfo,System.Object)">
+            <summary>
+            Creates an after event delegate using the method information provided and the object instance.
+            <para />
+            The T type identifies the arguments of the method.
+            </summary>
+            <param name="method">The method information to be used as a delegate.</param>
+            <param name="instance">The object instance.</param>
+            <returns>
+            An after event delegate.
+            </returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.MethodInfoExtensions.CreateBeforeEventDelegate``1(System.Reflection.MethodInfo,System.Object)">
+            <summary>
+            Creates a before event delegate using the method information provided and the object instance.
+            <para />
+            The T type identifies the arguments of the method. The boolean is the return type of the delegate.
+            </summary>
+            <param name="method">The method information to be used as a delegate.</param>
+            <param name="instance">The object instance.</param>
+            <returns>
+            A before event delegate.
+            </returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.MethodInfoExtensions.GetAttribute``1(System.Reflection.MethodInfo)">
+            <summary>
+            Gets a specific attribute from a method (provided it has one).
+            </summary>
+            <typeparam name="T">The type of the attribute</typeparam>
+            <param name="method">The method information to extract the attribute from.</param>
+            <returns>
+            The attribute cast to the given attribute type.
+            </returns>
+        </member>
+        <member name="F:B1PP.Forms.Events.RightClickEvents.B1RightClickEventDispatcher.sink">
+            <summary>
+            Stores the event sink for right click events.
+            </summary>
+        </member>
+        <member name="T:B1PP.Forms.Events.RightClickEvents.IRightClickEventSink">
+            <summary>
+            Generic right click event sink that receives all right click events
+            not handled by other specific handlers on the specified form types.
+            </summary>
+        </member>
+        <member name="P:B1PP.Forms.Events.RightClickEvents.IRightClickEventSink.FormTypes">
+            <summary>
+            Form types for which this sink will be considered.
+            </summary>
+            <value>
+            The form types.
+            </value>
+        </member>
+        <member name="M:B1PP.Forms.Events.RightClickEvents.IRightClickEventSink.OnRightClickEvent(SAPbouiCOM.ContextMenuInfo@,System.Boolean@)">
+            <summary>
+            Called when an unhandled right click event occurs.
+            </summary>
+            <param name="e">The event args.</param>
+            <param name="bubbleEvent">The bubble event flag.</param>
+        </member>
+        <member name="T:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException">
+            <summary>
+            Thrown when attempting to overwrite an existing right click event sink.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException"/> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.Events.RightClickEvents.RightClickEventSinkAlreadyExistsException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:B1PP.Forms.Events.XmlEventFilter">
+            <summary>
+            Helper to produce the Xml format needed by the event filter in SAP Business One.
+            </summary>
+        </member>
+        <member name="F:B1PP.Forms.Events.XmlEventFilter.xmlEventsStructure">
+            <summary>
+            Represents the xml file to be produced.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.AddEventType(SAPbouiCOM.BoEventTypes)">
+            <summary>
+            Adds a new event tag to the events tag with the given event type.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.AddFormTypeToEvent(SAPbouiCOM.BoEventTypes,System.String)">
+            <summary>
+            Adds a new form tag to the forms tag with the given form type.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <param name="formType">Type of the form.</param>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.IsEventTypeMissing(SAPbouiCOM.BoEventTypes)">
+            <summary>
+            Determines whether an event with the given type exists.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <returns>True when an event with the given type exists, false otherwise.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.IsFormTypeMissing(SAPbouiCOM.BoEventTypes,System.String)">
+            <summary>
+            Determines whether a form with the given type already exists.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <param name="formType">Type of the form.</param>
+            <returns>True when a form with the type exists, false otherwise.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.Load(System.String)">
+            <summary>
+            Loads the specified event filters.
+            </summary>
+            <param name="eventFilters">The event filters.</param>
+            <exception cref="T:System.ArgumentException">
+            Thrown when eventFilters is null or empty.
+            </exception>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.CreateEventOfType(SAPbouiCOM.BoEventTypes)">
+            <summary>
+            Creates an event tag with the given type on the type attribute.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <returns>An <see cref="T:System.Xml.Linq.XElement" /> that represents the created tag.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.EventTypeAsString(SAPbouiCOM.BoEventTypes)">
+            <summary>
+            Converts the given event type to a string.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <returns>A string that represents the given event type.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.FindEventElement(SAPbouiCOM.BoEventTypes)">
+            <summary>
+            Finds the event element with the type attribute that matches <paramref name="eventType" />.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <returns>The <see cref="T:System.Xml.Linq.XElement" /> that represents the found event.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.WithFormType(System.String)">
+            <summary>
+            Checks if the attribute matches the given type.
+            </summary>
+            <param name="formType">Type of the form.</param>
+            <returns>True when it matches, false otherwise.</returns>
+        </member>
+        <member name="M:B1PP.Forms.Events.XmlEventFilter.WithType(SAPbouiCOM.BoEventTypes)">
+            <summary>
+            Checks if the attribute matches the given type.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <returns>True when it matches, false otherwise.</returns>
+        </member>
+        <member name="T:B1PP.Forms.NotFoundException">
+            <summary>
+            Represents a failure in a search.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:B1PP.Forms.NotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.NotFoundException" /> class.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.NotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.NotFoundException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:B1PP.Forms.NotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.NotFoundException" /> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:B1PP.Forms.NotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.NotFoundException" /> class.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object
+            data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+            information about the source or destination.
+            </param>
+        </member>
+        <member name="T:B1PP.Forms.StatusBarMessage">
+            <summary>
+            Displays a status bar message as error, warning or success,
+            with the given message and parameters.
+            </summary>
+            <example>
+                <code>
+            var message = new StatusBarMessage(application, @"Hello {0}!", "World");
+            </code>
+            </example>
+        </member>
+        <member name="M:B1PP.Forms.StatusBarMessage.#ctor(SAPbouiCOM.Application,System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:B1PP.Forms.StatusBarMessage" /> class.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="text">The text to be displayed.</param>
+            <param name="args">The arguments for the text.</param>
+        </member>
+        <member name="M:B1PP.Forms.StatusBarMessage.Error">
+            <summary>
+            Displays the message as error.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.StatusBarMessage.Success">
+            <summary>
+            Displays the message as success.
+            </summary>
+        </member>
+        <member name="M:B1PP.Forms.StatusBarMessage.Warning">
+            <summary>
+            Displays the message as warning.
+            </summary>
+        </member>
+    </members>
+</doc>

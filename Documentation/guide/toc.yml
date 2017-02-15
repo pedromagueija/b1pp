@@ -1,0 +1,8 @@
+- name: Standard add-on
+  href: standard.md
+- name: UI API only add-on
+  href: uiapi.md
+- name: DI API only add-on
+  href: diapi.md
+- name: DI API settings file format
+  href: diapi-settings-file-format.md

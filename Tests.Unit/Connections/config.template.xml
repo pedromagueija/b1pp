@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<DiApiConnectionSettings>
+  <Server>server</Server>
+  <UseTrusted>1</UseTrusted>
+  <UserName>user</UserName>
+  <Password>password</Password>
+  <Language>ln_English</Language>
+  <LicenseServer>server:30000</LicenseServer>
+  <DbServerType>dst_MSSQL2012</DbServerType>
+  <CompanyDb>SBODEMOCH</CompanyDb>
+  <DbUserName>username</DbUserName>
+  <DbPassword>password</DbPassword>
+</DiApiConnectionSettings>
