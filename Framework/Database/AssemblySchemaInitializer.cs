@@ -13,11 +13,23 @@ namespace B1PP.Database
 
     using SAPbobsCOM;
 
+    /// <summary>
+    /// Creates the schema using the models attributes as a source.
+    /// </summary>
     public class AssemblySchemaInitializer
     {
+        /// <summary>
+        /// The assembly that contains the models.
+        /// </summary>
         private readonly Assembly assembly;
+        /// <summary>
+        /// The company object.
+        /// </summary>
         private readonly Company company;
 
+        /// <summary>
+        /// Types in this list will have their properties ignored when creating fields.
+        /// </summary>
         private readonly List<Type> ignoredTypes = new List<Type>
         {
             typeof(SimpleRecord),
@@ -25,16 +37,33 @@ namespace B1PP.Database
             typeof(DocumentRecordLine)
         };
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssemblySchemaInitializer"/> class.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// <param name="assembly">The assembly.</param>
         public AssemblySchemaInitializer(Company company, Assembly assembly)
         {
             this.company = company;
             this.assembly = assembly;
         }
 
+        /// <summary>
+        /// Occurs when [create user field error].
+        /// </summary>
         public event EventHandler<UserFieldErrorEventArgs> CreateUserFieldError = delegate { };
-        public event EventHandler<AddUserObjectErrorArgs> CreateUserObjectError = delegate { };
+        /// <summary>
+        /// Occurs when [create user object error].
+        /// </summary>
+        public event EventHandler<AddUserObjectErrorEventArgs> CreateUserObjectError = delegate { };
+        /// <summary>
+        /// Occurs when [create user table error].
+        /// </summary>
         public event EventHandler<AddUserTableErrorEventArgs> CreateUserTableError = delegate { };
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
         public void Initialize()
         {
             var userTableTypes = GetUserTableTypes().ToList();
@@ -63,6 +92,11 @@ namespace B1PP.Database
             }
         }
 
+        /// <summary>
+        /// Creates the fields.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="tableName">Name of the table.</param>
         private void CreateFields(Type type, string tableName)
         {
             var properties = GetCustomProperties(type);
@@ -80,11 +114,23 @@ namespace B1PP.Database
             }
         }
 
+        /// <summary>
+        /// Determines whether [has user field attribute] [the specified p].
+        /// </summary>
+        /// <param name="p">The p.</param>
+        /// <returns>
+        ///   <c>true</c> if [has user field attribute] [the specified p]; otherwise, <c>false</c>.
+        /// </returns>
         private bool HasUserFieldAttribute(PropertyInfo p)
         {
             return p.GetCustomAttribute<UserFieldAttribute>() != null;
         }
 
+        /// <summary>
+        /// Creates the object.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="tableName">Name of the table.</param>
         private void CreateObject(Type type, string tableName)
         {
             // ignore if not marked with user object attribute
@@ -103,6 +149,11 @@ namespace B1PP.Database
             addUserObject.Execute();
         }
 
+        /// <summary>
+        /// Creates the table.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
         private string CreateTable(Type type)
         {
             var table = (UserTablesMD) company.GetBusinessObject(BoObjectTypes.oUserTables);
@@ -120,16 +171,30 @@ namespace B1PP.Database
             return tableName;
         }
 
+        /// <summary>
+        /// Gets the custom properties.
+        /// </summary>
+        /// <param name="userTable">The user table.</param>
+        /// <returns></returns>
         private IEnumerable<PropertyInfo> GetCustomProperties(Type userTable)
         {
             return GetWriteableProperties(userTable).Where(p => !ignoredTypes.Contains(p.DeclaringType));
         }
 
+        /// <summary>
+        /// Gets the properties.
+        /// </summary>
+        /// <param name="userTable">The user table.</param>
+        /// <returns></returns>
         private IEnumerable<PropertyInfo> GetProperties(Type userTable)
         {
             return userTable.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         }
 
+        /// <summary>
+        /// Gets the user table types.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<Type> GetUserTableTypes()
         {
             Type userTableAttribute = typeof(UserTableAttribute);
@@ -140,22 +205,42 @@ namespace B1PP.Database
                      t.GetCustomAttributes(userTableAttribute).Any());
         }
 
+        /// <summary>
+        /// Gets the writeable properties.
+        /// </summary>
+        /// <param name="userTable">The user table.</param>
+        /// <returns></returns>
         private IEnumerable<PropertyInfo> GetWriteableProperties(Type userTable)
         {
             return GetProperties(userTable)
                 .Where(p => p.CanWrite);
         }
 
+        /// <summary>
+        /// Called when [add user field error].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="UserFieldErrorEventArgs"/> instance containing the event data.</param>
         private void OnAddUserFieldError(object sender, UserFieldErrorEventArgs e)
         {
             CreateUserFieldError(sender, e);
         }
 
-        private void OnAddUserObjectError(object sender, AddUserObjectErrorArgs e)
+        /// <summary>
+        /// Called when [add user object error].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="AddUserObjectErrorEventArgs"/> instance containing the event data.</param>
+        private void OnAddUserObjectError(object sender, AddUserObjectErrorEventArgs e)
         {
             CreateUserObjectError(sender, e);
         }
 
+        /// <summary>
+        /// Called when [add user table error].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="AddUserTableErrorEventArgs"/> instance containing the event data.</param>
         private void OnAddUserTableError(object sender, AddUserTableErrorEventArgs e)
         {
             CreateUserTableError(sender, e);

@@ -53,6 +53,13 @@ namespace B1PP.Extensions.SDK.UI
             return application.Forms.AddEx(fcp);
         }
 
+        /// <summary>
+        /// Gets the active form identifier.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <returns>
+        /// The active form unique id, or an empty string.
+        /// </returns>
         public static string GetActiveFormId(this Application application)
         {
             Form activeForm;
@@ -66,7 +73,7 @@ namespace B1PP.Extensions.SDK.UI
                 return string.Empty;
             }
 
-            return activeForm.UniqueID ?? string.Empty;
+            return activeForm?.UniqueID ?? string.Empty;
         }
 
         /// <summary>
@@ -81,6 +88,11 @@ namespace B1PP.Extensions.SDK.UI
             application.SetFilter(eventFilters);
         }
 
+        /// <summary>
+        /// Shows the error.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <param name="message">The message.</param>
         public static void ShowError(this Application application, string message)
         {
             if (string.IsNullOrWhiteSpace(message))

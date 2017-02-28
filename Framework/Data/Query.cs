@@ -79,81 +79,159 @@ namespace B1PP.Data
             return this;
         }
 
+        /// <summary>
+        /// Selects the many.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<dynamic> SelectMany()
         {
             return SelectMany(PreparedStatement);
         }
 
+        /// <summary>
+        /// Selects the many.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IEnumerable<T> SelectMany<T>() where T : class
         {
             return SelectMany<T>(PreparedStatement);
         }
 
+        /// <summary>
+        /// Selects the many.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="creator">The creator.</param>
+        /// <returns></returns>
         public IEnumerable<T> SelectMany<T>(InstanceCreator<T> creator) where T : class
         {
             return SelectMany(PreparedStatement, creator);
         }
 
+        /// <summary>
+        /// Selects the one.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         [CanBeNull]
         public T SelectOne<T>() where T : class
         {
             return SelectOne<T>(PreparedStatement);
         }
 
+        /// <summary>
+        /// Selects the one.
+        /// </summary>
+        /// <returns></returns>
         [CanBeNull]
         public dynamic SelectOne()
         {
             return SelectOne(PreparedStatement);
         }
 
+        /// <summary>
+        /// Selects the one.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="creator">The creator.</param>
+        /// <returns></returns>
         [CanBeNull]
         public T SelectOne<T>(InstanceCreator<T> creator) where T : class
         {
             return SelectOne(PreparedStatement, creator, null);
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public Query With(string placeholder, int value)
         {
             args.Add(new IntegerValueArg(placeholder, value));
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public Query With(string placeholder, string value)
         {
             args.Add(new StringValueArg(placeholder, value));
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public Query With(string placeholder, DateTime value)
         {
             args.Add(new DateTimeValueArg(placeholder, value));
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public Query With(string placeholder, double value)
         {
             args.Add(new DoubleValueArg(placeholder, value));
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="values">The values.</param>
+        /// <returns></returns>
         public Query With(string placeholder, IEnumerable<int> values)
         {
             args.Add(new MultipleIntValuesArg(placeholder, values));
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="values">The values.</param>
+        /// <returns></returns>
         public Query With(string placeholder, IEnumerable<double> values)
         {
             args.Add(new MultipleDoubleValuesArg(placeholder, values));
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="values">The values.</param>
+        /// <returns></returns>
         public Query With(string placeholder, IEnumerable<string> values)
         {
             args.Add(new MultipleStringValuesArg(placeholder, values));
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified pair as an argument for the query.
+        /// </summary>
+        /// <param name="placeholder">The placeholder.</param>
+        /// <param name="values">The values.</param>
+        /// <returns></returns>
         public Query With(string placeholder, IEnumerable<DateTime> values)
         {
             args.Add(new MultipleDateTimeValuesArg(placeholder, values));

@@ -61,7 +61,7 @@
     <Compile Include="Database\AdapterBase.cs" />
     <Compile Include="Database\AddUserField.cs" />
     <Compile Include="Database\AddUserObject.cs" />
-    <Compile Include="Database\AddUserObjectErrorArgs.cs" />
+    <Compile Include="Database\AddUserObjectErrorEventArgs.cs" />
     <Compile Include="Database\AddUserTable.cs" />
     <Compile Include="Database\AddUserTableErrorEventArgs.cs" />
     <Compile Include="Database\ArchiveDateFieldAttribute.cs" />

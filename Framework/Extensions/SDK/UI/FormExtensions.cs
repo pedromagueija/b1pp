@@ -6,6 +6,9 @@ namespace B1PP.Extensions.SDK.UI
 {
     using SAPbouiCOM;
 
+    /// <summary>
+    /// Common and helpful for <see cref="Form"/>.
+    /// </summary>
     public static class FormExtensions
     {
         /// <summary>

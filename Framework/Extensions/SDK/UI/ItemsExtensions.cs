@@ -48,7 +48,9 @@ namespace B1PP.Extensions.SDK.UI
             throw CreateInvalidSpecificItemTypeException(itemId, item, typeof(T));
         }
 
-        private static InvalidSpecificItemTypeException CreateInvalidSpecificItemTypeException(string itemId, Item item,
+        private static InvalidSpecificItemTypeException CreateInvalidSpecificItemTypeException(
+            string itemId, 
+            Item item,
             Type type)
         {
             string message = $"Item '{itemId}' is not of type '{type}'.";

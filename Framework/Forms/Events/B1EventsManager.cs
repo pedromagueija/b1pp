@@ -17,6 +17,8 @@ namespace B1PP.Forms.Events
 
     using ItemEvents;
 
+    using JetBrains.Annotations;
+
     using LayoutKeyEvents;
 
     using MenuEvents;
@@ -51,12 +53,28 @@ namespace B1PP.Forms.Events
         public B1EventsManager(
             Application application,
             IApplicationInstance applicationInstance,
-            IMainMenuInstance mainMenu)
+            [CanBeNull] IMainMenuInstance mainMenu)
         {
             this.application = application;
             this.assembly = applicationInstance.GetType().Assembly;
             this.applicationInstance = applicationInstance;
             this.mainMenu = mainMenu ?? new NullMainMenuInstance();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="B1EventsManager" /> class.
+        /// </summary>
+        /// <param name="application">
+        /// The application.
+        /// </param>
+        /// <param name="applicationInstance">
+        /// The instance responsible for application event handling.
+        /// </param>
+        public B1EventsManager(
+            Application application,
+            IApplicationInstance applicationInstance) : this(application, applicationInstance, null)
+        {
+
         }
 
         /// <summary>

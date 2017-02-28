@@ -20,14 +20,14 @@ namespace B1PP.Database
             this.userObjectMd = userObjectMd;
         }
 
-        public event EventHandler<AddUserObjectErrorArgs> OnError = delegate { };
+        public event EventHandler<AddUserObjectErrorEventArgs> OnError = delegate { };
 
         public void Execute()
         {
             int result = userObjectMd.Add();
             if (result != 0)
             {
-                var errorArgs = new AddUserObjectErrorArgs
+                var errorArgs = new AddUserObjectErrorEventArgs
                 {
                     TableName = userObjectMd.TableName,
                     ObjectName = userObjectMd.Name,

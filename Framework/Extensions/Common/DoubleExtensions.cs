@@ -12,7 +12,7 @@ namespace B1PP.Extensions.Common
         /// <summary>
         /// The tolerance suitable for Business One, where the maximum decimal places is 6.
         /// </summary>
-        private const double Tolerance = 0.0000001;
+        private const double DefaultTolerance = 0.0000001;
 
         /// <summary>
         /// Returns the value as an invariant string.
@@ -50,7 +50,7 @@ namespace B1PP.Extensions.Common
         /// </returns>
         public static bool IsEqual(this double value, double other)
         {
-            return IsEqual(value, other, Tolerance);
+            return IsEqual(value, other, DefaultTolerance);
         }
     }
 }

@@ -30,6 +30,7 @@ namespace B1PP.Forms.Events.RightClickEvents
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
+
             if (sink != null)
                 throw new RightClickEventSinkAlreadyExistsException();
 
@@ -86,12 +87,12 @@ namespace B1PP.Forms.Events.RightClickEvents
             try
             {
                 string activeFormId = Application.GetActiveFormId();
-                if (activeFormId == null)
+                if (string.IsNullOrEmpty(activeFormId))
                 {
                     return;
                 }
 
-                var listener = rightClickEventListeners.Find(l => l.Id == activeFormId);
+                IRightClickEventListener listener = rightClickEventListeners.Find(l => l.Id == activeFormId);
                 if (listener != null)
                 {
                     bool handled = listener.OnRightClickEvent(ref e, out bubbleEvent);

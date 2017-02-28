@@ -20,7 +20,7 @@ namespace B1PP.Database
         }
 
         public event EventHandler<UserFieldErrorEventArgs> CreateUserFieldError = delegate { };
-        public event EventHandler<AddUserObjectErrorArgs> CreateUserObjectError = delegate { };
+        public event EventHandler<AddUserObjectErrorEventArgs> CreateUserObjectError = delegate { };
         public event EventHandler<AddUserTableErrorEventArgs> CreateUserTableError = delegate { };
 
         public void InitializeFromAssembly(Assembly assembly)
@@ -94,7 +94,7 @@ namespace B1PP.Database
             CreateUserFieldError(sender, e);
         }
 
-        private void OnAddUserObjectError(object sender, AddUserObjectErrorArgs e)
+        private void OnAddUserObjectError(object sender, AddUserObjectErrorEventArgs e)
         {
             CreateUserObjectError(sender, e);
         }

@@ -14,8 +14,18 @@ namespace B1PP.Extensions.SDK.UI
 
     using SAPbouiCOM;
 
+    /// <summary>
+    /// Common and helpful methods for <see cref="DBDataSource"/>.
+    /// </summary>
     public static class DbDataSourceExtensions
     {
+        /// <summary>
+        /// Gets the date time.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <returns></returns>
         public static DateTime? GetDateTime(this DBDataSource source, string columnId, int rowIndex)
         {
             string sourceValue = source.GetString(columnId, rowIndex);
@@ -28,6 +38,13 @@ namespace B1PP.Extensions.SDK.UI
             return value;
         }
 
+        /// <summary>
+        /// Gets the double.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <returns></returns>
         public static double? GetDouble(this DBDataSource source, string columnId, int rowIndex)
         {
             string sourceValue = source.GetString(columnId, rowIndex);
@@ -42,6 +59,13 @@ namespace B1PP.Extensions.SDK.UI
             return value;
         }
 
+        /// <summary>
+        /// Gets the int.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <returns></returns>
         public static int? GetInt(this DBDataSource source, string columnId, int rowIndex)
         {
             string sourceValue = source.GetString(columnId, rowIndex);
@@ -56,6 +80,13 @@ namespace B1PP.Extensions.SDK.UI
             return value;
         }
 
+        /// <summary>
+        /// Gets the string.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <returns></returns>
         public static string GetString(this DBDataSource source, string columnId, int rowIndex)
         {
             string sourceValue = source.GetValue(columnId, rowIndex);
@@ -63,6 +94,13 @@ namespace B1PP.Extensions.SDK.UI
             return sourceValue?.Trim();
         }
 
+        /// <summary>
+        /// Sets the specified column identifier.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <param name="value">The value.</param>
         public static void Set(this DBDataSource source, string columnId, int rowIndex, int? value)
         {
             if (value != null)
@@ -71,6 +109,13 @@ namespace B1PP.Extensions.SDK.UI
             }
         }
 
+        /// <summary>
+        /// Sets the specified column identifier.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <param name="value">The value.</param>
         public static void Set(this DBDataSource source, string columnId, int rowIndex, string value)
         {
             if (value != null)
@@ -79,6 +124,13 @@ namespace B1PP.Extensions.SDK.UI
             }
         }
 
+        /// <summary>
+        /// Sets the specified column identifier.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <param name="value">The value.</param>
         public static void Set(this DBDataSource source, string columnId, int rowIndex, double? value)
         {
             if (value != null)
@@ -87,6 +139,13 @@ namespace B1PP.Extensions.SDK.UI
             }
         }
 
+        /// <summary>
+        /// Sets the specified column identifier.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="columnId">The column identifier.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <param name="value">The value.</param>
         public static void Set(this DBDataSource source, string columnId, int rowIndex, DateTime? value)
         {
             if (value != null)
@@ -96,6 +155,12 @@ namespace B1PP.Extensions.SDK.UI
         }
 
 
+        /// <summary>
+        /// To the list.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source.</param>
+        /// <returns></returns>
         public static IEnumerable<T> ToList<T>(this DBDataSource source) where T : class, new()
         {
             int rowCount = source.Size;
@@ -109,6 +174,13 @@ namespace B1PP.Extensions.SDK.UI
             }
         }
 
+        /// <summary>
+        /// Creates the new item.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <returns></returns>
         private static T CreateNewItem<T>(DBDataSource source, int rowIndex) where T : class, new()
         {
             Fields sourceFields = source.Fields;
@@ -134,6 +206,12 @@ namespace B1PP.Extensions.SDK.UI
             return item;
         }
 
+        /// <summary>
+        /// Determines the property.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns></returns>
         private static PropertyInfo DetermineProperty(Type type, string columnName)
         {
             string propertyName = DeterminePropertyName(columnName);
@@ -148,11 +226,21 @@ namespace B1PP.Extensions.SDK.UI
             return property;
         }
 
+        /// <summary>
+        /// Users the field name attribute match.
+        /// </summary>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns></returns>
         private static Func<PropertyInfo, bool> UserFieldNameAttributeMatch(string columnName)
         {
             return p => columnName.Equals(p.GetCustomAttribute<FieldNameAttribute>()?.FieldName);
         }
 
+        /// <summary>
+        /// Determines the name of the property.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
         private static string DeterminePropertyName(string name)
         {
             return name.StartsWith(@"U_") ? name.Substring(2) : name;

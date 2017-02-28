@@ -15,7 +15,7 @@ namespace B1PP.Extensions.Types
     /// </summary>
     /// <remarks>
     /// This class facilitates the int/string duality present in B1. Sometimes an integer is prefered,
-    /// sometimes a string is prefered. This object can be implicit converted to and from strings or ints.
+    /// sometimes a string is prefered. This object can be implicitly converted to and from strings or ints.
     /// </remarks>
     [TypeConverter(typeof(IdTypeConverter))]
     public class Id
