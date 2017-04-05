@@ -15,7 +15,7 @@ namespace B1PP.Data
         /// Gets the place holder.
         /// </summary>
         /// <remarks>
-        /// Typically an @placeHolderName format is used, but you can use any placeholder.
+        /// The format for a placeholder is @placeHolderName.
         /// </remarks>
         string PlaceHolder { get; }
 

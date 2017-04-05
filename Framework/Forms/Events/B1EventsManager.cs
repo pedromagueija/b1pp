@@ -38,6 +38,8 @@ namespace B1PP.Forms.Events
         private readonly IMainMenuInstance mainMenu;
         private readonly Assembly assembly;
 
+        private B1ApplicationEventDispatcher B1ApplicationEventDispatcher { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="B1EventsManager" /> class.
         /// </summary>
@@ -59,6 +61,8 @@ namespace B1PP.Forms.Events
             this.assembly = applicationInstance.GetType().Assembly;
             this.applicationInstance = applicationInstance;
             this.mainMenu = mainMenu ?? new NullMainMenuInstance();
+
+            B1ApplicationEventDispatcher = new B1ApplicationEventDispatcher();
         }
 
         /// <summary>

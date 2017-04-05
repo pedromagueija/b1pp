@@ -35,7 +35,7 @@ namespace B1PP.Connections
         /// Gets the company.
         /// </summary>
         public DiCompany Company { get; private set; }
-        
+
         /// <summary>
         /// Gets a value indicating whether this <see cref="IConnection" /> is connected.
         /// </summary>

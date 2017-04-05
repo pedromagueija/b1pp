@@ -8,26 +8,26 @@ namespace B1PP.Forms.Events.ApplicationEvents
 
     using SAPbouiCOM;
 
-    internal static class B1ApplicationEventDispatcher
+    internal class B1ApplicationEventDispatcher : ISystemEventSubscriber
     {
-        private static IApplicationInstance instance;
+        private IApplicationInstance instance;
 
-        private static Application Application { get; set; }
+        private Application Application { get; set; }
 
-        public static event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
+        public event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
 
-        public static void SetListener(IApplicationInstance listener)
+        public void SetListener(IApplicationInstance listener)
         {
             instance = listener;
         }
 
-        public static void Subscribe(Application application)
+        public void Subscribe(Application application)
         {
             Application = application;
             Application.AppEvent += OnAppEvent;
         }
 
-        public static void Unsubscribe()
+        public void Unsubscribe()
         {
             if (Application != null)
             {
@@ -36,7 +36,7 @@ namespace B1PP.Forms.Events.ApplicationEvents
             }
         }
 
-        private static void OnAppEvent(BoAppEventTypes eventType)
+        private void OnAppEvent(BoAppEventTypes eventType)
         {
             try
             {
