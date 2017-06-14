@@ -6,8 +6,6 @@ namespace B1PP.Forms.Events
 {
     using System.Collections.Generic;
 
-    using FormDataEvents;
-
     using ItemEvents;
 
     using LayoutKeyEvents;
@@ -27,9 +25,9 @@ namespace B1PP.Forms.Events
         /// Initializes a new instance of the <see cref="EventListener"/> class.
         /// </summary>
         /// <param name="form">The form.</param>
-        public EventListener(IFormInstance form):this(form, null)
+        public EventListener(B1Session session, IFormInstance form):this(session, form, null)
         {
-            
+
         }
 
         /// <summary>
@@ -37,17 +35,17 @@ namespace B1PP.Forms.Events
         /// </summary>
         /// <param name="form">The form.</param>
         /// <param name="subordinates">Other objects that contain.</param>
-        public EventListener(IFormInstance form, params object[] subordinates)
+        public EventListener(B1Session session, IFormInstance form, params object[] subordinates)
         {
             var delegates = subordinates ?? new object[0];
 
             listeners = new List<IEventListener>()
             {
-                new FormMenuEventListener(form),
-                new RightClickEventListener(form),
-                new FormItemEventListener(form, delegates),
-                new FormDataEventListener(form),
-                new LayoutKeyEventListener(form)
+                session.CreateFormMenuEventListener(form),
+                session.CreateRightClickEventListener(form),
+                session.CreateFormItemEventListener(form, delegates),
+                session.CreateFormDataEventListener(form),
+                session.CreateLayoutKeyEventListener(form)
             };
         }
 

@@ -13,6 +13,7 @@ namespace B1PP.Forms.Events.ItemEvents
     {
         private readonly HandlersCollection<ItemEvent> handlers = new HandlersCollection<ItemEvent>();
 
+        private readonly B1ItemEventDispatcher dispatcher;
         private readonly IFormInstance form;
         private readonly object[] subordinates;
 
@@ -25,12 +26,13 @@ namespace B1PP.Forms.Events.ItemEvents
             }
         }
 
-        public FormItemEventListener(IFormInstance form) : this(form, null)
+        public FormItemEventListener(B1ItemEventDispatcher dispatcher, IFormInstance form) : this(dispatcher, form, null)
         {
         }
 
-        public FormItemEventListener(IFormInstance form, params object[] subordinates)
+        public FormItemEventListener(B1ItemEventDispatcher dispatcher, IFormInstance form, params object[] subordinates)
         {
+            this.dispatcher = dispatcher;
             this.form = form;
             this.subordinates = subordinates ?? new object[0];
         }
@@ -39,7 +41,7 @@ namespace B1PP.Forms.Events.ItemEvents
         public void OnItemEvent(ref ItemEvent e, out bool bubbleEvent)
         {
             bubbleEvent = true;
-            
+
             if(e.BeforeAction)
                 handlers.HandleBefore(e, out bubbleEvent);
             else
@@ -59,12 +61,12 @@ namespace B1PP.Forms.Events.ItemEvents
                 AddEventHandlers(subordinate, form.FormType);
             }
 
-            B1ItemEventDispatcher.AddListener(this);
+            dispatcher.AddListener(this);
         }
 
         public void Unsubscribe()
         {
-            B1ItemEventDispatcher.RemoveListener(this);
+            dispatcher.RemoveListener(this);
         }
 
         private void AddEventHandlers(object userForm, string formType)

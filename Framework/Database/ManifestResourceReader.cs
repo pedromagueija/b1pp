@@ -35,7 +35,7 @@ namespace B1PP.Database
                 {
                     if (stream == null)
                     {
-                        string message = $"'{resourceName}' was not found. Was it marked as an Embedded resource?";
+                        string message = $@"'{resourceName}' was not found. Was it marked as an Embedded resource?";
                         throw new UnableToReadException(message);
                     }
 

@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.MenuEvents
 {
     using System;
@@ -12,17 +13,18 @@ namespace B1PP.Forms.Events.MenuEvents
     using AfterEventMap = System.Collections.Generic.Dictionary<string, System.Action<SAPbouiCOM.MenuEvent>>;
     using BeforeEventMap = System.Collections.Generic.Dictionary<string, System.Func<SAPbouiCOM.MenuEvent, bool>>;
 
-    internal class MainMenuEventListener : IMainMenuEventListener, IEventListener
+    internal class MainMenuEventListener : IMainMenuEventListener
     {
-        private readonly IMainMenuInstance main;
-
         private readonly AfterEventMap after = new AfterEventMap();
 
         private readonly BeforeEventMap before = new BeforeEventMap();
+        private readonly B1MenuEventDispatcher dispatcher;
+        private readonly IMainMenuInstance main;
 
-        public MainMenuEventListener(IMainMenuInstance main)
+        public MainMenuEventListener(IMainMenuInstance main, B1MenuEventDispatcher dispatcher)
         {
             this.main = main;
+            this.dispatcher = dispatcher;
         }
 
         public void OnMenuEvent(ref MenuEvent e, out bool bubbleEvent)
@@ -41,14 +43,19 @@ namespace B1PP.Forms.Events.MenuEvents
             }
         }
 
-        public event EventHandler<HandlerAddedEventArgs> HandlerAdded = delegate { };
-
         public void Subscribe()
         {
             AddEventHandlers(main);
 
-            B1MenuEventDispatcher.AddMainMenuListener(this);
+            dispatcher.AddMainMenuListener(this);
         }
+
+        public void Unsubscribe()
+        {
+            dispatcher.RemoveMainMenuListener();
+        }
+
+        public event EventHandler<HandlerAddedEventArgs> HandlerAdded = delegate { };
 
         private void AddEventHandlers(IMainMenuInstance mainMenu)
         {
@@ -80,11 +87,6 @@ namespace B1PP.Forms.Events.MenuEvents
 
                 HandlerAdded(this, new HandlerAddedEventArgs(BoEventTypes.et_MENU_CLICK, @"ALL_FORMS"));
             }
-        }
-
-        public void Unsubscribe()
-        {
-            B1MenuEventDispatcher.RemoveMainMenuListener();
         }
     }
 }

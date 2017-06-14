@@ -9,26 +9,49 @@ namespace B1PP.Database.Attributes
 
     using SAPbobsCOM;
 
+    /// <summary>
+    /// Defines the default value to use for a UserField.
+    /// </summary>
+    /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class UserFieldDefaultValueAttribute : Attribute
     {
+        /// <summary>
+        /// The value
+        /// </summary>
         private readonly object value;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public UserFieldDefaultValueAttribute(int value)
         {
             this.value = value;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public UserFieldDefaultValueAttribute(double value)
         {
             this.value = value;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public UserFieldDefaultValueAttribute(string value)
         {
             this.value = value ?? string.Empty;
         }
 
+        /// <summary>
+        /// Applies the default value to the specified field.
+        /// </summary>
+        /// <param name="field">The field to apply the default value to.</param>
         public void Apply(UserFieldsMD field)
         {
             string text = string.Empty;

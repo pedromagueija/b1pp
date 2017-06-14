@@ -100,6 +100,9 @@ namespace B1PP.Connections
         /// <para />
         /// Note that without connection both <see cref="Application" /> and <see cref="Company" /> are <see langword="null" />.
         /// </summary>
+        /// <exception cref="ConnectionException">
+        /// Thrown when an error occurs while connecting.
+        /// </exception>
         public void Connect()
         {
             int attempts = 1;

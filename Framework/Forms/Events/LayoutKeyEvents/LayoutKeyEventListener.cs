@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.LayoutKeyEvents
 {
     using System;
@@ -18,6 +19,7 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
         private readonly Dictionary<LayoutKeyEventHandlerAttribute, Func<LayoutKeyInfo, bool>> before =
             new Dictionary<LayoutKeyEventHandlerAttribute, Func<LayoutKeyInfo, bool>>();
 
+        private readonly B1LayoutKeyEventDispatcher dispatcher;
         private readonly IFormInstance form;
 
 
@@ -29,9 +31,22 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
             }
         }
 
-        public LayoutKeyEventListener(IFormInstance form)
+        public LayoutKeyEventListener(B1LayoutKeyEventDispatcher dispatcher, IFormInstance form)
         {
+            this.dispatcher = dispatcher;
             this.form = form;
+        }
+
+        public void Subscribe()
+        {
+            AddEventHandlers(form);
+
+            dispatcher.AddListener(this);
+        }
+
+        public void Unsubscribe()
+        {
+            dispatcher.RemoveListener(this);
         }
 
 
@@ -54,18 +69,6 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
         }
 
         public event EventHandler<HandlerAddedEventArgs> HandlerAdded = delegate { };
-
-        public void Subscribe()
-        {
-            AddEventHandlers(form);
-
-            B1LayoutKeyEventDispatcher.AddListener(this);
-        }
-
-        public void Unsubscribe()
-        {
-            B1LayoutKeyEventDispatcher.RemoveListener(this);
-        }
 
         private void AddEventHandlers(IFormInstance userForm)
         {

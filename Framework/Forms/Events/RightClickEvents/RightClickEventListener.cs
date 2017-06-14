@@ -18,6 +18,7 @@ namespace B1PP.Forms.Events.RightClickEvents
         private readonly Dictionary<string, Func<ContextMenuInfo, bool>> before =
             new Dictionary<string, Func<ContextMenuInfo, bool>>();
 
+        private readonly B1RightClickEventDispatcher dispatcher;
         private readonly IFormInstance form;
 
         public string Id
@@ -28,8 +29,9 @@ namespace B1PP.Forms.Events.RightClickEvents
             }
         }
 
-        public RightClickEventListener(IFormInstance form)
+        public RightClickEventListener(B1RightClickEventDispatcher dispatcher, IFormInstance form)
         {
+            this.dispatcher = dispatcher;
             this.form = form;
         }
 
@@ -58,12 +60,12 @@ namespace B1PP.Forms.Events.RightClickEvents
         {
             AddEventHandlers(form);
 
-            B1RightClickEventDispatcher.AddListener(this);
+            dispatcher.AddListener(this);
         }
 
         public void Unsubscribe()
         {
-            B1RightClickEventDispatcher.RemoveListener(this);
+            dispatcher.RemoveListener(this);
         }
 
         private void AddEventHandlers(IFormInstance userForm)

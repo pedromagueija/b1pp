@@ -18,6 +18,7 @@ namespace B1PP.Forms.Events.MenuEvents
             new Dictionary<string, Func<MenuEvent, bool>>();
 
         private readonly IFormInstance form;
+        private readonly B1MenuEventDispatcher dispatcher;
 
         public string FormId
         {
@@ -27,9 +28,10 @@ namespace B1PP.Forms.Events.MenuEvents
             }
         }
 
-        public FormMenuEventListener(IFormInstance form)
+        public FormMenuEventListener(IFormInstance form, B1MenuEventDispatcher dispatcher)
         {
             this.form = form;
+            this.dispatcher = dispatcher;
         }
 
         public bool OnMenuEvent(ref MenuEvent e, out bool bubbleEvent)
@@ -57,12 +59,12 @@ namespace B1PP.Forms.Events.MenuEvents
         {
             AddEventHandlers(form);
 
-            B1MenuEventDispatcher.AddListener(this);
+            dispatcher.AddListener(this);
         }
 
         public void Unsubscribe()
         {
-            B1MenuEventDispatcher.RemoveListener(this);
+            dispatcher.RemoveListener(this);
         }
 
         private void AddEventHandlers(IFormInstance userForm)

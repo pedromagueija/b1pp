@@ -253,7 +253,7 @@ namespace B1PP.Extensions.SDK.UI
 
             if (type == typeof(DateTime))
             {
-                return DateTime.ParseExact(textValue, "yyyyMMdd", CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(textValue, @"yyyyMMdd", CultureInfo.InvariantCulture);
             }
 
             if (type == typeof(int))
@@ -312,12 +312,12 @@ namespace B1PP.Extensions.SDK.UI
             IEnumerable<PropertyInfo> properties)
         {
             return from value in values
-                select new XElement("Row",
-                    new XElement("Cells",
+                select new XElement(@"Row",
+                    new XElement(@"Cells",
                         from property in properties
-                        select new XElement("Cell",
-                            new XElement("ColumnUid", property.Name),
-                            new XElement("Value", GetValue(property, value)))));
+                        select new XElement(@"Cell",
+                            new XElement(@"ColumnUid", property.Name),
+                            new XElement(@"Value", GetValue(property, value)))));
         }
 
         /// <summary>
@@ -367,7 +367,7 @@ namespace B1PP.Extensions.SDK.UI
             if (propertyValue is DateTime)
             {
                 var dateTime = (DateTime) propertyValue;
-                return dateTime.ToString("yyyyMMdd");
+                return dateTime.ToString(@"yyyyMMdd");
             }
 
             return Convert.ToString(propertyValue, CultureInfo.InvariantCulture);

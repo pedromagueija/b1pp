@@ -5,7 +5,7 @@ namespace B1PP.Forms.Events.ApplicationEvents
     using SAPbouiCOM;
 
     /// <summary>
-    /// Represents a system event subscriber that subscribes to events 
+    /// Represents a system event subscriber that subscribes to events
     /// <para/>
     /// from the <see cref="Application"/> object.
     /// </summary>
@@ -17,7 +17,7 @@ namespace B1PP.Forms.Events.ApplicationEvents
         event EventHandler<ErrorEventArgs> EventHandlerError;
 
         /// <summary>
-        /// Subscribes the specified application.
+        /// Subscribes the specified application events.
         /// </summary>
         /// <param name="application">The application.</param>
         void Subscribe(Application application);

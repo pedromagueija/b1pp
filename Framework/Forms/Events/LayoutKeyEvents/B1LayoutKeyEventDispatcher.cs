@@ -9,32 +9,32 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
 
     using SAPbouiCOM;
 
-    internal static class B1LayoutKeyEventDispatcher
+    internal class B1LayoutKeyEventDispatcher
     {
-        private static readonly Dictionary<string, ILayoutKeyEventListener> eventListeners =
+        private readonly Dictionary<string, ILayoutKeyEventListener> eventListeners =
             new Dictionary<string, ILayoutKeyEventListener>();
 
-        private static Application Application { get; set; }
+        private Application Application { get; set; }
 
-        public static void AddListener(LayoutKeyEventListener listener)
+        public void AddListener(LayoutKeyEventListener listener)
         {
             eventListeners.Add(listener.Id, listener);
         }
 
-        public static event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
+        public event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
 
-        public static void RemoveListener(LayoutKeyEventListener listener)
+        public void RemoveListener(LayoutKeyEventListener listener)
         {
             eventListeners.Remove(listener.Id);
         }
 
-        public static void Subscribe(Application application)
+        public void Subscribe(Application application)
         {
             Application = application;
             Application.LayoutKeyEvent += OnLayoutKeyEvent;
         }
 
-        public static void Unsubscribe()
+        public void Unsubscribe()
         {
             if (Application != null)
             {
@@ -44,7 +44,7 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
             }
         }
 
-        private static void OnLayoutKeyEvent(ref LayoutKeyInfo e, out bool bubbleEvent)
+        private void OnLayoutKeyEvent(ref LayoutKeyInfo e, out bool bubbleEvent)
         {
             bubbleEvent = true;
 

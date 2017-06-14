@@ -9,21 +9,21 @@ namespace B1PP.Forms.Events.FormDataEvents
 
     using SAPbouiCOM;
 
-    internal static class B1FormDataEventDispatcher
+    internal class B1FormDataEventDispatcher
     {
-        private static Dictionary<string, IFormDataEventListener> listeners =
+        private Dictionary<string, IFormDataEventListener> listeners =
             new Dictionary<string, IFormDataEventListener>();
 
-        private static Application Application { get; set; }
+        private Application Application { get; set; }
 
-        public static void AddListener(FormDataEventListener listener)
+        public void AddListener(FormDataEventListener listener)
         {
             listeners.Add(listener.Id, listener);
         }
 
-        public static event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
+        public event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
 
-        public static void RemoveListener(FormDataEventListener listener)
+        public void RemoveListener(FormDataEventListener listener)
         {
             if (listeners.ContainsKey(listener.Id))
             {
@@ -37,7 +37,7 @@ namespace B1PP.Forms.Events.FormDataEvents
         /// <param name="application">The application to subscribe to.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="application" /> is null.</exception>
         /// <exception cref="System.InvalidOperationException">Cannot subscribe twice to 'Application.ItemEvent'.</exception>
-        public static void Subscribe(Application application)
+        public void Subscribe(Application application)
         {
             if (application == null)
             {
@@ -46,7 +46,7 @@ namespace B1PP.Forms.Events.FormDataEvents
 
             if (Application != null)
             {
-                throw new InvalidOperationException("Cannot subscribe twice to 'Application.ItemEvent'.");
+                throw new InvalidOperationException(@"Cannot subscribe twice to 'Application.ItemEvent'.");
             }
 
             Application = application;
@@ -56,7 +56,7 @@ namespace B1PP.Forms.Events.FormDataEvents
         /// <summary>
         /// Unsubscribing will remove all event listeners.
         /// </summary>
-        public static void Unsubscribe()
+        public void Unsubscribe()
         {
             if (Application != null)
             {
@@ -66,7 +66,7 @@ namespace B1PP.Forms.Events.FormDataEvents
             }
         }
 
-        private static void OnFormDataEvent(ref BusinessObjectInfo e, out bool bubbleEvent)
+        private void OnFormDataEvent(ref BusinessObjectInfo e, out bool bubbleEvent)
         {
             bubbleEvent = true;
 

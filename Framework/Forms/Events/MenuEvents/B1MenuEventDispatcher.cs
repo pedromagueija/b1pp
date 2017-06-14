@@ -11,33 +11,33 @@ namespace B1PP.Forms.Events.MenuEvents
 
     using SAPbouiCOM;
 
-    internal static class B1MenuEventDispatcher
+    internal class B1MenuEventDispatcher
     {
-        private static IMainMenuEventListener mainMenuEventListener;
+        private IMainMenuEventListener mainMenuEventListener;
 
-        private static Dictionary<string, IFormMenuEventListener> menuEventListeners =
+        private Dictionary<string, IFormMenuEventListener> menuEventListeners =
             new Dictionary<string, IFormMenuEventListener>();
 
-        private static Application Application { get; set; }
+        private Application Application { get; set; }
 
-        public static void AddListener(IFormMenuEventListener listener)
+        public void AddListener(IFormMenuEventListener listener)
         {
             menuEventListeners.Add(listener.FormId, listener);
         }
 
-        public static void AddMainMenuListener(IMainMenuEventListener listener)
+        public void AddMainMenuListener(IMainMenuEventListener listener)
         {
             mainMenuEventListener = listener;
         }
 
-        public static event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
+        public event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
 
-        public static void RemoveListener(IFormMenuEventListener listener)
+        public void RemoveListener(IFormMenuEventListener listener)
         {
             menuEventListeners.Remove(listener.FormId);
         }
 
-        public static void RemoveMainMenuListener()
+        public void RemoveMainMenuListener()
         {
             mainMenuEventListener = null;
         }
@@ -52,7 +52,7 @@ namespace B1PP.Forms.Events.MenuEvents
         /// <exception cref="System.InvalidOperationException">
         /// Thrown when trying to call subscribe twice or more.
         /// </exception>
-        public static void Subscribe(Application application)
+        public void Subscribe(Application application)
         {
             if (application == null)
             {
@@ -68,7 +68,7 @@ namespace B1PP.Forms.Events.MenuEvents
             Application.MenuEvent += OnMenuEvent;
         }
 
-        public static void Unsubscribe()
+        public void Unsubscribe()
         {
             if (Application != null)
             {
@@ -79,12 +79,12 @@ namespace B1PP.Forms.Events.MenuEvents
             }
         }
 
-        private static bool IsFormMenu(string activeFormId)
+        private bool IsFormMenu(string activeFormId)
         {
             return !string.IsNullOrEmpty(activeFormId) && menuEventListeners.ContainsKey(activeFormId);
         }
 
-        private static void OnMenuEvent(ref MenuEvent e, out bool bubbleEvent)
+        private void OnMenuEvent(ref MenuEvent e, out bool bubbleEvent)
         {
             bubbleEvent = true;
 

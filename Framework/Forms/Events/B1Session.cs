@@ -1,7 +1,8 @@
-﻿// <copyright filename="B1EventsManager.cs" project="Framework">
+﻿// <copyright filename="B1Session.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events
 {
     using System;
@@ -28,20 +29,37 @@ namespace B1PP.Forms.Events
     using SAPbouiCOM;
 
     /// <summary>
-    /// Manages events from SAP Business One.
+    /// Manages the events session.
     /// </summary>
-    public class B1EventsManager
+    public class B1Session
     {
         private readonly Application application;
 
         private readonly IApplicationInstance applicationInstance;
-        private readonly IMainMenuInstance mainMenu;
         private readonly Assembly assembly;
+        private readonly IMainMenuInstance mainMenu;
 
-        private B1ApplicationEventDispatcher B1ApplicationEventDispatcher { get; set; }
+        private B1ApplicationEventDispatcher B1ApplicationEventDispatcher { get; }
+        private B1FormDataEventDispatcher B1FormDataEventDispatcher { get; }
+
+        private B1MenuEventDispatcher B1MenuEventDispatcher { get; }
+
+        private B1ItemEventDispatcher B1ItemEventDispatcher { get; }
+
+        private B1RightClickEventDispatcher B1RightClickEventDispatcher { get; }
+
+        private B1LayoutKeyEventDispatcher B1LayoutKeyEventDispatcher { get; }
+
+        private static Func<Type, bool> IsSystemForm
+        {
+            get
+            {
+                return t => t.GetCustomAttributes(typeof(B1SystemFormTypeAttribute), true).Any();
+            }
+        }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="B1EventsManager" /> class.
+        /// Initializes a new instance of the <see cref="B1Session" /> class.
         /// </summary>
         /// <param name="application">
         /// The application.
@@ -52,21 +70,26 @@ namespace B1PP.Forms.Events
         /// <param name="mainMenu">
         /// The main menu instance.
         /// </param>
-        public B1EventsManager(
+        public B1Session(
             Application application,
             IApplicationInstance applicationInstance,
             [CanBeNull] IMainMenuInstance mainMenu)
         {
             this.application = application;
-            this.assembly = applicationInstance.GetType().Assembly;
+            assembly = applicationInstance.GetType().Assembly;
             this.applicationInstance = applicationInstance;
             this.mainMenu = mainMenu ?? new NullMainMenuInstance();
 
             B1ApplicationEventDispatcher = new B1ApplicationEventDispatcher();
+            B1FormDataEventDispatcher = new B1FormDataEventDispatcher();
+            B1MenuEventDispatcher = new B1MenuEventDispatcher();
+            B1ItemEventDispatcher = new B1ItemEventDispatcher();
+            B1RightClickEventDispatcher = new B1RightClickEventDispatcher();
+            B1LayoutKeyEventDispatcher = new B1LayoutKeyEventDispatcher();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="B1EventsManager" /> class.
+        /// Initializes a new instance of the <see cref="B1Session" /> class.
         /// </summary>
         /// <param name="application">
         /// The application.
@@ -74,11 +97,10 @@ namespace B1PP.Forms.Events
         /// <param name="applicationInstance">
         /// The instance responsible for application event handling.
         /// </param>
-        public B1EventsManager(
+        public B1Session(
             Application application,
             IApplicationInstance applicationInstance) : this(application, applicationInstance, null)
         {
-
         }
 
         /// <summary>
@@ -97,13 +119,6 @@ namespace B1PP.Forms.Events
             SetMainMenu();
         }
 
-        private void SetMainMenu()
-        {
-            var listener = new MainMenuEventListener(mainMenu);
-            listener.Subscribe();
-            B1EventFilterManager.Include(BoEventTypes.et_MENU_CLICK, @"ALL_FORMS");
-        }
-
         /// <summary>
         /// Triggered when an event handler throws an exception
         /// </summary>
@@ -120,6 +135,16 @@ namespace B1PP.Forms.Events
             B1LayoutKeyEventDispatcher.Unsubscribe();
             B1FormDataEventDispatcher.Unsubscribe();
             B1ApplicationEventDispatcher.Unsubscribe();
+        }
+
+        internal IEventListener CreateFormDataEventListener(IFormInstance form)
+        {
+            return new FormDataEventListener(form, B1FormDataEventDispatcher);
+        }
+
+        internal IEventListener CreateFormMenuEventListener(IFormInstance form)
+        {
+            return new FormMenuEventListener(form, B1MenuEventDispatcher);
         }
 
         private void AddEventSink(Type type)
@@ -170,7 +195,7 @@ namespace B1PP.Forms.Events
         private IEnumerable<Type> FindSystemFormsInAssembly()
         {
             var systemForms = assembly.GetTypes()
-                .Where(IsDecoratedWithSystemForm());
+                .Where(IsSystemForm);
 
             return systemForms;
         }
@@ -179,11 +204,6 @@ namespace B1PP.Forms.Events
         {
             object attribute = systemForm.GetCustomAttributes(typeof(T), true).FirstOrDefault();
             return (T) attribute;
-        }
-
-        private static Func<Type, bool> IsDecoratedWithSystemForm()
-        {
-            return t => t.GetCustomAttributes(typeof(B1SystemFormTypeAttribute), true).Any();
         }
 
         private Func<Type, bool> IsIRightClickEventSinkType()
@@ -202,6 +222,18 @@ namespace B1PP.Forms.Events
             B1ApplicationEventDispatcher.SetListener(applicationInstance);
         }
 
+        private void SetMainMenu()
+        {
+            var listener = CreateMainMenuEventListener(mainMenu);
+            listener.Subscribe();
+            B1EventFilterManager.Include(BoEventTypes.et_MENU_CLICK, @"ALL_FORMS");
+        }
+
+        private IEventListener CreateMainMenuEventListener(IMainMenuInstance instance)
+        {
+            return new MainMenuEventListener(instance, B1MenuEventDispatcher);
+        }
+
         private void StartEventDispatchers()
         {
             B1ApplicationEventDispatcher.Subscribe(application);
@@ -217,6 +249,21 @@ namespace B1PP.Forms.Events
             B1ItemEventDispatcher.EventHandlerError += OnEventHandlerError;
             B1FormDataEventDispatcher.EventHandlerError += OnEventHandlerError;
             B1LayoutKeyEventDispatcher.EventHandlerError += OnEventHandlerError;
+        }
+
+        internal IEventListener CreateFormItemEventListener(IFormInstance form, params object[] subordinates)
+        {
+            return new FormItemEventListener(B1ItemEventDispatcher, form, subordinates);
+        }
+
+        internal IEventListener CreateRightClickEventListener(IFormInstance form)
+        {
+            return new RightClickEventListener(B1RightClickEventDispatcher, form);
+        }
+
+        internal IEventListener CreateLayoutKeyEventListener(IFormInstance form)
+        {
+            return new LayoutKeyEventListener(B1LayoutKeyEventDispatcher, form);
         }
     }
 }

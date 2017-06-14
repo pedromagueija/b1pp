@@ -23,8 +23,8 @@ namespace Tests.Feature.Data
             var query = new Query(connection.Company);
             query.SetStatement(@"
             SELECT TOP 1
-                'string value' as ""String"", 
-                1 AS ""Number"", 
+                'string value' as ""String"",
+                1 AS ""Number"",
                 12.3 AS ""Float"",
                 CAST('20120101' AS DateTime) AS ""DateTime""
             FROM OCRD");
@@ -52,7 +52,7 @@ namespace Tests.Feature.Data
             var query = new Query(connection.Company);
             query.SetStatement(@"
             SELECT TOP 10
-                'string value' as ""String"", 
+                'string value' as ""String"",
                 1 AS ""Number"",
                 12.3 AS ""Float"",
                 CAST('20120101' AS DateTime) AS ""DateTime""

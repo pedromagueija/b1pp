@@ -10,13 +10,13 @@ namespace B1PP.Forms.Events.ItemEvents
 
     using ListenerCollection = System.Collections.Generic.Dictionary<string, IItemEventListener>;
 
-    internal static class B1ItemEventDispatcher
+    internal class B1ItemEventDispatcher
     {
-        private static readonly ListenerCollection Listeners = new ListenerCollection();
+        private readonly ListenerCollection Listeners = new ListenerCollection();
 
-        private static Application Application { get; set; }
+        private Application Application { get; set; }
 
-        public static void AddListener(IItemEventListener listener)
+        public void AddListener(IItemEventListener listener)
         {
             if (!Listeners.ContainsKey(listener.Id))
             {
@@ -24,9 +24,9 @@ namespace B1PP.Forms.Events.ItemEvents
             }
         }
 
-        public static event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
+        public event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
 
-        public static void RemoveListener(IItemEventListener listener)
+        public void RemoveListener(IItemEventListener listener)
         {
             if (Listeners.ContainsKey(listener.Id))
             {
@@ -44,7 +44,7 @@ namespace B1PP.Forms.Events.ItemEvents
         /// <exception cref="System.InvalidOperationException">
         /// Cannot subscribe twice to 'Application.ItemEvent'.
         /// </exception>
-        public static void Subscribe(Application application)
+        public void Subscribe(Application application)
         {
             if (application == null)
             {
@@ -63,7 +63,7 @@ namespace B1PP.Forms.Events.ItemEvents
         /// <summary>
         /// Unsubscribing will remove all event listeners.
         /// </summary>
-        public static void Unsubscribe()
+        public void Unsubscribe()
         {
             if (Application != null)
             {
@@ -73,7 +73,7 @@ namespace B1PP.Forms.Events.ItemEvents
             }
         }
 
-        private static bool Dispatch(string key, ItemEvent e, out bool bubbleEvent)
+        private bool Dispatch(string key, ItemEvent e, out bool bubbleEvent)
         {
             bubbleEvent = true;
 
@@ -86,7 +86,7 @@ namespace B1PP.Forms.Events.ItemEvents
             return false;
         }
 
-        private static void OnItemEvent(string formId, ref ItemEvent e, out bool bubbleEvent)
+        private void OnItemEvent(string formId, ref ItemEvent e, out bool bubbleEvent)
         {
             bubbleEvent = true;
 

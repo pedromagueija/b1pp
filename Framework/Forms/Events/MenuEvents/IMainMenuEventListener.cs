@@ -6,7 +6,7 @@ namespace B1PP.Forms.Events.MenuEvents
 {
     using SAPbouiCOM;
 
-    internal interface IMainMenuEventListener
+    internal interface IMainMenuEventListener : IEventListener
     {
         void OnMenuEvent(ref MenuEvent e, out bool bubbleEvent);
     }

@@ -59,7 +59,7 @@ namespace Tests.Feature.Database
             AssertTable(@"T_DOTB", @"Document object table", BoUTBTableType.bott_Document);
 
             var userTable = company.UserTables.Item(@"T_DOTB");
-            Fields userFields = userTable.UserFields.Fields;            
+            Fields userFields = userTable.UserFields.Fields;
             Assert.NotNull(userFields.Item(@"U_ReferenceNumber"));
             Assert.NotNull(userFields.Item(@"U_CustomerId"));
         }

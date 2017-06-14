@@ -19,6 +19,7 @@ namespace B1PP.Forms.Events.FormDataEvents
             new Dictionary<FormDataEventHandlerAttribute, Func<BusinessObjectInfo, bool>>();
 
         private readonly IFormInstance form;
+        private readonly B1FormDataEventDispatcher dispatcher;
 
         public string Id
         {
@@ -28,9 +29,10 @@ namespace B1PP.Forms.Events.FormDataEvents
             }
         }
 
-        public FormDataEventListener(IFormInstance form)
+        public FormDataEventListener(IFormInstance form, B1FormDataEventDispatcher dispatcher)
         {
             this.form = form;
+            this.dispatcher = dispatcher;
         }
 
         public void OnFormDataEvent(ref BusinessObjectInfo e, out bool bubbleEvent)
@@ -57,12 +59,12 @@ namespace B1PP.Forms.Events.FormDataEvents
         {
             AddEventHandlers(form);
 
-            B1FormDataEventDispatcher.AddListener(this);
+            dispatcher.AddListener(this);
         }
 
         public void Unsubscribe()
         {
-            B1FormDataEventDispatcher.RemoveListener(this);
+            dispatcher.RemoveListener(this);
         }
 
         private void AddEventHandlers(IFormInstance userForm)

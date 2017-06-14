@@ -144,7 +144,7 @@
     <Compile Include="Forms\Events\ApplicationEvents\IApplicationInstance.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\ISystemEventSubscriber.cs" />
     <Compile Include="Forms\Events\B1EventFilterManager.cs" />
-    <Compile Include="Forms\Events\B1EventsManager.cs" />
+    <Compile Include="Forms\Events\B1Session.cs" />
     <Compile Include="Forms\Events\B1SystemFormTypeAttribute.cs" />
     <Compile Include="Forms\Events\BeforeAction.cs" />
     <Compile Include="Forms\Events\ClassHelper.cs" />
