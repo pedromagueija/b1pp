@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IConnection
+   | B1 Plus Plus Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IConnection
+   | B1 Plus Plus Documentation ">
+    <meta name="generator" content="docfx 2.6.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="B1PP_Connections_IConnection" data-uid="B1PP.Connections.IConnection">Interface IConnection
+              </h1>
+              <div class="markdown level0 summary"><p sourcefile="api/B1PP.Connections.IConnection.yml" sourcestartlinenumber="2" sourceendlinenumber="3">Represents a connection to SAP Business One.
+A connection can be obtained from the <a class="xref" href="B1PP.Connections.ConnectionFactory.html#B1PP_Connections_ConnectionFactory">ConnectionFactory</a>.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <h6><strong>Namespace</strong>:B1PP.Connections</h6>
+              <h6><strong>Assembly</strong>:B1PP.Framework.dll</h6>
+              <h5 id="B1PP_Connections_IConnection_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public interface IConnection</code></pre>
+              </div>
+              <h5 id="B1PP_Connections_IConnection_examples"><strong>Examples</strong></h5>
+              
+How to perform a standard (UI and DI API) connection to SAP Business One.
+<pre><code>IConnection connection = ConnectionFactory.CreateStandardConnection();
+connection.Connect();
+// Your code
+connection.Disconnect(); </code></pre>
+
+              <h3 id="properties">Properties
+              </h3>
+              
+              
+              <h4 id="B1PP_Connections_IConnection_Application" data-uid="B1PP.Connections.IConnection.Application">Application</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Connections.IConnection.yml" sourcestartlinenumber="2" sourceendlinenumber="3">Returns the <span class="xref">Application</span> object, or null when the connection<p>
+type does not support it (e.g.: DI API only connections).</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">Application Application { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">SAPbouiCOM.Application</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="B1PP_Connections_IConnection_Company" data-uid="B1PP.Connections.IConnection.Company">Company</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Connections.IConnection.yml" sourcestartlinenumber="2" sourceendlinenumber="3">Returns the <span class="xref">SAPbouiCOM.Company</span> object, or null when the connection<p>
+type does not support it (e.g.: UI API only connections).</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">Company Company { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">SAPbobsCOM.Company</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="B1PP_Connections_IConnection_Connected" data-uid="B1PP.Connections.IConnection.Connected">Connected</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Connections.IConnection.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Gets a value indicating whether this <a class="xref" href="B1PP.Connections.IConnection.html#B1PP_Connections_IConnection">IConnection</a> is connected.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">bool Connected { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><p sourcefile="api/B1PP.Connections.IConnection.yml" sourcestartlinenumber="2" sourceendlinenumber="2"><code>true</code> if connected; otherwise, <code>false</code>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="methods">Methods
+              </h3>
+              
+              
+              <h4 id="B1PP_Connections_IConnection_Connect" data-uid="B1PP.Connections.IConnection.Connect">Connect()</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Connections.IConnection.yml" sourcestartlinenumber="2" sourceendlinenumber="3">Establishes the connection to SAP Business One.<p>
+Note that without connection both <a class="xref" href="B1PP.Connections.IConnection.html#B1PP_Connections_IConnection_Application">Application</a> and <a class="xref" href="B1PP.Connections.IConnection.html#B1PP_Connections_IConnection_Company">Company</a> are <span class="xref">null</span>.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">void Connect()</code></pre>
+              </div>
+              
+              
+              <h4 id="B1PP_Connections_IConnection_Disconnect" data-uid="B1PP.Connections.IConnection.Disconnect">Disconnect()</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Connections.IConnection.yml" sourcestartlinenumber="2" sourceendlinenumber="3">Disconnects from SAP Business One.<p>
+Note that without after disconnecting both <a class="xref" href="B1PP.Connections.IConnection.html#B1PP_Connections_IConnection_Application">Application</a> and <a class="xref" href="B1PP.Connections.IConnection.html#B1PP_Connections_IConnection_Company">Company</a> are <span class="xref">null</span>.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">void Disconnect()</code></pre>
+              </div>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Generated with DocFX
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

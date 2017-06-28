@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IRecordsetReader
+   | B1 Plus Plus Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IRecordsetReader
+   | B1 Plus Plus Documentation ">
+    <meta name="generator" content="docfx 2.6.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="B1PP_Data_IRecordsetReader" data-uid="B1PP.Data.IRecordsetReader">Interface IRecordsetReader
+              </h1>
+              <div class="markdown level0 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Allows reading of a recordset object contents.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <h6><strong>Namespace</strong>:B1PP.Data</h6>
+              <h6><strong>Assembly</strong>:B1PP.Framework.dll</h6>
+              <h5 id="B1PP_Data_IRecordsetReader_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public interface IRecordsetReader</code></pre>
+              </div>
+              <h3 id="properties">Properties
+              </h3>
+              
+              
+              <h4 id="B1PP_Data_IRecordsetReader_Columns" data-uid="B1PP.Data.IRecordsetReader.Columns">Columns</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Returns the columns names.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">IEnumerable&lt;IColumn&gt; Columns { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="B1PP.Data.IColumn.html#B1PP_Data_IColumn">IColumn</a>&gt;</td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The columns names.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="methods">Methods
+              </h3>
+              
+              
+              <h4 id="B1PP_Data_IRecordsetReader_GetBool_System_String_" data-uid="B1PP.Data.IRecordsetReader.GetBool(System.String)">GetBool(String)</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Gets a boolean value from the reader.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">bool GetBool(string columnName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><em>columnName</em></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="1" sourceendlinenumber="1">The item identifier.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="1" sourceendlinenumber="1">The boolean value.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="1" sourceendlinenumber="1">Triggered when <em>columnName</em> doesn&#39;t exist, is null or is empty.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.FormatException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="1" sourceendlinenumber="1">Thrown when column value is not True or False literals.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="B1PP_Data_IRecordsetReader_GetDateTime_System_String_" data-uid="B1PP.Data.IRecordsetReader.GetDateTime(System.String)">GetDateTime(String)</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Gets a date time from the reader.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">DateTime? GetDateTime([NotNull] string columnName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><em>columnName</em></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The item id.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTime</span>&gt;</td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The <span class="xref">DateTime</span> value.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Triggered when <em>columnName</em> doesn&#39;t exist, is null or is empty.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.FormatException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Triggered when the value contained in <em>columnName</em> is empty or not a date.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="B1PP_Data_IRecordsetReader_GetDouble_System_String_" data-uid="B1PP.Data.IRecordsetReader.GetDouble(System.String)">GetDouble(String)</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Gets a double from the reader.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">double ? GetDouble([NotNull] string columnName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><em>columnName</em></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The item id.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Double</span>&gt;</td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The double value.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Triggered when <em>columnName</em> doesn&#39;t exist, is null or is empty.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.OverflowException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The value contained in <em>columnName</em> represents a number that is less than</p>
+<p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="3" sourceendlinenumber="3"><span class="xref">System.Double.MinValue</span> or greater than <span class="xref">System.Double.MaxValue</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.FormatException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="3">The value contained in <em>columnName</em> does not represent a number in a
+valid format.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="B1PP_Data_IRecordsetReader_GetInt_System_String_" data-uid="B1PP.Data.IRecordsetReader.GetInt(System.String)">GetInt(String)</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Gets an integer from the reader.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">int ? GetInt([NotNull] string columnName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><em>columnName</em></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The item id.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The integer value.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.OverflowException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The value contained in <em>columnName</em> represents a number less than</p>
+<p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="3" sourceendlinenumber="3"><span class="xref">System.Int32.MinValue</span> or greater than <span class="xref">System.Int32.MaxValue</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.FormatException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The value contained in <em>columnName</em> is not of the correct format.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Triggered when <em>columnName</em> doesn&#39;t exist, is null or is empty.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="B1PP_Data_IRecordsetReader_GetString_System_String_" data-uid="B1PP.Data.IRecordsetReader.GetString(System.String)">GetString(String)</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Gets the value as a string.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">[NotNull]
+string GetString([NotNull] string columnName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><em>columnName</em></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The item id.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Value as a string.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Triggered when <em>columnName</em> doesn&#39;t exist, is null or is empty.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="B1PP_Data_IRecordsetReader_MoveNext" data-uid="B1PP.Data.IRecordsetReader.MoveNext">MoveNext()</h4>
+              <div class="markdown level1 summary"><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">Moves to the next record.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">bool MoveNext()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">True if there is another record, false otherwise.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.InvalidOperationException</span></td>
+                    <td><p sourcefile="api/B1PP.Data.IRecordsetReader.yml" sourcestartlinenumber="2" sourceendlinenumber="2">The collection was modified after the enumerator was created.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Generated with DocFX
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

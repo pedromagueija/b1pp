@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>DI API settings file format | B1 Plus Plus Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="DI API settings file format | B1 Plus Plus Documentation ">
+    <meta name="generator" content="docfx 2.6.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1 id="di-api-settings-file-format" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="1" sourceendlinenumber="1">DI API settings file format</h1>
+              
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="3" sourceendlinenumber="3">Here is the standard file format for the DI API settings.</p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="5" sourceendlinenumber="19"><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot; ?&gt;
+&lt;DiApiConnectionSettings&gt;
+  &lt;Server&gt;&lt;/Server&gt;
+  &lt;UseTrusted&gt;&lt;/UseTrusted&gt;
+  &lt;UserName&gt;&lt;/UserName&gt;
+  &lt;Password&gt;&lt;/Password&gt;
+  &lt;Language&gt;&lt;/Language&gt;
+  &lt;LicenseServer&gt;&lt;/LicenseServer&gt;
+  &lt;DbServerType&gt;&lt;/DbServerType&gt;
+  &lt;CompanyDb&gt;&lt;/CompanyDb&gt;
+  &lt;DbUserName&gt;&lt;/DbUserName&gt;
+  &lt;DbPassword&gt;&lt;/DbPassword&gt;
+&lt;/DiApiConnectionSettings&gt;
+</code></pre><h3 id="server" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="21" sourceendlinenumber="21">Server</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="22" sourceendlinenumber="22">This should be filled with the name or IP of your server.</p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="23" sourceendlinenumber="25"><code class="lang-xml">  &lt;Server&gt;localhost&lt;/Server&gt;
+</code></pre><h3 id="use-trusted" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="27" sourceendlinenumber="27">Use Trusted</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="28" sourceendlinenumber="28">This defines whether you&#39;ll be using trusted connection or a regular connection. Accepted values are 1 for True and 0 for false.</p>
+<h3 id="username" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="30" sourceendlinenumber="30">UserName</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="31" sourceendlinenumber="31">This is the username you use to connect to the company.</p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="32" sourceendlinenumber="34"><code class="lang-xml">  &lt;UserName&gt;manager&lt;/UserName&gt;
+</code></pre><h3 id="password" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="36" sourceendlinenumber="36">Password</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="37" sourceendlinenumber="37">This is the password for the username provided.</p>
+<h3 id="language" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="39" sourceendlinenumber="39">Language</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="40" sourceendlinenumber="40">The language to use for this session. Accepted values are the enum literals of BoSuppLang. </p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="41" sourceendlinenumber="43"><code class="lang-xml">  &lt;Language&gt;ln_English&lt;/Language&gt;
+</code></pre><h3 id="username-1" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="44" sourceendlinenumber="44">UserName</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="45" sourceendlinenumber="45">This is the username you use to connect to the company.</p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="46" sourceendlinenumber="48"><code class="lang-xml">  &lt;UserName&gt;manager&lt;/UserName&gt;
+</code></pre><h3 id="password-1" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="50" sourceendlinenumber="50">Password</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="51" sourceendlinenumber="51">This is the password for the username provided.</p>
+<h3 id="license-server" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="52" sourceendlinenumber="52">License server</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="53" sourceendlinenumber="54">The address of the license server. 
+The format must be provided like &quot;server:port&quot;. </p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="55" sourceendlinenumber="57"><code class="lang-xml">  &lt;LicenseServer&gt;localhost:30000&lt;/LicenseServer&gt;
+</code></pre><h3 id="dbservertype" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="59" sourceendlinenumber="59">DbServerType</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="60" sourceendlinenumber="60">The type of the database server. Accepted values are the enum literals of the BoDataServerTypes.</p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="61" sourceendlinenumber="63"><code class="lang-xml">  &lt;DbServerType&gt;dst_MSSQL2012&lt;/DbServerType&gt;
+</code></pre><h3 id="companydb" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="65" sourceendlinenumber="65">CompanyDb</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="66" sourceendlinenumber="66">The name of the company database.</p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="67" sourceendlinenumber="69"><code class="lang-xml">  &lt;CompanyDb&gt;SBODEMOUS&lt;/CompanyDb&gt;
+</code></pre><h3 id="dbusername" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="70" sourceendlinenumber="70">DbUserName</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="71" sourceendlinenumber="71">This is the username you use to connect to your database server.</p>
+<pre sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="72" sourceendlinenumber="74"><code class="lang-xml">  &lt;DbUserName&gt;sa&lt;/DbUserName&gt;
+</code></pre><h3 id="dbpassword" sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="76" sourceendlinenumber="76">DbPassword</h3>
+<p sourcefile="guide/diapi-settings-file-format.md" sourcestartlinenumber="77" sourceendlinenumber="77">This is the password for the database username provided.</p>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Generated with DocFX
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
