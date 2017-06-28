@@ -59,6 +59,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Common\UtilitiesTests.cs" />
     <Compile Include="Connections\ConnectionStringTests.cs" />
     <Compile Include="Connections\DiApiConnectionSettingsTests.cs" />
     <Compile Include="Connections\InsistentStandardConnectionTests.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Database\TypeTests.cs" />
     <Compile Include="Database\UserObjectAdapterTests.cs" />
     <Compile Include="Data\DateTimeValueArgTests.cs" />
+    <Compile Include="Data\DisposableRecordsetTests.cs" />
     <Compile Include="Extensions\SDK\UI\ApplicationExtensionsTests.cs" />
     <Compile Include="Extensions\Types\IdTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
-namespace B1PP.Connections
+namespace B1PP.Common
 {
     using System.Runtime.InteropServices;
 
@@ -39,7 +39,7 @@ namespace B1PP.Connections
         /// <param name="o">The object to release.</param>
         private static void ReleaseOne(object o)
         {
-            if ((o == null) || NotComObj(o))
+            if (o == null || NotComObj(o))
             {
                 return;
             }

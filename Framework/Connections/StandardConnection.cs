@@ -7,6 +7,8 @@ namespace B1PP.Connections
     using System;
     using System.Runtime.InteropServices;
 
+    using Common;
+
     using SAPbouiCOM;
 
     using DiCompany = SAPbobsCOM.Company;

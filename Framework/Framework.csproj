@@ -57,7 +57,7 @@
     <Compile Include="Connections\InsistentConnection.cs" />
     <Compile Include="Connections\StandardConnection.cs" />
     <Compile Include="Connections\UiApiConnection.cs" />
-    <Compile Include="Connections\Utilities.cs" />
+    <Compile Include="Common\Utilities.cs" />
     <Compile Include="Database\AdapterBase.cs" />
     <Compile Include="Database\AddUserField.cs" />
     <Compile Include="Database\AddUserObject.cs" />

@@ -4,6 +4,8 @@
 // </copyright>
 namespace B1PP.Connections
 {
+    using Common;
+
     using SAPbouiCOM;
 
     using DiCompany = SAPbobsCOM.Company;
