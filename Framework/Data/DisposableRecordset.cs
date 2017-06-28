@@ -24,6 +24,7 @@ namespace B1PP.Data
     internal class DisposableRecordset : IRecordset, IDisposable
     {
         private readonly Recordset recordset;
+
         public bool IsDisposed { get; private set; }
 
         public Fields Fields
