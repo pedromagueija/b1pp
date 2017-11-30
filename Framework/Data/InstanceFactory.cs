@@ -12,6 +12,8 @@ namespace B1PP.Data
 
     using Extensions.Types;
 
+    using JetBrains.Annotations;
+
     using SAPbobsCOM;
 
     internal static class InstanceFactory
@@ -55,6 +57,15 @@ namespace B1PP.Data
             return expando;
         }
 
+        /// <summary>
+        /// Creates an instance of a {T} type.
+        /// </summary>
+        /// <typeparam name="T">Type of the instance to create.</typeparam>
+        /// <param name="reader">The reader that contains the data to populate the instance.</param>
+        /// <returns>
+        /// An instance of {T} populated with the data.
+        /// </returns>
+        [CanBeNull]
         public static T AutoCreateInstance<T>(IRecordsetReader reader) where T : class
         {
             var instance = (T)Activator.CreateInstance(typeof(T));
@@ -69,36 +80,41 @@ namespace B1PP.Data
                     continue;
                 }
 
-                var propertyType = property.PropertyType;
-
-                if (propertyType == typeof(string))
-                {
-                    property.SetValue(instance, reader.GetString(property.Name));
-                }
-                else if (propertyType == typeof(DateTime))
-                {
-                    property.SetValue(instance, reader.GetDateTime(property.Name));
-                }
-                else if (propertyType == typeof(int))
-                {
-                    property.SetValue(instance, reader.GetInt(property.Name));
-                }
-                else if (propertyType == typeof(double))
-                {
-                    property.SetValue(instance, reader.GetDouble(property.Name));
-                }
-                else if (propertyType == typeof(bool))
-                {
-                    property.SetValue(instance, reader.GetBool(property.Name));
-                }
-                else if (propertyType == typeof(Id))
-                {
-                    var value = reader.GetString(property.Name);
-                    property.SetValue(instance, new Id(value));
-                }
+                SetPropertyValue(reader, property, instance);
             }
 
             return instance;
+        }
+
+        private static void SetPropertyValue<T>(IRecordsetReader reader, PropertyInfo property, T instance) where T : class
+        {
+            var propertyType = property.PropertyType;
+
+            if (propertyType == typeof(string))
+            {
+                property.SetValue(instance, reader.GetString(property.Name));
+            }
+            else if (propertyType == typeof(DateTime))
+            {
+                property.SetValue(instance, reader.GetDateTime(property.Name));
+            }
+            else if (propertyType == typeof(int))
+            {
+                property.SetValue(instance, reader.GetInt(property.Name));
+            }
+            else if (propertyType == typeof(double))
+            {
+                property.SetValue(instance, reader.GetDouble(property.Name));
+            }
+            else if (propertyType == typeof(bool))
+            {
+                property.SetValue(instance, reader.GetBool(property.Name));
+            }
+            else if (propertyType == typeof(Id))
+            {
+                string value = reader.GetString(property.Name);
+                property.SetValue(instance, new Id(value));
+            }
         }
 
         private static IEnumerable<PropertyInfo> GetMatchingProperties<T>(T instance, List<IColumn> columns) where T : class

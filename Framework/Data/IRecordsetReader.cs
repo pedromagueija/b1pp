@@ -110,10 +110,10 @@ namespace B1PP.Data
         bool MoveNext();
 
         /// <summary>
-        /// Returns the columns names.
+        /// Returns the columns.
         /// </summary>
         /// <value>
-        /// The columns names.
+        /// The columns.
         /// </value>
         IEnumerable<IColumn> Columns { get; }
     }
