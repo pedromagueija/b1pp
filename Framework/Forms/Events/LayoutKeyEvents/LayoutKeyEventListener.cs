@@ -74,7 +74,7 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
         {
             var handlerMethods = ClassHelper.FindAnnotatedMethods<LayoutKeyEventHandlerAttribute>(userForm);
 
-            foreach (MethodInfo method in handlerMethods)
+            foreach (var method in handlerMethods)
             {
                 var attribute = method.GetAttribute<LayoutKeyEventHandlerAttribute>();
                 if (attribute.Before)

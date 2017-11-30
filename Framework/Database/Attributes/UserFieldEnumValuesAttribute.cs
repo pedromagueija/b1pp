@@ -36,7 +36,7 @@ namespace B1PP.Database.Attributes
         public void Apply(UserFieldsMD field)
         {
             var values = new EnumConverter(type).ToEnumerable();
-            ValidValuesMD validValues = field.ValidValues;
+            var validValues = field.ValidValues;
 
             foreach (var value in values)
             {                

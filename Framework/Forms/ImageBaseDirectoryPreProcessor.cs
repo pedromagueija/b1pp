@@ -13,12 +13,12 @@ namespace B1PP.Forms
     {
         public void Process(XDocument formXml)
         {
-            string baseDirectory = Environment.CurrentDirectory;
+            var baseDirectory = Environment.CurrentDirectory;
             var icons = formXml.XPathSelectElements(@"//*[@Image != '']");
 
-            foreach (XElement icon in icons)
+            foreach (var icon in icons)
             {
-                XAttribute imageAttr = icon.Attribute(@"Image");
+                var imageAttr = icon.Attribute(@"Image");
                 imageAttr.Value = Path.Combine(baseDirectory, imageAttr.Value);
             }
         }

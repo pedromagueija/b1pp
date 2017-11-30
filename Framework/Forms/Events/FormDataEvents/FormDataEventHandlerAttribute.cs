@@ -65,7 +65,7 @@ namespace B1PP.Forms.Events.FormDataEvents
         {
             unchecked
             {
-                int hashCode = base.GetHashCode();
+                var hashCode = base.GetHashCode();
                 hashCode = (hashCode * 397) ^ Before.GetHashCode();
                 hashCode = (hashCode * 397) ^ (int) EventType;
                 return hashCode;

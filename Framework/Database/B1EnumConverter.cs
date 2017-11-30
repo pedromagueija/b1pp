@@ -19,7 +19,7 @@ namespace B1PP.Database
         {
             try
             {
-                object option = Enum.Parse(type, value);
+                var option = Enum.Parse(type, value);
                 return option;
             }
             catch (Exception ex)

@@ -15,7 +15,7 @@ namespace B1PP.Data
         {
             get
             {
-                string arguments = string.Join(",", values.Select(ToSqlParameter));
+                var arguments = string.Join(",", values.Select(ToSqlParameter));
 
                 return arguments;
             }

@@ -31,15 +31,15 @@ namespace B1PP.Database
         {
             try
             {
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                using (var stream = assembly.GetManifestResourceStream(resourceName))
                 {
                     if (stream == null)
                     {
-                        string message = $@"'{resourceName}' was not found. Was it marked as an Embedded resource?";
+                        var message = $@"'{resourceName}' was not found. Was it marked as an Embedded resource?";
                         throw new UnableToReadException(message);
                     }
 
-                    using (StreamReader reader = new StreamReader(stream))
+                    using (var reader = new StreamReader(stream))
                     {
                         return reader.ReadToEnd();
                     }
@@ -52,7 +52,7 @@ namespace B1PP.Database
                 e is NotImplementedException
             )
             {
-                string message =
+                var message =
                     $@"An error as occurred when attempting to read '{resourceName}'.";
                 throw new UnableToReadException(message, e);
             }

@@ -90,10 +90,10 @@ namespace B1PP.Forms.Events.MenuEvents
 
             try
             {
-                string activeFormId = Application.GetActiveFormId();
+                var activeFormId = Application.GetActiveFormId();
                 if (IsFormMenu(activeFormId))
                 {
-                    bool handled = menuEventListeners[activeFormId].OnMenuEvent(ref e, out bubbleEvent);
+                    var handled = menuEventListeners[activeFormId].OnMenuEvent(ref e, out bubbleEvent);
                     if (handled)
                         return;
                 }

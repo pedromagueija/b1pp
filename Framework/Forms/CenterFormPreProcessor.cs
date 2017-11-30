@@ -21,12 +21,12 @@ namespace B1PP.Forms
 
         public void Process(XDocument formXml)
         {
-            XElement formElement = formXml.XPathSelectElement(@"//form");
+            var formElement = formXml.XPathSelectElement(@"//form");
 
-            XAttribute heightAttr = formElement.Attribute(@"height");
-            XAttribute widthAttr = formElement.Attribute(@"width");
-            XAttribute leftAttr = formElement.Attribute(@"left");
-            XAttribute topAttr = formElement.Attribute(@"top");
+            var heightAttr = formElement.Attribute(@"height");
+            var widthAttr = formElement.Attribute(@"width");
+            var leftAttr = formElement.Attribute(@"left");
+            var topAttr = formElement.Attribute(@"top");
 
             if (heightAttr == null || widthAttr == null || leftAttr == null || topAttr == null)
             {
@@ -36,16 +36,16 @@ namespace B1PP.Forms
             int formHeight;
             int formWidth;
 
-            bool isHeight = int.TryParse(heightAttr.Value, out formHeight);
-            bool isWidth = int.TryParse(widthAttr.Value, out formWidth);
+            var isHeight = int.TryParse(heightAttr.Value, out formHeight);
+            var isWidth = int.TryParse(widthAttr.Value, out formWidth);
 
             if (!isHeight || !isWidth)
             {
                 return;
             }
 
-            int top = application.Desktop.Height / 2 - formHeight / 2;
-            int left = application.Desktop.Width / 2 - formWidth / 2;
+            var top = application.Desktop.Height / 2 - formHeight / 2;
+            var left = application.Desktop.Width / 2 - formWidth / 2;
 
             leftAttr.Value = left.ToString(CultureInfo.InvariantCulture);
             topAttr.Value = top.ToString(CultureInfo.InvariantCulture);

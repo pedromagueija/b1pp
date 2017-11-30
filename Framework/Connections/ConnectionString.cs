@@ -90,7 +90,7 @@ namespace B1PP.Connections
         {
             if (commandLineArgs.Length == 2)
             {
-                string connectionString = commandLineArgs[1];
+                var connectionString = commandLineArgs[1];
                 const string pattern = @"[a-zA-Z0-9]{20,50}";
 
                 return Regex.IsMatch(connectionString, pattern);

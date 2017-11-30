@@ -17,8 +17,8 @@ namespace Tests.Feature.Connections
         [Test]
         public void CompanyIsNullAfterDisconnect()
         {
-            string configFile = config.CreateConfigFile();
-            DiApiConnectionSettings settings = DiApiConnectionSettings.Load(configFile);
+            var configFile = config.CreateConfigFile();
+            var settings = DiApiConnectionSettings.Load(configFile);
             var connection = new DiApiConnection(settings);
             connection.Connect();
 
@@ -30,8 +30,8 @@ namespace Tests.Feature.Connections
         [Test]
         public void CompanyIsNullBeforeConnect()
         {
-            string configFile = config.CreateConfigFile();
-            DiApiConnectionSettings settings = DiApiConnectionSettings.Load(configFile);
+            var configFile = config.CreateConfigFile();
+            var settings = DiApiConnectionSettings.Load(configFile);
             var connection = new DiApiConnection(settings);
 
             Assert.IsNull(connection.Company);
@@ -40,8 +40,8 @@ namespace Tests.Feature.Connections
         [Test]
         public void ConnectAllowsAccessToCompany()
         {
-            string configFile = config.CreateConfigFile();
-            DiApiConnectionSettings settings = DiApiConnectionSettings.Load(configFile);
+            var configFile = config.CreateConfigFile();
+            var settings = DiApiConnectionSettings.Load(configFile);
             var connection = new DiApiConnection(settings);
 
             connection.Connect();

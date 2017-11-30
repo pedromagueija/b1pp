@@ -27,8 +27,8 @@ namespace B1PP.Forms
 
         protected XDocument PreProcess(string formContents)
         {
-            XDocument formXml = XDocument.Parse(formContents);
-            foreach (IFormPreProcessor preProcessor in PreProcessors)
+            var formXml = XDocument.Parse(formContents);
+            foreach (var preProcessor in PreProcessors)
             {
                 preProcessor.Process(formXml);
             }
@@ -39,14 +39,14 @@ namespace B1PP.Forms
         {
             if (!ResourceExists(fileName, assembly))
             {
-                string message =
+                var message =
                     $"The resource '{fileName}' was not found in assembly '{assembly}'." +
                     $"Consider making '{fileName}' an Embedded Resource.";
 
                 throw new NotFoundException(message);
             }
 
-            using (Stream stream = assembly.GetManifestResourceStream(fileName))
+            using (var stream = assembly.GetManifestResourceStream(fileName))
             {
                 if (stream == null)
                 {
@@ -67,7 +67,7 @@ namespace B1PP.Forms
 
         private bool ResourceExists(string fileName, Assembly assembly)
         {
-            string resourceName = assembly.GetManifestResourceNames()
+            var resourceName = assembly.GetManifestResourceNames()
                 .FirstOrDefault(name => name.Equals(fileName));
 
             return !string.IsNullOrEmpty(resourceName);

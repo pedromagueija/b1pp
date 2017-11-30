@@ -62,7 +62,7 @@ namespace B1PP.Connections
 
         internal static ConnectionException CreateFrom(COMException e)
         {
-            string message = e.Message;
+            var message = e.Message;
 
             if (e.ErrorCode == BusinessOneNotRunningErrorCode)
             {
@@ -79,7 +79,7 @@ namespace B1PP.Connections
 
         private static string FormatConnectionMessage()
         {
-            string runMode = IntPtr.Size == 4 ? @"32bit" : @"64bit";
+            var runMode = IntPtr.Size == 4 ? @"32bit" : @"64bit";
             return $@"Unable to connect to SAP Business One. Is SAP Business One {runMode} running?";
         }
     }

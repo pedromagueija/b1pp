@@ -16,7 +16,7 @@ namespace B1PP.Data
     /// It also allows a fluent usage.
     /// <example>
     /// var q = new Query(company);
-    /// q.SetStatement(sql).With("parameter", "value);
+    /// q.SetStatement(sql).With("parameter", "value");
     /// </example>
     /// </summary>
     /// <seealso cref="B1PP.Data.QueryHelper" />

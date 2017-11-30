@@ -77,7 +77,7 @@ namespace B1PP.Forms.Events
         /// </summary>
         private static void SetEventSending()
         {
-            EventFilters eventFilters = app.GetFilter();
+            var eventFilters = app.GetFilter();
             eventFilters.LoadFromXML(XmlFilter.ToString());
             app.SetFilter(eventFilters);
         }

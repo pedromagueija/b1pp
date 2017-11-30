@@ -22,7 +22,7 @@ namespace B1PP.Database.Attributes
 
         public void Apply(UserFieldsMD field)
         {
-            ValidValuesMD validValues = field.ValidValues;
+            var validValues = field.ValidValues;
 
             validValues.Value = Value;
             validValues.Description = Description;

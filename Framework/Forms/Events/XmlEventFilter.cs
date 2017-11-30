@@ -26,7 +26,7 @@ namespace B1PP.Forms.Events
         /// <param name="eventType">Type of the event.</param>
         public void AddEventType(BoEventTypes eventType)
         {
-            XElement events = xmlEventsStructure.Descendants("events").First();
+            var events = xmlEventsStructure.Descendants("events").First();
             events.Add(CreateEventOfType(eventType));
         }
 
@@ -37,8 +37,8 @@ namespace B1PP.Forms.Events
         /// <param name="formType">Type of the form.</param>
         public void AddFormTypeToEvent(BoEventTypes eventType, string formType)
         {
-            XElement eventElement = FindEventElement(eventType);
-            XElement formsElement = CreateOrGet(eventElement, "forms");
+            var eventElement = FindEventElement(eventType);
+            var formsElement = CreateOrGet(eventElement, "forms");
             var formTypeElement = new XElement("form");
             var formTypeAttribute = new XAttribute("form_id", formType);
 
@@ -65,7 +65,7 @@ namespace B1PP.Forms.Events
         /// <returns>True when a form with the type exists, false otherwise.</returns>
         public bool IsFormTypeMissing(BoEventTypes eventType, string formType)
         {
-            XElement eventElement = FindEventElement(eventType);
+            var eventElement = FindEventElement(eventType);
             return !eventElement.Descendants("form").Any(WithFormType(formType));
         }
 

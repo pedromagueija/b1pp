@@ -83,7 +83,7 @@ namespace B1PP.Extensions.SDK.UI
         /// <param name="xmlFilters">The XML filters.</param>
         public static void SetFilterFromXml(this Application application, string xmlFilters)
         {
-            EventFilters eventFilters = application.GetFilter();
+            var eventFilters = application.GetFilter();
             eventFilters.LoadFromXML(xmlFilters);
             application.SetFilter(eventFilters);
         }

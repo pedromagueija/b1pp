@@ -16,15 +16,15 @@ namespace Tests.Feature.Connections
     {
         public string CreateConfigFile()
         {
-            string path = Path.GetTempFileName();
+            var path = Path.GetTempFileName();
 
-            string contents = ReadText(@"diapi.credentials.xml");
-            XDocument xml = XDocument.Parse(contents);
+            var contents = ReadText(@"diapi.credentials.xml");
+            var xml = XDocument.Parse(contents);
             if (xml.Root == null)
             {
                 return string.Empty;
             }
-            XElement passwordElement = xml.Root.XPathSelectElement(@"//Password");
+            var passwordElement = xml.Root.XPathSelectElement(@"//Password");
             passwordElement.Value = Environment.GetEnvironmentVariable(@"B1_Password") ?? string.Empty;
             File.WriteAllText(path, xml.ToString());
 
@@ -33,14 +33,14 @@ namespace Tests.Feature.Connections
 
         private string ReadText(string resourceName)
         {
-            Assembly assembly = Assembly.GetAssembly(GetType());
+            var assembly = Assembly.GetAssembly(GetType());
             var resources = assembly.GetManifestResourceNames();
-            string fullResourceName = resources.FirstOrDefault(r => r.EndsWith(resourceName));
+            var fullResourceName = resources.FirstOrDefault(r => r.EndsWith(resourceName));
 
             if(string.IsNullOrEmpty(fullResourceName))
                 throw new ArgumentException($@"Invalid resource name {resourceName}.");
 
-            using (Stream stream = assembly.GetManifestResourceStream(fullResourceName))
+            using (var stream = assembly.GetManifestResourceStream(fullResourceName))
             {
                 using (var reader = new StreamReader(stream))
                 {

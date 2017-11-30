@@ -37,7 +37,7 @@ namespace B1PP.Database
         /// </summary>
         public void Execute()
         {
-            int result = field.Add();
+            var result = field.Add();
             if (result != 0)
             {
                 var errorArgs = new UserFieldErrorEventArgs

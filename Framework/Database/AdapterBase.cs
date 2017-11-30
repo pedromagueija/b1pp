@@ -26,7 +26,7 @@ namespace B1PP.Database
         /// </returns>
         private object GetPropertyValue(XAttribute attribute, Type propertyType)
         {
-            string attributeValue = attribute.Value;
+            var attributeValue = attribute.Value;
             object value;
 
             if (propertyType.IsEnum)
@@ -50,7 +50,7 @@ namespace B1PP.Database
         /// <param name="instance">The instance.</param>
         protected void PopulateProperties<T>(IEnumerable<XAttribute> attributes, object instance)
         {
-            foreach (XAttribute attribute in attributes)
+            foreach (var attribute in attributes)
             {
                 PopulateProperty<T>(instance, attribute);
             }
@@ -58,11 +58,11 @@ namespace B1PP.Database
 
         private void PopulateProperty<T>(object instance, XAttribute attribute)
         {
-            string propertyName = attribute.Name.LocalName ?? string.Empty;
+            var propertyName = attribute.Name.LocalName ?? string.Empty;
 
             try { 
-                PropertyInfo property = typeof(T).GetProperty(propertyName);
-                object value = GetPropertyValue(attribute, property.PropertyType);
+                var property = typeof(T).GetProperty(propertyName);
+                var value = GetPropertyValue(attribute, property.PropertyType);
 
                 property.SetValue(instance, value);
             }
@@ -79,7 +79,7 @@ namespace B1PP.Database
 
         protected void PopulateCollection<T>(IEnumerable<XElement> elements, object instance)
         {
-            foreach (XElement element in elements)
+            foreach (var element in elements)
             {
                 var attributes = element.Attributes();
                 PopulateProperties<T>(attributes, instance);

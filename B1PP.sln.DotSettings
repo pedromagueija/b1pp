@@ -3,4 +3,5 @@
 	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">&lt;copyright filename="$FILENAME$" project="$PROJECT$"&gt;&#xD;
   This file is licensed to you under the MIT License.&#xD;
   Full license in the project root.&#xD;
-&lt;/copyright&gt;</s:String></wpf:ResourceDictionary>
+&lt;/copyright&gt;</s:String>
+	<s:String x:Key="/Default/FilterSettingsManager/CoverageFilterXml/@EntryValue">&lt;data&gt;&lt;IncludeFilters /&gt;&lt;ExcludeFilters&gt;&lt;Filter ModuleMask="Tests.Feature" ModuleVersionMask="*" ClassMask="*" FunctionMask="*" IsEnabled="True" /&gt;&lt;Filter ModuleMask="Tests.Unit" ModuleVersionMask="*" ClassMask="*" FunctionMask="*" IsEnabled="True" /&gt;&lt;/ExcludeFilters&gt;&lt;/data&gt;</s:String></wpf:ResourceDictionary>

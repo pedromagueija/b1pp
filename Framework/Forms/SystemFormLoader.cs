@@ -33,13 +33,13 @@ namespace B1PP.Forms
 
         public override Form Load()
         {
-            Assembly assembly = form.GetType().Assembly;
-            string formType = $"{form.GetType().FullName}.xml";
-            string contents = ReadFileContents(assembly, formType);
+            var assembly = form.GetType().Assembly;
+            var formType = $"{form.GetType().FullName}.xml";
+            var contents = ReadFileContents(assembly, formType);
 
-            XDocument xml = XDocument.Parse(contents);
-            XElement formElement = xml.XPathSelectElement(@"//form");
-            XAttribute idAttr = formElement.Attribute(@"uid");
+            var xml = XDocument.Parse(contents);
+            var formElement = xml.XPathSelectElement(@"//form");
+            var idAttr = formElement.Attribute(@"uid");
             idAttr.Value = formId;
 
             UpdateForm(xml.ToString());
@@ -49,7 +49,7 @@ namespace B1PP.Forms
 
         private void UpdateForm(string contents)
         {
-            XDocument xml = PreProcess(contents);
+            var xml = PreProcess(contents);
 
             Application.Apply(xml.ToString());
         }

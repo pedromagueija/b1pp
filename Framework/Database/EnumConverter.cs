@@ -18,14 +18,14 @@ namespace B1PP.Database
 
         public IEnumerable<Tuple<string, string>> ToEnumerable()
         {
-            Array values = Enum.GetValues(type);
-            Type underlyingType = Enum.GetUnderlyingType(type);
+            var values = Enum.GetValues(type);
+            var underlyingType = Enum.GetUnderlyingType(type);
 
-            foreach (object value in values)
+            foreach (var value in values)
             {
-                object underlyingValue = Convert.ChangeType(value, underlyingType);
-                string key = Convert.ToString(underlyingValue);
-                string name = Enum.GetName(type, value);
+                var underlyingValue = Convert.ChangeType(value, underlyingType);
+                var key = Convert.ToString(underlyingValue);
+                var name = Enum.GetName(type, value);
                 yield return new Tuple<string, string>(key, name);
             }
         }

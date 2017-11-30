@@ -28,7 +28,7 @@ namespace B1PP.Forms.Events
         {
             if (e.EventType == BoEventTypes.et_FORM_LOAD && e.BeforeAction && e.FormTypeEx.Equals(Id))
             {
-                Form form = application.Forms.Item(e.FormUID);
+                var form = application.Forms.Item(e.FormUID);
                 var instance = (ISystemFormInstance) Activator.CreateInstance(classType, form);
 
                 instance.Initialize();

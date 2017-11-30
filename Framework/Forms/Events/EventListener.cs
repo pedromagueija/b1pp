@@ -54,7 +54,7 @@ namespace B1PP.Forms.Events
         /// </summary>
         public void Subscribe()
         {
-            foreach (IEventListener listener in listeners)
+            foreach (var listener in listeners)
             {
                 listener.HandlerAdded += OnHandlerAdded;
                 listener.Subscribe();
@@ -66,7 +66,7 @@ namespace B1PP.Forms.Events
         /// </summary>
         public void Unsubscribe()
         {
-            foreach (IEventListener listener in listeners)
+            foreach (var listener in listeners)
             {
                 listener.HandlerAdded -= OnHandlerAdded;
                 listener.Unsubscribe();

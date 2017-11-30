@@ -50,7 +50,7 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
 
             try
             {
-                string formUid = e.FormUID;
+                var formUid = e.FormUID;
                 if (eventListeners.ContainsKey(formUid))
                 {
                     eventListeners[formUid].OnLayoutKeyEvent(ref e, out bubbleEvent);

@@ -72,7 +72,7 @@ namespace B1PP.Forms.Events.RightClickEvents
         {
             var handlerMethods = ClassHelper.FindAnnotatedMethods<RightClickEventHandlerAttribute>(userForm);
 
-            foreach (MethodInfo method in handlerMethods)
+            foreach (var method in handlerMethods)
             {
                 var attribute = method.GetAttribute<RightClickEventHandlerAttribute>();
                 if (attribute.Before)

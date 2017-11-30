@@ -75,18 +75,18 @@ namespace B1PP.Database
              * are necessary to create the object.
              */
 
-            foreach (Type type in userTableTypes)
+            foreach (var type in userTableTypes)
             {
-                string tableName = CreateTable(type);
+                var tableName = CreateTable(type);
                 typeMap.Add(tableName, type);
             }
 
-            foreach (string tableName in typeMap.Keys)
+            foreach (var tableName in typeMap.Keys)
             {
                 CreateFields(typeMap[tableName], tableName);
             }
 
-            foreach (string tableName in typeMap.Keys)
+            foreach (var tableName in typeMap.Keys)
             {
                 CreateObject(typeMap[tableName], tableName);
             }
@@ -102,24 +102,29 @@ namespace B1PP.Database
             var properties = GetCustomProperties(type);
             var annotated = properties.Where(HasUserFieldAttribute);
 
-            foreach (PropertyInfo property in annotated)
+            foreach (var property in annotated)
             {
-                var field = (UserFieldsMD) company.GetBusinessObject(BoObjectTypes.oUserFields);
-                var adapter = new PropertyUserFieldAdapter(tableName, property, field);
-                adapter.Execute();
-
-                var addUserField = new AddUserField(company, field);
-                addUserField.OnError += OnAddUserFieldError;
-                addUserField.Execute();
+                CreateField(tableName, property);
             }
         }
 
+        private void CreateField(string tableName, PropertyInfo property)
+        {
+            var field = (UserFieldsMD) company.GetBusinessObject(BoObjectTypes.oUserFields);
+            var adapter = new PropertyUserFieldAdapter(tableName, property, field);
+            adapter.Execute();
+
+            var addUserField = new AddUserField(company, field);
+            addUserField.OnError += OnAddUserFieldError;
+            addUserField.Execute();
+        }
+
         /// <summary>
-        /// Determines whether [has user field attribute] [the specified p].
+        /// Determines whether the property has a user field attribute.
         /// </summary>
-        /// <param name="p">The p.</param>
+        /// <param name="p">The property.</param>
         /// <returns>
-        ///   <c>true</c> if [has user field attribute] [the specified p]; otherwise, <c>false</c>.
+        ///   <c>true</c> if the property has a user field attribute; otherwise, <c>false</c>.
         /// </returns>
         private bool HasUserFieldAttribute(PropertyInfo p)
         {
@@ -162,7 +167,7 @@ namespace B1PP.Database
 
             // used to return the table name, because the AddUserTable action will release the table
             // thus we won't have access to the table.TableName anymore
-            string tableName = table.TableName;
+            var tableName = table.TableName;
 
             var addUserTable = new AddUserTable(company, table);
             addUserTable.Error += OnAddUserTableError;
@@ -197,7 +202,7 @@ namespace B1PP.Database
         /// <returns></returns>
         private IEnumerable<Type> GetUserTableTypes()
         {
-            Type userTableAttribute = typeof(UserTableAttribute);
+            var userTableAttribute = typeof(UserTableAttribute);
 
             return assembly.GetTypes().Where(
                 t => t.IsClass &&

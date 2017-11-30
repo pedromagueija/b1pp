@@ -23,12 +23,12 @@ namespace Tests.Feature.Database
         [SetUp]
         public void Setup()
         {
-            IConnection connection = ConnectionFactory.CreateStandardConnection();
+            var connection = ConnectionFactory.CreateStandardConnection();
             connection.Connect();
 
             company = connection.Company;
 
-            SchemaManager manager = new SchemaManager(company);
+            var manager = new SchemaManager(company);
             manager.InitializeFromAssembly(GetType().Assembly);
         }
 
@@ -41,10 +41,10 @@ namespace Tests.Feature.Database
         [Test]
         public void CanCreateFields()
         {
-            UserTable userTable = company.UserTables.Item(@"T_SPTB");
+            var userTable = company.UserTables.Item(@"T_SPTB");
             Assert.NotNull(userTable);
 
-            Fields userFields = userTable.UserFields.Fields;
+            var userFields = userTable.UserFields.Fields;
             Assert.NotNull(userFields.Item(@"U_Subject"));
             Assert.NotNull(userFields.Item(@"U_NumberOfDays"));
             Assert.NotNull(userFields.Item(@"U_Price"));
@@ -59,7 +59,7 @@ namespace Tests.Feature.Database
             AssertTable(@"T_DOTB", @"Document object table", BoUTBTableType.bott_Document);
 
             var userTable = company.UserTables.Item(@"T_DOTB");
-            Fields userFields = userTable.UserFields.Fields;
+            var userFields = userTable.UserFields.Fields;
             Assert.NotNull(userFields.Item(@"U_ReferenceNumber"));
             Assert.NotNull(userFields.Item(@"U_CustomerId"));
         }
@@ -72,13 +72,13 @@ namespace Tests.Feature.Database
 
         private void AssertObject(string objectId, BoUTBTableType objectType)
         {
-            UserObjectsMD ubmd = (UserObjectsMD)company.GetBusinessObject(BoObjectTypes.oUserObjectsMD);
+            var ubmd = (UserObjectsMD)company.GetBusinessObject(BoObjectTypes.oUserObjectsMD);
             Assert.IsTrue(ubmd.GetByKey(objectId));
         }
 
         private void AssertTable(string tableName, string tableDescription, BoUTBTableType tableType)
         {
-            UserTablesMD utmd = (UserTablesMD) company.GetBusinessObject(BoObjectTypes.oUserTables);
+            var utmd = (UserTablesMD) company.GetBusinessObject(BoObjectTypes.oUserTables);
             Assert.IsTrue(utmd.GetByKey(tableName));
             Assert.AreEqual(utmd.TableType, tableType);
             Assert.IsTrue(string.Equals(utmd.TableDescription, tableDescription, StringComparison.OrdinalIgnoreCase));

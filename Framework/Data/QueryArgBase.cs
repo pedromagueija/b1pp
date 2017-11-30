@@ -84,8 +84,8 @@ namespace B1PP.Data
         /// </returns>
         protected string ToSqlParameter(string value)
         {
-            string escapedValue = Escape(value);
-            string singleQuotedValue = SingleQuote(escapedValue);
+            var escapedValue = Escape(value);
+            var singleQuotedValue = SingleQuote(escapedValue);
             return ToUnicode(singleQuotedValue);
         }
 
@@ -100,7 +100,7 @@ namespace B1PP.Data
         /// </returns>
         protected string ToSqlParameter(DateTime value)
         {
-            string stringValue = value.ToString(@"yyyyMMdd");
+            var stringValue = value.ToString(@"yyyyMMdd");
             return SingleQuote(stringValue);
         }
 

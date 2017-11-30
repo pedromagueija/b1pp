@@ -46,7 +46,7 @@ namespace B1PP.Forms.Events.ItemEvents
         /// </returns>
         public override string ToString()
         {
-            string isBefore = BeforeAction ? "Before" : "After";
+            var isBefore = BeforeAction ? "Before" : "After";
             return $"{isBefore} {EventType}({ItemId})";
         }
 
@@ -95,7 +95,7 @@ namespace B1PP.Forms.Events.ItemEvents
         {
             unchecked
             {
-                int hashCode = base.GetHashCode();
+                var hashCode = base.GetHashCode();
                 hashCode = (hashCode * 397) ^ BeforeAction.GetHashCode();
                 hashCode = (hashCode * 397) ^ (ItemId?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ (int) EventType;

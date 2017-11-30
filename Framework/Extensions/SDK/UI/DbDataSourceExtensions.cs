@@ -28,13 +28,13 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         public static DateTime? GetDateTime(this DBDataSource source, string columnId, int rowIndex)
         {
-            string sourceValue = source.GetString(columnId, rowIndex);
+            var sourceValue = source.GetString(columnId, rowIndex);
             if (string.IsNullOrEmpty(sourceValue))
             {
                 return null;
             }
 
-            DateTime value = DateTime.ParseExact(sourceValue, "yyyyMMdd", CultureInfo.InvariantCulture);
+            var value = DateTime.ParseExact(sourceValue, "yyyyMMdd", CultureInfo.InvariantCulture);
             return value;
         }
 
@@ -53,7 +53,7 @@ namespace B1PP.Extensions.SDK.UI
                 return null;
             }
 
-            double value = double.Parse(sourceValue, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
+            var value = double.Parse(sourceValue, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
                 CultureInfo.InvariantCulture);
 
             return value;
@@ -74,7 +74,7 @@ namespace B1PP.Extensions.SDK.UI
                 return null;
             }
 
-            int value = int.Parse(sourceValue, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
+            var value = int.Parse(sourceValue, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
                 CultureInfo.InvariantCulture);
 
             return value;
@@ -89,7 +89,7 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         public static string GetString(this DBDataSource source, string columnId, int rowIndex)
         {
-            string sourceValue = source.GetValue(columnId, rowIndex);
+            var sourceValue = source.GetValue(columnId, rowIndex);
 
             return sourceValue?.Trim();
         }
@@ -163,13 +163,13 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         public static IEnumerable<T> ToList<T>(this DBDataSource source) where T : class, new()
         {
-            int rowCount = source.Size;
+            var rowCount = source.Size;
             if (rowCount <= 0)
                 yield break;
 
-            for (int row = 0; row < rowCount; row++)
+            for (var row = 0; row < rowCount; row++)
             {
-                T item = CreateNewItem<T>(source, row);
+                var item = CreateNewItem<T>(source, row);
                 yield return item;
             }
         }
@@ -183,14 +183,14 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         private static T CreateNewItem<T>(DBDataSource source, int rowIndex) where T : class, new()
         {
-            Fields sourceFields = source.Fields;
-            int columnCount = sourceFields.Count;
-            T item = new T();
-            Type type = typeof(T);
+            var sourceFields = source.Fields;
+            var columnCount = sourceFields.Count;
+            var item = new T();
+            var type = typeof(T);
 
-            for (int column = 0; column < columnCount; column++)
+            for (var column = 0; column < columnCount; column++)
             {
-                string columnName = sourceFields.Item(column).Name;
+                var columnName = sourceFields.Item(column).Name;
                 var property = DetermineProperty(type, columnName);
 
                 if (property.PropertyType == typeof(string))
@@ -214,7 +214,7 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         private static PropertyInfo DetermineProperty(Type type, string columnName)
         {
-            string propertyName = DeterminePropertyName(columnName);
+            var propertyName = DeterminePropertyName(columnName);
             var property = type.GetProperty(propertyName);
 
             if (property == null)

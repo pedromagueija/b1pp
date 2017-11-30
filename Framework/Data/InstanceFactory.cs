@@ -27,7 +27,7 @@ namespace B1PP.Data
             {
                 if (data.ContainsKey(column.Name))
                 {
-                    string message = $"The column '{column.Name}' appears twice or more times. " +
+                    var message = $"The column '{column.Name}' appears twice or more times. " +
                                      $"Please use different aliases for each column.";
                     throw new ArgumentException(message);
                 }
@@ -62,14 +62,14 @@ namespace B1PP.Data
 
             var properties = GetMatchingProperties(instance, columns);
 
-            foreach (PropertyInfo property in properties)
+            foreach (var property in properties)
             {
                 if (!property.CanWrite)
                 {
                     continue;
                 }
 
-                Type propertyType = property.PropertyType;
+                var propertyType = property.PropertyType;
 
                 if (propertyType == typeof(string))
                 {
@@ -93,7 +93,7 @@ namespace B1PP.Data
                 }
                 else if (propertyType == typeof(Id))
                 {
-                    string value = reader.GetString(property.Name);
+                    var value = reader.GetString(property.Name);
                     property.SetValue(instance, new Id(value));
                 }
             }

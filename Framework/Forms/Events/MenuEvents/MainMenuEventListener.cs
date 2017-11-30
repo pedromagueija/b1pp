@@ -61,7 +61,7 @@ namespace B1PP.Forms.Events.MenuEvents
         {
             var handlerMethods = ClassHelper.FindAnnotatedMethods<MenuEventHandlerAttribute>(mainMenu);
 
-            foreach (MethodInfo method in handlerMethods)
+            foreach (var method in handlerMethods)
             {
                 var attribute = method.GetAttribute<MenuEventHandlerAttribute>();
                 try

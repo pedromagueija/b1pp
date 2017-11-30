@@ -47,7 +47,7 @@ namespace B1PP.Database
 
             var properties = GetProperties(type);
 
-            foreach (PropertyInfo property in properties)
+            foreach (var property in properties)
             {
                 SetFindColumns(property);
 
@@ -72,7 +72,7 @@ namespace B1PP.Database
                 return;
             }
 
-            UserObjectMD_ChildTables child = userObject.ChildTables;
+            var child = userObject.ChildTables;
             child.TableName = childTableAttribute.TableName;
             child.ObjectName = childTableAttribute.ObjectName;
 

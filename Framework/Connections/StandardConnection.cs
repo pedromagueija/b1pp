@@ -75,10 +75,10 @@ namespace B1PP.Connections
                 Application = gui.GetApplication();
 
                 Company = new DiCompanyClass {Application = Application};
-                int result = Company.Connect();
+                var result = Company.Connect();
                 if (result != 0)
                 {
-                    string message = $"{result} {Company.GetLastErrorDescription()}";
+                    var message = $"{result} {Company.GetLastErrorDescription()}";
                     throw new ConnectionException(message);
                 }
 

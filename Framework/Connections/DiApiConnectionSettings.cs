@@ -360,7 +360,7 @@ namespace B1PP.Connections
             var properties = GetType().GetProperties();
             var values = new List<string>(properties.Length);
 
-            foreach (PropertyInfo property in properties)
+            foreach (var property in properties)
             {
                 values.Add($"{property.Name}: " + property.GetValue(this, null));
             }

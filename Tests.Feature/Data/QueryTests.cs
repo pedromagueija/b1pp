@@ -29,7 +29,7 @@ namespace Tests.Feature.Data
                 CAST('20120101' AS DateTime) AS ""DateTime""
             FROM OCRD");
 
-            dynamic results = query.SelectOne();
+            var results = query.SelectOne();
 
             Assert.NotNull(results);
 
@@ -63,7 +63,7 @@ namespace Tests.Feature.Data
             Assert.NotNull(many);
             Assert.AreEqual(10, many.Count());
 
-            dynamic first = many.First();
+            var first = many.First();
 
             Assert.AreEqual("string value", first.String);
             Assert.AreEqual(typeof(string), first.String.GetType());

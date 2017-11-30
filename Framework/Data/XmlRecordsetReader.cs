@@ -72,7 +72,7 @@ namespace B1PP.Data
         /// </exception>
         public DateTime? GetDateTime(string columnName)
         {
-            string value = GetString(columnName);
+            var value = GetString(columnName);
             if (string.IsNullOrEmpty(value))
                 return null;
             return DateTime.ParseExact(value, @"yyyyMMdd", CultureInfo.InvariantCulture);
@@ -100,7 +100,7 @@ namespace B1PP.Data
         /// </exception>
         public double? GetDouble(string columnName)
         {
-            string value = GetString(columnName);
+            var value = GetString(columnName);
             if (string.IsNullOrEmpty(value))
                 return null;
             return double.Parse(value, CultureInfo.InvariantCulture);
@@ -125,7 +125,7 @@ namespace B1PP.Data
         /// </exception>
         public int? GetInt(string columnName)
         {
-            string value = GetString(columnName);
+            var value = GetString(columnName);
             if (string.IsNullOrEmpty(value))
                 return null;
             return int.Parse(value, CultureInfo.InvariantCulture);
@@ -140,7 +140,7 @@ namespace B1PP.Data
         /// <exception cref="FormatException">Thrown when column value is not True or False literals.</exception>
         public bool GetBool(string columnName)
         {
-            string value = GetString(columnName);
+            var value = GetString(columnName);
             return bool.Parse(value);
         }
 
@@ -163,7 +163,7 @@ namespace B1PP.Data
                 throw new ArgumentException($"Parameter {nameof(columnName)} cannot be null or empty");
             }
 
-            XmlNode valueNode = GetItemXmlNode(columnName);
+            var valueNode = GetItemXmlNode(columnName);
 
             if (valueNode != null)
             {
@@ -184,7 +184,7 @@ namespace B1PP.Data
         {
             if (rowEnumerator != null)
             {
-                bool retVal = rowEnumerator.MoveNext();
+                var retVal = rowEnumerator.MoveNext();
                 currentRow = (XmlNode) rowEnumerator.Current;
                 return retVal;
             }
@@ -240,7 +240,7 @@ namespace B1PP.Data
         [NotNull]
         private string ExtractXmlFromRecordset(IRecordset data)
         {
-            string fixedXml = data.GetFixedXML(RecordsetXMLModeEnum.rxmData);
+            var fixedXml = data.GetFixedXML(RecordsetXMLModeEnum.rxmData);
             if (string.IsNullOrEmpty(fixedXml))
             {
                 return string.Empty;
@@ -261,7 +261,7 @@ namespace B1PP.Data
 
             try
             {
-                string xpath = $"Fields/Field/Value[../Alias = '{columnName}']";
+                var xpath = $"Fields/Field/Value[../Alias = '{columnName}']";
                 valueNode = currentRow.SelectSingleNode(xpath);
             }
             catch (XPathException)
@@ -288,7 +288,7 @@ namespace B1PP.Data
         private void Load(IRecordset data)
         {
             // get data
-            string xmlData = ExtractXmlFromRecordset(data);
+            var xmlData = ExtractXmlFromRecordset(data);
 
             if (string.IsNullOrEmpty(xmlData))
             {
@@ -297,20 +297,20 @@ namespace B1PP.Data
 
             xmlDoc.LoadXml(xmlData);
 
-            XmlNodeList rows = xmlDoc.SelectNodes(@"//Row");
+            var rows = xmlDoc.SelectNodes(@"//Row");
             if (rows != null)
             {
                 rowEnumerator = rows.GetEnumerator();
 
-                XmlNode firstNode = rows[0];
+                var firstNode = rows[0];
                 var aliases = firstNode.SelectNodes(@"descendant::Alias");
                 var fields = data.Fields;
                 if (aliases != null)
                 {
                     foreach (XmlNode alias in aliases)
                     {
-                        string name = alias.InnerXml;
-                        BoFieldTypes type = fields.Item(name).Type;
+                        var name = alias.InnerXml;
+                        var type = fields.Item(name).Type;
 
                         columns.Add(new Column(name, type));
                     }

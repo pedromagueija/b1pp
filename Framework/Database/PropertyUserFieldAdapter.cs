@@ -68,7 +68,7 @@ namespace B1PP.Database
             enumValuesAttr?.Apply(field);
 
             var userFieldValidValues = property.GetCustomAttributes<UserFieldValidValueAttribute>();
-            foreach (UserFieldValidValueAttribute validValueAttribute in userFieldValidValues)
+            foreach (var validValueAttribute in userFieldValidValues)
             {
                 validValueAttribute.Apply(field);
             }

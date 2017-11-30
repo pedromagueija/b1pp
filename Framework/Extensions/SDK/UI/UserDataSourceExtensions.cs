@@ -20,9 +20,9 @@ namespace B1PP.Extensions.SDK.UI
                 return null;
             }
 
-            string data = datasource.GetString(userDataSourceId);
+            var data = datasource.GetString(userDataSourceId);
             DateTime value;
-            bool success = DateTime.TryParse(data, CultureInfo.InvariantCulture, DateTimeStyles.None, out value);
+            var success = DateTime.TryParse(data, CultureInfo.InvariantCulture, DateTimeStyles.None, out value);
 
             if (success)
             {
@@ -52,7 +52,7 @@ namespace B1PP.Extensions.SDK.UI
 
             string data = datasource.GetString(userDataSourceId);
             double value;
-            bool success = double.TryParse(data, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
+            var success = double.TryParse(data, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
                 CultureInfo.InvariantCulture, out value);
 
             if (success)
@@ -142,7 +142,7 @@ namespace B1PP.Extensions.SDK.UI
 
             string data = datasource.GetString(userDataSourceId);
             int value;
-            bool success = int.TryParse(data, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out value);
+            var success = int.TryParse(data, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out value);
 
             if (success)
             {

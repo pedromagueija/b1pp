@@ -24,7 +24,7 @@ namespace B1PP.Extensions.Tests.Unit.SDK.UI
             var app = Substitute.For<Application>();
             app.Forms.ActiveForm.Returns(t => { throw new COMException(); });
 
-            string formId = app.GetActiveFormId();
+            var formId = app.GetActiveFormId();
 
             Assert.AreEqual(string.Empty, formId);
         }
@@ -37,7 +37,7 @@ namespace B1PP.Extensions.Tests.Unit.SDK.UI
             form.UniqueID.Returns(@"FORM_UID");
             app.Forms.ActiveForm.Returns(form);
 
-            string formId = app.GetActiveFormId();
+            var formId = app.GetActiveFormId();
 
             Assert.AreEqual(@"FORM_UID", formId);
         }
@@ -50,7 +50,7 @@ namespace B1PP.Extensions.Tests.Unit.SDK.UI
             form.UniqueID.Returns((string)null);
             app.Forms.ActiveForm.Returns(form);
 
-            string formId = app.GetActiveFormId();
+            var formId = app.GetActiveFormId();
 
             Assert.AreEqual(string.Empty, formId);
         }

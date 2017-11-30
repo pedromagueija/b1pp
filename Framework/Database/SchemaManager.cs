@@ -34,8 +34,8 @@ namespace B1PP.Database
 
         public void InitializeFromFile(string fileName, Assembly assembly)
         {
-            string contents = ReadFile(fileName, assembly);
-            XDocument xml = XDocument.Parse(contents);
+            var contents = ReadFile(fileName, assembly);
+            var xml = XDocument.Parse(contents);
 
             CreateTablesFromXDocument(xml);
             CreateFieldsFromXDocument(xml);
@@ -46,7 +46,7 @@ namespace B1PP.Database
         {
             var userFields = xml.Descendants(@"UserField");
 
-            foreach (XElement userField in userFields)
+            foreach (var userField in userFields)
             {
                 var field = (UserFieldsMD) company.GetBusinessObject(BoObjectTypes.oUserFields);
                 var adapter = new UserFieldAdapter(field, userField);
@@ -62,7 +62,7 @@ namespace B1PP.Database
         {
             var xmlUserObjects = xml.Descendants(@"UserObject");
 
-            foreach (XElement xmlUserObject in xmlUserObjects)
+            foreach (var xmlUserObject in xmlUserObjects)
             {
                 var userObject = (UserObjectsMD) company.GetBusinessObject(BoObjectTypes.oUserObjectsMD);
                 var adapter = new UserObjectAdapter(userObject, xmlUserObject);
@@ -78,7 +78,7 @@ namespace B1PP.Database
         {
             var userTables = xml.Descendants(@"UserTable");
 
-            foreach (XElement userTable in userTables)
+            foreach (var userTable in userTables)
             {
                 var table = (UserTablesMD) company.GetBusinessObject(BoObjectTypes.oUserTables);
                 var adapter = new UserTableAdapter(table, userTable);

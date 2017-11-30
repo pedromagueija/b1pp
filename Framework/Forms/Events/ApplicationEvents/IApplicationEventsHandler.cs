@@ -5,9 +5,9 @@
 namespace B1PP.Forms.Events.ApplicationEvents
 {
     /// <summary>
-    /// Manages application events.
+    /// Standard application events from SAP Business One.
     /// </summary>
-    public interface IApplicationInstance
+    public interface IApplicationEventsHandler
     {
         /// <summary>
         /// Called when the addon is requested to stop by SAP Business One.

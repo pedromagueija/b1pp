@@ -45,9 +45,9 @@ namespace B1PP.Data
         /// <returns></returns>
         public string Prepare(string query, params IQueryArg[] args)
         {
-            string workingQuery = query;
+            var workingQuery = query;
 
-            foreach (IQueryArg arg in args)
+            foreach (var arg in args)
             {
                 workingQuery = workingQuery.Replace(arg.PlaceHolder, arg.Value);
             }
@@ -73,7 +73,7 @@ namespace B1PP.Data
                     yield break;
                 }
 
-                XmlRecordsetReader reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = XmlRecordsetReader.CreateNew(recordset);
 
                 while (reader.MoveNext())
                 {
@@ -98,7 +98,7 @@ namespace B1PP.Data
                     yield break;
                 }
 
-                XmlRecordsetReader reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = XmlRecordsetReader.CreateNew(recordset);
 
                 while (reader.MoveNext())
                 {
@@ -124,7 +124,7 @@ namespace B1PP.Data
                     yield break;
                 }
 
-                XmlRecordsetReader reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = XmlRecordsetReader.CreateNew(recordset);
 
                 while (reader.MoveNext())
                 {
@@ -152,7 +152,7 @@ namespace B1PP.Data
                     return @default;
                 }
 
-                XmlRecordsetReader reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = XmlRecordsetReader.CreateNew(recordset);
 
                 if (reader.MoveNext())
                 {
@@ -181,7 +181,7 @@ namespace B1PP.Data
                     return null;
                 }
 
-                XmlRecordsetReader reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = XmlRecordsetReader.CreateNew(recordset);
 
                 if (reader.MoveNext())
                 {
@@ -208,7 +208,7 @@ namespace B1PP.Data
                     return null;
                 }
 
-                XmlRecordsetReader reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = XmlRecordsetReader.CreateNew(recordset);
 
                 if (reader.MoveNext())
                 {

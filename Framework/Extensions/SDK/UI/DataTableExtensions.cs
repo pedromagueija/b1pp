@@ -52,7 +52,7 @@ namespace B1PP.Extensions.SDK.UI
                 dataTable.Rows.Add();
             }
 
-            int lastRowIndex = rowIndex ?? dataTable.Rows.Count - 1;
+            var lastRowIndex = rowIndex ?? dataTable.Rows.Count - 1;
             PopulateRow(dataTable, value, lastRowIndex);
         }
 
@@ -65,7 +65,7 @@ namespace B1PP.Extensions.SDK.UI
         public static void AppendValue<T>(this DataTable dataTable, T value)
         {
             dataTable.Rows.Add();
-            int lastRowIndex = dataTable.Rows.Count - 1;
+            var lastRowIndex = dataTable.Rows.Count - 1;
 
             PopulateRow(dataTable, value, lastRowIndex);
         }
@@ -86,8 +86,8 @@ namespace B1PP.Extensions.SDK.UI
             }
 
             var properties = GetPropertiesMatchingColumns<T>(dataTable);
-            XDocument currentData = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_All));
-            int row = startFromRowIndex + 1;
+            var currentData = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_All));
+            var row = startFromRowIndex + 1;
             var rowsToAdd = CreateDataCells(values, properties);
 
             currentData.XPathSelectElements($"//Row[position() = {row}]").First().AddAfterSelf(rowsToAdd);
@@ -119,7 +119,7 @@ namespace B1PP.Extensions.SDK.UI
                 throw new ArgumentException("Cannot be null or empty.", nameof(columnId));
             }
 
-            DataColumn column = dataTable.Columns.Cast<DataColumn>().First(c => columnId.Equals(c.Name));
+            var column = dataTable.Columns.Cast<DataColumn>().First(c => columnId.Equals(c.Name));
             if (column == null)
             {
                 throw new ArgumentException(
@@ -149,8 +149,8 @@ namespace B1PP.Extensions.SDK.UI
                     nameof(columnId));
             }
 
-            object data = dataTable.GetValue(columnId, rowIndex);
-            DateTime value = Convert.ToDateTime(data);
+            var data = dataTable.GetValue(columnId, rowIndex);
+            var value = Convert.ToDateTime(data);
             return value;
         }
 
@@ -163,7 +163,7 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         public static double? GetDouble(this DataTable dataTable, string columnId, int rowIndex)
         {
-            object data = dataTable.GetValue(columnId, rowIndex);
+            var data = dataTable.GetValue(columnId, rowIndex);
             double? value = Convert.ToDouble(data);
             return value;
         }
@@ -177,7 +177,7 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         public static int? GetInt(this DataTable dataTable, string columnId, int rowIndex)
         {
-            object data = dataTable.GetValue(columnId, rowIndex);
+            var data = dataTable.GetValue(columnId, rowIndex);
             int? value = Convert.ToInt32(data);
             return value;
         }
@@ -190,14 +190,14 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         public static IEnumerable<T> GetValues<T>(this DataTable dataTable) where T : class, new()
         {
-            int rowCount = dataTable.Rows.Count;
+            var rowCount = dataTable.Rows.Count;
             if (rowCount <= 0)
             {
                 return new List<T>();
             }
 
             var properties = GetPropertiesMatchingColumns<T>(dataTable);
-            XDocument xdata = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_All));
+            var xdata = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_All));
 
             var values = from dataRow in xdata.Descendants("Row")
                 select CreateNewValue<T>(dataRow, properties);
@@ -212,9 +212,9 @@ namespace B1PP.Extensions.SDK.UI
         /// <param name="range">The range.</param>
         public static void RemoveRange(this DataTable dataTable, IEnumerable<int> range)
         {
-            DataRows dataRows = dataTable.Rows;
+            var dataRows = dataTable.Rows;
 
-            foreach (int index in range.OrderByDescending(i => i))
+            foreach (var index in range.OrderByDescending(i => i))
             {
                 dataRows.Remove(index);
             }
@@ -231,7 +231,7 @@ namespace B1PP.Extensions.SDK.UI
             var properties = GetPropertiesMatchingColumns<T>(dataTable);
             var dataCells = CreateDataCells(values, properties);
 
-            XDocument xdata = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_DataOnly));
+            var xdata = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_DataOnly));
             xdata.XPathSelectElement("//Rows").ReplaceAll(dataCells);
             dataTable.LoadSerializedXML(BoDataTableXmlSelect.dxs_DataOnly, xdata.ToString());
         }
@@ -247,7 +247,7 @@ namespace B1PP.Extensions.SDK.UI
         {
             if (type == typeof(Id))
             {
-                TypeConverter conv = TypeDescriptor.GetConverter(type);
+                var conv = TypeDescriptor.GetConverter(type);
                 return conv.ConvertFrom(textValue);
             }
 
@@ -289,7 +289,7 @@ namespace B1PP.Extensions.SDK.UI
         /// </returns>
         private static bool Contains(DataColumns columns, string name)
         {
-            for (int i = 0; i < columns.Count; i++)
+            for (var i = 0; i < columns.Count; i++)
             {
                 if (columns.Item(i).Name.Equals(name))
                 {
@@ -330,12 +330,12 @@ namespace B1PP.Extensions.SDK.UI
         private static T CreateNewValue<T>(XElement dataRow, List<PropertyInfo> properties) where T : class, new()
         {
             var instance = new T();
-            foreach (PropertyInfo property in properties)
+            foreach (var property in properties)
             {
-                string propertyName = property.Name;
-                string textValue = GetValue(dataRow, propertyName);
-                Type propertyType = property.PropertyType;
-                object value = ChangeType(textValue, propertyType);
+                var propertyName = property.Name;
+                var textValue = GetValue(dataRow, propertyName);
+                var propertyType = property.PropertyType;
+                var value = ChangeType(textValue, propertyType);
 
                 property.SetValue(instance, value);
             }
@@ -362,7 +362,7 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         private static object GetValue<T>(PropertyInfo property, T value)
         {
-            object propertyValue = property.GetValue(value);
+            var propertyValue = property.GetValue(value);
 
             if (propertyValue is DateTime)
             {
@@ -381,7 +381,7 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns></returns>
         private static string GetValue(XElement dataRow, string propertyName)
         {
-            string propertyValue = dataRow.XPathSelectElement($"Cells/Cell/Value[../ColumnUid='{propertyName}']").Value;
+            var propertyValue = dataRow.XPathSelectElement($"Cells/Cell/Value[../ColumnUid='{propertyName}']").Value;
             return propertyValue;
         }
 
@@ -395,7 +395,7 @@ namespace B1PP.Extensions.SDK.UI
         private static void PopulateRow<T>(DataTable dataTable, T value, int rowIndex)
         {
             var properties = GetPropertiesMatchingColumns<T>(dataTable);
-            foreach (PropertyInfo property in properties)
+            foreach (var property in properties)
             {
                 dataTable.SetValue(property.Name, rowIndex, property.GetValue(value));
             }

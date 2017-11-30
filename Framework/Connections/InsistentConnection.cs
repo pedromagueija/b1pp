@@ -105,7 +105,7 @@ namespace B1PP.Connections
         /// </exception>
         public void Connect()
         {
-            int attempts = 1;
+            var attempts = 1;
             const int maxAttempts = 3;
             const int intervalMilliseconds = 100;
 
@@ -124,7 +124,7 @@ namespace B1PP.Connections
             } while (attempts <= maxAttempts);
 
             // could not connect
-            string message = $@"{Audit.LastMessage}{Environment.NewLine}" +
+            var message = $@"{Audit.LastMessage}{Environment.NewLine}" +
                              @"More information in the 'Data' property of the exception.";
 
             var e = new ConnectionException(message);

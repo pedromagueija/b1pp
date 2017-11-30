@@ -30,12 +30,12 @@ namespace B1PP.Forms
 
         public override Form Load()
         {
-            Type type = form.GetType();
-            Assembly assembly = type.Assembly;
-            string formType = type.FullName;
-            string fileName = $"{formType}.xml";
-            string contents = ReadFileContents(assembly, fileName);
-            string uniqueId = GenerateUniqueId();
+            var type = form.GetType();
+            var assembly = type.Assembly;
+            var formType = type.FullName;
+            var fileName = $"{formType}.xml";
+            var contents = ReadFileContents(assembly, fileName);
+            var uniqueId = GenerateUniqueId();
 
             return Load(contents, formType, uniqueId);
         }
@@ -58,7 +58,7 @@ namespace B1PP.Forms
 
         private Form Load(string formContents, string formType, string formId)
         {
-            XDocument formXml = PreProcess(formContents);
+            var formXml = PreProcess(formContents);
 
             return CreateForm(formType, formId, formXml.ToString());
         }

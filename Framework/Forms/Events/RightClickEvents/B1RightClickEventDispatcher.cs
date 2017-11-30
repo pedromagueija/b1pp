@@ -36,7 +36,7 @@ namespace B1PP.Forms.Events.RightClickEvents
 
             sink = value;
 
-            foreach (string formType in sink.FormTypes)
+            foreach (var formType in sink.FormTypes)
             {
                 B1EventFilterManager.Include(BoEventTypes.et_RIGHT_CLICK, formType);
             }            
@@ -86,16 +86,16 @@ namespace B1PP.Forms.Events.RightClickEvents
 
             try
             {
-                string activeFormId = Application.GetActiveFormId();
+                var activeFormId = Application.GetActiveFormId();
                 if (string.IsNullOrEmpty(activeFormId))
                 {
                     return;
                 }
 
-                IRightClickEventListener listener = rightClickEventListeners.Find(l => l.Id == activeFormId);
+                var listener = rightClickEventListeners.Find(l => l.Id == activeFormId);
                 if (listener != null)
                 {
-                    bool handled = listener.OnRightClickEvent(ref e, out bubbleEvent);
+                    var handled = listener.OnRightClickEvent(ref e, out bubbleEvent);
                     if (handled)
                         return;
                 }

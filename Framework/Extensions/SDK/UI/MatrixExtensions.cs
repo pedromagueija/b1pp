@@ -29,12 +29,12 @@ namespace B1PP.Extensions.SDK.UI
         {
             if (!string.IsNullOrEmpty(columnId))
             {
-                Columns matrixColumns = matrix.Columns;
-                int columnCount = matrixColumns.Count;
+                var matrixColumns = matrix.Columns;
+                var columnCount = matrixColumns.Count;
 
-                for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+                for (var columnIndex = 0; columnIndex < columnCount; columnIndex++)
                 {
-                    Column column = matrixColumns.Item(columnIndex);
+                    var column = matrixColumns.Item(columnIndex);
                     if (column.UniqueID == columnId)
                     {
                         return columnIndex;
@@ -42,7 +42,7 @@ namespace B1PP.Extensions.SDK.UI
                 }
             }
 
-            string message = $@"Column '{columnId}' does not exist in matrix '{matrix.Item.UniqueID}'.";
+            var message = $@"Column '{columnId}' does not exist in matrix '{matrix.Item.UniqueID}'.";
             throw new ArgumentException(message);
         }
     }

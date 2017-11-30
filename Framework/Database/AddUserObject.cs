@@ -24,7 +24,7 @@ namespace B1PP.Database
 
         public void Execute()
         {
-            int result = userObjectMd.Add();
+            var result = userObjectMd.Add();
             if (result != 0)
             {
                 var errorArgs = new AddUserObjectErrorEventArgs

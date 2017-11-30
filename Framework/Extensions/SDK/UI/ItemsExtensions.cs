@@ -30,7 +30,7 @@ namespace B1PP.Extensions.SDK.UI
             }
             catch (COMException ex)
             {
-                string message = $"Item '{itemId}' was not found";
+                var message = $"Item '{itemId}' was not found";
                 throw new ItemNotFoundException(message, ex);
             }
 
@@ -53,7 +53,7 @@ namespace B1PP.Extensions.SDK.UI
             Item item,
             Type type)
         {
-            string message = $"Item '{itemId}' is not of type '{type}'.";
+            var message = $"Item '{itemId}' is not of type '{type}'.";
             var exception = new InvalidSpecificItemTypeException(message);
             exception.Data.Add("itemId", itemId);
             exception.Data.Add("item", item.Type.ToString());

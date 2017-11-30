@@ -24,7 +24,7 @@ namespace B1PP.Database
 
         public void Execute()
         {
-            int result = table.Add();
+            var result = table.Add();
             if (result != 0)
             {
                 var errorArgs = new AddUserTableErrorEventArgs

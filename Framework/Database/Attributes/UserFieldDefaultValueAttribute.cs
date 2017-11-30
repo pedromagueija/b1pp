@@ -54,7 +54,7 @@ namespace B1PP.Database.Attributes
         /// <param name="field">The field to apply the default value to.</param>
         public void Apply(UserFieldsMD field)
         {
-            string text = string.Empty;
+            var text = string.Empty;
 
             if (value is int)
                 text = ((int) value).ToString(CultureInfo.InvariantCulture);

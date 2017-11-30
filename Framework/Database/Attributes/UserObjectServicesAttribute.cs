@@ -19,11 +19,11 @@ namespace B1PP.Database.Attributes
 
         internal void Apply(UserObjectsMD userObject)
         {
-            // the properties are unset at this point in the userObject
+            // the properties are unset (null) at this point in the userObject
             // we set them to tNO to avoid the no value found exception
             DisableAllServices(userObject);
 
-            foreach (ObjectServices service in services)
+            foreach (var service in services)
             {
                 ActivateService(service, userObject);
             }

@@ -56,7 +56,7 @@ namespace B1PP.Forms.Events.ItemEvents
         public void Subscribe()
         {
             AddEventHandlers(form, form.FormType);
-            foreach (object subordinate in subordinates)
+            foreach (var subordinate in subordinates)
             {
                 AddEventHandlers(subordinate, form.FormType);
             }
@@ -73,7 +73,7 @@ namespace B1PP.Forms.Events.ItemEvents
         {
             var handlerMethods = ClassHelper.FindAnnotatedMethods<ItemEventHandlerAttribute>(userForm);
 
-            foreach (MethodInfo method in handlerMethods)
+            foreach (var method in handlerMethods)
             {
                 var attribute = method.GetAttribute<ItemEventHandlerAttribute>();
                 var signature = ItemEventSignature.Create(method);

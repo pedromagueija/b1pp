@@ -17,7 +17,7 @@ namespace B1PP.Common
         /// <param name="objects">COM objects to release.</param>
         public static void Release(params object[] objects)
         {
-            foreach (object obj in objects)
+            foreach (var obj in objects)
             {
                 ReleaseOne(obj);
             }

@@ -35,7 +35,7 @@ namespace B1PP.Forms.Events
     {
         private readonly Application application;
 
-        private readonly IApplicationInstance applicationInstance;
+        private readonly IApplicationEventsHandler applicationEventsHandler;
         private readonly Assembly assembly;
         private readonly IMainMenuInstance mainMenu;
 
@@ -64,7 +64,7 @@ namespace B1PP.Forms.Events
         /// <param name="application">
         /// The application.
         /// </param>
-        /// <param name="applicationInstance">
+        /// <param name="applicationEventsHandler">
         /// The instance responsible for application event handling.
         /// </param>
         /// <param name="mainMenu">
@@ -72,12 +72,12 @@ namespace B1PP.Forms.Events
         /// </param>
         public B1Session(
             Application application,
-            IApplicationInstance applicationInstance,
+            IApplicationEventsHandler applicationEventsHandler,
             [CanBeNull] IMainMenuInstance mainMenu)
         {
             this.application = application;
-            assembly = applicationInstance.GetType().Assembly;
-            this.applicationInstance = applicationInstance;
+            assembly = applicationEventsHandler.GetType().Assembly;
+            this.applicationEventsHandler = applicationEventsHandler;
             this.mainMenu = mainMenu ?? new NullMainMenuInstance();
 
             B1ApplicationEventDispatcher = new B1ApplicationEventDispatcher();
@@ -94,12 +94,12 @@ namespace B1PP.Forms.Events
         /// <param name="application">
         /// The application.
         /// </param>
-        /// <param name="applicationInstance">
+        /// <param name="applicationEventsHandler">
         /// The instance responsible for application event handling.
         /// </param>
         public B1Session(
             Application application,
-            IApplicationInstance applicationInstance) : this(application, applicationInstance, null)
+            IApplicationEventsHandler applicationEventsHandler) : this(application, applicationEventsHandler, null)
         {
         }
 
@@ -157,7 +157,7 @@ namespace B1PP.Forms.Events
         {
             var eventSinks = FindEventSinks();
 
-            foreach (Type type in eventSinks)
+            foreach (var type in eventSinks)
             {
                 AddEventSink(type);
             }
@@ -166,7 +166,7 @@ namespace B1PP.Forms.Events
         private void AddSystemFormLoadListener(Type classType)
         {
             var attribute = GetAttribute<B1SystemFormTypeAttribute>(classType);
-            string formType = attribute.FormType;
+            var formType = attribute.FormType;
 
             var loadListener = new SystemFormLoadListener(application, formType, classType);
 
@@ -178,7 +178,7 @@ namespace B1PP.Forms.Events
         {
             var systemForms = FindSystemFormsInAssembly();
 
-            foreach (Type systemForm in systemForms)
+            foreach (var systemForm in systemForms)
             {
                 AddSystemFormLoadListener(systemForm);
             }
@@ -202,7 +202,7 @@ namespace B1PP.Forms.Events
 
         private T GetAttribute<T>(Type systemForm)
         {
-            object attribute = systemForm.GetCustomAttributes(typeof(T), true).FirstOrDefault();
+            var attribute = systemForm.GetCustomAttributes(typeof(T), true).FirstOrDefault();
             return (T) attribute;
         }
 
@@ -219,7 +219,7 @@ namespace B1PP.Forms.Events
 
         private void SetApplicationEventListener()
         {
-            B1ApplicationEventDispatcher.SetListener(applicationInstance);
+            B1ApplicationEventDispatcher.SetListener(applicationEventsHandler);
         }
 
         private void SetMainMenu()

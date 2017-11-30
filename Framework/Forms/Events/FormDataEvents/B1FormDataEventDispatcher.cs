@@ -72,21 +72,21 @@ namespace B1PP.Forms.Events.FormDataEvents
 
             try
             {
-                string formUid = e.FormUID;
+                var formUid = e.FormUID;
                 if (listeners.ContainsKey(formUid))
                 {
                     listeners[formUid].OnFormDataEvent(ref e, out bubbleEvent);
                     return;
                 }
 
-                string formType = e.FormTypeEx;
+                var formType = e.FormTypeEx;
                 if (listeners.ContainsKey(formType))
                 {
                     listeners[formType].OnFormDataEvent(ref e, out bubbleEvent);
                     return;
                 }
 
-                string eventType = e.EventType.ToString();
+                var eventType = e.EventType.ToString();
                 if (listeners.ContainsKey(eventType))
                 {
                     listeners[eventType].OnFormDataEvent(ref e, out bubbleEvent);

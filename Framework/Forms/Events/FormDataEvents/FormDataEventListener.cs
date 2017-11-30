@@ -71,7 +71,7 @@ namespace B1PP.Forms.Events.FormDataEvents
         {
             var handlerMethods = ClassHelper.FindAnnotatedMethods<FormDataEventHandlerAttribute>(userForm);
 
-            foreach (MethodInfo method in handlerMethods)
+            foreach (var method in handlerMethods)
             {
                 var attribute = method.GetAttribute<FormDataEventHandlerAttribute>();
 

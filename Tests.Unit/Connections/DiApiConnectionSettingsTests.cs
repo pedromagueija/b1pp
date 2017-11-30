@@ -29,8 +29,8 @@ namespace Tests.Unit.Connections
 
         private string CreateConfigFile()
         {
-            string path = Path.GetTempFileName();
-            string resourceName = $@"{GetType().Namespace}.config.template.xml";
+            var path = Path.GetTempFileName();
+            var resourceName = $@"{GetType().Namespace}.config.template.xml";
 
             File.WriteAllText(path, ReadText(resourceName));
 
@@ -41,7 +41,7 @@ namespace Tests.Unit.Connections
         {
             var assembly = Assembly.GetAssembly(this.GetType());
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
                 using (var reader = new StreamReader(stream))
                 {
@@ -53,7 +53,7 @@ namespace Tests.Unit.Connections
         [Test]
         public void LoadSettingsFromConfigurationTest()
         {
-            DiApiConnectionSettings expectedSettings = DiApiConnectionSettings.CreateTrustedSettings(
+            var expectedSettings = DiApiConnectionSettings.CreateTrustedSettings(
                 "server",
                 "user",
                 "password",
@@ -62,9 +62,9 @@ namespace Tests.Unit.Connections
                 BoDataServerTypes.dst_MSSQL2012,
                 "SBODEMOCH");
 
-            string configFile = CreateConfigFile();
+            var configFile = CreateConfigFile();
 
-            DiApiConnectionSettings settings = DiApiConnectionSettings.Load(configFile);
+            var settings = DiApiConnectionSettings.Load(configFile);
 
             AssertSettingsMatch(settings, expectedSettings);
         }
@@ -73,7 +73,7 @@ namespace Tests.Unit.Connections
         [Ignore("Mono fails with cannot find ole32.dll.")]
         public void ToCompanyReturnsCompanyWithSettings()
         {
-            DiApiConnectionSettings expectedSettings = DiApiConnectionSettings.CreateStandardSettings(
+            var expectedSettings = DiApiConnectionSettings.CreateStandardSettings(
                 "server",
                 userName: "user",
                 password: "password",
@@ -84,7 +84,7 @@ namespace Tests.Unit.Connections
                 dbServerType: BoDataServerTypes.dst_MSSQL2012,
                 companyDb: "SBODEMOCH");
 
-            Company company = expectedSettings.ToCompany();
+            var company = expectedSettings.ToCompany();
 
             // can't check passwords
             Assert.That(company.Server, Is.EqualTo(expectedSettings.Server));
