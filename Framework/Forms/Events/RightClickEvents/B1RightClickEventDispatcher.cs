@@ -86,7 +86,7 @@ namespace B1PP.Forms.Events.RightClickEvents
 
             try
             {
-                var activeFormId = Application.GetActiveFormId();
+                string activeFormId = Application.GetActiveFormId();
                 if (string.IsNullOrEmpty(activeFormId))
                 {
                     return;
@@ -95,7 +95,7 @@ namespace B1PP.Forms.Events.RightClickEvents
                 var listener = rightClickEventListeners.Find(l => l.Id == activeFormId);
                 if (listener != null)
                 {
-                    var handled = listener.OnRightClickEvent(ref e, out bubbleEvent);
+                    bool handled = listener.OnRightClickEvent(ref e, out bubbleEvent);
                     if (handled)
                         return;
                 }

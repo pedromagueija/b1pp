@@ -1,0 +1,8 @@
+#recipe Docs
+
+// Customize your settings and add new ones here
+Settings[Keys.Host] = "dev.b1pp.localhost";
+Settings[DocsKeys.Title] = "B1PP Docs";
+Settings[DocsKeys.SourceFiles] = @"../Framework/**/*.cs";
+
+// Add any pipeline customizations here

@@ -247,3 +247,6 @@ ModelManifest.xml
 # Custom
 out/
 !SAPBusinessOneSDK.dll
+/output
+/input
+/.sonarqube

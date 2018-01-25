@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wyam</name>
+    </assembly>
+    <members>
+        <member name="T:Wyam.ActionFileSystemWatcher">
+            <summary>
+            A wrapper around <see cref="T:System.IO.FileSystemWatcher"/> that invokes a callback action on changes.
+            </summary>
+        </member>
+        <member name="T:Wyam.Commands.Command">
+            <summary>
+            Represents a single command line command, or a set of options and parameters.
+            </summary>
+        </member>
+        <member name="M:Wyam.Commands.Command.DirectoryPathFromArg(System.String)">
+            <summary>
+            This helper method is needed due to the escape behavior of command line argument parsing and the
+            way PowerShell handles tab completion of directory paths. See https://github.com/Wyamio/Wyam/issues/472#issuecomment-286884482
+            </summary>
+            <param name="arg">The command line argument containing the path</param>
+            <returns>A <see cref="T:Wyam.Common.IO.DirectoryPath"/></returns>
+        </member>
+        <member name="M:Wyam.Commands.CommandParser.Parse(System.String[],Wyam.Configuration.Preprocessing.Preprocessor,System.Boolean@)">
+            <summary>
+            Parses the command line arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+            <param name="preprocessor">The preprocessor.</param>
+            <param name="hasErrors">If set to <c>true</c>, the command line had errors.</param>
+            <returns>The resulting command.</returns>
+        </member>
+        <member name="T:Wyam.MetadataParser">
+            <summary>
+            Parses INI-like args in key=value format.
+            </summary>
+        </member>
+        <member name="T:Wyam.Program">
+            <summary>
+            The primary console entry point.
+            </summary>
+        </member>
+        <member name="T:Wyam.StandardInputReader">
+            <summary>
+            Reads standard input (stdin). We have to be very careful because the calling process might have
+            opened stdin and just left it open, in which case it would register as redirected but the
+            stream won't ever return because it's just waiting for input.
+            </summary>
+        </member>
+    </members>
+</doc>

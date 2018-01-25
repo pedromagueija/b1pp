@@ -45,13 +45,13 @@ namespace B1PP.Connections
 
         /// <summary>
         /// Establishes the connection to SAP Business One.<para/>
-        /// Note that without connection both <see cref="Application"/> and <see cref="Company"/> are <see langword="null" />.
+        /// Note that without connection both <see cref="Application"/> and <see cref="Company"/> are <c>null</c>.
         /// </summary>
         void Connect();
 
         /// <summary>
         /// Disconnects from SAP Business One.<para/>
-        /// Note that without after disconnecting both <see cref="Application"/> and <see cref="Company"/> are <see langword="null" />.
+        /// Note that without after disconnecting both <see cref="Application"/> and <see cref="Company"/> are <c>null</c>.
         /// </summary>
         void Disconnect();
     }

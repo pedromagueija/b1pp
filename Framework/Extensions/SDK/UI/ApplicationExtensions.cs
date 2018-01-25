@@ -62,18 +62,15 @@ namespace B1PP.Extensions.SDK.UI
         /// </returns>
         public static string GetActiveFormId(this Application application)
         {
-            Form activeForm;
-
             try
             {
-                activeForm = application.Forms.ActiveForm;
+                var activeForm = application.Forms.ActiveForm;
+                return activeForm?.UniqueID ?? string.Empty;
             }
             catch (COMException)
             {
                 return string.Empty;
             }
-
-            return activeForm?.UniqueID ?? string.Empty;
         }
 
         /// <summary>

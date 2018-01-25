@@ -45,12 +45,7 @@ namespace B1PP.Database
                     }
                 }
             }
-            catch (Exception e) when (
-                e is FileLoadException ||
-                e is FileNotFoundException ||
-                e is BadImageFormatException ||
-                e is NotImplementedException
-            )
+            catch (Exception e)
             {
                 var message =
                     $@"An error as occurred when attempting to read '{resourceName}'.";
