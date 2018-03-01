@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\B1PP.Framework.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>Framework.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\B1PP.Framework.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>Framework.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
@@ -40,8 +42,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\sap\SAPBusinessOneSDK.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
@@ -121,11 +127,13 @@
     <Compile Include="Data\QueryHelper.cs" />
     <Compile Include="Data\StringValueArg.cs" />
     <Compile Include="Data\XmlRecordsetReader.cs" />
+    <Compile Include="Ensure.cs" />
     <Compile Include="Extensions\Common\DoubleExtensions.cs" />
     <Compile Include="Extensions\Common\IntegerExtensions.cs" />
     <Compile Include="Extensions\Common\TypeExtensions.cs" />
     <Compile Include="Extensions\SDK\DI\CompanyExtensions.cs" />
     <Compile Include="Extensions\SDK\UI\ApplicationExtensions.cs" />
+    <Compile Include="Extensions\SDK\UI\DataTableCell.cs" />
     <Compile Include="Extensions\SDK\UI\DataTableExtensions.cs" />
     <Compile Include="Extensions\SDK\UI\DbDataSourceExtensions.cs" />
     <Compile Include="Extensions\SDK\UI\DbDataSourcesExtensions.cs" />
@@ -198,15 +206,23 @@
     <Compile Include="Forms\StatusBarMessage.cs" />
     <Compile Include="Forms\SystemFormLoader.cs" />
     <Compile Include="Forms\UserFormLoader.cs" />
+    <Compile Include="GlobalConstants.cs" />
+    <Compile Include="Container\IContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Container\SimpleInjectorContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Framework.csproj.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Framework.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.6.5.0.3766\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.6.5.0.3766\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.6.5.0.3766\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

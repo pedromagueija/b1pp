@@ -52,7 +52,7 @@ namespace B1PP.Extensions.SDK.UI
                 dataTable.Rows.Add();
             }
 
-            var lastRowIndex = rowIndex ?? dataTable.Rows.Count - 1;
+            int lastRowIndex = rowIndex ?? dataTable.Rows.Count - 1;
             PopulateRow(dataTable, value, lastRowIndex);
         }
 
@@ -65,7 +65,7 @@ namespace B1PP.Extensions.SDK.UI
         public static void AppendValue<T>(this DataTable dataTable, T value)
         {
             dataTable.Rows.Add();
-            var lastRowIndex = dataTable.Rows.Count - 1;
+            int lastRowIndex = dataTable.Rows.Count - 1;
 
             PopulateRow(dataTable, value, lastRowIndex);
         }
@@ -87,11 +87,14 @@ namespace B1PP.Extensions.SDK.UI
 
             var properties = GetPropertiesMatchingColumns<T>(dataTable);
             var currentData = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_All));
-            var row = startFromRowIndex + 1;
+            int rowIndex = startFromRowIndex + 1;
             var rowsToAdd = CreateDataCells(values, properties);
 
-            currentData.XPathSelectElements($"//Row[position() = {row}]").First().AddAfterSelf(rowsToAdd);
-            currentData.XPathSelectElements($"//Row[position() = {row}]").Remove();
+            var row = currentData.XPathSelectElements($"//Row[position() = {rowIndex}]").ToList();
+
+            row.First().AddAfterSelf(rowsToAdd);
+            row.Remove();
+            
             dataTable.LoadSerializedXML(BoDataTableXmlSelect.dxs_All, currentData.ToString());
         }
 
@@ -232,7 +235,11 @@ namespace B1PP.Extensions.SDK.UI
             var dataCells = CreateDataCells(values, properties);
 
             var xdata = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_DataOnly));
-            xdata.XPathSelectElement("//Rows").ReplaceAll(dataCells);
+            var rows = xdata.XPathSelectElement("//Rows");
+            if (rows == null)
+                return;
+
+            rows.ReplaceAll(dataCells);
             dataTable.LoadSerializedXML(BoDataTableXmlSelect.dxs_DataOnly, xdata.ToString());
         }
 
@@ -364,10 +371,9 @@ namespace B1PP.Extensions.SDK.UI
         {
             var propertyValue = property.GetValue(value);
 
-            if (propertyValue is DateTime)
+            if (propertyValue is DateTime dateTime)
             {
-                var dateTime = (DateTime) propertyValue;
-                return dateTime.ToString(@"yyyyMMdd");
+                return dateTime.ToString(GlobalConstants.AnsiSqlDateTimeFormat);
             }
 
             return Convert.ToString(propertyValue, CultureInfo.InvariantCulture);

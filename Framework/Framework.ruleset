@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="SonarQube - B1++ Sonar way" ToolsVersion="15.0">
+  <Include Path="..\sonarqube\b1ppcsharp.ruleset" Action="Default" />
+</RuleSet>

@@ -29,8 +29,8 @@ namespace B1PP.Data
             {
                 if (data.ContainsKey(column.Name))
                 {
-                    var message = $"The column '{column.Name}' appears twice or more times. " +
-                                     $"Please use different aliases for each column.";
+                    string message = $@"The column '{column.Name}' appears twice or more times. " +
+                                      @"Please use different aliases for each column.";
                     throw new ArgumentException(message);
                 }
 
@@ -50,7 +50,7 @@ namespace B1PP.Data
                         data.Add(column.Name, reader.GetDouble(column.Name));
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException($@"Unknown column type: {column.Type}");
                 }
             }
 

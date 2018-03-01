@@ -58,10 +58,10 @@ namespace Tests.Feature.Data
                 CAST('20120101' AS DateTime) AS ""DateTime""
             FROM OCRD");
 
-            var many = query.SelectMany();
+            var many = query.SelectMany().ToList();
 
             Assert.NotNull(many);
-            Assert.AreEqual(10, many.Count());
+            Assert.AreEqual(10, many.Count);
 
             var first = many.First();
 
