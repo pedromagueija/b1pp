@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.ItemEvents
 {
     using System;
@@ -25,7 +26,7 @@ namespace B1PP.Forms.Events.ItemEvents
         public List<BoFormMode> Modes => new List<BoFormMode>(modes);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FormModesAttribute"/> class.
+        /// Initializes a new instance of the <see cref="FormModesAttribute" /> class.
         /// </summary>
         /// <param name="modes">The modes.</param>
         /// <exception cref="ArgumentNullException">
@@ -34,7 +35,9 @@ namespace B1PP.Forms.Events.ItemEvents
         public FormModesAttribute(params BoFormMode[] modes)
         {
             if (modes == null)
+            {
                 throw new ArgumentNullException(nameof(modes));
+            }
 
             this.modes = new List<BoFormMode>(modes);
         }
@@ -42,15 +45,15 @@ namespace B1PP.Forms.Events.ItemEvents
         public FormModesAttribute()
         {
             modes = new List<BoFormMode>
-                        {
-                            BoFormMode.fm_ADD_MODE,
-                            BoFormMode.fm_EDIT_MODE,
-                            BoFormMode.fm_FIND_MODE,
-                            BoFormMode.fm_OK_MODE,
-                            BoFormMode.fm_PRINT_MODE,
-                            BoFormMode.fm_UPDATE_MODE,
-                            BoFormMode.fm_VIEW_MODE
-                        };
+            {
+                BoFormMode.fm_ADD_MODE,
+                BoFormMode.fm_EDIT_MODE,
+                BoFormMode.fm_FIND_MODE,
+                BoFormMode.fm_OK_MODE,
+                BoFormMode.fm_PRINT_MODE,
+                BoFormMode.fm_UPDATE_MODE,
+                BoFormMode.fm_VIEW_MODE
+            };
         }
     }
 }

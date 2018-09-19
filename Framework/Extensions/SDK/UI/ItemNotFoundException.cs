@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.SDK.UI
 {
     using System;
@@ -15,14 +16,14 @@ namespace B1PP.Extensions.SDK.UI
     public class ItemNotFoundException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemNotFoundException"/> class.
+        /// Initializes a new instance of the <see cref="ItemNotFoundException" /> class.
         /// </summary>
         public ItemNotFoundException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemNotFoundException"/> class.
+        /// Initializes a new instance of the <see cref="ItemNotFoundException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         public ItemNotFoundException(string message) : base(message)
@@ -30,7 +31,7 @@ namespace B1PP.Extensions.SDK.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemNotFoundException"/> class.
+        /// Initializes a new instance of the <see cref="ItemNotFoundException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner exception.</param>
@@ -39,10 +40,16 @@ namespace B1PP.Extensions.SDK.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemNotFoundException"/> class.
+        /// Initializes a new instance of the <see cref="ItemNotFoundException" /> class.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        /// <param name="info">
+        /// The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object
+        /// data about the exception being thrown.
+        /// </param>
+        /// <param name="context">
+        /// The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+        /// information about the source or destination.
+        /// </param>
         protected ItemNotFoundException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)

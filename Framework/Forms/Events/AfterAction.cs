@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events
 {
     using System;
@@ -9,12 +10,6 @@ namespace B1PP.Forms.Events
 
     internal class AfterAction<T>
     {
-        private AfterAction(ISignature signature, Action<T> handler)
-        {
-            Handler = handler;
-            Signature = signature;
-        }
-
         public string Name
         {
             get
@@ -27,14 +22,20 @@ namespace B1PP.Forms.Events
 
         private ISignature Signature { get; }
 
-        public static AfterAction<T> CreateNew(ISignature signature, MethodInfo method, object instance)
+        private AfterAction(ISignature signature, Action<T> handler)
         {
-            return new AfterAction<T>(signature, method.CreateAfterEventDelegate<T>(instance));
+            Handler = handler;
+            Signature = signature;
         }
 
         public bool CanHandle(T key)
         {
             return Signature.CanHandle(key);
+        }
+
+        public static AfterAction<T> CreateNew(ISignature signature, MethodInfo method, object instance)
+        {
+            return new AfterAction<T>(signature, method.CreateAfterEventDelegate<T>(instance));
         }
 
         public void Handle(T args)

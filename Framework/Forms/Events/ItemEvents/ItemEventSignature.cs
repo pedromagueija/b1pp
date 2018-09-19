@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.ItemEvents
 {
     using System.Collections.Generic;
@@ -33,6 +34,17 @@ namespace B1PP.Forms.Events.ItemEvents
             return CanHandle(itemEventArgs);
         }
 
+        public bool IsSame(ISignature other)
+        {
+            var signature = other as ItemEventSignature;
+            if (signature == null)
+            {
+                return false;
+            }
+
+            return IsSame(signature);
+        }
+
         public static ItemEventSignature Create(MethodInfo method)
         {
             var itemEvent = method.GetAttribute<ItemEventHandlerAttribute>();
@@ -49,36 +61,29 @@ namespace B1PP.Forms.Events.ItemEvents
             };
         }
 
-        public bool IsSame(ISignature other)
-        {
-            var signature = other as ItemEventSignature;
-            if (signature == null)
-            {
-                return false;
-            }
-
-            return IsSame(signature);
-        }
-
         private bool CanHandle(ItemEvent arg)
         {
             if (BeforeAction != arg.BeforeAction)
             {
                 return false;
             }
+
             if (EventType != arg.EventType)
             {
                 return false;
             }
+
             if (!ItemId.Equals(arg.ItemUID))
             {
                 return false;
             }
-            if ((Modes.Count > 0) && !Modes.Contains((BoFormMode) arg.FormMode))
+
+            if (Modes.Count > 0 && !Modes.Contains((BoFormMode) arg.FormMode))
             {
                 return false;
             }
-            if ((ColumnIds.Count > 0) && !ColumnIds.Contains(arg.ColUID))
+
+            if (ColumnIds.Count > 0 && !ColumnIds.Contains(arg.ColUID))
             {
                 return false;
             }
@@ -92,19 +97,23 @@ namespace B1PP.Forms.Events.ItemEvents
             {
                 return false;
             }
+
             if (EventType != other.EventType)
             {
                 return false;
             }
+
             if (!ItemId.Equals(other.ItemId))
             {
                 return false;
             }
-            if ((Modes.Count > 0) && !Modes.Intersect(other.Modes).Any())
+
+            if (Modes.Count > 0 && !Modes.Intersect(other.Modes).Any())
             {
                 return false;
             }
-            if ((ColumnIds.Count > 0) && !ColumnIds.Intersect(other.ColumnIds).Any())
+
+            if (ColumnIds.Count > 0 && !ColumnIds.Intersect(other.ColumnIds).Any())
             {
                 return false;
             }

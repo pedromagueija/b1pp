@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System.Collections.Generic;
@@ -21,10 +22,9 @@ namespace B1PP.Data
             }
         }
 
-        public MultipleIntValuesArg(string placeHolder, IEnumerable<int> values)
+        public MultipleIntValuesArg(string placeHolder, IEnumerable<int> values) : base(placeHolder)
         {
             this.values = values;
-            PlaceHolder = placeHolder;
         }
     }
 }

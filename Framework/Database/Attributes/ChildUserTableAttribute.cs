@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database.Attributes
 {
     using System;
@@ -38,7 +39,7 @@ namespace B1PP.Database.Attributes
         public string LogTableName { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChildUserTableAttribute"/> class.
+        /// Initializes a new instance of the <see cref="ChildUserTableAttribute" /> class.
         /// </summary>
         /// <param name="tableName">Name of the child table.</param>
         /// <param name="objectName">Name of the child object.</param>

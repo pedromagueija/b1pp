@@ -2,18 +2,25 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System;
     using System.Collections.Generic;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Allows reading of a recordset object contents.
     /// </summary>
     public interface IRecordsetReader
     {
+        /// <summary>
+        /// Returns the columns.
+        /// </summary>
+        /// <value>
+        /// The columns.
+        /// </value>
+        IEnumerable<IColumn> Columns { get; }
+
         /// <summary>
         /// Gets a boolean value from the reader.
         /// </summary>
@@ -38,7 +45,7 @@ namespace B1PP.Data
         /// <exception cref="FormatException">
         /// Triggered when the value contained in <paramref name="columnName" /> is empty or not a date.
         /// </exception>
-        DateTime? GetDateTime([NotNull] string columnName);
+        DateTime? GetDateTime(string columnName);
 
         /// <summary>
         /// Gets a double from the reader.
@@ -60,7 +67,7 @@ namespace B1PP.Data
         /// The value contained in <paramref name="columnName" /> does not represent a number in a
         /// valid format.
         /// </exception>
-        double? GetDouble([NotNull] string columnName);
+        double? GetDouble(string columnName);
 
         /// <summary>
         /// Gets an integer from the reader.
@@ -81,7 +88,7 @@ namespace B1PP.Data
         /// <exception cref="ArgumentException">
         /// Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
         /// </exception>
-        int? GetInt([NotNull] string columnName);
+        int? GetInt(string columnName);
 
         /// <summary>
         /// Gets the value as a string.
@@ -95,8 +102,7 @@ namespace B1PP.Data
         /// <exception cref="ArgumentException">
         /// Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
         /// </exception>
-        [NotNull]
-        string GetString([NotNull] string columnName);
+        string GetString(string columnName);
 
         /// <summary>
         /// Moves to the next record.
@@ -108,13 +114,5 @@ namespace B1PP.Data
         /// The collection was modified after the enumerator was created.
         /// </exception>
         bool MoveNext();
-
-        /// <summary>
-        /// Returns the columns.
-        /// </summary>
-        /// <value>
-        /// The columns.
-        /// </value>
-        IEnumerable<IColumn> Columns { get; }
     }
 }

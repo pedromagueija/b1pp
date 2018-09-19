@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -27,8 +28,6 @@ namespace B1PP.Database
             this.field = field;
         }
 
-        public event EventHandler<UserFieldErrorEventArgs> OnError = delegate { };
-
         public void Execute()
         {
             var result = field.Add();
@@ -47,5 +46,7 @@ namespace B1PP.Database
 
             Marshal.ReleaseComObject(field);
         }
+
+        public event EventHandler<UserFieldErrorEventArgs> OnError = delegate { };
     }
 }

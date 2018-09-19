@@ -2,7 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
-// ReSharper disable InconsistentNaming
+
 namespace B1PP.Forms
 {
     /// <summary>

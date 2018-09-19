@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.SDK.UI
 {
     using System;
@@ -9,7 +10,7 @@ namespace B1PP.Extensions.SDK.UI
     using SAPbouiCOM;
 
     /// <summary>
-    /// Helpful methods for the <see cref="SAPbouiCOM.Matrix"/> object.
+    /// Helpful methods for the <see cref="SAPbouiCOM.Matrix" /> object.
     /// </summary>
     public static class MatrixExtensions
     {
@@ -23,7 +24,7 @@ namespace B1PP.Extensions.SDK.UI
         /// The column index.
         /// </returns>
         /// <exception cref="System.ArgumentException">
-        /// Throw when <paramref name="columnId"/> is empty, null or doesn't exist in the matrix.
+        /// Throw when <paramref name="columnId" /> is empty, null or doesn't exist in the matrix.
         /// </exception>
         public static int GetColumnIndex(this Matrix matrix, string columnId)
         {

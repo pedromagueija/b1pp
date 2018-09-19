@@ -16,14 +16,12 @@ namespace B1PP.Extensions.SDK.UI
 
     using Common;
 
-    using JetBrains.Annotations;
-
     using SAPbouiCOM;
 
     using Types;
 
     /// <summary>
-    /// Common and helpful for <see cref="DataTable"/>.
+    /// Common and helpful functions for <see cref="DataTable" />.
     /// </summary>
     public static class DataTableExtensions
     {
@@ -94,7 +92,7 @@ namespace B1PP.Extensions.SDK.UI
 
             row.First().AddAfterSelf(rowsToAdd);
             row.Remove();
-            
+
             dataTable.LoadSerializedXML(BoDataTableXmlSelect.dxs_All, currentData.ToString());
         }
 
@@ -237,10 +235,13 @@ namespace B1PP.Extensions.SDK.UI
             var xdata = XDocument.Parse(dataTable.SerializeAsXML(BoDataTableXmlSelect.dxs_DataOnly));
             var rows = xdata.XPathSelectElement("//Rows");
             if (rows == null)
+            {
                 return;
+            }
 
             rows.ReplaceAll(dataCells);
-            dataTable.LoadSerializedXML(BoDataTableXmlSelect.dxs_DataOnly, xdata.ToString());
+            string xml = $"<?xml version=\"1.0\" encoding=\"UTF-16\" ?>{xdata.ToString(SaveOptions.DisableFormatting)}";
+            dataTable.LoadSerializedXML(BoDataTableXmlSelect.dxs_DataOnly, xml);
         }
 
         /// <summary>
@@ -249,7 +250,6 @@ namespace B1PP.Extensions.SDK.UI
         /// <param name="textValue">The text value.</param>
         /// <param name="type">The type.</param>
         /// <returns></returns>
-        [CanBeNull]
         private static object ChangeType(string textValue, Type type)
         {
             if (type == typeof(Id))
@@ -317,7 +317,7 @@ namespace B1PP.Extensions.SDK.UI
         private static IEnumerable<XElement> CreateDataCells<T>(
             IEnumerable<T> values,
             IEnumerable<PropertyInfo> properties)
-        {
+        {            
             return from value in values
                 select new XElement(@"Row",
                     new XElement(@"Cells",
@@ -346,6 +346,7 @@ namespace B1PP.Extensions.SDK.UI
 
                 property.SetValue(instance, value);
             }
+
             return instance;
         }
 
@@ -373,7 +374,7 @@ namespace B1PP.Extensions.SDK.UI
 
             if (propertyValue is DateTime dateTime)
             {
-                return dateTime.ToString(GlobalConstants.AnsiSqlDateTimeFormat);
+                return dateTime.ToString("yyyyMMdd");
             }
 
             return Convert.ToString(propertyValue, CultureInfo.InvariantCulture);

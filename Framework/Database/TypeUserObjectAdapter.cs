@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -78,26 +79,12 @@ namespace B1PP.Database
 
             // setting the child table log when the object doesn't support the log service 
             // results in an error in transaction when updating the object
-            if(userObject.CanLog == BoYesNoEnum.tYES)
+            if (userObject.CanLog == BoYesNoEnum.tYES)
+            {
                 child.LogTableName = childTableAttribute.LogTableName;
+            }
 
             child.Add();
-        }
-
-        private void SetFindColumns(PropertyInfo property)
-        {
-            if (!property.CanWrite)
-            {
-                return;
-            }
-            
-            var excludeColumnAttr = property.GetCustomAttribute<ExcludeFindColumnAttribute>();
-            if (excludeColumnAttr == null)
-            {
-                SetFindColumn(property);
-
-                userObject.FindColumns.Add();
-            }
         }
 
         private void SetFindColumn(PropertyInfo property)
@@ -121,6 +108,22 @@ namespace B1PP.Database
                     ? property.Name
                     : $"U_{property.Name}";
                 findColumns.ColumnDescription = SplitByCaps(property.Name);
+            }
+        }
+
+        private void SetFindColumns(PropertyInfo property)
+        {
+            if (!property.CanWrite)
+            {
+                return;
+            }
+
+            var excludeColumnAttr = property.GetCustomAttribute<ExcludeFindColumnAttribute>();
+            if (excludeColumnAttr == null)
+            {
+                SetFindColumn(property);
+
+                userObject.FindColumns.Add();
             }
         }
 

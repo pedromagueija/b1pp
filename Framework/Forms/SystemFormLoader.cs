@@ -2,10 +2,10 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms
 {
     using System.Collections.Generic;
-    using System.Reflection;
     using System.Xml.Linq;
     using System.Xml.XPath;
 

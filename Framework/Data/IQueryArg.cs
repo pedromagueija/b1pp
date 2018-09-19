@@ -2,11 +2,11 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     /// <summary>
     /// Represents a query parameter composed of a placeholder,
-    /// <para />
     /// which will be replaced by the value on the query statement.
     /// </summary>
     public interface IQueryArg

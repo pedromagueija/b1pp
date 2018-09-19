@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -21,7 +22,7 @@ namespace B1PP.Database
         private readonly string tableName;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyUserFieldAdapter"/> class.
+        /// Initializes a new instance of the <see cref="PropertyUserFieldAdapter" /> class.
         /// </summary>
         /// <param name="tableName">Name of the table.</param>
         /// <param name="property">The property.</param>
@@ -37,14 +38,15 @@ namespace B1PP.Database
         /// Executes this instance.
         /// </summary>
         /// <exception cref="System.InvalidOperationException">
-        /// Thrown when the <see cref="UserFieldAttribute"/> is not present in the given property.
+        /// Thrown when the <see cref="UserFieldAttribute" /> is not present in the given property.
         /// </exception>
         public void Execute()
         {
             var userFieldTypeAttribute = property.GetCustomAttribute<UserFieldAttribute>();
             if (userFieldTypeAttribute == null)
             {
-                throw new InvalidOperationException($"UserFieldAttribute is missing from property {property.DeclaringType}.{property.Name}.");
+                throw new InvalidOperationException(
+                    $"UserFieldAttribute is missing from property {property.DeclaringType}.{property.Name}.");
             }
 
             field.TableName = tableName;
@@ -76,7 +78,8 @@ namespace B1PP.Database
 
         private FieldNameAttribute GetUserFieldNameAttribute()
         {
-            return property.GetCustomAttribute<FieldNameAttribute>() ?? new FieldNameAttribute(property.Name, Utilities.SplitByCaps(property.Name));
+            return property.GetCustomAttribute<FieldNameAttribute>() ??
+                   new FieldNameAttribute(property.Name, Utilities.SplitByCaps(property.Name));
         }
     }
 }

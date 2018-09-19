@@ -57,35 +57,39 @@ namespace B1PP.Forms.Events.MenuEvents
 
         public event EventHandler<HandlerAddedEventArgs> HandlerAdded = delegate { };
 
+        private void AddEventHandler(IMainMenuInstance mainMenu, MethodInfo method)
+        {
+            var attribute = method.GetAttribute<MenuEventHandlerAttribute>();
+            try
+            {
+                if (attribute.Before)
+                {
+                    before.Add(attribute.MenuId, method.CreateBeforeEventDelegate<MenuEvent>(mainMenu));
+                }
+                else
+                {
+                    after.Add(attribute.MenuId, method.CreateAfterEventDelegate<MenuEvent>(mainMenu));
+                }
+            }
+            catch (ArgumentException e)
+            {
+                var exception =
+                    new EventHandlerAlreadyExistsException($"A menu event handler for {attribute.MenuId} already exists. " +
+                                                           $"Duplicate method {method.Name}.", e);
+                throw exception;
+            }
+
+
+            HandlerAdded(this, new HandlerAddedEventArgs(BoEventTypes.et_MENU_CLICK, @"ALL_FORMS"));
+        }
+
         private void AddEventHandlers(IMainMenuInstance mainMenu)
         {
             var handlerMethods = ClassHelper.FindAnnotatedMethods<MenuEventHandlerAttribute>(mainMenu);
 
             foreach (var method in handlerMethods)
             {
-                var attribute = method.GetAttribute<MenuEventHandlerAttribute>();
-                try
-                {
-                    if (attribute.Before)
-                    {
-                        before.Add(attribute.MenuId, method.CreateBeforeEventDelegate<MenuEvent>(mainMenu));
-                    }
-                    else
-                    {
-                        after.Add(attribute.MenuId, method.CreateAfterEventDelegate<MenuEvent>(mainMenu));
-                    }
-                }
-                catch (ArgumentException e)
-                {
-                    var exception =
-                        new EventHandlerAlreadyExistsException(
-                            $"A menu event handler for {attribute.MenuId} already exists. Duplicate method {method.Name}.",
-                            e);
-                    throw exception;
-                }
-
-
-                HandlerAdded(this, new HandlerAddedEventArgs(BoEventTypes.et_MENU_CLICK, @"ALL_FORMS"));
+                AddEventHandler(mainMenu, method);
             }
         }
     }

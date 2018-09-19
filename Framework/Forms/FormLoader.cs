@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms
 {
     using System;
@@ -32,6 +33,7 @@ namespace B1PP.Forms
             {
                 preProcessor.Process(formXml);
             }
+
             return formXml;
         }
 

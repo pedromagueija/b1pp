@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.FormDataEvents
 {
     using System;
@@ -11,23 +12,23 @@ namespace B1PP.Forms.Events.FormDataEvents
 
     internal class B1FormDataEventDispatcher
     {
-        private Dictionary<string, IFormDataEventListener> listeners =
-            new Dictionary<string, IFormDataEventListener>();
+        private Dictionary<string, IFormDataEventHandler> handlers =
+            new Dictionary<string, IFormDataEventHandler>();
 
         private Application Application { get; set; }
 
-        public void AddListener(FormDataEventListener listener)
+        public void AddListener(FormDataEventHandler handler)
         {
-            listeners.Add(listener.Id, listener);
+            handlers.Add(handler.Id, handler);
         }
 
-        public event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
+        public event EventHandler<ErrorEventArgs> OnEventHandlerError = delegate { };
 
-        public void RemoveListener(FormDataEventListener listener)
+        public void RemoveListener(FormDataEventHandler handler)
         {
-            if (listeners.ContainsKey(listener.Id))
+            if (handlers.ContainsKey(handler.Id))
             {
-                listeners.Remove(listener.Id);
+                handlers.Remove(handler.Id);
             }
         }
 
@@ -62,8 +63,43 @@ namespace B1PP.Forms.Events.FormDataEvents
             {
                 Application.FormDataEvent -= OnFormDataEvent;
                 Application = null;
-                listeners = new Dictionary<string, IFormDataEventListener>();
+                handlers = new Dictionary<string, IFormDataEventHandler>();
             }
+        }
+
+        /// <summary>
+        /// Returns the handler id that can process the event. If no handler is able to handle the event, <langword>null</langword>
+        /// is returned.
+        /// </summary>
+        /// <param name="e">
+        /// Event information to use.
+        /// </param>
+        /// <returns>
+        /// The handler id, or null when none is present.
+        /// </returns>
+        private string GetHandlerId(BusinessObjectInfo e)
+        {
+            // any event handler on a form is given priority, if none is present, 
+            // any event handler of the form type is given priority, if none is present,
+            // finally any event handler of the type of event is given priority.
+            // When none is present null is returned.
+
+            if (handlers.ContainsKey(e.FormUID))
+            {
+                return e.FormUID;
+            }
+
+            if (handlers.ContainsKey(e.FormTypeEx))
+            {
+                return e.FormTypeEx;
+            }
+
+            if (handlers.ContainsKey(e.EventType.ToString()))
+            {
+                return e.EventType.ToString();
+            }
+
+            return null;
         }
 
         private void OnFormDataEvent(ref BusinessObjectInfo e, out bool bubbleEvent)
@@ -72,29 +108,16 @@ namespace B1PP.Forms.Events.FormDataEvents
 
             try
             {
-                var formUid = e.FormUID;
-                if (listeners.ContainsKey(formUid))
-                {
-                    listeners[formUid].OnFormDataEvent(ref e, out bubbleEvent);
-                    return;
-                }
+                string handlerId = GetHandlerId(e);
 
-                var formType = e.FormTypeEx;
-                if (listeners.ContainsKey(formType))
+                if (handlerId != null)
                 {
-                    listeners[formType].OnFormDataEvent(ref e, out bubbleEvent);
-                    return;
-                }
-
-                var eventType = e.EventType.ToString();
-                if (listeners.ContainsKey(eventType))
-                {
-                    listeners[eventType].OnFormDataEvent(ref e, out bubbleEvent);
+                    handlers[handlerId].OnFormDataEvent(ref e, out bubbleEvent);
                 }
             }
             catch (Exception exception)
             {
-                EventHandlerError(null, new ErrorEventArgs(exception));
+                OnEventHandlerError(this, new ErrorEventArgs(exception));
             }
         }
     }

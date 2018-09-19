@@ -2,11 +2,12 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     internal class FileContents
     {
-        public int FileSize { get; private set; }
+        public int FileSize { get; }
         public byte[] Contents { get; }
 
         public FileContents(int fileSize, byte[] contents)

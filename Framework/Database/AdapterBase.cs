@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -15,8 +16,34 @@ namespace B1PP.Database
     /// </summary>
     internal class AdapterBase
     {
+        protected void PopulateCollection<T>(IEnumerable<XElement> elements, object instance)
+        {
+            foreach (var element in elements)
+            {
+                var attributes = element.Attributes();
+                PopulateProperties<T>(attributes, instance);
+
+                typeof(T).GetMethod("Add").Invoke(instance, new object[] { });
+            }
+        }
+
         /// <summary>
-        /// Extracts the value from the <paramref name="attribute"/> and<para/>
+        /// Populates the properties.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="attributes">The attributes.</param>
+        /// <param name="instance">The instance.</param>
+        protected void PopulateProperties<T>(IEnumerable<XAttribute> attributes, object instance)
+        {
+            foreach (var attribute in attributes)
+            {
+                PopulateProperty<T>(instance, attribute);
+            }
+        }
+
+        /// <summary>
+        /// Extracts the value from the <paramref name="attribute" /> and
+        /// <para />
         /// performs necessary conversions, e.g.: to B1 enumerations, when required.
         /// </summary>
         /// <param name="attribute">The attribute.</param>
@@ -42,49 +69,25 @@ namespace B1PP.Database
             return value;
         }
 
-        /// <summary>
-        /// Populates the properties.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="attributes">The attributes.</param>
-        /// <param name="instance">The instance.</param>
-        protected void PopulateProperties<T>(IEnumerable<XAttribute> attributes, object instance)
-        {
-            foreach (var attribute in attributes)
-            {
-                PopulateProperty<T>(instance, attribute);
-            }
-        }
-
         private void PopulateProperty<T>(object instance, XAttribute attribute)
         {
             var propertyName = attribute.Name.LocalName ?? string.Empty;
 
-            try { 
+            try
+            {
                 var property = typeof(T).GetProperty(propertyName);
                 var value = GetPropertyValue(attribute, property.PropertyType);
 
                 property.SetValue(instance, value);
             }
             catch (Exception e) when (
-               e is ArgumentNullException || 
-               e is AmbiguousMatchException || 
-               e is TargetException || 
-               e is MethodAccessException || 
-               e is TargetInvocationException)
+                e is ArgumentNullException ||
+                e is AmbiguousMatchException ||
+                e is TargetException ||
+                e is MethodAccessException ||
+                e is TargetInvocationException)
             {
                 throw new SetPropertyException($"Couldn't set property '{propertyName}'.", e);
-            }
-        }
-
-        protected void PopulateCollection<T>(IEnumerable<XElement> elements, object instance)
-        {
-            foreach (var element in elements)
-            {
-                var attributes = element.Attributes();
-                PopulateProperties<T>(attributes, instance);
-
-                typeof(T).GetMethod("Add").Invoke(instance, new object[]{});
             }
         }
     }

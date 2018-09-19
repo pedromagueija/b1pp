@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database.Attributes
 {
     using System;
@@ -12,7 +13,6 @@ namespace B1PP.Database.Attributes
     /// Activates the user defined object service "Approve".
     /// </summary>
     /// <seealso cref="System.Attribute" />
-    
     [AttributeUsage(AttributeTargets.Class)]
     public class ApproveServiceAttribute : Attribute
     {
@@ -25,7 +25,7 @@ namespace B1PP.Database.Attributes
         public string TemplateId { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ApproveServiceAttribute"/> class.
+        /// Initializes a new instance of the <see cref="ApproveServiceAttribute" /> class.
         /// </summary>
         /// <param name="templateId">The workflow manager template identifier.</param>
         public ApproveServiceAttribute(string templateId)

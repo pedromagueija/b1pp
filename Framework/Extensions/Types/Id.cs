@@ -2,13 +2,12 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.Types
 {
     using System;
     using System.ComponentModel;
     using System.Globalization;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Represents an integer id of a record in SAP Business One.
@@ -29,7 +28,7 @@ namespace B1PP.Extensions.Types
         public int Value { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Id"/> class.
+        /// Initializes a new instance of the <see cref="Id" /> class.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <exception cref="System.ArgumentException">
@@ -49,7 +48,7 @@ namespace B1PP.Extensions.Types
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Id"/> class.
+        /// Initializes a new instance of the <see cref="Id" /> class.
         /// </summary>
         /// <param name="value">The value.</param>
         public Id(int value)
@@ -58,7 +57,7 @@ namespace B1PP.Extensions.Types
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Id"/>.
+        /// Performs an implicit conversion from <see cref="System.String" /> to <see cref="Id" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>
@@ -70,7 +69,7 @@ namespace B1PP.Extensions.Types
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.Int32"/> to <see cref="Id"/>.
+        /// Performs an implicit conversion from <see cref="System.Int32" /> to <see cref="Id" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>
@@ -82,23 +81,24 @@ namespace B1PP.Extensions.Types
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Id"/> to <see cref="System.String"/>.
+        /// Performs an implicit conversion from <see cref="Id" /> to <see cref="System.String" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        [NotNull]
-        public static implicit operator string([CanBeNull] Id id)
+        public static implicit operator string(Id id)
         {
             if (id == null)
+            {
                 return string.Empty;
+            }
 
             return id.Value.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Id"/> to <see cref="System.Int32"/>.
+        /// Performs an implicit conversion from <see cref="Id" /> to <see cref="System.Int32" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>

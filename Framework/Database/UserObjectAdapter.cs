@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -14,16 +15,16 @@ namespace B1PP.Database
     /// </summary>
     internal class UserObjectAdapter : AdapterBase
     {
-        private readonly IUserObjectsMD userObject;
         private readonly XElement root;
+        private readonly IUserObjectsMD userObject;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserObjectAdapter"/> class.
+        /// Initializes a new instance of the <see cref="UserObjectAdapter" /> class.
         /// </summary>
         /// <param name="userObject">The user object.</param>
         /// <param name="root">The XML user object.</param>
         /// <exception cref="System.ArgumentNullException">
-        /// Thrown when <paramref name="userObject"/> or <paramref name="root"/> are null.
+        /// Thrown when <paramref name="userObject" /> or <paramref name="root" /> are null.
         /// </exception>
         public UserObjectAdapter(IUserObjectsMD userObject, XElement root)
         {

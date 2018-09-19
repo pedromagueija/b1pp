@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.LayoutKeyEvents
 {
     using System;
@@ -27,11 +28,13 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
             {
                 return false;
             }
+
             if (ReferenceEquals(this, other))
             {
                 return true;
             }
-            return base.Equals(other) && (Before == other.Before);
+
+            return base.Equals(other) && Before == other.Before;
         }
 
         /// <summary>Returns a value that indicates whether this instance is equal to a specified object.</summary>
@@ -43,14 +46,17 @@ namespace B1PP.Forms.Events.LayoutKeyEvents
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;
             }
+
             if (obj.GetType() != GetType())
             {
                 return false;
             }
+
             return Equals((LayoutKeyEventHandlerAttribute) obj);
         }
 

@@ -2,17 +2,10 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events
 {
     using System.Collections.Generic;
-
-    using ItemEvents;
-
-    using LayoutKeyEvents;
-
-    using MenuEvents;
-
-    using RightClickEvents;
 
     /// <summary>
     /// Scans the given object for event handlers and subscribes them with the appropriate listeners.
@@ -22,30 +15,31 @@ namespace B1PP.Forms.Events
         private readonly IList<IEventListener> listeners;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EventListener"/> class.
+        /// Initializes a new instance of the <see cref="EventListener" /> class.
         /// </summary>
         /// <param name="form">The form.</param>
-        public EventListener(B1Session session, IFormInstance form):this(session, form, null)
+        public EventListener(IFormInstance form) : this(form, null)
         {
-
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EventListener"/> class.
+        /// Initializes a new instance of the <see cref="EventListener" /> class.
         /// </summary>
         /// <param name="form">The form.</param>
         /// <param name="subordinates">Other objects that contain.</param>
-        public EventListener(B1Session session, IFormInstance form, params object[] subordinates)
+        public EventListener(IFormInstance form, params object[] subordinates)
         {
+            var eventsManager = B1EventsManager.Instance;
+
             var delegates = subordinates ?? new object[0];
 
-            listeners = new List<IEventListener>()
+            listeners = new List<IEventListener>
             {
-                session.CreateFormMenuEventListener(form),
-                session.CreateRightClickEventListener(form),
-                session.CreateFormItemEventListener(form, delegates),
-                session.CreateFormDataEventListener(form),
-                session.CreateLayoutKeyEventListener(form)
+                eventsManager.CreateFormMenuEventListener(form),
+                eventsManager.CreateRightClickEventListener(form),
+                eventsManager.CreateFormItemEventListener(form, delegates),
+                eventsManager.CreateFormDataEventListener(form),
+                eventsManager.CreateLayoutKeyEventListener(form)
             };
         }
 

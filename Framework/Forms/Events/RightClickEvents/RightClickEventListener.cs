@@ -2,11 +2,11 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.RightClickEvents
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
 
     using SAPbouiCOM;
 
@@ -35,6 +35,18 @@ namespace B1PP.Forms.Events.RightClickEvents
             this.form = form;
         }
 
+        public void Subscribe()
+        {
+            AddEventHandlers(form);
+
+            dispatcher.AddListener(this);
+        }
+
+        public void Unsubscribe()
+        {
+            dispatcher.RemoveListener(this);
+        }
+
         public bool OnRightClickEvent(ref ContextMenuInfo e, out bool bubbleEvent)
         {
             bubbleEvent = true;
@@ -55,18 +67,6 @@ namespace B1PP.Forms.Events.RightClickEvents
         }
 
         public event EventHandler<HandlerAddedEventArgs> HandlerAdded = delegate { };
-
-        public void Subscribe()
-        {
-            AddEventHandlers(form);
-
-            dispatcher.AddListener(this);
-        }
-
-        public void Unsubscribe()
-        {
-            dispatcher.RemoveListener(this);
-        }
 
         private void AddEventHandlers(IFormInstance userForm)
         {

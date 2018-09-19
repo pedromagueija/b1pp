@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -23,7 +24,6 @@ namespace B1PP.Database
                 return option;
             }
             catch (Exception ex)
-                when (ex is ArgumentNullException || ex is ArgumentException || ex is OverflowException)
             {
                 var e = new B1EnumConvertException($"Cannot convert '{value}' into enumeration of type '{type}'.", ex);
                 e.Data.Add("value", value);

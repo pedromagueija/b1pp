@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using SAPbobsCOM;
@@ -29,7 +30,7 @@ namespace B1PP.Data
         public BoFieldTypes Type { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Column"/> class.
+        /// Initializes a new instance of the <see cref="Column" /> class.
         /// </summary>
         /// <param name="name">The column name.</param>
         /// <param name="type">The column type.</param>

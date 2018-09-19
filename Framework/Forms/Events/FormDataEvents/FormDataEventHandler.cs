@@ -1,16 +1,16 @@
-// <copyright filename="FormDataEventListener.cs" project="Framework">
+// <copyright filename="FormDataEventHandler.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.FormDataEvents
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
 
     using SAPbouiCOM;
 
-    internal class FormDataEventListener : IFormDataEventListener, IEventListener
+    internal class FormDataEventHandler : IFormDataEventHandler, IEventListener
     {
         private readonly Dictionary<FormDataEventHandlerAttribute, Action<BusinessObjectInfo>> after =
             new Dictionary<FormDataEventHandlerAttribute, Action<BusinessObjectInfo>>();
@@ -18,8 +18,9 @@ namespace B1PP.Forms.Events.FormDataEvents
         private readonly Dictionary<FormDataEventHandlerAttribute, Func<BusinessObjectInfo, bool>> before =
             new Dictionary<FormDataEventHandlerAttribute, Func<BusinessObjectInfo, bool>>();
 
-        private readonly IFormInstance form;
         private readonly B1FormDataEventDispatcher dispatcher;
+
+        private readonly IFormInstance form;
 
         public string Id
         {
@@ -29,10 +30,22 @@ namespace B1PP.Forms.Events.FormDataEvents
             }
         }
 
-        public FormDataEventListener(IFormInstance form, B1FormDataEventDispatcher dispatcher)
+        public FormDataEventHandler(IFormInstance form, B1FormDataEventDispatcher dispatcher)
         {
             this.form = form;
             this.dispatcher = dispatcher;
+        }
+
+        public void Subscribe()
+        {
+            AddEventHandlers(form);
+
+            dispatcher.AddListener(this);
+        }
+
+        public void Unsubscribe()
+        {
+            dispatcher.RemoveListener(this);
         }
 
         public void OnFormDataEvent(ref BusinessObjectInfo e, out bool bubbleEvent)
@@ -54,18 +67,6 @@ namespace B1PP.Forms.Events.FormDataEvents
         }
 
         public event EventHandler<HandlerAddedEventArgs> HandlerAdded = delegate { };
-
-        public void Subscribe()
-        {
-            AddEventHandlers(form);
-
-            dispatcher.AddListener(this);
-        }
-
-        public void Unsubscribe()
-        {
-            dispatcher.RemoveListener(this);
-        }
 
         private void AddEventHandlers(IFormInstance userForm)
         {

@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -22,6 +23,7 @@ namespace B1PP.Database
         /// The assembly that contains the models.
         /// </summary>
         private readonly Assembly assembly;
+
         /// <summary>
         /// The company object.
         /// </summary>
@@ -38,7 +40,7 @@ namespace B1PP.Database
         };
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AssemblySchemaInitializer"/> class.
+        /// Initializes a new instance of the <see cref="AssemblySchemaInitializer" /> class.
         /// </summary>
         /// <param name="company">The company.</param>
         /// <param name="assembly">The assembly.</param>
@@ -52,10 +54,12 @@ namespace B1PP.Database
         /// Occurs when [create user field error].
         /// </summary>
         public event EventHandler<UserFieldErrorEventArgs> CreateUserFieldError = delegate { };
+
         /// <summary>
         /// Occurs when [create user object error].
         /// </summary>
         public event EventHandler<AddUserObjectErrorEventArgs> CreateUserObjectError = delegate { };
+
         /// <summary>
         /// Occurs when [create user table error].
         /// </summary>
@@ -70,7 +74,7 @@ namespace B1PP.Database
             var typeMap = new Dictionary<string, Type>();
 
             /*
-             * Tables are created all first, then all fields to prevent 
+             * Tables are all created first, then all fields to prevent 
              * the situation where a table or field are missing but 
              * are necessary to create the object.
              */
@@ -92,6 +96,17 @@ namespace B1PP.Database
             }
         }
 
+        private void CreateField(string tableName, PropertyInfo property)
+        {
+            var field = (UserFieldsMD) company.GetBusinessObject(BoObjectTypes.oUserFields);
+            var adapter = new PropertyUserFieldAdapter(tableName, property, field);
+            adapter.Execute();
+
+            var addUserField = new AddUserField(company, field);
+            addUserField.OnError += OnAddUserFieldError;
+            addUserField.Execute();
+        }
+
         /// <summary>
         /// Creates the fields.
         /// </summary>
@@ -106,29 +121,6 @@ namespace B1PP.Database
             {
                 CreateField(tableName, property);
             }
-        }
-
-        private void CreateField(string tableName, PropertyInfo property)
-        {
-            var field = (UserFieldsMD) company.GetBusinessObject(BoObjectTypes.oUserFields);
-            var adapter = new PropertyUserFieldAdapter(tableName, property, field);
-            adapter.Execute();
-
-            var addUserField = new AddUserField(company, field);
-            addUserField.OnError += OnAddUserFieldError;
-            addUserField.Execute();
-        }
-
-        /// <summary>
-        /// Determines whether the property has a user field attribute.
-        /// </summary>
-        /// <param name="p">The property.</param>
-        /// <returns>
-        ///   <c>true</c> if the property has a user field attribute; otherwise, <c>false</c>.
-        /// </returns>
-        private bool HasUserFieldAttribute(PropertyInfo p)
-        {
-            return p.GetCustomAttribute<UserFieldAttribute>() != null;
         }
 
         /// <summary>
@@ -222,10 +214,22 @@ namespace B1PP.Database
         }
 
         /// <summary>
+        /// Determines whether the property has a user field attribute.
+        /// </summary>
+        /// <param name="p">The property.</param>
+        /// <returns>
+        /// <c>true</c> if the property has a user field attribute; otherwise, <c>false</c>.
+        /// </returns>
+        private bool HasUserFieldAttribute(PropertyInfo p)
+        {
+            return p.GetCustomAttribute<UserFieldAttribute>() != null;
+        }
+
+        /// <summary>
         /// Called when [add user field error].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="UserFieldErrorEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="UserFieldErrorEventArgs" /> instance containing the event data.</param>
         private void OnAddUserFieldError(object sender, UserFieldErrorEventArgs e)
         {
             CreateUserFieldError(sender, e);
@@ -235,7 +239,7 @@ namespace B1PP.Database
         /// Called when [add user object error].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="AddUserObjectErrorEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="AddUserObjectErrorEventArgs" /> instance containing the event data.</param>
         private void OnAddUserObjectError(object sender, AddUserObjectErrorEventArgs e)
         {
             CreateUserObjectError(sender, e);
@@ -245,7 +249,7 @@ namespace B1PP.Database
         /// Called when [add user table error].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="AddUserTableErrorEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="AddUserTableErrorEventArgs" /> instance containing the event data.</param>
         private void OnAddUserTableError(object sender, AddUserTableErrorEventArgs e)
         {
             CreateUserTableError(sender, e);

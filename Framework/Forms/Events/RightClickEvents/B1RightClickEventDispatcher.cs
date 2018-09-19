@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.RightClickEvents
 {
     using System;
@@ -9,37 +10,37 @@ namespace B1PP.Forms.Events.RightClickEvents
 
     using Extensions.SDK.UI;
 
-    using JetBrains.Annotations;
-
     using SAPbouiCOM;
 
     internal class B1RightClickEventDispatcher
     {
+        private List<IRightClickEventListener> rightClickEventListeners = new List<IRightClickEventListener>();
+
         /// <summary>
         /// Stores the event sink for right click events.
         /// </summary>
-        [CanBeNull]
         private IRightClickEventSink sink;
-
-        private List<IRightClickEventListener> rightClickEventListeners =
-            new List<IRightClickEventListener>();
 
         private Application Application { get; set; }
 
         public void AddListener(IRightClickEventSink value)
         {
             if (value == null)
+            {
                 throw new ArgumentNullException(nameof(value));
+            }
 
             if (sink != null)
+            {
                 throw new RightClickEventSinkAlreadyExistsException();
+            }
 
             sink = value;
 
             foreach (var formType in sink.FormTypes)
             {
                 B1EventFilterManager.Include(BoEventTypes.et_RIGHT_CLICK, formType);
-            }            
+            }
         }
 
         public void AddListener(IRightClickEventListener listener)
@@ -97,7 +98,9 @@ namespace B1PP.Forms.Events.RightClickEvents
                 {
                     bool handled = listener.OnRightClickEvent(ref e, out bubbleEvent);
                     if (handled)
+                    {
                         return;
+                    }
                 }
 
                 // try to dispatch to sink

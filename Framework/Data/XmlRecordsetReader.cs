@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System;
@@ -11,8 +12,6 @@ namespace B1PP.Data
     using System.Linq;
     using System.Xml;
     using System.Xml.XPath;
-
-    using JetBrains.Annotations;
 
     using SAPbobsCOM;
 
@@ -32,6 +31,11 @@ namespace B1PP.Data
         private readonly XmlDocument xmlDoc;
 
         /// <summary>
+        /// The columns names.
+        /// </summary>
+        private List<Column> columns = new List<Column>();
+
+        /// <summary>
         /// The current row node.
         /// </summary>
         private XmlNode currentRow;
@@ -42,9 +46,18 @@ namespace B1PP.Data
         private IEnumerator rowEnumerator;
 
         /// <summary>
-        /// The columns names.
+        /// Returns the columns names.
         /// </summary>
-        private List<Column> columns = new List<Column>();
+        /// <value>
+        /// The columns names.
+        /// </value>
+        public IEnumerable<IColumn> Columns
+        {
+            get
+            {
+                return columns;
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRecordsetReader" /> class.
@@ -74,7 +87,10 @@ namespace B1PP.Data
         {
             var value = GetString(columnName);
             if (string.IsNullOrEmpty(value))
+            {
                 return null;
+            }
+
             return DateTime.ParseExact(value, @"yyyyMMdd", CultureInfo.InvariantCulture);
         }
 
@@ -102,7 +118,10 @@ namespace B1PP.Data
         {
             var value = GetString(columnName);
             if (string.IsNullOrEmpty(value))
+            {
                 return null;
+            }
+
             return double.Parse(value, CultureInfo.InvariantCulture);
         }
 
@@ -127,7 +146,10 @@ namespace B1PP.Data
         {
             var value = GetString(columnName);
             if (string.IsNullOrEmpty(value))
+            {
                 return null;
+            }
+
             return int.Parse(value, CultureInfo.InvariantCulture);
         }
 
@@ -193,20 +215,6 @@ namespace B1PP.Data
         }
 
         /// <summary>
-        /// Returns the columns names.
-        /// </summary>
-        /// <value>
-        /// The columns names.
-        /// </value>
-        public IEnumerable<IColumn> Columns
-        {
-            get
-            {
-                return columns;
-            }
-        }
-
-        /// <summary>
         /// Creates a new <see cref="XmlRecordsetReader" /> to read the given <paramref name="data" />.
         /// </summary>
         /// <param name="data">The recordset to be read.</param>
@@ -216,8 +224,7 @@ namespace B1PP.Data
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="data" /> is <see langword="null" />.</exception>
         /// <exception cref="XPathException">The XPath expression contains a prefix. </exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty. </exception>
-        [NotNull]
-        public static XmlRecordsetReader CreateNew([NotNull] IRecordset data)
+        public static XmlRecordsetReader CreateNew(IRecordset data)
         {
             if (data == null)
             {
@@ -237,7 +244,6 @@ namespace B1PP.Data
         /// <returns>
         /// A string that represents the data.
         /// </returns>
-        [NotNull]
         private string ExtractXmlFromRecordset(IRecordset data)
         {
             var fixedXml = data.GetFixedXML(RecordsetXMLModeEnum.rxmData);
@@ -254,7 +260,6 @@ namespace B1PP.Data
         /// </summary>
         /// <param name="columnName">The item identifier.</param>
         /// <returns>The XML node if it exists, or <see langword="null" /> if it doesn't.</returns>
-        [CanBeNull]
         private XmlNode GetItemXmlNode(string columnName)
         {
             XmlNode valueNode;
@@ -279,7 +284,8 @@ namespace B1PP.Data
         /// The record set with the data.
         /// </param>
         /// <exception cref="XmlException">
-        /// There is a load or parse error in the XML.<para/>
+        /// There is a load or parse error in the XML.
+        /// <para />
         /// In this case, the document remains empty.
         /// </exception>
         /// <exception cref="XPathException">
@@ -315,6 +321,7 @@ namespace B1PP.Data
                         columns.Add(new Column(name, type));
                     }
 
+                    // TODO: why is this here?
                     columns = columns.ToList();
                 }
             }

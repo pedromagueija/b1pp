@@ -1,7 +1,8 @@
-// <copyright filename="SystemFormLoadListener.cs" project="Framework">
+// <copyright filename="SystemFormLoadHandler.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events
 {
     using System;
@@ -10,14 +11,14 @@ namespace B1PP.Forms.Events
 
     using SAPbouiCOM;
 
-    internal class SystemFormLoadListener : IItemEventListener
+    internal class SystemFormLoadHandler : IItemEventHandler
     {
         private readonly Application application;
         private readonly Type classType;
 
         public string Id { get; }
 
-        public SystemFormLoadListener(Application application, string formType, Type classType)
+        public SystemFormLoadHandler(Application application, string formType, Type classType)
         {
             this.application = application;
             this.classType = classType;

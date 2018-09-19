@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     /// <summary>
@@ -10,7 +11,7 @@ namespace B1PP.Data
     /// <remarks>
     /// The value will be quoted and escaped.
     /// </remarks>
-    public class StringValueArg : QueryArgBase
+    internal class StringValueArg : QueryArgBase
     {
         private readonly string value;
 
@@ -26,13 +27,12 @@ namespace B1PP.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StringValueArg"/> class.
+        /// Initializes a new instance of the <see cref="StringValueArg" /> class.
         /// </summary>
         /// <param name="placeHolder">The place holder.</param>
         /// <param name="value">The value.</param>
-        public StringValueArg(string placeHolder, string value)
+        public StringValueArg(string placeHolder, string value) : base(placeHolder)
         {
-            PlaceHolder = placeHolder;
             this.value = value ?? string.Empty;
         }
     }

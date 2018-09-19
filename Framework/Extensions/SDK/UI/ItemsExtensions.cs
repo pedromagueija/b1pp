@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.SDK.UI
 {
     using System;
@@ -49,7 +50,7 @@ namespace B1PP.Extensions.SDK.UI
         }
 
         private static InvalidSpecificItemTypeException CreateInvalidSpecificItemTypeException(
-            string itemId, 
+            string itemId,
             Item item,
             Type type)
         {

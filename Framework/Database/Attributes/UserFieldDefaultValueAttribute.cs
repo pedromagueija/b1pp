@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database.Attributes
 {
     using System;
@@ -22,7 +23,7 @@ namespace B1PP.Database.Attributes
         private readonly object value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute"/> class.
+        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute" /> class.
         /// </summary>
         /// <param name="value">The value.</param>
         public UserFieldDefaultValueAttribute(int value)
@@ -31,7 +32,7 @@ namespace B1PP.Database.Attributes
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute"/> class.
+        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute" /> class.
         /// </summary>
         /// <param name="value">The value.</param>
         public UserFieldDefaultValueAttribute(double value)
@@ -40,7 +41,7 @@ namespace B1PP.Database.Attributes
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute"/> class.
+        /// Initializes a new instance of the <see cref="UserFieldDefaultValueAttribute" /> class.
         /// </summary>
         /// <param name="value">The value.</param>
         public UserFieldDefaultValueAttribute(string value)
@@ -57,14 +58,24 @@ namespace B1PP.Database.Attributes
             var text = string.Empty;
 
             if (value is int)
+            {
                 text = ((int) value).ToString(CultureInfo.InvariantCulture);
+            }
+
             if (value is double)
+            {
                 text = ((double) value).ToString(CultureInfo.InvariantCulture);
+            }
+
             if (value is string)
-                text = (string)value;
+            {
+                text = (string) value;
+            }
 
             if (!string.IsNullOrEmpty(text))
+            {
                 field.DefaultValue = text;
+            }
         }
     }
 }

@@ -2,12 +2,11 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Connections
 {
     using System;
     using System.Threading;
-
-    using JetBrains.Annotations;
 
     using SAPbouiCOM;
 
@@ -89,8 +88,7 @@ namespace B1PP.Connections
         /// <remarks>
         /// By default the <see cref="InsistentConnection" /> will use a <see cref="StandardConnection" /> as its connection.
         /// </remarks>
-        /// ///
-        public InsistentConnection([CanBeNull] IConnection connection)
+        public InsistentConnection(IConnection connection)
         {
             this.connection = connection ?? new StandardConnection();
         }
@@ -124,7 +122,7 @@ namespace B1PP.Connections
             } while (attempts <= maxAttempts);
 
             // could not connect
-            var message = $@"{Audit.LastMessage}{Environment.NewLine}" +
+            string message = $@"{Audit.LastMessage}{Environment.NewLine}" +
                              @"More information in the 'Data' property of the exception.";
 
             var e = new ConnectionException(message);

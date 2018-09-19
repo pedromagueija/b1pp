@@ -2,12 +2,11 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Xml.Linq;
 
     using Extensions.SDK.UI;
 
@@ -40,7 +39,8 @@ namespace B1PP.Forms
             return Load(contents, formType, uniqueId);
         }
 
-        private Form CreateForm(string formType, string formId, string xmlData, BoFormModality modality = BoFormModality.fm_None)
+        private Form CreateForm(string formType, string formId, string xmlData,
+            BoFormModality modality = BoFormModality.fm_None)
         {
             var formDefinition = Application.Create<FormCreationParams>(BoCreatableObjectType.cot_FormCreationParams);
             formDefinition.XmlData = xmlData;

@@ -1,19 +1,21 @@
-// <copyright filename="IItemEventListener.cs" project="Framework">
+// <copyright filename="IItemEventHandler.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.ItemEvents
 {
     using SAPbouiCOM;
 
     /// <summary>
-    /// Represents an item event listener that is notified 
-    /// when the item event matches the id of the identifier. 
+    /// Represents an item event listener that is notified
+    /// when the item event matches the id of the identifier.
     /// </summary>
-    internal interface IItemEventListener
+    internal interface IItemEventHandler
     {
         /// <summary>
-        /// Gets the identifier of the listener.<para/>
+        /// Gets the identifier of the listener.
+        /// <para />
         /// This id should be a form id, form type or an event type.
         /// </summary>
         /// <value>

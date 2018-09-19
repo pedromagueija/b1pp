@@ -2,13 +2,12 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.Types
 {
     using System;
     using System.ComponentModel;
     using System.Globalization;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Standard type converter for the <see cref="Id" /> type.
@@ -16,7 +15,7 @@ namespace B1PP.Extensions.Types
     /// <seealso cref="System.ComponentModel.TypeConverter" />
     internal class IdTypeConverter : TypeConverter
     {
-        public override bool CanConvertFrom([CanBeNull] ITypeDescriptorContext context, Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string) || sourceType == typeof(int))
             {
@@ -26,7 +25,7 @@ namespace B1PP.Extensions.Types
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override bool CanConvertTo([CanBeNull] ITypeDescriptorContext context, Type destinationType)
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(string) || destinationType == typeof(int))
             {
@@ -36,24 +35,25 @@ namespace B1PP.Extensions.Types
             return base.CanConvertTo(context, destinationType);
         }
 
-        [CanBeNull]
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, [CanBeNull] object value)
+
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is string)
+            if (value is string s)
             {
-                return new Id((string) value);
+                return new Id(s);
             }
-            if (value is int)
+
+            if (value is int i)
             {
-                return new Id((int) value);
+                return new Id(i);
             }
 
             return base.ConvertFrom(context, culture, value);
         }
 
-        [CanBeNull]
-        public override object ConvertTo([CanBeNull] ITypeDescriptorContext context, [CanBeNull] CultureInfo culture,
-            [CanBeNull] object value, Type destinationType)
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture,
+            object value, Type destinationType)
         {
             if (destinationType == typeof(string))
             {

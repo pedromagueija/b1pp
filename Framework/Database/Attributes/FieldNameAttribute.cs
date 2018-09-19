@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database.Attributes
 {
     using System;
@@ -33,7 +34,7 @@ namespace B1PP.Database.Attributes
         public string FieldDescription { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FieldNameAttribute"/> class.
+        /// Initializes a new instance of the <see cref="FieldNameAttribute" /> class.
         /// </summary>
         /// <param name="fieldName">Name of the field.</param>
         /// <param name="fieldDescription">The field description.</param>
@@ -44,7 +45,7 @@ namespace B1PP.Database.Attributes
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FieldNameAttribute"/> class.
+        /// Initializes a new instance of the <see cref="FieldNameAttribute" /> class.
         /// </summary>
         /// <param name="fieldName">Name of the field.</param>
         public FieldNameAttribute(string fieldName)
@@ -59,16 +60,6 @@ namespace B1PP.Database.Attributes
             field.Description = DetermineFieldDescription(property);
         }
 
-        private string DetermineFieldName(PropertyInfo property)
-        {
-            if (string.IsNullOrWhiteSpace(FieldName))
-            {
-                return property.Name;
-            }
-
-            return FieldName;
-        }
-
         private string DetermineFieldDescription(PropertyInfo property)
         {
             if (string.IsNullOrWhiteSpace(FieldDescription))
@@ -77,6 +68,16 @@ namespace B1PP.Database.Attributes
             }
 
             return FieldDescription;
+        }
+
+        private string DetermineFieldName(PropertyInfo property)
+        {
+            if (string.IsNullOrWhiteSpace(FieldName))
+            {
+                return property.Name;
+            }
+
+            return FieldName;
         }
     }
 }

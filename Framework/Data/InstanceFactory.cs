@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System;
@@ -12,25 +13,51 @@ namespace B1PP.Data
 
     using Extensions.Types;
 
-    using JetBrains.Annotations;
-
     using SAPbobsCOM;
 
     internal static class InstanceFactory
     {
-        private const BindingFlags MapableProperties = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        private const BindingFlags MapableProperties =
+            BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+
+        /// <summary>
+        /// Creates an instance of a {T} type.
+        /// </summary>
+        /// <typeparam name="T">Type of the instance to create.</typeparam>
+        /// <param name="reader">The reader that contains the data to populate the instance.</param>
+        /// <returns>
+        /// An instance of {T} populated with the data.
+        /// </returns>
+        public static T AutoCreateInstance<T>(IRecordsetReader reader) where T : class
+        {
+            var instance = (T) Activator.CreateInstance(typeof(T));
+            var columns = reader.Columns.ToList();
+
+            var properties = GetMatchingProperties(instance, columns);
+
+            foreach (var property in properties)
+            {
+                if (!property.CanWrite)
+                {
+                    continue;
+                }
+
+                SetPropertyValue(reader, property, instance);
+            }
+
+            return instance;
+        }
 
         public static dynamic CreateDynamicObject(IRecordsetReader reader)
         {
             var expando = new ExpandoObject();
-            var data = (IDictionary<string, object>)expando;
-
+            var data = (IDictionary<string, object>) expando;
             foreach (var column in reader.Columns)
             {
                 if (data.ContainsKey(column.Name))
                 {
                     string message = $@"The column '{column.Name}' appears twice or more times. " +
-                                      @"Please use different aliases for each column.";
+                                     @"Please use different aliases for each column.";
                     throw new ArgumentException(message);
                 }
 
@@ -57,36 +84,21 @@ namespace B1PP.Data
             return expando;
         }
 
-        /// <summary>
-        /// Creates an instance of a {T} type.
-        /// </summary>
-        /// <typeparam name="T">Type of the instance to create.</typeparam>
-        /// <param name="reader">The reader that contains the data to populate the instance.</param>
-        /// <returns>
-        /// An instance of {T} populated with the data.
-        /// </returns>
-        [CanBeNull]
-        public static T AutoCreateInstance<T>(IRecordsetReader reader) where T : class
+        private static IEnumerable<PropertyInfo> GetMatchingProperties<T>(T instance, List<IColumn> columns)
+            where T : class
         {
-            var instance = (T)Activator.CreateInstance(typeof(T));
-            var columns = reader.Columns.ToList();
-
-            var properties = GetMatchingProperties(instance, columns);
-
-            foreach (var property in properties)
-            {
-                if (!property.CanWrite)
-                {
-                    continue;
-                }
-
-                SetPropertyValue(reader, property, instance);
-            }
-
-            return instance;
+            return instance.GetType()
+                .GetProperties(MapableProperties)
+                .Where(NamesMatch(columns));
         }
 
-        private static void SetPropertyValue<T>(IRecordsetReader reader, PropertyInfo property, T instance) where T : class
+        private static Func<PropertyInfo, bool> NamesMatch(List<IColumn> columns)
+        {
+            return p => columns.Exists(c => c.Name.Equals(p.Name));
+        }
+
+        private static void SetPropertyValue<T>(IRecordsetReader reader, PropertyInfo property, T instance)
+            where T : class
         {
             var propertyType = property.PropertyType;
 
@@ -115,18 +127,6 @@ namespace B1PP.Data
                 string value = reader.GetString(property.Name);
                 property.SetValue(instance, new Id(value));
             }
-        }
-
-        private static IEnumerable<PropertyInfo> GetMatchingProperties<T>(T instance, List<IColumn> columns) where T : class
-        {
-            return instance.GetType()
-                .GetProperties(MapableProperties)
-                .Where(NamesMatch(columns));
-        }
-
-        private static Func<PropertyInfo, bool> NamesMatch(List<IColumn> columns)
-        {
-            return p => columns.Exists(c => c.Name.Equals(p.Name));
         }
     }
 }

@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.MenuEvents
 {
     using System;
@@ -47,7 +48,7 @@ namespace B1PP.Forms.Events.MenuEvents
         /// </summary>
         /// <param name="application">The application.</param>
         /// <exception cref="System.ArgumentNullException">
-        /// Thrown when <paramref name="application"/> is null.
+        /// Thrown when <paramref name="application" /> is null.
         /// </exception>
         /// <exception cref="System.InvalidOperationException">
         /// Thrown when trying to call subscribe twice or more.
@@ -90,19 +91,21 @@ namespace B1PP.Forms.Events.MenuEvents
 
             try
             {
-                var activeFormId = Application.GetActiveFormId();
+                string activeFormId = Application.GetActiveFormId();
                 if (IsFormMenu(activeFormId))
                 {
-                    var handled = menuEventListeners[activeFormId].OnMenuEvent(ref e, out bubbleEvent);
+                    bool handled = menuEventListeners[activeFormId].OnMenuEvent(ref e, out bubbleEvent);
                     if (handled)
+                    {
                         return;
+                    }
                 }
 
                 mainMenuEventListener?.OnMenuEvent(ref e, out bubbleEvent);
             }
             catch (Exception exception)
             {
-                EventHandlerError(null, new ErrorEventArgs(exception));
+                EventHandlerError(this, new ErrorEventArgs(exception));
             }
         }
     }

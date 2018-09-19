@@ -2,12 +2,11 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.SDK.UI
 {
     using System;
     using System.Globalization;
-
-    using JetBrains.Annotations;
 
     using SAPbouiCOM;
 
@@ -160,7 +159,6 @@ namespace B1PP.Extensions.SDK.UI
         /// <returns>
         /// The string on the datasource.
         /// </returns>
-        [CanBeNull]
         public static string GetString(this UserDataSources datasource, string userDataSourceId)
         {
             return datasource.Item(userDataSourceId).ValueEx ?? string.Empty;

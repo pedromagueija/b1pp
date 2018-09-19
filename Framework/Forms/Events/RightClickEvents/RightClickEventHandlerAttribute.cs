@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.RightClickEvents
 {
     using System;
@@ -13,7 +14,7 @@ namespace B1PP.Forms.Events.RightClickEvents
         public bool Before { get; }
 
         public RightClickEventHandlerAttribute() : this(string.Empty, false)
-        {            
+        {
         }
 
         public RightClickEventHandlerAttribute(bool before) : this(string.Empty, before)

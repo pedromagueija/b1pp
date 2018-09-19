@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -19,6 +20,7 @@ namespace B1PP.Database
         /// The name of the table.
         /// </value>
         public string TableName { get; set; }
+
         /// <summary>
         /// Gets or sets the error description.
         /// </summary>
@@ -26,6 +28,7 @@ namespace B1PP.Database
         /// The error description.
         /// </value>
         public string ErrorDescription { get; set; }
+
         /// <summary>
         /// Gets or sets the error code.
         /// </summary>

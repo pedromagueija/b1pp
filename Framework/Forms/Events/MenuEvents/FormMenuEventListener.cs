@@ -2,11 +2,11 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.MenuEvents
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
 
     using SAPbouiCOM;
 
@@ -17,8 +17,9 @@ namespace B1PP.Forms.Events.MenuEvents
         private readonly Dictionary<string, Func<MenuEvent, bool>> before =
             new Dictionary<string, Func<MenuEvent, bool>>();
 
-        private readonly IFormInstance form;
         private readonly B1MenuEventDispatcher dispatcher;
+
+        private readonly IFormInstance form;
 
         public string FormId
         {
@@ -32,6 +33,18 @@ namespace B1PP.Forms.Events.MenuEvents
         {
             this.form = form;
             this.dispatcher = dispatcher;
+        }
+
+        public void Subscribe()
+        {
+            AddEventHandlers(form);
+
+            dispatcher.AddListener(this);
+        }
+
+        public void Unsubscribe()
+        {
+            dispatcher.RemoveListener(this);
         }
 
         public bool OnMenuEvent(ref MenuEvent e, out bool bubbleEvent)
@@ -54,18 +67,6 @@ namespace B1PP.Forms.Events.MenuEvents
         }
 
         public event EventHandler<HandlerAddedEventArgs> HandlerAdded = delegate { };
-
-        public void Subscribe()
-        {
-            AddEventHandlers(form);
-
-            dispatcher.AddListener(this);
-        }
-
-        public void Unsubscribe()
-        {
-            dispatcher.RemoveListener(this);
-        }
 
         private void AddEventHandlers(IFormInstance userForm)
         {

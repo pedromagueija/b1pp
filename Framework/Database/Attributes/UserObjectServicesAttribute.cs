@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database.Attributes
 {
     using System;
@@ -27,17 +28,6 @@ namespace B1PP.Database.Attributes
             {
                 ActivateService(service, userObject);
             }
-        }
-
-        private void DisableAllServices(UserObjectsMD userObject)
-        {
-            userObject.CanFind = BoYesNoEnum.tNO;
-            userObject.CanDelete = BoYesNoEnum.tNO;
-            userObject.CanCancel = BoYesNoEnum.tNO;
-            userObject.CanClose = BoYesNoEnum.tNO;
-            userObject.CanLog = BoYesNoEnum.tNO;
-            userObject.ManageSeries = BoYesNoEnum.tNO;
-            userObject.CanYearTransfer = BoYesNoEnum.tNO;
         }
 
         private void ActivateService(ObjectServices service, UserObjectsMD userObject)
@@ -73,6 +63,17 @@ namespace B1PP.Database.Attributes
                 default:
                     throw new ArgumentOutOfRangeException(nameof(service), service, "Unknown service");
             }
+        }
+
+        private void DisableAllServices(UserObjectsMD userObject)
+        {
+            userObject.CanFind = BoYesNoEnum.tNO;
+            userObject.CanDelete = BoYesNoEnum.tNO;
+            userObject.CanCancel = BoYesNoEnum.tNO;
+            userObject.CanClose = BoYesNoEnum.tNO;
+            userObject.CanLog = BoYesNoEnum.tNO;
+            userObject.ManageSeries = BoYesNoEnum.tNO;
+            userObject.CanYearTransfer = BoYesNoEnum.tNO;
         }
     }
 }

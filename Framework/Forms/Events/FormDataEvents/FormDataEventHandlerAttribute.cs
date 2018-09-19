@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.FormDataEvents
 {
     using System;
@@ -32,11 +33,13 @@ namespace B1PP.Forms.Events.FormDataEvents
             {
                 return false;
             }
+
             if (ReferenceEquals(this, other))
             {
                 return true;
             }
-            return base.Equals(other) && (Before == other.Before) && (EventType == other.EventType);
+
+            return base.Equals(other) && Before == other.Before && EventType == other.EventType;
         }
 
         /// <summary>Returns a value that indicates whether this instance is equal to a specified object.</summary>
@@ -48,14 +51,17 @@ namespace B1PP.Forms.Events.FormDataEvents
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;
             }
+
             if (obj.GetType() != GetType())
             {
                 return false;
             }
+
             return Equals((FormDataEventHandlerAttribute) obj);
         }
 

@@ -2,17 +2,17 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events
 {
     using System.Collections.Generic;
 
     internal class HandlersCollection<T>
     {
-        public string Id { get; set; }
-
         private readonly List<AfterAction<T>> after = new List<AfterAction<T>>();
 
         private readonly List<BeforeAction<T>> before = new List<BeforeAction<T>>();
+        public string Id { get; set; }
 
         public void AddAfter(AfterAction<T> action)
         {

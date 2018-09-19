@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -28,11 +29,6 @@ namespace B1PP.Database
         }
 
         /// <summary>
-        /// Occurs when the update fails.
-        /// </summary>
-        public event EventHandler<UserFieldErrorEventArgs> OnError = delegate { };
-
-        /// <summary>
         /// Executes the update action and releases the object.
         /// </summary>
         public void Execute()
@@ -53,5 +49,10 @@ namespace B1PP.Database
 
             Marshal.ReleaseComObject(field);
         }
+
+        /// <summary>
+        /// Occurs when the update fails.
+        /// </summary>
+        public event EventHandler<UserFieldErrorEventArgs> OnError = delegate { };
     }
 }

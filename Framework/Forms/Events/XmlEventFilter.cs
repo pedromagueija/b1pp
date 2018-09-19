@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events
 {
     using System;
@@ -146,7 +147,7 @@ namespace B1PP.Forms.Events
         /// <returns>True when it matches, false otherwise.</returns>
         private Func<XElement, bool> WithFormType(string formType)
         {
-            return e => (e.Attribute("form_id").Value == formType) || (e.Attribute("form_id").Value == "ALL_FORMS");
+            return e => e.Attribute("form_id").Value == formType || e.Attribute("form_id").Value == "ALL_FORMS";
         }
 
         /// <summary>

@@ -2,13 +2,14 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Connections
 {
     /// <summary>
-    /// Creates different types of connections. 
+    /// Creates different types of connections.
     /// It does not connect or manage the lifetime of the connections.
     /// </summary>
-    public static class ConnectionFactory
+    public class ConnectionFactory
     {
         /// <summary>
         /// Creates the DI API connection.
@@ -17,7 +18,7 @@ namespace B1PP.Connections
         /// <returns>
         /// A new DI API connection.
         /// </returns>
-        public static IConnection CreateDiApiConnection(DiApiConnectionSettings settings)
+        public IConnection CreateDiApiConnection(DiApiConnectionSettings settings)
         {
             return new InsistentConnection(new DiApiConnection(settings));
         }
@@ -28,7 +29,7 @@ namespace B1PP.Connections
         /// <returns>
         /// A new standard (UI and DI API) connection.
         /// </returns>
-        public static IConnection CreateStandardConnection()
+        public IConnection CreateStandardConnection()
         {
             return new InsistentConnection(new StandardConnection());
         }
@@ -39,7 +40,7 @@ namespace B1PP.Connections
         /// <returns>
         /// A new UI API connection.
         /// </returns>
-        public static IConnection CreateUiApiConnection()
+        public IConnection CreateUiApiConnection()
         {
             return new InsistentConnection(new UiApiConnection());
         }

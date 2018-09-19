@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Connections
 {
     using System;
@@ -42,7 +43,7 @@ namespace B1PP.Connections
         /// Gets a value indicating whether this <see cref="IConnection" /> is connected.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if connected; otherwise, <c>false</c>.
+        /// <c>true</c> if connected; otherwise, <c>false</c>.
         /// </value>
         public bool Connected { get; private set; }
 
@@ -70,17 +71,8 @@ namespace B1PP.Connections
                     return;
                 }
 
-                var gui = new SboGuiApiClass();
-                gui.Connect(connectionString);
-                Application = gui.GetApplication();
-
-                Company = new DiCompanyClass {Application = Application};
-                var result = Company.Connect();
-                if (result != 0)
-                {
-                    var message = $"{result} {Company.GetLastErrorDescription()}";
-                    throw new ConnectionException(message);
-                }
+                var gui = ConnectToGui();
+                ConnectToCompany(gui);
 
                 Connected = true;
             }
@@ -114,6 +106,27 @@ namespace B1PP.Connections
             }
 
             Connected = false;
+        }
+
+        private void ConnectToCompany(ISboGuiApi gui)
+        {
+            Application = gui.GetApplication();
+            Company = new DiCompanyClass {Application = Application};
+
+            int result = Company.Connect();
+            if (result != 0)
+            {
+                string lastErrorDescription = Company.GetLastErrorDescription();
+                string message = $"{result} {lastErrorDescription}";
+                throw new ConnectionException(message);
+            }
+        }
+
+        private SboGuiApiClass ConnectToGui()
+        {
+            var gui = new SboGuiApiClass();
+            gui.Connect(connectionString);
+            return gui;
         }
     }
 }

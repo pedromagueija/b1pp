@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     /// <summary>
@@ -10,7 +11,7 @@ namespace B1PP.Data
     /// <remarks>
     /// The value will be represented as an invariant value (e.g.: 123.123).
     /// </remarks>
-    public class DoubleValueArg : QueryArgBase
+    internal class DoubleValueArg : QueryArgBase
     {
         private readonly double value;
 
@@ -26,13 +27,12 @@ namespace B1PP.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DoubleValueArg"/> class.
+        /// Initializes a new instance of the <see cref="DoubleValueArg" /> class.
         /// </summary>
         /// <param name="placeHolder">The place holder.</param>
         /// <param name="value">The value.</param>
-        public DoubleValueArg(string placeHolder, double value)
+        public DoubleValueArg(string placeHolder, double value) : base(placeHolder)
         {
-            PlaceHolder = placeHolder;
             this.value = value;
         }
     }

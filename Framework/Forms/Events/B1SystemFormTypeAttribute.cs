@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events
 {
     using System;
@@ -16,11 +17,11 @@ namespace B1PP.Forms.Events
         public string FormType { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="B1SystemFormTypeAttribute"/> class.
+        /// Initializes a new instance of the <see cref="B1SystemFormTypeAttribute" /> class.
         /// </summary>
         /// <param name="formType">Type of the form.</param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown when <paramref name="formType"/> is null.
+        /// Thrown when <paramref name="formType" /> is null.
         /// </exception>
         public B1SystemFormTypeAttribute(string formType)
         {

@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Connections
 {
     using Common;
@@ -58,7 +59,9 @@ namespace B1PP.Connections
         public void Connect()
         {
             if (Connected)
+            {
                 return;
+            }
 
             Company = settings.ToCompany();
 
@@ -78,7 +81,9 @@ namespace B1PP.Connections
         public void Disconnect()
         {
             if (!Connected)
+            {
                 return;
+            }
 
             if (Company != null)
             {

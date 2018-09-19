@@ -2,12 +2,12 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Connections
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Reflection;
     using System.Xml.Serialization;
 
     using SAPbobsCOM;

@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System;
@@ -12,8 +13,8 @@ namespace B1PP.Data
     /// <remarks>
     /// The DateTime will be converted automatically to the universal SQL date format ('yyyyMMdd').
     /// </remarks>
-    /// <seealso cref="QueryArgBase"/>
-    public class DateTimeValueArg : QueryArgBase
+    /// <seealso cref="QueryArgBase" />
+    internal class DateTimeValueArg : QueryArgBase
     {
         private readonly DateTime value;
 
@@ -21,7 +22,7 @@ namespace B1PP.Data
         /// Gets the value to replace the placeholder with.
         /// </summary>
         /// <returns>
-        /// The <see cref="DateTime"/> as a <see cref="String"/>.
+        /// The <see cref="DateTime" /> as a <see cref="String" />.
         /// </returns>
         public override string Value
         {
@@ -36,10 +37,9 @@ namespace B1PP.Data
         /// </summary>
         /// <param name="placeHolder">The place holder.</param>
         /// <param name="value">The value.</param>
-        public DateTimeValueArg(string placeHolder, DateTime value)
+        public DateTimeValueArg(string placeHolder, DateTime value)  : base(placeHolder)
         {
             this.value = value;
-            PlaceHolder = placeHolder;
         }
     }
 }

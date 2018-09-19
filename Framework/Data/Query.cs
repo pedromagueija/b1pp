@@ -2,25 +2,25 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System;
     using System.Collections.Generic;
 
-    using JetBrains.Annotations;
-
     using SAPbobsCOM;
 
     /// <summary>
-    /// Facilitates the querying operations by acting as a simple facade.<para/>
+    /// Facilitates the querying operations by acting as a simple facade.
+    /// <para />
     /// It also allows a fluent usage.
     /// <example>
     /// var q = new Query(company);
     /// q.SetStatement(sql).With("parameter", "value");
     /// </example>
     /// </summary>
-    /// <seealso cref="B1PP.Data.QueryHelper" />
-    public class Query : QueryHelper
+    /// <seealso cref="QueryBase" />
+    internal class Query : QueryBase, IQuery
     {
         private readonly List<IQueryArg> args = new List<IQueryArg>();
 
@@ -42,15 +42,17 @@ namespace B1PP.Data
         {
             get
             {
-                if(string.IsNullOrWhiteSpace(Statement))
+                if (string.IsNullOrWhiteSpace(Statement))
+                {
                     return string.Empty;
+                }
 
                 return Prepare(Statement, args.ToArray());
             }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Query"/> class.
+        /// Initializes a new instance of the <see cref="Query" /> class.
         /// </summary>
         /// <param name="company">The company.</param>
         public Query(Company company) : base(company)
@@ -64,19 +66,6 @@ namespace B1PP.Data
         public void AddArgument(IQueryArg arg)
         {
             args.Add(arg);
-        }
-
-        /// <summary>
-        /// Sets the query statement.
-        /// </summary>
-        /// <param name="statement">The statement.</param>
-        /// <returns>
-        /// The current object so you can continue chaining calls.
-        /// </returns>
-        public Query SetStatement(string statement)
-        {
-            Statement = statement;
-            return this;
         }
 
         /// <summary>
@@ -114,7 +103,6 @@ namespace B1PP.Data
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        [CanBeNull]
         public T SelectOne<T>() where T : class
         {
             return SelectOne<T>(PreparedStatement);
@@ -124,7 +112,6 @@ namespace B1PP.Data
         /// Selects the one.
         /// </summary>
         /// <returns></returns>
-        [CanBeNull]
         public dynamic SelectOne()
         {
             return SelectOne(PreparedStatement);
@@ -136,10 +123,35 @@ namespace B1PP.Data
         /// <typeparam name="T"></typeparam>
         /// <param name="creator">The creator.</param>
         /// <returns></returns>
-        [CanBeNull]
         public T SelectOne<T>(InstanceCreator<T> creator) where T : class
         {
             return SelectOne(PreparedStatement, creator, null);
+        }
+
+        /// <summary>
+        /// Sets the query statement.
+        /// </summary>
+        /// <param name="statement">The statement.</param>
+        /// <returns>
+        /// The current object so you can continue chaining calls.
+        /// </returns>
+        public IQuery SetStatement(string statement)
+        {
+            Statement = statement;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the query statement automatically to the provided type.
+        /// </summary>
+        /// <returns>
+        /// The current object so you can continue chaining calls.
+        /// </returns>
+        public IQuery SetStatement<T>()
+        {
+            var statement = SqlStatementFactory.Create<T>();
+            Statement = statement.GetStatement();
+            return this;
         }
 
         /// <summary>
@@ -148,7 +160,7 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public Query With(string placeholder, int value)
+        public IQuery With(string placeholder, int value)
         {
             args.Add(new IntegerValueArg(placeholder, value));
             return this;
@@ -160,7 +172,7 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public Query With(string placeholder, string value)
+        public IQuery With(string placeholder, string value)
         {
             args.Add(new StringValueArg(placeholder, value));
             return this;
@@ -172,7 +184,7 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public Query With(string placeholder, DateTime value)
+        public IQuery With(string placeholder, DateTime value)
         {
             args.Add(new DateTimeValueArg(placeholder, value));
             return this;
@@ -184,7 +196,7 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public Query With(string placeholder, double value)
+        public IQuery With(string placeholder, double value)
         {
             args.Add(new DoubleValueArg(placeholder, value));
             return this;
@@ -196,7 +208,7 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="values">The values.</param>
         /// <returns></returns>
-        public Query With(string placeholder, IEnumerable<int> values)
+        public IQuery With(string placeholder, IEnumerable<int> values)
         {
             args.Add(new MultipleIntValuesArg(placeholder, values));
             return this;
@@ -208,7 +220,7 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="values">The values.</param>
         /// <returns></returns>
-        public Query With(string placeholder, IEnumerable<double> values)
+        public IQuery With(string placeholder, IEnumerable<double> values)
         {
             args.Add(new MultipleDoubleValuesArg(placeholder, values));
             return this;
@@ -220,7 +232,7 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="values">The values.</param>
         /// <returns></returns>
-        public Query With(string placeholder, IEnumerable<string> values)
+        public IQuery With(string placeholder, IEnumerable<string> values)
         {
             args.Add(new MultipleStringValuesArg(placeholder, values));
             return this;
@@ -232,10 +244,18 @@ namespace B1PP.Data
         /// <param name="placeholder">The placeholder.</param>
         /// <param name="values">The values.</param>
         /// <returns></returns>
-        public Query With(string placeholder, IEnumerable<DateTime> values)
+        public IQuery With(string placeholder, IEnumerable<DateTime> values)
         {
             args.Add(new MultipleDateTimeValuesArg(placeholder, values));
             return this;
+        }
+
+        /// <summary>
+        /// Executes the current query.
+        /// </summary>
+        public void Execute()
+        {
+            Execute(PreparedStatement);
         }
     }
 }

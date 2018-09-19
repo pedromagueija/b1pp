@@ -1,38 +1,29 @@
-﻿// <copyright filename="QueryHelper.cs" project="Framework">
+﻿// <copyright filename="QueryBase.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System.Collections.Generic;
-
-    using JetBrains.Annotations;
 
     using SAPbobsCOM;
 
     /// <summary>
     /// Performs data access operations.
     /// </summary>
-    public class QueryHelper
+    internal abstract class QueryBase
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="reader">The reader.</param>
-        /// <returns></returns>
-        public delegate T InstanceCreator<out T>(IRecordsetReader reader);
-
         /// <summary>
         /// The company
         /// </summary>
         private readonly Company company;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryHelper"/> class.
+        /// Initializes a new instance of the <see cref="QueryBase" /> class.
         /// </summary>
         /// <param name="company">The company.</param>
-        public QueryHelper(Company company)
+        protected QueryBase(Company company)
         {
             this.company = company;
         }
@@ -43,7 +34,7 @@ namespace B1PP.Data
         /// <param name="query">The query.</param>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
-        public string Prepare(string query, params IQueryArg[] args)
+        protected string Prepare(string query, params IQueryArg[] args)
         {
             var workingQuery = query;
 
@@ -169,7 +160,6 @@ namespace B1PP.Data
         /// <typeparam name="T"></typeparam>
         /// <param name="query">The query.</param>
         /// <returns></returns>
-        [CanBeNull]
         public T SelectOne<T>(string query) where T : class
         {
             using (var recordset = new DisposableRecordset(company))
@@ -197,7 +187,6 @@ namespace B1PP.Data
         /// </summary>
         /// <param name="query">The query.</param>
         /// <returns></returns>
-        [CanBeNull]
         public dynamic SelectOne(string query)
         {
             using (var recordset = new DisposableRecordset(company))
@@ -217,6 +206,16 @@ namespace B1PP.Data
 
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Executes the specified query.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        protected void Execute(string query)
+        {
+            using(var recordset = new DisposableRecordset(company))
+                recordset.DoQuery(query);
         }
     }
 }

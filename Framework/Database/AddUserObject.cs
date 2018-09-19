@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
@@ -19,8 +20,6 @@ namespace B1PP.Database
             this.company = company;
             this.userObjectMd = userObjectMd;
         }
-
-        public event EventHandler<AddUserObjectErrorEventArgs> OnError = delegate { };
 
         public void Execute()
         {
@@ -40,5 +39,7 @@ namespace B1PP.Database
 
             Marshal.ReleaseComObject(userObjectMd);
         }
+
+        public event EventHandler<AddUserObjectErrorEventArgs> OnError = delegate { };
     }
 }

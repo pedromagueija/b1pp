@@ -2,13 +2,14 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System;
     using System.Runtime.Serialization;
 
     [Serializable]
-    internal class UnableToReadException : Exception
+    public class UnableToReadException : Exception
     {
         public UnableToReadException()
         {

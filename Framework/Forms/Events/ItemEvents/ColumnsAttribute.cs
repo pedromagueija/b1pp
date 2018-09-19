@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.ItemEvents
 {
     using System;
@@ -14,7 +15,7 @@ namespace B1PP.Forms.Events.ItemEvents
     /// <remarks>
     /// </remarks>
     /// <example>
-    /// <code>
+    ///     <code>
     /// [ItemEventHandler(@"itemId", BoEventTypes.et_MATRIX_LINK_PRESSED)]
     /// [Columns(@"columnId")]
     /// private void OnAfterColumnLinkPressed(ItemEvent e)
@@ -60,7 +61,7 @@ namespace B1PP.Forms.Events.ItemEvents
         /// </remarks>
         public ColumnsAttribute(params string[] values)
         {
-                ColumnIds = values?.Where(id => !string.IsNullOrWhiteSpace(id)) ?? new List<string>();
+            ColumnIds = values?.Where(id => !string.IsNullOrWhiteSpace(id)) ?? new List<string>();
         }
     }
 }

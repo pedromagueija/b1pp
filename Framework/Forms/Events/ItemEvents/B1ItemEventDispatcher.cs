@@ -2,35 +2,36 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Forms.Events.ItemEvents
 {
     using System;
 
     using SAPbouiCOM;
 
-    using ListenerCollection = System.Collections.Generic.Dictionary<string, IItemEventListener>;
+    using Map = System.Collections.Generic.Dictionary<string, IItemEventHandler>;
 
     internal class B1ItemEventDispatcher
     {
-        private readonly ListenerCollection Listeners = new ListenerCollection();
+        private readonly Map handlers = new Map();
 
         private Application Application { get; set; }
 
-        public void AddListener(IItemEventListener listener)
+        public void AddListener(IItemEventHandler handler)
         {
-            if (!Listeners.ContainsKey(listener.Id))
+            if (!handlers.ContainsKey(handler.Id))
             {
-                Listeners.Add(listener.Id, listener);
+                handlers.Add(handler.Id, handler);
             }
         }
 
         public event EventHandler<ErrorEventArgs> EventHandlerError = delegate { };
 
-        public void RemoveListener(IItemEventListener listener)
+        public void RemoveListener(IItemEventHandler handler)
         {
-            if (Listeners.ContainsKey(listener.Id))
+            if (handlers.ContainsKey(handler.Id))
             {
-                Listeners.Remove(listener.Id);
+                handlers.Remove(handler.Id);
             }
         }
 
@@ -69,7 +70,7 @@ namespace B1PP.Forms.Events.ItemEvents
             {
                 Application.ItemEvent -= OnItemEvent;
                 Application = null;
-                Listeners.Clear();
+                handlers.Clear();
             }
         }
 
@@ -77,9 +78,9 @@ namespace B1PP.Forms.Events.ItemEvents
         {
             bubbleEvent = true;
 
-            if (Listeners.ContainsKey(key))
+            if (handlers.ContainsKey(key))
             {
-                Listeners[key].OnItemEvent(ref e, out bubbleEvent);
+                handlers[key].OnItemEvent(ref e, out bubbleEvent);
                 return true;
             }
 
@@ -106,7 +107,7 @@ namespace B1PP.Forms.Events.ItemEvents
             }
             catch (Exception exception)
             {
-                EventHandlerError(null, new ErrorEventArgs(exception));
+                EventHandlerError(this, new ErrorEventArgs(exception));
             }
         }
     }

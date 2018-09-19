@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.SDK.UI
 {
     using System;
@@ -14,6 +15,16 @@ namespace B1PP.Extensions.SDK.UI
     /// </summary>
     public static class ApplicationExtensions
     {
+        /// <summary>
+        /// Applies the specified XML.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <param name="xml">The XML.</param>
+        public static void Apply(this Application application, string xml)
+        {
+            application.LoadBatchActions(ref xml);
+        }
+
         /// <summary>
         /// Creates an instance of the object. This method casts the object to the given T type.
         /// </summary>
@@ -34,14 +45,17 @@ namespace B1PP.Extensions.SDK.UI
         /// <param name="formUniqueId">The form unique identifier. Must not be empty or null.</param>
         /// <param name="formXml">The form xml definition. Must not be empty or null.</param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown when <paramref name="formType"/>, <paramref name="formUniqueId"/> or <paramref name="formXml"/> are null or empty.
+        /// Thrown when <paramref name="formType" />, <paramref name="formUniqueId" /> or <paramref name="formXml" /> are null or
+        /// empty.
         /// </exception>
         /// <returns>The created form.</returns>
-        public static Form CreateForm(this Application application, string formType, string formUniqueId, string formXml)
+        public static Form CreateForm(this Application application, string formType, string formUniqueId,
+            string formXml)
         {
             if (string.IsNullOrEmpty(formType) || string.IsNullOrEmpty(formUniqueId) || string.IsNullOrEmpty(formXml))
             {
-                throw new ArgumentNullException("FormType, FormUniqueId and FormXml cannot be null or empty.", (Exception)null);    
+                throw new ArgumentNullException("FormType, FormUniqueId and FormXml cannot be null or empty.",
+                    (Exception) null);
             }
 
             var fcp = application.Create<FormCreationParams>(BoCreatableObjectType.cot_FormCreationParams);
@@ -113,17 +127,8 @@ namespace B1PP.Extensions.SDK.UI
                 return;
             }
 
-            application.StatusBar.SetSystemMessage(message, BoMessageTime.bmt_Short, BoStatusBarMessageType.smt_Warning);
-        }
-
-        /// <summary>
-        /// Applies the specified XML.
-        /// </summary>
-        /// <param name="application">The application.</param>
-        /// <param name="xml">The XML.</param>
-        public static void Apply(this Application application, string xml)
-        {
-            application.LoadBatchActions(ref xml);
+            application.StatusBar.SetSystemMessage(message, BoMessageTime.bmt_Short,
+                BoStatusBarMessageType.smt_Warning);
         }
     }
 }

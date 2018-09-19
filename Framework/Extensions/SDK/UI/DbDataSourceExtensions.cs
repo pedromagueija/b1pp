@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Extensions.SDK.UI
 {
     using System;
@@ -15,7 +16,7 @@ namespace B1PP.Extensions.SDK.UI
     using SAPbouiCOM;
 
     /// <summary>
-    /// Common and helpful methods for <see cref="DBDataSource"/>.
+    /// Common and helpful methods for <see cref="DBDataSource" />.
     /// </summary>
     public static class DbDataSourceExtensions
     {
@@ -165,7 +166,9 @@ namespace B1PP.Extensions.SDK.UI
         {
             var rowCount = source.Size;
             if (rowCount <= 0)
+            {
                 yield break;
+            }
 
             for (var row = 0; row < rowCount; row++)
             {
@@ -194,13 +197,24 @@ namespace B1PP.Extensions.SDK.UI
                 var property = DetermineProperty(type, columnName);
 
                 if (property.PropertyType == typeof(string))
+                {
                     property.SetValue(item, source.GetString(columnName, rowIndex));
+                }
+
                 if (property.PropertyType == typeof(int))
+                {
                     property.SetValue(item, source.GetInt(columnName, rowIndex));
+                }
+
                 if (property.PropertyType == typeof(double))
+                {
                     property.SetValue(item, source.GetDouble(columnName, rowIndex));
+                }
+
                 if (property.PropertyType == typeof(DateTime))
+                {
                     property.SetValue(item, source.GetDateTime(columnName, rowIndex));
+                }
             }
 
             return item;
@@ -219,21 +233,12 @@ namespace B1PP.Extensions.SDK.UI
 
             if (property == null)
             {
-                var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var properties =
+                    type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                 property = properties.First(UserFieldNameAttributeMatch(propertyName));
             }
 
             return property;
-        }
-
-        /// <summary>
-        /// Users the field name attribute match.
-        /// </summary>
-        /// <param name="columnName">Name of the column.</param>
-        /// <returns></returns>
-        private static Func<PropertyInfo, bool> UserFieldNameAttributeMatch(string columnName)
-        {
-            return p => columnName.Equals(p.GetCustomAttribute<FieldNameAttribute>()?.FieldName);
         }
 
         /// <summary>
@@ -244,6 +249,16 @@ namespace B1PP.Extensions.SDK.UI
         private static string DeterminePropertyName(string name)
         {
             return name.StartsWith(@"U_") ? name.Substring(2) : name;
+        }
+
+        /// <summary>
+        /// Users the field name attribute match.
+        /// </summary>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns></returns>
+        private static Func<PropertyInfo, bool> UserFieldNameAttributeMatch(string columnName)
+        {
+            return p => columnName.Equals(p.GetCustomAttribute<FieldNameAttribute>()?.FieldName);
         }
     }
 }

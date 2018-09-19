@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database.Attributes
 {
     using System;
@@ -14,7 +15,7 @@ namespace B1PP.Database.Attributes
         public BoUTBTableType TableType { get; }
         public string TableName { get; }
         public string TableDescription { get; }
-        
+
         /// <summary>
         /// Gets the table prefix.
         /// </summary>
@@ -23,7 +24,8 @@ namespace B1PP.Database.Attributes
         /// </value>
         public string TablePrefix { get; }
 
-        public UserTableAttribute(string tableName, string tableDescription, BoUTBTableType tableType, string tablePrefix)
+        public UserTableAttribute(string tableName, string tableDescription, BoUTBTableType tableType,
+            string tablePrefix)
         {
             TableType = tableType;
             TablePrefix = tablePrefix ?? string.Empty;
@@ -31,7 +33,7 @@ namespace B1PP.Database.Attributes
             TableDescription = tableDescription ?? string.Empty;
         }
 
-        public UserTableAttribute(BoUTBTableType tableType, string tablePrefix) : 
+        public UserTableAttribute(BoUTBTableType tableType, string tablePrefix) :
             this(string.Empty, string.Empty, tableType, tablePrefix)
         {
         }

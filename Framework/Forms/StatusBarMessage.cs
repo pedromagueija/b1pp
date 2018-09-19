@@ -14,7 +14,7 @@ namespace B1PP.Forms
     /// with the given message and parameters.
     /// </summary>
     /// <example>
-    /// <code>
+    ///     <code>
     ///     var message = new StatusBarMessage(application, @"Hello {0}!", "World");
     /// </code>
     /// </example>
@@ -31,15 +31,17 @@ namespace B1PP.Forms
         /// <param name="text">The text to be displayed.</param>
         /// <param name="args">The arguments for the text.</param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown when <paramref name="application"/> is <see langword="null"/>.
+        /// Thrown when <paramref name="application" /> is <see langword="null" />.
         /// </exception>
         public StatusBarMessage(Application application, string text, params object[] args)
         {
-            if(application == null)
+            if (application == null)
+            {
                 throw new ArgumentNullException(nameof(application));
+            }
 
             this.application = application;
-            this.args = args ?? new object[]{};
+            this.args = args ?? new object[] { };
             this.text = text ?? string.Empty;
         }
 

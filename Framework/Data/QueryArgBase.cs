@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Data
 {
     using System;
@@ -15,13 +16,20 @@ namespace B1PP.Data
     /// <seealso cref="B1PP.Data.IQueryArg" />
     public abstract class QueryArgBase : IQueryArg
     {
+        protected QueryArgBase(string placeHolder)
+        {
+            if(string.IsNullOrEmpty(placeHolder))
+                throw new ArgumentException("Cannot be null or empty", nameof(placeHolder));
+
+            PlaceHolder = placeHolder.StartsWith(@"@") ? placeHolder : $@"@{placeHolder}";
+        }
         /// <summary>
         /// Gets the place holder.
         /// </summary>
         /// <remarks>
-        /// Typically a @placeHolderName format is used, but you can use any placeholder.
+        /// Placeholder must be in format @nameOfPlaceHolder.
         /// </remarks>
-        public string PlaceHolder { get; protected set; }
+        public string PlaceHolder { get; private set; }
 
         /// <summary>
         /// Gets the value to replace the placeholder with.

@@ -2,10 +2,10 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Connections
 {
     using System;
-    using System.Reflection;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -33,12 +33,7 @@ namespace B1PP.Connections
         /// </exception>
         public ConnectionString(string[] commandLineArgs)
         {
-            if (commandLineArgs == null)
-            {
-                throw new ArgumentNullException(nameof(commandLineArgs));
-            }
-
-            this.commandLineArgs = commandLineArgs;
+            this.commandLineArgs = commandLineArgs ?? throw new ArgumentNullException(nameof(commandLineArgs));
         }
 
         /// <summary>
@@ -88,15 +83,16 @@ namespace B1PP.Connections
         /// </returns>
         private bool IsBusinessOneConnectionString()
         {
-            if (commandLineArgs.Length == 2)
+            // B1 always invokes the add-on with two command line arguments
+            if (commandLineArgs.Length != 2)
             {
-                var connectionString = commandLineArgs[1];
-                const string pattern = @"[a-zA-Z0-9]{20,50}";
-
-                return Regex.IsMatch(connectionString, pattern);
+                return false;
             }
 
-            return false;
+            // the first argument is the name of the executable, the second is the connection string
+            string connectionString = commandLineArgs[1];
+
+            return Regex.IsMatch(connectionString, @"[a-zA-Z0-9]{20,50}");
         }
     }
 }

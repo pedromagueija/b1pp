@@ -2,6 +2,7 @@
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
 namespace B1PP.Database
 {
     using System.Xml.Linq;
@@ -10,8 +11,8 @@ namespace B1PP.Database
 
     internal class UserFieldAdapter : AdapterBase
     {
-        private readonly IUserFieldsMD userField;
         private readonly XElement root;
+        private readonly IUserFieldsMD userField;
 
         public UserFieldAdapter(IUserFieldsMD userField, XElement root)
         {
