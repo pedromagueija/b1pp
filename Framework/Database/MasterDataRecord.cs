@@ -1,7 +1,10 @@
-// <copyright filename="DocumentRecord.cs" project="Framework">
+// <copyright filename="MasterDataRecord.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
+
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// Reason: The private setters are essential for setting the properties via reflection.
 
 namespace B1PP.Database
 {
@@ -10,64 +13,36 @@ namespace B1PP.Database
     using Attributes;
 
     /// <summary>
-    /// Standard Business One data for document type records.
+    /// Standard Business One data for master data type records.
     /// </summary>
-    public abstract class DocumentRecord
+    public abstract class MasterDataRecord : IMasterDataRecord
     {
         /// <summary>
-        /// Gets the document entry.
+        /// Gets the code.
         /// </summary>
         /// <value>
-        /// The document entry.
+        /// The code.
         /// </value>
         [SystemField]
-        public int? DocEntry { get; }
+        public string Code { get; set; }
 
         /// <summary>
-        /// Gets the document number.
+        /// Gets the name.
         /// </summary>
         /// <value>
-        /// The document number.
+        /// The name.
         /// </value>
         [SystemField]
-        public string DocNum { get; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets the period.
+        /// Gets the master data entry.
         /// </summary>
         /// <value>
-        /// The period.
+        /// The master data entry.
         /// </value>
         [SystemField]
-        public int? Period { get; }
-
-        /// <summary>
-        /// Gets the instance.
-        /// </summary>
-        /// <value>
-        /// The instance.
-        /// </value>
-        [SystemField]
-        public int? Instance { get; }
-
-        /// <summary>
-        /// Gets the series.
-        /// </summary>
-        /// <value>
-        /// The series.
-        /// </value>
-        [SystemField]
-        public int? Series { get; }
-
-        /// <summary>
-        /// Gets the handwritten.
-        /// </summary>
-        /// <value>
-        /// The handwritten.
-        /// </value>
-        [SystemField]
-        [FieldName(@"Handwrtten")]
-        public string Handwritten { get; }
+        public int? DocEntry { get; private set; }
 
         /// <summary>
         /// Gets the canceled.
@@ -77,7 +52,7 @@ namespace B1PP.Database
         /// </value>
         [SystemField]
         [FieldName(@"Canceled")]
-        public string Cancelled { get; }
+        public string Cancelled { get; private set; }
 
         /// <summary>
         /// Gets the object.
@@ -86,7 +61,7 @@ namespace B1PP.Database
         /// The object.
         /// </value>
         [SystemField]
-        public string Object { get; }
+        public string Object { get; private set; }
 
         /// <summary>
         /// Gets the log instance.
@@ -96,7 +71,7 @@ namespace B1PP.Database
         /// </value>
         [SystemField]
         [FieldName(@"LogInst")]
-        public int? LogInstance { get; }
+        public int? LogInstance { get; private set; }
 
         /// <summary>
         /// Gets the user signature.
@@ -106,7 +81,7 @@ namespace B1PP.Database
         /// </value>
         [SystemField]
         [FieldName(@"UserSign")]
-        public int? UserSignature { get; }
+        public int? UserSignature { get; private set; }
 
         /// <summary>
         /// Gets the transferred.
@@ -116,7 +91,7 @@ namespace B1PP.Database
         /// </value>
         [SystemField]
         [FieldName(@"Transfered")]
-        public string Transferred { get; }
+        public string Transferred { get; private set; }
 
         /// <summary>
         /// Gets the status.
@@ -125,7 +100,7 @@ namespace B1PP.Database
         /// The status.
         /// </value>
         [SystemField]
-        public string Status { get; }
+        public string Status { get; private set; }
 
         /// <summary>
         /// Gets the create date.
@@ -134,7 +109,7 @@ namespace B1PP.Database
         /// The create date.
         /// </value>
         [SystemField]
-        public DateTime? CreateDate { get; }
+        public DateTime? CreateDate { get; private set; }
 
         /// <summary>
         /// Gets the create time.
@@ -143,7 +118,7 @@ namespace B1PP.Database
         /// The create time.
         /// </value>
         [SystemField]
-        public int? CreateTime { get; }
+        public int? CreateTime { get; private set; }
 
         /// <summary>
         /// Gets the update date.
@@ -152,7 +127,7 @@ namespace B1PP.Database
         /// The update date.
         /// </value>
         [SystemField]
-        public DateTime? UpdateDate { get; }
+        public DateTime? UpdateDate { get; private set; }
 
         /// <summary>
         /// Gets the update time.
@@ -161,7 +136,7 @@ namespace B1PP.Database
         /// The update time.
         /// </value>
         [SystemField]
-        public int? UpdateTime { get; }
+        public int? UpdateTime { get; private set; }
 
         /// <summary>
         /// Gets the data source.
@@ -170,33 +145,6 @@ namespace B1PP.Database
         /// The data source.
         /// </value>
         [SystemField]
-        public string DataSource { get; }
-
-        /// <summary>
-        /// Gets the request status.
-        /// </summary>
-        /// <value>
-        /// The request status.
-        /// </value>
-        [SystemField]
-        public string RequestStatus { get; }
-
-        /// <summary>
-        /// Gets the creator.
-        /// </summary>
-        /// <value>
-        /// The creator.
-        /// </value>
-        [SystemField]
-        public string Creator { get; }
-
-        /// <summary>
-        /// Gets the remark.
-        /// </summary>
-        /// <value>
-        /// The remark.
-        /// </value>
-        [SystemField]
-        public string Remark { get; }
+        public string DataSource { get; private set; }
     }
 }

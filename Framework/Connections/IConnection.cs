@@ -11,7 +11,7 @@ namespace B1PP.Connections
 
     /// <summary>
     /// Represents a connection to SAP Business One.
-    /// A connection can be obtained from the <see cref="IConnectionFactory" />.
+    /// A connection can be obtained from the <see cref="ConnectionFactory" />.
     /// </summary>
     /// <example>
     /// How to perform a standard (UI and DI API) connection to SAP Business One.

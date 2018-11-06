@@ -5,7 +5,7 @@
 
 namespace B1PP.Database
 {
-    public interface ISimpleAutoIncrementRecord
+    public interface ISimpleAutoIncrementRecord : INoObjectRecord
     {
         int Code { get; }
         string Name { get; set; }

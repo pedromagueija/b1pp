@@ -16,103 +16,64 @@ namespace B1PP.Data
         /// <summary>
         /// Returns the columns.
         /// </summary>
-        /// <value>
-        /// The columns.
-        /// </value>
         IEnumerable<IColumn> Columns { get; }
 
         /// <summary>
-        /// Gets a boolean value from the reader.
+        /// Gets a value from the reader if one exists, or the default value otherwise.
         /// </summary>
-        /// <param name="columnName">The item identifier.</param>
-        /// <returns>The boolean value.</returns>
-        /// <exception cref="ArgumentException">Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.</exception>
-        /// <exception cref="FormatException">Thrown when column value is not True or False literals.</exception>
-        bool GetBool(string columnName);
+        bool GetBoolOrDefault(string columnName);
 
         /// <summary>
-        /// Gets a date time from the reader.
+        /// Gets a value from the reader if one exists, or null otherwise.
         /// </summary>
-        /// <param name="columnName">
-        /// The item id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="DateTime" /> value.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
-        /// </exception>
-        /// <exception cref="FormatException">
-        /// Triggered when the value contained in <paramref name="columnName" /> is empty or not a date.
-        /// </exception>
+        bool? GetBool(string columnName);
+        
+        /// <summary>
+        /// Gets a value from the reader if one exists, or null otherwise.
+        /// </summary>
         DateTime? GetDateTime(string columnName);
 
         /// <summary>
-        /// Gets a double from the reader.
+        /// Gets a value from the reader if one exists, or the default value otherwise.
         /// </summary>
-        /// <param name="columnName">
-        /// The item id.
-        /// </param>
-        /// <returns>
-        /// The double value.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
-        /// </exception>
-        /// <exception cref="OverflowException">
-        /// The value contained in <paramref name="columnName" /> represents a number that is less than
-        /// <see cref="F:System.Double.MinValue" /> or greater than <see cref="F:System.Double.MaxValue" />.
-        /// </exception>
-        /// <exception cref="FormatException">
-        /// The value contained in <paramref name="columnName" /> does not represent a number in a
-        /// valid format.
-        /// </exception>
+        DateTime GetDateTimeOrDefault(string columnName);
+
+        /// <summary>
+        /// Gets a value from the reader if one exists, or null otherwise.
+        /// </summary>
         double? GetDouble(string columnName);
 
         /// <summary>
-        /// Gets an integer from the reader.
+        /// Gets a value from the reader if one exists, or the default value otherwise.
         /// </summary>
-        /// <param name="columnName">
-        /// The item id.
-        /// </param>
-        /// <returns>
-        /// The integer value.
-        /// </returns>
-        /// <exception cref="OverflowException">
-        /// The value contained in <paramref name="columnName" /> represents a number less than
-        /// <see cref="F:System.Int32.MinValue" /> or greater than <see cref="F:System.Int32.MaxValue" />.
-        /// </exception>
-        /// <exception cref="FormatException">
-        /// The value contained in <paramref name="columnName" /> is not of the correct format.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
-        /// </exception>
+        double GetDoubleOrDefault(string columnName);
+
+        /// <summary>
+        /// Gets a value from the reader if one exists, or null otherwise.
+        /// </summary>
         int? GetInt(string columnName);
 
         /// <summary>
-        /// Gets the value as a string.
+        /// Gets a value from the reader if one exists, or the default value otherwise.
         /// </summary>
-        /// <param name="columnName">
-        /// The item id.
-        /// </param>
-        /// <returns>
-        /// Value as a string.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// Triggered when <paramref name="columnName" /> doesn't exist, is null or is empty.
-        /// </exception>
+        int GetIntOrDefault(string columnName);
+        
+        /// <summary>
+        /// Gets a value from the reader if one exists, or null otherwise.
+        /// </summary>
         string GetString(string columnName);
 
+        /// <summary>
+        /// Gets a value from the reader if one exists, or an empty string otherwise.
+        /// </summary>
+        string GetStringOrEmpty(string columnName);
+        
         /// <summary>
         /// Moves to the next record.
         /// </summary>
         /// <returns>
         /// True if there is another record, false otherwise.
         /// </returns>
-        /// <exception cref="InvalidOperationException">
-        /// The collection was modified after the enumerator was created.
-        /// </exception>
         bool MoveNext();
     }
 }

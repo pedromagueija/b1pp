@@ -81,7 +81,7 @@ namespace Tests.Feature.Data
         [SetUp]
         public void Setup()
         {
-            connection = ConnectionFactory.CreateStandardConnection();
+            connection = new ConnectionFactory().CreateStandardConnection();
             connection.Connect();
         }
 

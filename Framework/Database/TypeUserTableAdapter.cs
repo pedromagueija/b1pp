@@ -28,10 +28,17 @@ namespace B1PP.Database
             var userTableData = type.GetCustomAttribute<UserTableAttribute>();
             if (userTableData != null)
             {
-                userTableData.Apply(type, table);
+                userTableData.Apply(table);
 
-                var archiveable = type.GetCustomAttribute<ArchiveDateFieldAttribute>();
-                archiveable?.Apply(table);
+                var archivable = type.GetCustomAttribute<ArchiveDateFieldAttribute>();
+                archivable?.Apply(table);
+                return;
+            }
+
+            var childTableAttr = type.GetCustomAttribute<ChildUserTableAttribute>();
+            if (childTableAttr != null)
+            {
+                childTableAttr.Apply(table);
             }
         }
     }

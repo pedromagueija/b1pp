@@ -16,13 +16,6 @@ namespace B1PP.Database
 
     internal class TypeUserObjectAdapter
     {
-        private readonly List<Type> ignoredTypes = new List<Type>
-        {
-            typeof(SimpleRecord),
-            typeof(DocumentRecord),
-            typeof(DocumentRecordLine)
-        };
-
         private readonly string tableName;
         private readonly Type type;
         private readonly UserObjectsMD userObject;
@@ -37,10 +30,18 @@ namespace B1PP.Database
         public void Execute()
         {
             var userObjectAttr = type.GetCustomAttribute<UserObjectAttribute>();
+            if (userObjectAttr == null)
+            {
+                throw new InvalidOperationException($@"'{type}' does not contain a user object attribute.");
+            }
             userObjectAttr.Apply(userObject, tableName);
 
             // enable other services
             var userObjectServicesAttr = type.GetCustomAttribute<UserObjectServicesAttribute>();
+            if (userObjectServicesAttr == null)
+            {
+                throw new InvalidOperationException($@"'{type}' does not contain a user object services attribute.");
+            }
             userObjectServicesAttr.Apply(userObject);
 
             var approveServiceAttr = type.GetCustomAttribute<ApproveServiceAttribute>();
@@ -67,21 +68,22 @@ namespace B1PP.Database
 
         private void SetChildTables(PropertyInfo property)
         {
-            var childTableAttribute = property.GetCustomAttribute<ChildUserTableAttribute>();
-            if (childTableAttribute == null)
+            var childrenAttribute = property.GetCustomAttribute<ChildrenAttribute>();
+            var childUserTable = childrenAttribute?.Type.GetCustomAttribute<ChildUserTableAttribute>();
+            if (childUserTable == null)
             {
                 return;
             }
-
+            
             var child = userObject.ChildTables;
-            child.TableName = childTableAttribute.TableName;
-            child.ObjectName = childTableAttribute.ObjectName;
+            child.TableName = childUserTable.TableName;
+            child.ObjectName = childUserTable.ObjectName;
 
             // setting the child table log when the object doesn't support the log service 
             // results in an error in transaction when updating the object
             if (userObject.CanLog == BoYesNoEnum.tYES)
             {
-                child.LogTableName = childTableAttribute.LogTableName;
+                child.LogTableName = childUserTable.LogTableName;
             }
 
             child.Add();
@@ -89,22 +91,23 @@ namespace B1PP.Database
 
         private void SetFindColumn(PropertyInfo property)
         {
-            var userFieldNameAttr = property.GetCustomAttribute<FieldNameAttribute>();
+            bool isSystemField = property.GetCustomAttribute<SystemFieldAttribute>() != null;
+            var fieldNameAttr = property.GetCustomAttribute<FieldNameAttribute>();
             var findColumns = userObject.FindColumns;
 
-            if (userFieldNameAttr != null)
+            if (fieldNameAttr != null)
             {
-                findColumns.ColumnAlias = ignoredTypes.Contains(property.DeclaringType)
-                    ? userFieldNameAttr.FieldName
-                    : $"U_{userFieldNameAttr.FieldName}";
+                findColumns.ColumnAlias = isSystemField
+                    ? fieldNameAttr.FieldName
+                    : $"U_{fieldNameAttr.FieldName}";
                 findColumns.ColumnDescription =
-                    string.IsNullOrEmpty(userFieldNameAttr.FieldDescription)
+                    string.IsNullOrEmpty(fieldNameAttr.FieldDescription)
                         ? SplitByCaps(property.Name)
-                        : userFieldNameAttr.FieldDescription;
+                        : fieldNameAttr.FieldDescription;
             }
             else
             {
-                findColumns.ColumnAlias = ignoredTypes.Contains(property.DeclaringType)
+                findColumns.ColumnAlias = isSystemField
                     ? property.Name
                     : $"U_{property.Name}";
                 findColumns.ColumnDescription = SplitByCaps(property.Name);

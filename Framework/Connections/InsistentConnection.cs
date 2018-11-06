@@ -74,16 +74,6 @@ namespace B1PP.Connections
         /// <summary>
         /// Initializes a new instance of the <see cref="InsistentConnection" /> class.
         /// </summary>
-        /// <remarks>
-        /// By default the <see cref="InsistentConnection" /> will use a <see cref="StandardConnection" /> as its connection.
-        /// </remarks>
-        public InsistentConnection() : this(null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InsistentConnection" /> class.
-        /// </summary>
         /// <param name="connection">The connection type.</param>
         /// <remarks>
         /// By default the <see cref="InsistentConnection" /> will use a <see cref="StandardConnection" /> as its connection.

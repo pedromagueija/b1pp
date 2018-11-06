@@ -7,14 +7,11 @@ namespace B1PP.Data
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
 
     using Database.Attributes;
-
-    using Exceptions;
 
     internal class SelectStatement<T> : ISelectStatement<T>
     {
@@ -38,7 +35,7 @@ namespace B1PP.Data
             return builder.ToString();
         }
 
-        private static IEnumerable<string> GetColumnNames(Type type)
+        private IEnumerable<string> GetColumnNames(Type type)
         {
             foreach (var property in type.GetProperties())
             {

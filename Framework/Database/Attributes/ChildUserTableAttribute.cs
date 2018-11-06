@@ -7,11 +7,13 @@ namespace B1PP.Database.Attributes
 {
     using System;
 
+    using SAPbobsCOM;
+
     /// <summary>
-    /// Marks a member as being a relationship to a child table.
+    /// Marks a class as being a child user table.
     /// </summary>
     /// <seealso cref="System.Attribute" />
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class ChildUserTableAttribute : Attribute
     {
         /// <summary>
@@ -21,6 +23,10 @@ namespace B1PP.Database.Attributes
         /// The name of the child table.
         /// </value>
         public string TableName { get; }
+
+        public string TableDescription { get; }
+
+        public BoUTBTableType TableType { get; }
 
         /// <summary>
         /// Gets the name of the child object.
@@ -42,13 +48,30 @@ namespace B1PP.Database.Attributes
         /// Initializes a new instance of the <see cref="ChildUserTableAttribute" /> class.
         /// </summary>
         /// <param name="tableName">Name of the child table.</param>
+        /// <param name="tableDescription">Description of the child table.</param>
+        /// <param name="tableType">Type of the child table.</param>
         /// <param name="objectName">Name of the child object.</param>
         /// <param name="logTableName">Name of the child log table.</param>
-        public ChildUserTableAttribute(string tableName, string objectName, string logTableName)
+        public ChildUserTableAttribute(string tableName, string tableDescription, BoUTBTableType tableType, string objectName, string logTableName)
         {
             TableName = tableName;
+            TableDescription = tableDescription;
             ObjectName = objectName;
             LogTableName = logTableName;
+            TableType = tableType;
+        }
+
+        public ChildUserTableAttribute(string tableName, string tableDescription, BoUTBTableType tableType) :
+            this(tableName, tableDescription, tableType, $"{tableName}_O", $"{tableName}_A")
+        {
+            
+        }
+
+        public void Apply(UserTablesMD table)
+        {
+            table.TableName = TableName;
+            table.TableDescription = TableDescription;
+            table.TableType = TableType;
         }
     }
 }

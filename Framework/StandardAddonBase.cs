@@ -26,10 +26,6 @@ namespace B1PP
         {
             Connect();
 
-            //SetupSchema();
-            //SetupMainMenu();
-            //SetupEvents();
-
             B1EventsManager.Instance.Initialize(connection.Application, GetApplicationEventHandler());
 
             var status = new StatusBarMessage(
@@ -41,8 +37,6 @@ namespace B1PP
         public void Stop()
         {
             events.Terminate();
-            //mainMenu.Terminate();
-            //B1.Disconnect();
 
             connection.Disconnect();
         }

@@ -14,7 +14,7 @@ namespace B1PP.Database.Attributes
     /// </summary>
     /// <remarks>
     /// Using spaces or other special characters in the name of the object can affect the ability to
-    /// serialize for GeneralData. Due to this implication, spaces are removed from the name.
+    /// serialize for GeneralData. Due to this implication, spaces are replaced with underscores in the name.
     /// </remarks>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Class)]
@@ -30,7 +30,7 @@ namespace B1PP.Database.Attributes
             BoUDOObjType objectType)
         {
             ObjectId = objectId;
-            ObjectName = objectName.Replace(" ", "");
+            ObjectName = objectName.Replace(@" ", @"_");
             ObjectType = objectType;
         }
 

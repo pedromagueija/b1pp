@@ -23,7 +23,7 @@ namespace Tests.Feature.Database
         [SetUp]
         public void Setup()
         {
-            var connection = ConnectionFactory.CreateStandardConnection();
+            var connection = new ConnectionFactory().CreateStandardConnection();
             connection.Connect();
 
             company = connection.Company;
@@ -84,25 +84,9 @@ namespace Tests.Feature.Database
             Assert.IsTrue(string.Equals(utmd.TableDescription, tableDescription, StringComparison.OrdinalIgnoreCase));
             Assert.IsTrue(string.Equals(utmd.TableName, tableName, StringComparison.OrdinalIgnoreCase));
         }
-
-
-        [Test]
-        public void CanCreateAutoTableName()
-        {
-            AssertTable(@"T_AutoTableName", @"Auto Table Name", BoUTBTableType.bott_NoObject);
-        }
     }
 
-    [UserTable(BoUTBTableType.bott_NoObject, @"T_")]
-    internal class AutoTableName : SimpleRecord
-    {
-        [UserField(BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 10)]
-        public string SimpleField { get; set; }
-
-        public string IgnoredField { get; set; }
-    }
-
-    [UserTable(@"SPTB", @"Test no object table", BoUTBTableType.bott_NoObject, @"T_")]
+    [UserTable(@"T_SPTB", @"Test no object table", BoUTBTableType.bott_NoObject)]
     internal class Sample : SimpleRecord
     {
         [FieldName(nameof(Subject), @"Subject of Sample")]
@@ -132,7 +116,7 @@ namespace Tests.Feature.Database
         Unique
     }
 
-    [UserTable(@"DOTB", @"Document object table", BoUTBTableType.bott_Document, @"T_")]
+    [UserTable(@"T_DOTB", @"Document object table", BoUTBTableType.bott_Document)]
     [UserObject(@"T_DOTB_O", @"Document object table object", BoUDOObjType.boud_Document)]
     [UserObjectServices(ObjectServices.Find, ObjectServices.Delete, ObjectServices.Cancel, ObjectServices.Close, ObjectServices.Log, ObjectServices.ManageSeries, ObjectServices.YearTransfer)]
     [ApproveService(@"MyTmplId")]
@@ -146,11 +130,11 @@ namespace Tests.Feature.Database
         [UserFieldOptional]
         public string ReferenceNumber { get; set; }
 
-        [ChildUserTable(@"T_DTLN", @"T_DTLN_O", @"T_DTLN_LOG")]
+        [Children(typeof(DocumentSampleLine))]
         public IEnumerable<DocumentSampleLine> Lines { get; } = new List<DocumentSampleLine>();
     }
 
-    [UserTable(@"DTLN", @"Document object table lines", BoUTBTableType.bott_DocumentLines, @"T_")]
+    [ChildUserTable(@"T_DTLN", @"Document object table lines", BoUTBTableType.bott_DocumentLines)]
     internal class DocumentSampleLine : DocumentRecordLine
     {
         [UserField(BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50)]

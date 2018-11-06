@@ -41,6 +41,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\sap\SAPBusinessOneSDK.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\packages\Serilog.2.7.2-dev-01024\lib\net46\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.2.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\packages\Serilog.Sinks.Console.3.1.2-dev-00777\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\packages\Serilog.Sinks.File.4.0.1-dev-00796\lib\net45\Serilog.Sinks.File.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -52,6 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\AddMasterData.cs" />
+    <Compile Include="Database\AddRecord.cs" />
+    <Compile Include="Database\Attributes\ChildrenAttribute.cs" />
+    <Compile Include="Database\IMasterDataRecord.cs" />
+    <Compile Include="Database\INoObjectRecord.cs" />
+    <Compile Include="Database\MasterDataRecord.cs" />
+    <Compile Include="Database\MasterDataRecordLine.cs" />
     <Compile Include="Data\InstanceCreatorDelegate.cs" />
     <Compile Include="Data\IQuery.cs" />
     <Compile Include="Data\ISelectStatement.cs" />
@@ -59,9 +78,10 @@
     <Compile Include="Data\SelectStatement.cs" />
     <Compile Include="Data\SqlStatementFactory.cs" />
     <Compile Include="Data\SystemTableAttribute.cs" />
-    <Compile Include="Exceptions\SystemTableAttributeNotFoundException.cs" />
+    <Compile Include="Exceptions\MissingAttributeException.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\ApplicationEventsHandlerBase.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\DefaultApplicationEventsHandler.cs" />
+    <Compile Include="GenericUdoSerializer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Inquiries\GetUserFieldByName.cs" />
     <Compile Include="Inquiries\UserFieldExists.cs" />

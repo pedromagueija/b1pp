@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\pedro\.Rider2018.2\config\consoles\db" t="IncludeRecursive" />
+    <e p="C:\Users\pedro\.Rider2018.2\config\Extensions" t="IncludeRecursive" />
+    <e p="C:\Users\pedro\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\pedro\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_B1PP.350801295.00" t="ExcludeRecursive" />
+    <e p="D:\Dev\SAP\B1PP" t="IncludeFlat">
+      <e p=".gitignore" t="Include" />
+      <e p="B1PP.sln" t="IncludeFlat" />
+      <e p="CHANGELOG.md" t="Include" />
+      <e p="Framework" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Common" t="Include">
+          <e p="Utilities.cs" t="Include" />
+        </e>
+        <e p="Connections" t="Include">
+          <e p="ActionResult.cs" t="Include" />
+          <e p="ConnectionException.cs" t="Include" />
+          <e p="ConnectionFactory.cs" t="Include" />
+          <e p="ConnectionString.cs" t="Include" />
+          <e p="DiApiConnection.cs" t="Include" />
+          <e p="DiApiConnectionSettings.cs" t="Include" />
+          <e p="IConnection.cs" t="Include" />
+          <e p="InsistentConnection.cs" t="Include" />
+          <e p="StandardConnection.cs" t="Include" />
+          <e p="UiApiConnection.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="Column.cs" t="Include" />
+          <e p="DateTimeValueArg.cs" t="Include" />
+          <e p="DisposableRecordset.cs" t="Include" />
+          <e p="DoubleValueArg.cs" t="Include" />
+          <e p="IColumn.cs" t="Include" />
+          <e p="InstanceCreatorDelegate.cs" t="Include" />
+          <e p="InstanceFactory.cs" t="Include" />
+          <e p="IntegerValueArg.cs" t="Include" />
+          <e p="IQuery.cs" t="Include" />
+          <e p="IQueryArg.cs" t="Include" />
+          <e p="IRecordsetReader.cs" t="Include" />
+          <e p="ISelectStatement.cs" t="Include" />
+          <e p="MultipleDateTimeValuesArg.cs" t="Include" />
+          <e p="MultipleDoubleValuesArg.cs" t="Include" />
+          <e p="MultipleIntValuesArg.cs" t="Include" />
+          <e p="MultipleStringValuesArg.cs" t="Include" />
+          <e p="Query.cs" t="Include" />
+          <e p="QueryArgBase.cs" t="Include" />
+          <e p="QueryBase.cs" t="Include" />
+          <e p="QueryFactory.cs" t="Include" />
+          <e p="SelectStatement.cs" t="Include" />
+          <e p="SqlStatementFactory.cs" t="Include" />
+          <e p="StringValueArg.cs" t="Include" />
+          <e p="SystemTableAttribute.cs" t="Include" />
+          <e p="XmlRecordsetReader.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="AdapterBase.cs" t="Include" />
+          <e p="AddMasterData.cs" t="Include" />
+          <e p="AddRecord.cs" t="Include" />
+          <e p="AddUserField.cs" t="Include" />
+          <e p="AddUserObject.cs" t="Include" />
+          <e p="AddUserObjectErrorEventArgs.cs" t="Include" />
+          <e p="AddUserTable.cs" t="Include" />
+          <e p="AddUserTableErrorEventArgs.cs" t="Include" />
+          <e p="ArchiveDateFieldAttribute.cs" t="Include" />
+          <e p="AssemblySchemaInitializer.cs" t="Include" />
+          <e p="Attributes" t="Include">
+            <e p="ApproveServiceAttribute.cs" t="Include" />
+            <e p="ChildrenAttribute.cs" t="Include" />
+            <e p="ChildUserTableAttribute.cs" t="Include" />
+            <e p="ExcludeFindColumnAttribute.cs" t="Include" />
+            <e p="FieldNameAttribute.cs" t="Include" />
+            <e p="ObjectServices.cs" t="Include" />
+            <e p="UserFieldAttribute.cs" t="Include" />
+            <e p="UserFieldDefaultValueAttribute.cs" t="Include" />
+            <e p="UserFieldEnumValuesAttribute.cs" t="Include" />
+            <e p="UserFieldOptionalAttribute.cs" t="Include" />
+            <e p="UserFieldValidValueAttribute.cs" t="Include" />
+            <e p="UserObjectAttribute.cs" t="Include" />
+            <e p="UserObjectServicesAttribute.cs" t="Include" />
+            <e p="UserTableAttribute.cs" t="Include" />
+          </e>
+          <e p="B1EnumConverter.cs" t="Include" />
+          <e p="B1EnumConvertException.cs" t="Include" />
+          <e p="DocumentRecord.cs" t="Include" />
+          <e p="DocumentRecordLine.cs" t="Include" />
+          <e p="EnumConverter.cs" t="Include" />
+          <e p="FileContents.cs" t="Include" />
+          <e p="IMasterDataRecord.cs" t="Include" />
+          <e p="INoObjectRecord.cs" t="Include" />
+          <e p="ISimpleAutoIncrementRecord.cs" t="Include" />
+          <e p="ISimpleRecord.cs" t="Include" />
+          <e p="ManifestResourceReader.cs" t="Include" />
+          <e p="MasterDataRecord.cs" t="Include" />
+          <e p="MasterDataRecordLine.cs" t="Include" />
+          <e p="PropertyUserFieldAdapter.cs" t="Include" />
+          <e p="SchemaManager.cs" t="Include" />
+          <e p="SetPropertyException.cs" t="Include" />
+          <e p="SimpleAutoIncrementRecord.cs" t="Include" />
+          <e p="SimpleRecord.cs" t="Include" />
+          <e p="SystemFieldAttribute.cs" t="Include" />
+          <e p="TypeUserObjectAdapter.cs" t="Include" />
+          <e p="TypeUserTableAdapter.cs" t="Include" />
+          <e p="UnableToReadException.cs" t="Include" />
+          <e p="UpdateUserField.cs" t="Include" />
+          <e p="UserFieldAdapter.cs" t="Include" />
+          <e p="UserFieldErrorEventArgs.cs" t="Include" />
+          <e p="UserObjectAdapter.cs" t="Include" />
+          <e p="UserTableAdapter.cs" t="Include" />
+          <e p="Utilities.cs" t="Include" />
+        </e>
+        <e p="Ensure.cs" t="Include" />
+        <e p="Exceptions" t="Include">
+          <e p="MissingAttributeException.cs" t="Include" />
+        </e>
+        <e p="Extensions" t="Include">
+          <e p="Common" t="Include">
+            <e p="DoubleExtensions.cs" t="Include" />
+            <e p="IntegerExtensions.cs" t="Include" />
+            <e p="TypeExtensions.cs" t="Include" />
+          </e>
+          <e p="SDK" t="Include">
+            <e p="DI" t="Include">
+              <e p="CompanyExtensions.cs" t="Include" />
+            </e>
+            <e p="UI" t="Include">
+              <e p="ApplicationExtensions.cs" t="Include" />
+              <e p="DataTableCell.cs" t="Include" />
+              <e p="DataTableExtensions.cs" t="Include" />
+              <e p="DbDataSourceExtensions.cs" t="Include" />
+              <e p="DbDataSourcesExtensions.cs" t="Include" />
+              <e p="FormExtensions.cs" t="Include" />
+              <e p="InvalidSpecificItemTypeException.cs" t="Include" />
+              <e p="ItemNotFoundException.cs" t="Include" />
+              <e p="ItemsExtensions.cs" t="Include" />
+              <e p="MatrixExtensions.cs" t="Include" />
+              <e p="UserDataSourceExtensions.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Types" t="Include">
+            <e p="Id.cs" t="Include" />
+            <e p="IdTypeConverter.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Forms" t="Include">
+          <e p="B1Ids.cs" t="Include" />
+          <e p="CenterFormPreProcessor.cs" t="Include" />
+          <e p="Events" t="Include">
+            <e p="AfterAction.cs" t="Include" />
+            <e p="ApplicationEvents" t="Include">
+              <e p="ApplicationEventDispatcher.cs" t="Include" />
+              <e p="ApplicationEventsHandlerBase.cs" t="Include" />
+              <e p="DefaultApplicationEventsHandler.cs" t="Include" />
+              <e p="IApplicationEventsHandler.cs" t="Include" />
+            </e>
+            <e p="B1EventFilterManager.cs" t="Include" />
+            <e p="B1EventsManager.cs" t="Include" />
+            <e p="B1SystemFormTypeAttribute.cs" t="Include" />
+            <e p="BeforeAction.cs" t="Include" />
+            <e p="ClassHelper.cs" t="Include" />
+            <e p="ErrorEventArgs.cs" t="Include" />
+            <e p="EventHandlerAlreadyExistsException.cs" t="Include" />
+            <e p="EventListener.cs" t="Include" />
+            <e p="FormDataEvents" t="Include">
+              <e p="B1FormDataEventDispatcher.cs" t="Include" />
+              <e p="FormDataEventHandler.cs" t="Include" />
+              <e p="FormDataEventHandlerAttribute.cs" t="Include" />
+              <e p="IFormDataEventHandler.cs" t="Include" />
+            </e>
+            <e p="HandlerAddedEventArgs.cs" t="Include" />
+            <e p="HandlersCollection.cs" t="Include" />
+            <e p="IEventFilterManager.cs" t="Include" />
+            <e p="IEventListener.cs" t="Include" />
+            <e p="IFilterable.cs" t="Include" />
+            <e p="IFormInstance.cs" t="Include" />
+            <e p="ISystemFormInstance.cs" t="Include" />
+            <e p="ItemEvents" t="Include">
+              <e p="B1ItemEventDispatcher.cs" t="Include" />
+              <e p="ColumnsAttribute.cs" t="Include" />
+              <e p="FormItemEventHandler.cs" t="Include" />
+              <e p="FormModesAttribute.cs" t="Include" />
+              <e p="IItemEventHandler.cs" t="Include" />
+              <e p="ItemEventHandlerAttribute.cs" t="Include" />
+              <e p="ItemEventSignature.cs" t="Include" />
+            </e>
+            <e p="LayoutKeyEvents" t="Include">
+              <e p="B1LayoutKeyEventDispatcher.cs" t="Include" />
+              <e p="ILayoutKeyEventListener.cs" t="Include" />
+              <e p="LayoutKeyEventHandlerAttribute.cs" t="Include" />
+              <e p="LayoutKeyEventListener.cs" t="Include" />
+            </e>
+            <e p="MenuEvents" t="Include">
+              <e p="B1MenuEventDispatcher.cs" t="Include" />
+              <e p="EventHandlerAlreadyExistsException.cs" t="Include" />
+              <e p="FormMenuEventListener.cs" t="Include" />
+              <e p="IFormMenuEventListener.cs" t="Include" />
+              <e p="IMainMenuEventListener.cs" t="Include" />
+              <e p="IMainMenuInstance.cs" t="Include" />
+              <e p="MainMenuEventListener.cs" t="Include" />
+              <e p="MenuEventHandlerAttribute.cs" t="Include" />
+            </e>
+            <e p="MethodInfoExtensions.cs" t="Include" />
+            <e p="RightClickEvents" t="Include">
+              <e p="B1RightClickEventDispatcher.cs" t="Include" />
+              <e p="IRightClickEventListener.cs" t="Include" />
+              <e p="IRightClickEventSink.cs" t="Include" />
+              <e p="RightClickEventHandlerAttribute.cs" t="Include" />
+              <e p="RightClickEventListener.cs" t="Include" />
+              <e p="RightClickEventSinkAlreadyExistsException.cs" t="Include" />
+            </e>
+            <e p="Signature.cs" t="Include" />
+            <e p="SystemFormLoadHandler.cs" t="Include" />
+            <e p="XmlEventFilter.cs" t="Include" />
+          </e>
+          <e p="FormLoader.cs" t="Include" />
+          <e p="IFormPreProcessor.cs" t="Include" />
+          <e p="ImageBaseDirectoryPreProcessor.cs" t="Include" />
+          <e p="NotFoundException.cs" t="Include" />
+          <e p="StatusBarMessage.cs" t="Include" />
+          <e p="SystemFormLoader.cs" t="Include" />
+          <e p="UserFormLoader.cs" t="Include" />
+        </e>
+        <e p="Framework.csproj" t="IncludeRecursive" />
+        <e p="Framework.csproj.nuspec" t="Include" />
+        <e p="Framework.ruleset" t="Include" />
+        <e p="GenericUdoSerializer.cs" t="Include" />
+        <e p="GlobalConstants.cs" t="Include" />
+        <e p="GlobalSuppressions.cs" t="Include" />
+        <e p="IAddon.cs" t="Include" />
+        <e p="Inquiries" t="Include">
+          <e p="GetUserFieldByName.cs" t="Include" />
+          <e p="UserFieldExists.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="StandardAddonBase.cs" t="Include" />
+      </e>
+      <e p="lib\SAP\SAPBusinessOneSDK.dll" t="Include" />
+      <e p="LICENSE.md" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="README.md" t="Include" />
+      <e p="Solution Items" t="Include" />
+      <e p="SonarQube" t="Include">
+        <e p="b1ppCSharp.ruleset" t="Include" />
+        <e p="SolutionBinding.sqconfig" t="Include" />
+      </e>
+      <e p="Tests.Feature" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Connections" t="Include">
+          <e p="diapi.credentials.xml" t="Include" />
+          <e p="DiApiConfigSettingHelper.cs" t="Include" />
+          <e p="DiApiConnectionTests.cs" t="Include" />
+          <e p="StandardConnectionTests.cs" t="Include" />
+          <e p="UiApiConnectionTests.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="QueryTests.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="AttributeMetadataTests.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Tests.Feature.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="Tests.Unit" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Common" t="Include">
+          <e p="UtilitiesTests.cs" t="Include" />
+        </e>
+        <e p="Connections" t="Include">
+          <e p="config.template.xml" t="Include" />
+          <e p="ConnectionStringTests.cs" t="Include" />
+          <e p="DiApiConnectionSettingsTests.cs" t="Include" />
+          <e p="InsistentStandardConnectionTests.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="DateTimeValueArgTests.cs" t="Include" />
+          <e p="DisposableRecordsetTests.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="EnumConverterTests.cs" t="Include" />
+          <e p="TypeTests.cs" t="Include" />
+          <e p="UserObjectAdapterTests.cs" t="Include" />
+        </e>
+        <e p="Extensions" t="Include">
+          <e p="SDK" t="Include">
+            <e p="UI" t="Include">
+              <e p="ApplicationExtensionsTests.cs" t="Include" />
+              <e p="DataTableCellTests.cs" t="Include" />
+              <e p="DataTableExtensionsTests.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Types" t="Include">
+            <e p="IdTests.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Forms" t="Include">
+          <e p="Events" t="Include">
+            <e p="ApplicationEvents" t="Include">
+              <e p="ApplicationEventDispatcherTests.cs" t="Include" />
+              <e p="ApplicationEventsHandlerBaseTests.cs" t="Include" />
+            </e>
+          </e>
+          <e p="StatusBarMessageTests.cs" t="Include" />
+        </e>
+        <e p="GenericUdoSerializerTests.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Tests.Unit.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>

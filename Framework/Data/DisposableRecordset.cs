@@ -3,8 +3,9 @@
 //   Full license in the project root.
 // </copyright>
 
+// ReSharper disable S927
 namespace B1PP.Data
-{
+{    
     using System;
 
     using Common;

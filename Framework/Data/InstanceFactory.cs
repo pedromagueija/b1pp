@@ -108,19 +108,19 @@ namespace B1PP.Data
             }
             else if (propertyType == typeof(DateTime))
             {
-                property.SetValue(instance, reader.GetDateTime(property.Name));
+                property.SetValue(instance, reader.GetDateTimeOrDefault(property.Name));
             }
             else if (propertyType == typeof(int))
             {
-                property.SetValue(instance, reader.GetInt(property.Name));
+                property.SetValue(instance, reader.GetIntOrDefault(property.Name));
             }
             else if (propertyType == typeof(double))
             {
-                property.SetValue(instance, reader.GetDouble(property.Name));
+                property.SetValue(instance, reader.GetDoubleOrDefault(property.Name));
             }
             else if (propertyType == typeof(bool))
             {
-                property.SetValue(instance, reader.GetBool(property.Name));
+                property.SetValue(instance, reader.GetBoolOrDefault(property.Name));
             }
             else if (propertyType == typeof(Id))
             {

@@ -30,16 +30,6 @@ namespace B1PP.Database
         private readonly Company company;
 
         /// <summary>
-        /// Types in this list will have their properties ignored when creating fields.
-        /// </summary>
-        private readonly List<Type> ignoredTypes = new List<Type>
-        {
-            typeof(SimpleRecord),
-            typeof(DocumentRecord),
-            typeof(DocumentRecordLine)
-        };
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AssemblySchemaInitializer" /> class.
         /// </summary>
         /// <param name="company">The company.</param>
@@ -81,16 +71,16 @@ namespace B1PP.Database
 
             foreach (var type in userTableTypes)
             {
-                var tableName = CreateTable(type);
+                string tableName = CreateTable(type);
                 typeMap.Add(tableName, type);
             }
 
-            foreach (var tableName in typeMap.Keys)
+            foreach (string tableName in typeMap.Keys)
             {
                 CreateFields(typeMap[tableName], tableName);
             }
 
-            foreach (var tableName in typeMap.Keys)
+            foreach (string tableName in typeMap.Keys)
             {
                 CreateObject(typeMap[tableName], tableName);
             }
@@ -114,10 +104,9 @@ namespace B1PP.Database
         /// <param name="tableName">Name of the table.</param>
         private void CreateFields(Type type, string tableName)
         {
-            var properties = GetCustomProperties(type);
-            var annotated = properties.Where(HasUserFieldAttribute);
+            var properties = GetUserFieldProperties(type);
 
-            foreach (var property in annotated)
+            foreach (var property in properties)
             {
                 CreateField(tableName, property);
             }
@@ -159,7 +148,7 @@ namespace B1PP.Database
 
             // used to return the table name, because the AddUserTable action will release the table
             // thus we won't have access to the table.TableName anymore
-            var tableName = table.TableName;
+            string tableName = table.TableName;
 
             var addUserTable = new AddUserTable(company, table);
             addUserTable.Error += OnAddUserTableError;
@@ -173,9 +162,9 @@ namespace B1PP.Database
         /// </summary>
         /// <param name="userTable">The user table.</param>
         /// <returns></returns>
-        private IEnumerable<PropertyInfo> GetCustomProperties(Type userTable)
+        private IEnumerable<PropertyInfo> GetUserFieldProperties(Type userTable)
         {
-            return GetWriteableProperties(userTable).Where(p => !ignoredTypes.Contains(p.DeclaringType));
+            return GetWritableProperties(userTable).Where(HasUserFieldAttribute);
         }
 
         /// <summary>
@@ -194,20 +183,28 @@ namespace B1PP.Database
         /// <returns></returns>
         private IEnumerable<Type> GetUserTableTypes()
         {
-            var userTableAttribute = typeof(UserTableAttribute);
+            return assembly.GetTypes().Where(t => 
+                t.IsClass && 
+                !t.IsAbstract && 
+                (HasUserTableAttribute(t) || HasChildUserTableAttribute(t)));
+        }
 
-            return assembly.GetTypes().Where(
-                t => t.IsClass &&
-                     !t.IsAbstract &&
-                     t.GetCustomAttributes(userTableAttribute).Any());
+        private bool HasChildUserTableAttribute(Type type)
+        {
+            return type.GetCustomAttribute<ChildUserTableAttribute>() != null;
+        }
+
+        private bool HasUserTableAttribute(Type type)
+        {
+            return type.GetCustomAttribute<UserTableAttribute>() != null;
         }
 
         /// <summary>
-        /// Gets the writeable properties.
+        /// Gets the writable properties.
         /// </summary>
         /// <param name="userTable">The user table.</param>
         /// <returns></returns>
-        private IEnumerable<PropertyInfo> GetWriteableProperties(Type userTable)
+        private IEnumerable<PropertyInfo> GetWritableProperties(Type userTable)
         {
             return GetProperties(userTable)
                 .Where(p => p.CanWrite);

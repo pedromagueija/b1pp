@@ -8,7 +8,7 @@ namespace B1PP.Database
     /// <summary>
     /// Represents a simple record (no type table).
     /// </summary>
-    public interface ISimpleRecord
+    public interface ISimpleRecord : INoObjectRecord
     {
         /// <summary>
         /// Gets or sets the code.

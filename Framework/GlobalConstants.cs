@@ -8,5 +8,6 @@ namespace B1PP
     internal static class GlobalConstants
     {
         public const string AnsiSqlDateTimeFormat = @"yyyy-MM-dd";
+        public const string BusinessOneDateTimeFormat = @"yyyyMMdd";
     }
 }

@@ -80,7 +80,10 @@
     <Compile Include="Extensions\SDK\UI\DataTableCellTests.cs" />
     <Compile Include="Extensions\SDK\UI\DataTableExtensionsTests.cs" />
     <Compile Include="Extensions\Types\IdTests.cs" />
+    <Compile Include="Forms\Events\ApplicationEvents\ApplicationEventDispatcherTests.cs" />
+    <Compile Include="Forms\Events\ApplicationEvents\ApplicationEventsHandlerBaseTests.cs" />
     <Compile Include="Forms\StatusBarMessageTests.cs" />
+    <Compile Include="GenericUdoSerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
