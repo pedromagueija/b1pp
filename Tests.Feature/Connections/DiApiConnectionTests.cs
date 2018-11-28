@@ -6,6 +6,7 @@
 namespace Tests.Feature.Connections
 {
     using B1PP.Connections;
+    using B1PP.Exceptions;
 
     using NUnit.Framework;
 
@@ -55,7 +56,7 @@ namespace Tests.Feature.Connections
         {
             var connection = new DiApiConnection(null);
 
-            Assert.Throws<ConnectionException>(() => connection.Connect());
+            Assert.Throws<ConnectionFailedException>(() => connection.Connect());
         }
     }
 }

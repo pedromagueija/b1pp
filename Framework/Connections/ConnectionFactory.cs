@@ -9,7 +9,7 @@ namespace B1PP.Connections
     /// Creates different types of connections.
     /// It does not connect or manage the lifetime of the connections.
     /// </summary>
-    public class ConnectionFactory
+    public static class ConnectionFactory
     {
         /// <summary>
         /// Creates the DI API connection.
@@ -18,9 +18,9 @@ namespace B1PP.Connections
         /// <returns>
         /// A new DI API connection.
         /// </returns>
-        public IConnection CreateDiApiConnection(DiApiConnectionSettings settings)
+        public static IDiApiConnection CreateDiApiConnection(DiApiConnectionSettings settings)
         {
-            return new InsistentConnection(new DiApiConnection(settings));
+            return new DiApiConnection(settings);
         }
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace B1PP.Connections
         /// <returns>
         /// A new standard (UI and DI API) connection.
         /// </returns>
-        public IConnection CreateStandardConnection()
+        public static IStandardConnection CreateStandardConnection()
         {
-            return new InsistentConnection(new StandardConnection());
+            return new StandardConnection();
         }
 
         /// <summary>
@@ -40,9 +40,9 @@ namespace B1PP.Connections
         /// <returns>
         /// A new UI API connection.
         /// </returns>
-        public IConnection CreateUiApiConnection()
+        public static IUiApiConnection CreateUiApiConnection()
         {
-            return new InsistentConnection(new UiApiConnection());
+            return new UiApiConnection();
         }
     }
 }

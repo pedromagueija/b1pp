@@ -1,9 +1,9 @@
-// <copyright filename="ConnectionException.cs" project="Framework">
+// <copyright filename="ConnectionFailedException.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
 
-namespace B1PP.Connections
+namespace B1PP.Exceptions
 {
     using System;
     using System.Runtime.InteropServices;
@@ -14,39 +14,39 @@ namespace B1PP.Connections
     /// </summary>
     /// <seealso cref="System.Exception" />
     [Serializable]
-    public class ConnectionException : Exception
+    public class ConnectionFailedException : Exception
     {
         private const int BusinessOneNotRunningErrorCode = -7202;
         private const int LoginInScreenLock = -1101;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectionException" /> class.
+        /// Initializes a new instance of the <see cref="ConnectionFailedException" /> class.
         /// </summary>
-        public ConnectionException()
+        public ConnectionFailedException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectionException" /> class.
+        /// Initializes a new instance of the <see cref="ConnectionFailedException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public ConnectionException(string message)
+        public ConnectionFailedException(string message)
             : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectionException" /> class.
+        /// Initializes a new instance of the <see cref="ConnectionFailedException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         /// <param name="inner">The inner exception.</param>
-        public ConnectionException(string message, Exception inner)
+        public ConnectionFailedException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectionException" /> class.
+        /// Initializes a new instance of the <see cref="ConnectionFailedException" /> class.
         /// </summary>
         /// <param name="info">The serialization information.</param>
         /// <param name="context">The streaming context.</param>
@@ -55,32 +55,34 @@ namespace B1PP.Connections
         /// (0).
         /// </exception>
         /// <exception cref="ArgumentNullException">The <paramref name="info" /> parameter is null. </exception>
-        protected ConnectionException(
+        protected ConnectionFailedException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {
         }
 
-        internal static ConnectionException CreateFrom(COMException e)
+        internal static ConnectionFailedException CreateFrom(COMException e)
         {
-            var message = e.Message;
+            string message = GetMessageFromError(e);
+            return new ConnectionFailedException(message, e);
+        }
 
-            if (e.ErrorCode == BusinessOneNotRunningErrorCode)
+        private static string GetMessageFromError(COMException e)
+        {
+            switch (e.ErrorCode)
             {
-                message = FormatConnectionMessage();
+                case BusinessOneNotRunningErrorCode:
+                    return FormatConnectionMessage();
+                case LoginInScreenLock:
+                    return @"Login screen is in lock mode. Please login and run the addon again.";
+                default:
+                    return e.Message;
             }
-
-            if (e.ErrorCode == LoginInScreenLock)
-            {
-                message = @"Login screen is in lock mode. Please login and run the addon again.";
-            }
-
-            return new ConnectionException(message, e);
         }
 
         private static string FormatConnectionMessage()
         {
-            var runMode = IntPtr.Size == 4 ? @"32bit" : @"64bit";
+            string runMode = IntPtr.Size == 4 ? @"32bit" : @"64bit";
             return $@"Unable to connect to SAP Business One. Is SAP Business One {runMode} running?";
         }
     }

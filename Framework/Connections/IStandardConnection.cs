@@ -1,10 +1,12 @@
-// <copyright filename="IConnection.cs" project="Framework">
+// <copyright filename="IStandardConnection.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
 
 namespace B1PP.Connections
 {
+    using Exceptions;
+
     using SAPbouiCOM;
 
     using Company = SAPbobsCOM.Company;
@@ -16,14 +18,13 @@ namespace B1PP.Connections
     /// <example>
     /// How to perform a standard (UI and DI API) connection to SAP Business One.
     /// <code>
-    /// IConnectionFactory factory = new ConnectionFactory();
-    /// IConnection connection = factory.CreateStandardConnection();
+    /// var connection = ConnectionFactory.CreateStandardConnection();
     /// connection.Connect();
     /// // Your code
     /// connection.Disconnect(); 
     /// </code>
     /// </example>
-    public interface IConnection
+    public interface IStandardConnection
     {
         /// <summary>
         /// Returns the <see cref="SAPbouiCOM.Application" /> object, or null when the connection
@@ -38,7 +39,7 @@ namespace B1PP.Connections
         Company Company { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="IConnection" /> is connected.
+        /// Gets a value indicating whether this instance is connected.
         /// </summary>
         /// <value>
         /// <c>true</c> if connected; otherwise, <c>false</c>.
@@ -49,7 +50,7 @@ namespace B1PP.Connections
         /// Establishes the connection to SAP Business One.
         /// Note that without connection both <see cref="Application" /> and <see cref="Company" /> are <c>null</c>.
         /// </summary>
-        /// <exception cref="ConnectionException">
+        /// <exception cref="ConnectionFailedException">
         /// Thrown when the connection to SAP Business One fails.
         /// </exception>
         void Connect();

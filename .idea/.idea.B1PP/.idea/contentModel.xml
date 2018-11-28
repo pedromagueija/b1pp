@@ -15,14 +15,13 @@
           <e p="Utilities.cs" t="Include" />
         </e>
         <e p="Connections" t="Include">
-          <e p="ActionResult.cs" t="Include" />
-          <e p="ConnectionException.cs" t="Include" />
           <e p="ConnectionFactory.cs" t="Include" />
           <e p="ConnectionString.cs" t="Include" />
           <e p="DiApiConnection.cs" t="Include" />
           <e p="DiApiConnectionSettings.cs" t="Include" />
-          <e p="IConnection.cs" t="Include" />
-          <e p="InsistentConnection.cs" t="Include" />
+          <e p="IDiApiConnection.cs" t="Include" />
+          <e p="IStandardConnection.cs" t="Include" />
+          <e p="IUiApiConnection.cs" t="Include" />
           <e p="StandardConnection.cs" t="Include" />
           <e p="UiApiConnection.cs" t="Include" />
         </e>
@@ -111,7 +110,9 @@
         </e>
         <e p="Ensure.cs" t="Include" />
         <e p="Exceptions" t="Include">
+          <e p="ConnectionFailedException.cs" t="Include" />
           <e p="MissingAttributeException.cs" t="Include" />
+          <e p="NotFoundException.cs" t="Include" />
         </e>
         <e p="Extensions" t="Include">
           <e p="Common" t="Include">
@@ -215,7 +216,6 @@
           <e p="FormLoader.cs" t="Include" />
           <e p="IFormPreProcessor.cs" t="Include" />
           <e p="ImageBaseDirectoryPreProcessor.cs" t="Include" />
-          <e p="NotFoundException.cs" t="Include" />
           <e p="StatusBarMessage.cs" t="Include" />
           <e p="SystemFormLoader.cs" t="Include" />
           <e p="UserFormLoader.cs" t="Include" />
@@ -278,7 +278,6 @@
           <e p="config.template.xml" t="Include" />
           <e p="ConnectionStringTests.cs" t="Include" />
           <e p="DiApiConnectionSettingsTests.cs" t="Include" />
-          <e p="InsistentStandardConnectionTests.cs" t="Include" />
         </e>
         <e p="Data" t="Include">
           <e p="DateTimeValueArgTests.cs" t="Include" />

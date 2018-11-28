@@ -10,59 +10,30 @@ namespace B1PP.Connections
 
     using Common;
 
+    using Exceptions;
+
     using SAPbouiCOM;
 
     using DiCompany = SAPbobsCOM.Company;
     using DiCompanyClass = SAPbobsCOM.CompanyClass;
 
-    /// <summary>
-    /// Provides access to the Application and Company objects from Business One
-    /// <para />
-    /// by establishing a connection to the API.
-    /// <para />
-    /// When disconnected the Application and Company objects will be null.
-    /// </summary>
-    internal class StandardConnection : IConnection
+    internal class StandardConnection : IStandardConnection
     {
-        /// <summary>
-        /// Gets the connection string.
-        /// </summary>
         private readonly ConnectionString connectionString;
 
-        /// <summary>
-        /// Gets the application.
-        /// </summary>
         public Application Application { get; private set; }
 
-        /// <summary>
-        /// Gets the company.
-        /// </summary>
         public DiCompany Company { get; private set; }
 
-        /// <summary>
-        /// Gets a value indicating whether this <see cref="IConnection" /> is connected.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if connected; otherwise, <c>false</c>.
-        /// </value>
         public bool Connected { get; private set; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StandardConnection" /> class.
-        /// </summary>
         public StandardConnection()
         {
             var commandLineArgs = Environment.GetCommandLineArgs();
             connectionString = new ConnectionString(commandLineArgs);
         }
 
-        /// <summary>
-        /// Connects this instance.
-        /// </summary>
-        /// <exception cref="ConnectionException">
-        /// Thrown when an error connecting to Business One occurs.
-        /// </exception>
-        public virtual void Connect()
+        public void Connect()
         {
             try
             {
@@ -78,13 +49,10 @@ namespace B1PP.Connections
             }
             catch (COMException e)
             {
-                throw ConnectionException.CreateFrom(e);
+                throw ConnectionFailedException.CreateFrom(e);
             }
         }
 
-        /// <summary>
-        /// Disconnects from SAP Business One.
-        /// </summary>
         public void Disconnect()
         {
             if (!Connected)
@@ -118,7 +86,7 @@ namespace B1PP.Connections
             {
                 string lastErrorDescription = Company.GetLastErrorDescription();
                 string message = $"{result} {lastErrorDescription}";
-                throw new ConnectionException(message);
+                throw new ConnectionFailedException(message);
             }
         }
 

@@ -16,9 +16,9 @@ namespace Tests.Feature.Connections
     {
         public string CreateConfigFile()
         {
-            var path = Path.GetTempFileName();
+            string path = Path.GetTempFileName();
 
-            var contents = ReadText(@"diapi.credentials.xml");
+            string contents = ReadText(@"diapi.credentials.xml");
             var xml = XDocument.Parse(contents);
             if (xml.Root == null)
             {
@@ -35,7 +35,7 @@ namespace Tests.Feature.Connections
         {
             var assembly = Assembly.GetAssembly(GetType());
             var resources = assembly.GetManifestResourceNames();
-            var fullResourceName = resources.FirstOrDefault(r => r.EndsWith(resourceName));
+            string fullResourceName = resources.FirstOrDefault(r => r.EndsWith(resourceName));
 
             if(string.IsNullOrEmpty(fullResourceName))
                 throw new ArgumentException($@"Invalid resource name {resourceName}.");

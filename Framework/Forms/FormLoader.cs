@@ -12,6 +12,8 @@ namespace B1PP.Forms
     using System.Reflection;
     using System.Xml.Linq;
 
+    using Exceptions;
+
     using SAPbouiCOM;
 
     public abstract class FormLoader

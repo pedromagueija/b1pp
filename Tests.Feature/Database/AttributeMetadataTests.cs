@@ -23,7 +23,7 @@ namespace Tests.Feature.Database
         [SetUp]
         public void Setup()
         {
-            var connection = new ConnectionFactory().CreateStandardConnection();
+            var connection = ConnectionFactory.CreateStandardConnection();
             connection.Connect();
 
             company = connection.Company;

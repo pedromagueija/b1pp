@@ -15,7 +15,7 @@ namespace Tests.Feature.Data
 
     internal class QueryTests
     {
-        private IConnection connection;
+        private IStandardConnection connection;
 
         [Test]
         public void CanGetDynamicObject()
@@ -81,7 +81,7 @@ namespace Tests.Feature.Data
         [SetUp]
         public void Setup()
         {
-            connection = new ConnectionFactory().CreateStandardConnection();
+            connection = ConnectionFactory.CreateStandardConnection();
             connection.Connect();
         }
 

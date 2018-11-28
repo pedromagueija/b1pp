@@ -64,6 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\IDiApiConnection.cs" />
+    <Compile Include="Connections\IUiApiConnection.cs" />
     <Compile Include="Database\AddMasterData.cs" />
     <Compile Include="Database\AddRecord.cs" />
     <Compile Include="Database\Attributes\ChildrenAttribute.cs" />
@@ -78,7 +80,9 @@
     <Compile Include="Data\SelectStatement.cs" />
     <Compile Include="Data\SqlStatementFactory.cs" />
     <Compile Include="Data\SystemTableAttribute.cs" />
+    <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Exceptions\MissingAttributeException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\ApplicationEventsHandlerBase.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\DefaultApplicationEventsHandler.cs" />
     <Compile Include="GenericUdoSerializer.cs" />
@@ -86,14 +90,11 @@
     <Compile Include="Inquiries\GetUserFieldByName.cs" />
     <Compile Include="Inquiries\UserFieldExists.cs" />
     <Compile Include="StandardAddonBase.cs" />
-    <Compile Include="Connections\ActionResult.cs" />
-    <Compile Include="Connections\ConnectionException.cs" />
     <Compile Include="Connections\ConnectionFactory.cs" />
     <Compile Include="Connections\ConnectionString.cs" />
     <Compile Include="Connections\DiApiConnection.cs" />
     <Compile Include="Connections\DiApiConnectionSettings.cs" />
-    <Compile Include="Connections\IConnection.cs" />
-    <Compile Include="Connections\InsistentConnection.cs" />
+    <Compile Include="Connections\IStandardConnection.cs" />
     <Compile Include="Connections\StandardConnection.cs" />
     <Compile Include="Connections\UiApiConnection.cs" />
     <Compile Include="Common\Utilities.cs" />
@@ -234,7 +235,6 @@
     <Compile Include="Forms\FormLoader.cs" />
     <Compile Include="Forms\IFormPreProcessor.cs" />
     <Compile Include="Forms\ImageBaseDirectoryPreProcessor.cs" />
-    <Compile Include="Forms\NotFoundException.cs" />
     <Compile Include="Forms\StatusBarMessage.cs" />
     <Compile Include="Forms\SystemFormLoader.cs" />
     <Compile Include="Forms\UserFormLoader.cs" />

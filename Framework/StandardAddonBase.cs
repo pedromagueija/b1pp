@@ -19,7 +19,7 @@ namespace B1PP
     public abstract class StandardAddonBase : IAddon
     {
         private IApplicationEventsHandler appEventsHandler;
-        protected IConnection connection;
+        protected IStandardConnection connection;
         private B1EventsManager events;
 
         public virtual void Start()
@@ -60,9 +60,7 @@ namespace B1PP
 
         private void Connect()
         {
-            var connectionFactory = new ConnectionFactory();
-            connection = connectionFactory.CreateStandardConnection();
-
+            connection = ConnectionFactory.CreateStandardConnection();
             connection.Connect();
         }
 

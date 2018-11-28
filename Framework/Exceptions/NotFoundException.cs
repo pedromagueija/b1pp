@@ -3,7 +3,7 @@
 //   Full license in the project root.
 // </copyright>
 
-namespace B1PP.Forms
+namespace B1PP.Exceptions
 {
     using System;
     using System.Runtime.Serialization;

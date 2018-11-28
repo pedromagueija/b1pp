@@ -36,7 +36,7 @@ namespace B1PP.Data
         /// <returns></returns>
         protected string Prepare(string query, params IQueryArg[] args)
         {
-            var workingQuery = query;
+            string workingQuery = query;
 
             foreach (var arg in args)
             {

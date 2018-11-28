@@ -53,7 +53,7 @@ namespace B1PP.Database
         /// </returns>
         private object GetPropertyValue(XAttribute attribute, Type propertyType)
         {
-            var attributeValue = attribute.Value;
+            string attributeValue = attribute.Value;
             object value;
 
             if (propertyType.IsEnum)
@@ -71,7 +71,7 @@ namespace B1PP.Database
 
         private void PopulateProperty<T>(object instance, XAttribute attribute)
         {
-            var propertyName = attribute.Name.LocalName ?? string.Empty;
+            string propertyName = attribute.Name.LocalName ?? string.Empty;
 
             try
             {

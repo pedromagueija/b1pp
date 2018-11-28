@@ -70,7 +70,6 @@
     <Compile Include="Common\UtilitiesTests.cs" />
     <Compile Include="Connections\ConnectionStringTests.cs" />
     <Compile Include="Connections\DiApiConnectionSettingsTests.cs" />
-    <Compile Include="Connections\InsistentStandardConnectionTests.cs" />
     <Compile Include="Database\EnumConverterTests.cs" />
     <Compile Include="Database\TypeTests.cs" />
     <Compile Include="Database\UserObjectAdapterTests.cs" />
