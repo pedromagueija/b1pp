@@ -66,9 +66,9 @@
   <ItemGroup>
     <Compile Include="Connections\IDiApiConnection.cs" />
     <Compile Include="Connections\IUiApiConnection.cs" />
-    <Compile Include="Database\AddMasterData.cs" />
-    <Compile Include="Database\AddRecord.cs" />
     <Compile Include="Database\Attributes\ChildrenAttribute.cs" />
+    <Compile Include="Database\Commands\AddMasterData.cs" />
+    <Compile Include="Database\Commands\AddRecord.cs" />
     <Compile Include="Database\IMasterDataRecord.cs" />
     <Compile Include="Database\INoObjectRecord.cs" />
     <Compile Include="Database\MasterDataRecord.cs" />

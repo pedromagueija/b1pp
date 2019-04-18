@@ -3,16 +3,14 @@
 //   Full license in the project root.
 // </copyright>
 
-namespace B1PP.Database
+using System;
+using System.Linq;
+using System.Reflection;
+using B1PP.Database.Attributes;
+using SAPbobsCOM;
+
+namespace B1PP.Database.Commands
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-
-    using Attributes;
-
-    using SAPbobsCOM;
-
     public class AddRecord<T> where T : INoObjectRecord
     {
         private readonly Company company;

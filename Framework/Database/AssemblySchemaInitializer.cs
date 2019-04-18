@@ -4,6 +4,7 @@
 // </copyright>
 
 using B1PP.Database.Adapters;
+using B1PP.Database.Commands;
 
 namespace B1PP.Database
 {

@@ -3,15 +3,13 @@
 //   Full license in the project root.
 // </copyright>
 
-namespace B1PP.Database
+using System;
+using System.Reflection;
+using B1PP.Database.Attributes;
+using SAPbobsCOM;
+
+namespace B1PP.Database.Commands
 {
-    using System;
-    using System.Reflection;
-
-    using Attributes;
-
-    using SAPbobsCOM;
-
     public class AddMasterData<T> where T : IMasterDataRecord, new()
     {
         private readonly Company company;
