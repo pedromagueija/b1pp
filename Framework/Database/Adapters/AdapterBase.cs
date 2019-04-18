@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Xml.Linq;
+using B1PP.Exceptions;
 
 namespace B1PP.Database.Adapters
 {

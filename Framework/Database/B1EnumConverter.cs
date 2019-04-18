@@ -3,6 +3,8 @@
 //   Full license in the project root.
 // </copyright>
 
+using B1PP.Exceptions;
+
 namespace B1PP.Database
 {
     using System;
