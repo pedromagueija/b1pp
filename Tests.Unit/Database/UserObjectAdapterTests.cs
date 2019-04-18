@@ -3,6 +3,8 @@
 //   Full license in the project root.
 // </copyright>
 
+using B1PP.Database.Adapters;
+
 namespace Tests.Unit.Database
 {
     using System;
