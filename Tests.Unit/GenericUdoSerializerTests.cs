@@ -16,7 +16,7 @@ namespace Tests.Unit
         [Test]
         public void Can_Deserialize_Master_And_Detail_Data()
         {
-            var serializer = new GenericUdoSerializer<TestUdo>();
+            var serializer = new GenericUdoDeserializer<TestUdo>();
             var instance = serializer.Deserialize(TestUdoConstants.Out);
 
             AssertMatch(CreateTestUdo(), instance);
@@ -37,7 +37,7 @@ namespace Tests.Unit
         [Test]
         public void Can_Deserialize_When_Value_Is_Missing_In_Xml()
         {
-            var serializer = new GenericUdoSerializer<TestUdo>();
+            var serializer = new GenericUdoDeserializer<TestUdo>();
             var instance = serializer.Deserialize(TestUdoConstants.Out2);
             
             Assert.AreEqual(default(string), instance.AlphaNumericalField);

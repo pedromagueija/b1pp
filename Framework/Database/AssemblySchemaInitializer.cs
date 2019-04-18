@@ -3,9 +3,6 @@
 //   Full license in the project root.
 // </copyright>
 
-using B1PP.Database.Adapters;
-using B1PP.Database.Commands;
-
 namespace B1PP.Database
 {
     using System;
@@ -16,6 +13,9 @@ namespace B1PP.Database
     using Attributes;
 
     using SAPbobsCOM;
+    
+    using Adapters;
+    using Commands;
 
     /// <summary>
     /// Creates the schema using the models attributes as a source.

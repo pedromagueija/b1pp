@@ -83,6 +83,7 @@
     <Compile Include="Forms\Events\ApplicationEvents\ApplicationEventsHandlerBaseTests.cs" />
     <Compile Include="Forms\StatusBarMessageTests.cs" />
     <Compile Include="GenericUdoSerializerTests.cs" />
+    <Compile Include="GetFieldNameFromPropertyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

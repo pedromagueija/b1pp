@@ -3,9 +3,6 @@
 //   Full license in the project root.
 // </copyright>
 
-using B1PP.Database.Adapters;
-using B1PP.Database.Commands;
-
 namespace B1PP.Database
 {
     using System;
@@ -13,6 +10,9 @@ namespace B1PP.Database
     using System.Xml.Linq;
 
     using SAPbobsCOM;
+    
+    using Adapters;
+    using Commands;
 
     public class SchemaManager
     {

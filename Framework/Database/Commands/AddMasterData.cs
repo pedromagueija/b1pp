@@ -10,19 +10,20 @@ using SAPbobsCOM;
 
 namespace B1PP.Database.Commands
 {
-    public class AddMasterData<T> where T : IMasterDataRecord, new()
+    internal class AddMasterData<T> : IAddMasterData<T> where T : class, IMasterDataRecord
     {
         private readonly Company company;
+        private readonly IUdoSerializer<T> serializer;
 
-        public AddMasterData(Company company)
+        public AddMasterData(Company company, IUdoSerializer<T> serializer)
         {
             this.company = company ?? throw new ArgumentNullException(nameof(company));
+            this.serializer = serializer;
         }
 
         public string Invoke(T instance)
         {
             string udoId = GetUserObjectId();
-            var serializer = new GenericUdoSerializer<T>();
             string xml = serializer.Serialize(instance);
 
             var service = company.GetCompanyService().GetGeneralService(udoId);

@@ -56,6 +56,7 @@ namespace B1PP.Database.Attributes
 
         internal void Apply(UserFieldsMD field, PropertyInfo property)
         {
+            // TODO: take into consideration that FieldName may contain U_FieldName and that will yield a U_U_FieldName field
             field.Name = DetermineFieldName(property);
             field.Description = DetermineFieldDescription(property);
         }

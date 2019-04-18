@@ -3,13 +3,14 @@
 //   Full license in the project root.
 // </copyright>
 
-using System;
-using System.Reflection;
-using B1PP.Database.Attributes;
-using SAPbobsCOM;
 
 namespace B1PP.Database.Adapters
 {
+    using System;
+    using System.Reflection;
+    using Attributes;
+    using SAPbobsCOM;
+
     /// <summary>
     /// Converts a property into a user field.
     /// </summary>

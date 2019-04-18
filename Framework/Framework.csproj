@@ -66,9 +66,18 @@
   <ItemGroup>
     <Compile Include="Connections\IDiApiConnection.cs" />
     <Compile Include="Connections\IUiApiConnection.cs" />
+    <Compile Include="Database\Adapters\AdapterBase.cs" />
+    <Compile Include="Database\Adapters\PropertyUserFieldAdapter.cs" />
+    <Compile Include="Database\Adapters\TypeUserObjectAdapter.cs" />
+    <Compile Include="Database\Adapters\TypeUserTableAdapter.cs" />
+    <Compile Include="Database\Adapters\UserFieldAdapter.cs" />
+    <Compile Include="Database\Adapters\UserObjectAdapter.cs" />
+    <Compile Include="Database\Adapters\UserTableAdapter.cs" />
     <Compile Include="Database\Attributes\ChildrenAttribute.cs" />
     <Compile Include="Database\Commands\AddMasterData.cs" />
     <Compile Include="Database\Commands\AddRecord.cs" />
+    <Compile Include="Database\Commands\CommandFactory.cs" />
+    <Compile Include="Database\Commands\IAddMasterData.cs" />
     <Compile Include="Database\IMasterDataRecord.cs" />
     <Compile Include="Database\INoObjectRecord.cs" />
     <Compile Include="Database\MasterDataRecord.cs" />
@@ -83,12 +92,17 @@
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Exceptions\MissingAttributeException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Extensions\Common\PropertyInfoExtensions.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\ApplicationEventsHandlerBase.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\DefaultApplicationEventsHandler.cs" />
+    <Compile Include="GenericUdoDeserializer.cs" />
     <Compile Include="GenericUdoSerializer.cs" />
+    <Compile Include="GetFieldName.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Inquiries\GetUserFieldByName.cs" />
     <Compile Include="Inquiries\UserFieldExists.cs" />
+    <Compile Include="IUdoDeserializer.cs" />
+    <Compile Include="IUdoSerializer.cs" />
     <Compile Include="StandardAddonBase.cs" />
     <Compile Include="Connections\ConnectionFactory.cs" />
     <Compile Include="Connections\ConnectionString.cs" />
@@ -98,7 +112,6 @@
     <Compile Include="Connections\StandardConnection.cs" />
     <Compile Include="Connections\UiApiConnection.cs" />
     <Compile Include="Common\Utilities.cs" />
-    <Compile Include="Database\AdapterBase.cs" />
     <Compile Include="Database\AddUserField.cs" />
     <Compile Include="Database\AddUserObject.cs" />
     <Compile Include="Database\AddUserObjectErrorEventArgs.cs" />
@@ -134,14 +147,9 @@
     <Compile Include="Database\SetPropertyException.cs" />
     <Compile Include="Database\SimpleAutoIncrementRecord.cs" />
     <Compile Include="Database\SystemFieldAttribute.cs" />
-    <Compile Include="Database\TypeUserObjectAdapter.cs" />
-    <Compile Include="Database\TypeUserTableAdapter.cs" />
     <Compile Include="Database\UnableToReadException.cs" />
     <Compile Include="Database\UpdateUserField.cs" />
-    <Compile Include="Database\UserFieldAdapter.cs" />
     <Compile Include="Database\UserFieldErrorEventArgs.cs" />
-    <Compile Include="Database\UserObjectAdapter.cs" />
-    <Compile Include="Database\UserTableAdapter.cs" />
     <Compile Include="Database\Utilities.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\DateTimeValueArg.cs" />
@@ -253,9 +261,6 @@
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.6.5.0.3766\analyzers\Google.Protobuf.dll" />
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.6.5.0.3766\analyzers\SonarAnalyzer.CSharp.dll" />
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.6.5.0.3766\analyzers\SonarAnalyzer.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\Adapters" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
