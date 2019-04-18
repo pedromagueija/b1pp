@@ -5,6 +5,7 @@
 
 using System;
 using System.Reflection;
+using B1PP.Database;
 using B1PP.Database.Attributes;
 using B1PP.Extensions.Common;
 

@@ -245,9 +245,10 @@ ModelManifest.xml
 .fake/
 
 # Custom
+packages.xml
+config.wyam.hash
 .idea/
 out/
 !SAPBusinessOneSDK.dll
-/output
-/input
-/.sonarqube
+output/
+.sonarqube/

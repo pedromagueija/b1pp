@@ -4,6 +4,7 @@
 // </copyright>
 
 using System.Collections;
+using B1PP.Database;
 using B1PP.Extensions.Common;
 
 namespace B1PP
@@ -73,7 +74,7 @@ namespace B1PP
         {
             var child = property.GetCustomAttribute<ChildrenAttribute>();
             var attr = child.Type.GetCustomAttribute<ChildUserTableAttribute>();
-            return attr.ObjectName;
+        return                                                                                                                                                                                                                                                                                                                                                                                                                 attr.ObjectName;
         }
         
         private IEnumerable<XElement> GetChildXmlProperties(Type t, T instance)

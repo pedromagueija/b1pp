@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using B1PP.Database;
 using B1PP.Database.Attributes;
 using B1PP.Exceptions;
 using B1PP.Extensions.Common;
@@ -70,7 +71,7 @@ namespace B1PP
        
         private bool HasSystemOrUserField(PropertyInfo p)
         {
-            return HasAttribute<UserFieldAttribute>(p) || HasAttribute<SystemFieldAttribute>(p);
+            return p.HasAttribute<UserFieldAttribute>() || p.HasAttribute<SystemFieldAttribute>();
         }       
         
         private Func<PropertyInfo, bool> IsChild

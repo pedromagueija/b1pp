@@ -4,28 +4,46 @@
 // </copyright>
 
 using B1PP;
+using B1PP.Database;
 using B1PP.Database.Attributes;
 using NUnit.Framework;
+using SAPbobsCOM;
 
 namespace Tests.Unit
 {
     public class GetFieldNameFromPropertyTests
     {
         [Test]
-        public void System_No_Custom_Name_Returns_Property_Name()
+        [TestCase(@"DocEntry", @"DocEntry")]
+        [TestCase(@"DocumentName", @"DocName")]
+        [TestCase(@"UserEntry", @"U_UserEntry")]
+        [TestCase(@"UserName", @"U_UName")]
+        public void Should_Correctly_Determine_Name(string propertyName, string expectedFieldName)
         {
-            var docEntryProperty = new TestClass().GetType().GetProperty(@"DocEntry");
+            var property = new TestClass().GetType().GetProperty(propertyName);
             var getFieldName = new GetFieldName();
 
-            string name = getFieldName.FromProperty(docEntryProperty);
+            string name = getFieldName.FromProperty(property);
 
-            Assert.AreEqual(@"DocEntry", name);
+            Assert.AreEqual(expectedFieldName, name);
         }
 
         public class TestClass
         {
             [SystemField]
             public string DocEntry { get; set; }
+            
+            [SystemField]
+            [FieldName(@"DocName")]
+            public string DocumentName { get; set; }
+
+            [UserField(BoFieldTypes.db_Alpha, BoFldSubTypes.st_None)]
+            public string UserEntry { get; set; }
+            
+            [UserField(BoFieldTypes.db_Alpha, BoFldSubTypes.st_None)]
+            [FieldName(@"UName")]
+            public string UserName { get; set; }
+
         }
     }
 }
