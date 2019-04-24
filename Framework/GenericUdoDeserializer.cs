@@ -62,13 +62,8 @@ namespace B1PP
 
             throw new ArgumentException(
                 $@"Property '{property.Name}' is of an unsupported type '{property.PropertyType}'");
-        }        
-
-        private bool HasAttribute<TAttr>(PropertyInfo property) where TAttr : Attribute
-        {
-            return property.GetCustomAttribute<TAttr>() != null;
         }
-       
+
         private bool HasSystemOrUserField(PropertyInfo p)
         {
             return p.HasAttribute<UserFieldAttribute>() || p.HasAttribute<SystemFieldAttribute>();

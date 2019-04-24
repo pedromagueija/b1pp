@@ -76,6 +76,10 @@
     <Compile Include="Database\Attributes\ChildrenAttribute.cs" />
     <Compile Include="Database\Commands\AddMasterData.cs" />
     <Compile Include="Database\Commands\AddRecord.cs" />
+    <Compile Include="Database\Commands\AddUserObject.cs" />
+    <Compile Include="Database\Commands\AddUserObjectErrorEventArgs.cs" />
+    <Compile Include="Database\Commands\AddUserTable.cs" />
+    <Compile Include="Database\Commands\AddUserTableErrorEventArgs.cs" />
     <Compile Include="Database\Commands\CommandFactory.cs" />
     <Compile Include="Database\Commands\IAddMasterData.cs" />
     <Compile Include="Database\IMasterDataRecord.cs" />
@@ -113,8 +117,6 @@
     <Compile Include="Connections\UiApiConnection.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Database\AddUserField.cs" />
-    <Compile Include="Database\AddUserObject.cs" />
-    <Compile Include="Database\AddUserObjectErrorEventArgs.cs" />
     <Compile Include="Database\AddUserTable.cs" />
     <Compile Include="Database\AddUserTableErrorEventArgs.cs" />
     <Compile Include="Database\ArchiveDateFieldAttribute.cs" />
