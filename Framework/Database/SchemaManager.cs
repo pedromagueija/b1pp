@@ -23,7 +23,7 @@ namespace B1PP.Database
             this.company = company;
         }
 
-        public event EventHandler<UserFieldErrorEventArgs> CreateUserFieldError = delegate { };
+        public event EventHandler<AddUserFieldErrorEventArgs> CreateUserFieldError = delegate { };
         public event EventHandler<AddUserObjectErrorEventArgs> CreateUserObjectError = delegate { };
         public event EventHandler<AddUserTableErrorEventArgs> CreateUserTableError = delegate { };
 
@@ -93,7 +93,7 @@ namespace B1PP.Database
             }
         }
 
-        private void OnAddUserFieldError(object sender, UserFieldErrorEventArgs e)
+        private void OnAddUserFieldError(object sender, AddUserFieldErrorEventArgs e)
         {
             CreateUserFieldError(sender, e);
         }

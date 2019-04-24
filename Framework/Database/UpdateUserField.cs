@@ -3,6 +3,8 @@
 //   Full license in the project root.
 // </copyright>
 
+using B1PP.Database.Commands;
+
 namespace B1PP.Database
 {
     using System;
@@ -36,7 +38,7 @@ namespace B1PP.Database
             var result = field.Add();
             if (result != 0)
             {
-                var errorArgs = new UserFieldErrorEventArgs
+                var errorArgs = new AddUserFieldErrorEventArgs
                 {
                     TableName = field.TableName,
                     FieldName = field.Name,
@@ -53,6 +55,6 @@ namespace B1PP.Database
         /// <summary>
         /// Occurs when the update fails.
         /// </summary>
-        public event EventHandler<UserFieldErrorEventArgs> OnError = delegate { };
+        public event EventHandler<AddUserFieldErrorEventArgs> OnError = delegate { };
     }
 }

@@ -32,7 +32,7 @@ namespace B1PP.Database.Commands
             var result = field.Add();
             if (result != 0)
             {
-                var errorArgs = new UserFieldErrorEventArgs
+                var errorArgs = new AddUserFieldErrorEventArgs
                 {
                     TableName = field.TableName,
                     FieldName = field.Name,
@@ -46,6 +46,6 @@ namespace B1PP.Database.Commands
             Marshal.ReleaseComObject(field);
         }
 
-        public event EventHandler<UserFieldErrorEventArgs> OnError = delegate { };
+        public event EventHandler<AddUserFieldErrorEventArgs> OnError = delegate { };
     }
 }

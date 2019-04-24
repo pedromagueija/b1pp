@@ -4,6 +4,7 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using SAPbobsCOM;
 
@@ -11,8 +12,11 @@ namespace B1PP.Database.Commands
 {
     internal class AddUserTable
     {
+        public IEnumerable<string> Errors => errors;
+
         private readonly Company company;
         private readonly UserTablesMD table;
+        private readonly List<string> errors = new List<string>();
 
         public AddUserTable(Company company, UserTablesMD table)
         {
@@ -22,11 +26,13 @@ namespace B1PP.Database.Commands
 
         public event EventHandler<AddUserTableErrorEventArgs> Error = delegate { };
 
-        public void Execute()
+        public bool Execute()
         {
-            var result = table.Add();
+            int result = table.Add();
             if (result != 0)
             {
+                errors.Add(company.GetLastErrorDescription());
+                
                 var errorArgs = new AddUserTableErrorEventArgs
                 {
                     TableName = table.TableName,
@@ -35,9 +41,13 @@ namespace B1PP.Database.Commands
                 };
 
                 Error(this, errorArgs);
+                
+                return false;
             }
 
             Marshal.ReleaseComObject(table);
+
+            return true;
         }
     }
 }

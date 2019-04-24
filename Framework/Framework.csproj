@@ -76,6 +76,8 @@
     <Compile Include="Database\Attributes\ChildrenAttribute.cs" />
     <Compile Include="Database\Commands\AddMasterData.cs" />
     <Compile Include="Database\Commands\AddRecord.cs" />
+    <Compile Include="Database\Commands\AddUserField.cs" />
+    <Compile Include="Database\Commands\AddUserFieldErrorEventArgs.cs" />
     <Compile Include="Database\Commands\AddUserObject.cs" />
     <Compile Include="Database\Commands\AddUserObjectErrorEventArgs.cs" />
     <Compile Include="Database\Commands\AddUserTable.cs" />
@@ -116,9 +118,6 @@
     <Compile Include="Connections\StandardConnection.cs" />
     <Compile Include="Connections\UiApiConnection.cs" />
     <Compile Include="Common\Utilities.cs" />
-    <Compile Include="Database\AddUserField.cs" />
-    <Compile Include="Database\AddUserTable.cs" />
-    <Compile Include="Database\AddUserTableErrorEventArgs.cs" />
     <Compile Include="Database\ArchiveDateFieldAttribute.cs" />
     <Compile Include="Database\AssemblySchemaInitializer.cs" />
     <Compile Include="Database\Attributes\ApproveServiceAttribute.cs" />
@@ -151,7 +150,6 @@
     <Compile Include="Database\SystemFieldAttribute.cs" />
     <Compile Include="Database\UnableToReadException.cs" />
     <Compile Include="Database\UpdateUserField.cs" />
-    <Compile Include="Database\UserFieldErrorEventArgs.cs" />
     <Compile Include="Database\Utilities.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\DateTimeValueArg.cs" />

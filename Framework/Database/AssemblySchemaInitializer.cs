@@ -3,8 +3,6 @@
 //   Full license in the project root.
 // </copyright>
 
-using B1PP.Database.Commands;
-
 namespace B1PP.Database
 {
     using System;
@@ -17,6 +15,8 @@ namespace B1PP.Database
     using SAPbobsCOM;
     
     using Adapters;
+    
+    using Commands;
 
     /// <summary>
     /// Creates the schema using the models attributes as a source.
@@ -47,7 +47,7 @@ namespace B1PP.Database
         /// <summary>
         /// Occurs when [create user field error].
         /// </summary>
-        public event EventHandler<UserFieldErrorEventArgs> CreateUserFieldError = delegate { };
+        public event EventHandler<AddUserFieldErrorEventArgs> CreateUserFieldError = delegate { };
 
         /// <summary>
         /// Occurs when [create user object error].
@@ -230,8 +230,8 @@ namespace B1PP.Database
         /// Called when [add user field error].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="UserFieldErrorEventArgs" /> instance containing the event data.</param>
-        private void OnAddUserFieldError(object sender, UserFieldErrorEventArgs e)
+        /// <param name="e">The <see cref="AddUserFieldErrorEventArgs" /> instance containing the event data.</param>
+        private void OnAddUserFieldError(object sender, AddUserFieldErrorEventArgs e)
         {
             CreateUserFieldError(sender, e);
         }

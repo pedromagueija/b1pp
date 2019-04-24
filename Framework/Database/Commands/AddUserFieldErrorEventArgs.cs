@@ -1,17 +1,17 @@
-// <copyright filename="AddUserTableErrorEventArgs.cs" project="Framework">
+// <copyright filename="UserFieldErrorEventArgs.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
 
-namespace B1PP.Database
-{
-    using System;
+using System;
 
+namespace B1PP.Database.Commands
+{
     /// <summary>
-    /// Event arguments for the error event when adding user tables.
+    /// Contains details about errors regarding actions with UserFields.
     /// </summary>
     /// <seealso cref="System.EventArgs" />
-    public class AddUserTableErrorEventArgs : EventArgs
+    public class AddUserFieldErrorEventArgs : EventArgs
     {
         /// <summary>
         /// Gets or sets the name of the table.
@@ -20,6 +20,14 @@ namespace B1PP.Database
         /// The name of the table.
         /// </value>
         public string TableName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the field.
+        /// </summary>
+        /// <value>
+        /// The name of the field.
+        /// </value>
+        public string FieldName { get; set; }
 
         /// <summary>
         /// Gets or sets the error description.
