@@ -25,7 +25,7 @@ namespace Tests.Unit.Database.Attributes
             
             attr.Apply(field, property);
             
-            property.Name.Should().Be(fieldName);
+            field.Name.Should().Be(fieldName);
         }
 
         private class TestClass
