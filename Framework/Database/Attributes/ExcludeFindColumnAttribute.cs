@@ -12,7 +12,7 @@ namespace B1PP.Database.Attributes
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class ExcludeFindColumnAttribute : Attribute
+    public sealed class ExcludeFindColumnAttribute : Attribute
     {
     }
 }

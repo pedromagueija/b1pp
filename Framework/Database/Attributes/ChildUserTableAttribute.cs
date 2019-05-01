@@ -14,7 +14,7 @@ namespace B1PP.Database.Attributes
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Class)]
-    public class ChildUserTableAttribute : Attribute
+    public sealed class ChildUserTableAttribute : Attribute
     {
         /// <summary>
         /// Gets the name of the child table.

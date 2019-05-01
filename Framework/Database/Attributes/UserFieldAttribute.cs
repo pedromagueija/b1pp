@@ -16,7 +16,7 @@ namespace B1PP.Database.Attributes
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class UserFieldAttribute : Attribute
+    public sealed class UserFieldAttribute : Attribute
     {
         /// <summary>
         /// The maximum alpha type size.

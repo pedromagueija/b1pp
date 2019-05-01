@@ -14,7 +14,7 @@ namespace B1PP.Database.Attributes
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Class)]
-    public class ApproveServiceAttribute : Attribute
+    public sealed class ApproveServiceAttribute : Attribute
     {
         /// <summary>
         /// Gets the workflow manager template identifier.

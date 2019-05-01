@@ -93,6 +93,7 @@
     <Compile Include="Data\SelectStatement.cs" />
     <Compile Include="Data\SqlStatementFactory.cs" />
     <Compile Include="Data\SystemTableAttribute.cs" />
+    <Compile Include="Enumerations\ObjectServices.cs" />
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Exceptions\MissingAttributeException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
@@ -125,7 +126,6 @@
     <Compile Include="Database\Attributes\ChildUserTableAttribute.cs" />
     <Compile Include="Database\Attributes\ExcludeFindColumnAttribute.cs" />
     <Compile Include="Database\Attributes\FieldNameAttribute.cs" />
-    <Compile Include="Database\Attributes\ObjectServices.cs" />
     <Compile Include="Database\Attributes\UserFieldAttribute.cs" />
     <Compile Include="Database\Attributes\UserFieldDefaultValueAttribute.cs" />
     <Compile Include="Database\Attributes\UserFieldEnumValuesAttribute.cs" />

@@ -10,7 +10,7 @@ namespace B1PP.Database.Attributes
     using SAPbobsCOM;
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
-    public class UserFieldValidValueAttribute : Attribute
+    public sealed class UserFieldValidValueAttribute : Attribute
     {
         public string Value { get; }
         public string Description { get; }

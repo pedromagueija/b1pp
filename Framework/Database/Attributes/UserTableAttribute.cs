@@ -10,7 +10,7 @@ namespace B1PP.Database.Attributes
     using SAPbobsCOM;
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class UserTableAttribute : Attribute
+    public sealed class UserTableAttribute : Attribute
     {
         public BoUTBTableType TableType { get; }
         public string TableName { get; }

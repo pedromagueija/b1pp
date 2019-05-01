@@ -3,13 +3,15 @@
 //   Full license in the project root.
 // </copyright>
 
+using B1PP.Enumerations;
+
 namespace B1PP.Database.Attributes
 {
     using System;
 
     using SAPbobsCOM;
 
-    public class UserObjectServicesAttribute : Attribute
+    public sealed class UserObjectServicesAttribute : Attribute
     {
         private readonly ObjectServices[] services;
 

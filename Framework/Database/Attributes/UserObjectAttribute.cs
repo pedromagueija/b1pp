@@ -18,7 +18,7 @@ namespace B1PP.Database.Attributes
     /// </remarks>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Class)]
-    public class UserObjectAttribute : Attribute
+    public sealed class UserObjectAttribute : Attribute
     {
         public string ObjectId { get; }
         public string ObjectName { get; }
@@ -30,14 +30,14 @@ namespace B1PP.Database.Attributes
             BoUDOObjType objectType)
         {
             ObjectId = objectId;
-            ObjectName = objectName.Replace(@" ", @"_");
+            ObjectName = objectName;
             ObjectType = objectType;
         }
 
         internal void Apply(UserObjectsMD userObject, string tableName)
         {
             userObject.Code = ObjectId;
-            userObject.Name = ObjectName;
+            userObject.Name = ObjectName.Replace(@" ", @"_");
             userObject.ObjectType = ObjectType;
             userObject.TableName = tableName;
         }

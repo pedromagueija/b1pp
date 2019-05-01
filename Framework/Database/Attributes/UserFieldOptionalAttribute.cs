@@ -14,7 +14,7 @@ namespace B1PP.Database.Attributes
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class UserFieldOptionalAttribute : Attribute
+    public sealed class UserFieldOptionalAttribute : Attribute
     {
         /// <summary>
         /// Applies the optional attribute to the specified field.

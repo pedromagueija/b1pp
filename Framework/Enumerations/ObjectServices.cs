@@ -3,7 +3,7 @@
 //   Full license in the project root.
 // </copyright>
 
-namespace B1PP.Database.Attributes
+namespace B1PP.Enumerations
 {
     /// <summary>
     /// Services provided by the User Defined Object.

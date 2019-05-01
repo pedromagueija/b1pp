@@ -15,7 +15,7 @@ namespace B1PP.Database.Attributes
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class UserFieldDefaultValueAttribute : Attribute
+    public sealed class UserFieldDefaultValueAttribute : Attribute
     {
         /// <summary>
         /// The value

@@ -3,6 +3,8 @@
 //   Full license in the project root.
 // </copyright>
 
+using B1PP.Enumerations;
+
 namespace Tests.Feature.Database
 {
     using System;
