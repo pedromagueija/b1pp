@@ -28,7 +28,7 @@ namespace Tests.Unit
             Assert.AreEqual(expectedFieldName, name);
         }
 
-        public class TestClass
+        private class TestClass
         {
             [SystemField]
             public string DocEntry { get; set; }
