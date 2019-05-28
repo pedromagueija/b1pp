@@ -39,10 +39,14 @@ namespace B1PP
         private object ConvertToObject(string value, PropertyInfo property)
         {
             if (string.IsNullOrEmpty(value))
+            {
                 return DefaultValue(property.PropertyType);
+            }
 
             if (property.PropertyType == typeof(string))
+            {
                 return value;
+            }
 
             if (property.PropertyType == typeof(int) || property.PropertyType == typeof(int?))
             {
@@ -55,13 +59,16 @@ namespace B1PP
             }
 
             if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
+            {
                 return Convert.ToDateTime(value, CultureInfo.InvariantCulture);
+            }
 
             if (property.PropertyType == typeof(double) || property.PropertyType == typeof(double?))
+            {
                 return Convert.ToDouble(value, CultureInfo.InvariantCulture);
+            }
 
-            throw new ArgumentException(
-                $@"Property '{property.Name}' is of an unsupported type '{property.PropertyType}'");
+            throw new ArgumentException($@"Property '{property.Name}' is of an unsupported type '{property.PropertyType}'");
         }
 
         private bool HasSystemOrUserField(PropertyInfo p)

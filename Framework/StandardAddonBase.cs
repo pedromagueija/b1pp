@@ -3,6 +3,8 @@
 //   Full license in the project root.
 // </copyright>
 
+using B1PP.Forms.Events.MenuEvents;
+
 namespace B1PP
 {
     using System;
@@ -19,6 +21,7 @@ namespace B1PP
     public abstract class StandardAddonBase : IAddon
     {
         private IApplicationEventsHandler appEventsHandler;
+        protected IMainMenuInstance MainMenu;
         protected IStandardConnection connection;
         private B1EventsManager events;
 
@@ -26,15 +29,21 @@ namespace B1PP
         {
             Connect();
 
-            B1EventsManager.Instance.Initialize(connection.Application, GetApplicationEventHandler());
+            B1EventsManager.Instance.Initialize(connection.Application, GetApplicationEventHandler(), MainMenu);
 
-            var status = new StatusBarMessage(
-                connection.Application,
-                $@"Addon ready at {connection.Application.Company.Name}.");
+            ShowReady();
+        }
+
+        private void ShowReady()
+        {
+            var app = connection.Application;
+            string companyName = app.Company.Name;
+            
+            var status = new StatusBarMessage(app, $@"Add-on ready at {companyName}.");
             status.Warning();
         }
 
-        public void Stop()
+        public virtual void Stop()
         {
             events.Terminate();
 

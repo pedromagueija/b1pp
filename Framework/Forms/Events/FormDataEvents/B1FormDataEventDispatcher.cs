@@ -19,6 +19,11 @@ namespace B1PP.Forms.Events.FormDataEvents
 
         public void AddListener(FormDataEventHandler handler)
         {
+            if (handler == null)
+            {
+                throw new ArgumentNullException(nameof(handler));
+            }
+            
             handlers.Add(handler.Id, handler);
         }
 
@@ -45,6 +50,7 @@ namespace B1PP.Forms.Events.FormDataEvents
                 throw new ArgumentNullException(nameof(application));
             }
 
+            
             if (Application != null)
             {
                 throw new InvalidOperationException(@"Cannot subscribe twice to 'Application.ItemEvent'.");
@@ -55,16 +61,18 @@ namespace B1PP.Forms.Events.FormDataEvents
         }
 
         /// <summary>
-        /// Unsubscribing will remove all event listeners.
+        /// Stops listening to form data events.
         /// </summary>
         public void Unsubscribe()
         {
-            if (Application != null)
+            if (Application == null)
             {
-                Application.FormDataEvent -= OnFormDataEvent;
-                Application = null;
-                handlers = new Dictionary<string, IFormDataEventHandler>();
+                return;
             }
+            
+            Application.FormDataEvent -= OnFormDataEvent;
+            Application = null;
+            handlers = new Dictionary<string, IFormDataEventHandler>();
         }
 
         /// <summary>
