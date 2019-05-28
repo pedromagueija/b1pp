@@ -9,6 +9,13 @@ namespace B1PP.Database.Attributes
 
     using SAPbobsCOM;
 
+    /// <summary>
+    /// Defines the valid values for a user field.
+    /// </summary>
+    /// <remarks>
+    /// This attribute can be used multiple times for different values.
+    /// </remarks>
+    /// <seealso cref="UserFieldEnumValuesAttribute"/>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
     public sealed class UserFieldValidValueAttribute : Attribute
     {
@@ -21,7 +28,7 @@ namespace B1PP.Database.Attributes
             Description = description;
         }
 
-        public void Apply(UserFieldsMD field)
+        internal void Apply(UserFieldsMD field)
         {
             var validValues = field.ValidValues;
 

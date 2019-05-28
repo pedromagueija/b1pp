@@ -20,7 +20,7 @@ namespace B1PP.Database.Attributes
         /// Applies the optional attribute to the specified field.
         /// </summary>
         /// <param name="field">The field to make optional.</param>
-        public void Apply(UserFieldsMD field)
+        internal void Apply(UserFieldsMD field)
         {
             field.Mandatory = BoYesNoEnum.tNO;
         }

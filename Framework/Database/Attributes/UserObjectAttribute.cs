@@ -20,10 +20,27 @@ namespace B1PP.Database.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class UserObjectAttribute : Attribute
     {
+        /// <summary>
+        /// The user-defined-object id.
+        /// </summary>
         public string ObjectId { get; }
+        
+        /// <summary>
+        /// The user-defined-object name.
+        /// </summary>
         public string ObjectName { get; }
+        
+        /// <summary>
+        /// The user-defined-object type.
+        /// </summary>
         public BoUDOObjType ObjectType { get; }
 
+        /// <summary>
+        /// Creates a new instance of <see cref="UserObjectAttribute"/>.
+        /// </summary>
+        /// <param name="objectId">The user-defined-object id.</param>
+        /// <param name="objectName">The user-defined-object name.</param>
+        /// <param name="objectType">The user-defined-object type.</param>
         public UserObjectAttribute(
             string objectId,
             string objectName,

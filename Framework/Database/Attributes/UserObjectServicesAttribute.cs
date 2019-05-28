@@ -11,10 +11,20 @@ namespace B1PP.Database.Attributes
 
     using SAPbobsCOM;
 
+    /// <summary>
+    /// Defines the services available with a user-defined-object.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class UserObjectServicesAttribute : Attribute
     {
         private readonly ObjectServices[] services;
 
+        /// <summary>
+        /// Creates a new instance of <see cref="UserObjectServicesAttribute"/>.
+        /// </summary>
+        /// <param name="services">
+        /// The services to activate on the user-defined-object.
+        /// </param>
         public UserObjectServicesAttribute(params ObjectServices[] services)
         {
             this.services = services;

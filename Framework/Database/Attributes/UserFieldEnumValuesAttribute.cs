@@ -36,7 +36,7 @@ namespace B1PP.Database.Attributes
             this.type = type;
         }
 
-        public void Apply(UserFieldsMD field)
+        internal void Apply(UserFieldsMD field)
         {
             var values = new EnumConverter(type).ToEnumerable();
             var validValues = field.ValidValues;

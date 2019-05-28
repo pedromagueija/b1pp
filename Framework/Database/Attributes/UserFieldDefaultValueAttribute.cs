@@ -53,7 +53,7 @@ namespace B1PP.Database.Attributes
         /// Applies the default value to the specified field.
         /// </summary>
         /// <param name="field">The field to apply the default value to.</param>
-        public void Apply(UserFieldsMD field)
+        internal void Apply(UserFieldsMD field)
         {
             var text = string.Empty;
 

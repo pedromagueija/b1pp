@@ -67,7 +67,7 @@ namespace B1PP.Database.Attributes
             
         }
 
-        public void Apply(UserTablesMD table)
+        internal void Apply(UserTablesMD table)
         {
             table.TableName = TableName;
             table.TableDescription = TableDescription;
