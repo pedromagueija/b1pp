@@ -7,9 +7,7 @@ namespace B1PP.Forms
 {
     using System;
     using System.Collections.Generic;
-
     using Extensions.SDK.UI;
-
     using SAPbouiCOM;
 
     public class UserFormLoader : FormLoader
@@ -21,20 +19,19 @@ namespace B1PP.Forms
         {
             this.form = form;
             PreProcessors = new List<IFormPreProcessor>
-            {
-                new CenterFormPreProcessor(application),
-                new ImageBaseDirectoryPreProcessor()
-            };
+                            {
+                                new CenterFormPreProcessor(application), new ImageBaseDirectoryPreProcessor()
+                            };
         }
 
         public override Form Load()
         {
             var type = form.GetType();
             var assembly = type.Assembly;
-            var formType = type.FullName;
-            var fileName = $"{formType}.xml";
-            var contents = ReadFileContents(assembly, fileName);
-            var uniqueId = GenerateUniqueId();
+            string formType = type.FullName;
+            string fileName = $"{formType}.xml";
+            string contents = ReadFileContents(assembly, fileName);
+            string uniqueId = GenerateUniqueId();
 
             return Load(contents, formType, uniqueId);
         }

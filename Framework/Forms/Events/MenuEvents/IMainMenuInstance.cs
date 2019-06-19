@@ -5,11 +5,10 @@
 
 namespace B1PP.Forms.Events.MenuEvents
 {
+    /// <summary>
+    /// Represents the main menu for the add-on.
+    /// </summary>
     public interface IMainMenuInstance
-    {
-    }
-
-    internal class NullMainMenuInstance : IMainMenuInstance
     {
     }
 }

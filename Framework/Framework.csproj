@@ -98,8 +98,11 @@
     <Compile Include="Exceptions\MissingAttributeException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Extensions\Common\PropertyInfoExtensions.cs" />
+    <Compile Include="Forms\Common\UserConfirmation.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\ApplicationEventsHandlerBase.cs" />
     <Compile Include="Forms\Events\ApplicationEvents\DefaultApplicationEventsHandler.cs" />
+    <Compile Include="Forms\Events\MenuEvents\DefaultMainMenu.cs" />
+    <Compile Include="Forms\UserForm.cs" />
     <Compile Include="GenericUdoDeserializer.cs" />
     <Compile Include="GenericUdoSerializer.cs" />
     <Compile Include="GetFieldName.cs" />

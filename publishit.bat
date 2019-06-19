@@ -1,0 +1,1 @@
+.\tools\nuget.exe push .\nupkg\B1PP.Framework.0.0.2-alpha.nupkg -Source https://api.nuget.org/v3/index.json

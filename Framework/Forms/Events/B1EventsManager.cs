@@ -37,9 +37,6 @@ namespace B1PP.Forms.Events
         private Assembly assembly;
         private Type[] assemblyTypes;
 
-
-        private IMainMenuInstance mainMenu;
-
         /// <summary>
         /// Gets the instance of the events manager.
         /// </summary>
@@ -82,13 +79,11 @@ namespace B1PP.Forms.Events
         /// <summary>
         /// Starts up the events managing system.
         /// </summary>
-        public void Initialize(Application app, IApplicationEventsHandler handler,
-            IMainMenuInstance mainMenuInstance = null)
+        public void Initialize(Application app, IApplicationEventsHandler handler)
         {
             application = app;
             assembly = GetAssembly(handler);
             assemblyTypes = GetAssemblyTypes(assembly);
-            mainMenu = GetMainMenu(mainMenuInstance);
 
             B1EventFilterManager.Initialize(app);
 
@@ -97,8 +92,6 @@ namespace B1PP.Forms.Events
 
             AddSystemFormLoadListeners();
             AddEventSinks();
-
-            SetMainMenu();
         }
 
         /// <summary>
@@ -225,7 +218,7 @@ namespace B1PP.Forms.Events
 
         private static IMainMenuInstance GetMainMenu(IMainMenuInstance mainMenuInstance)
         {
-            return mainMenuInstance ?? new NullMainMenuInstance();
+            return mainMenuInstance ?? new DefaultMainMenu();
         }
 
         private void OnEventHandlerError(object sender, ErrorEventArgs e)
@@ -234,7 +227,7 @@ namespace B1PP.Forms.Events
             OnError(sender, e);
         }
 
-        private void SetMainMenu()
+        public void SetMainMenu(IMainMenuInstance mainMenu)
         {
             var listener = CreateMainMenuEventListener(mainMenu);
             listener.Subscribe();
