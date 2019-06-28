@@ -10,6 +10,8 @@ using SAPbobsCOM;
 
 namespace B1PP.Database.Commands
 {
+    using System.Runtime.InteropServices;
+
     internal class AddMasterData<T> : IAddMasterData<T> where T : class, IMasterDataRecord
     {
         private readonly Company company;
@@ -21,16 +23,43 @@ namespace B1PP.Database.Commands
             this.serializer = serializer;
         }
 
-        public string Invoke(T instance)
+        /// <summary>
+        /// True when the action completes with success, false otherwise.
+        /// </summary>
+        public bool Success { get; private set; }
+
+        /// <summary>
+        /// Contains the error, if any, that caused the action to fail.
+        /// </summary>
+        public string Error { get; private set; }
+
+        public string Execute(T instance)
         {
             string udoId = GetUserObjectId();
             string xml = serializer.Serialize(instance);
 
             var service = company.GetCompanyService().GetGeneralService(udoId);
             var data = (GeneralData) service.GetDataInterfaceFromXMLString(xml);
-            var result = service.Add(data);
 
-            string code = result.GetProperty(@"Code") as string;
+            string code;
+            try
+            {
+                var result = service.Add(data);
+                code = result.GetProperty(@"Code") as string;
+                Success = true;
+            }
+            catch (COMException e)
+            {
+                if (e.HResult == -2035)
+                {
+                    Error = @"This entry already exists in the database.";
+                    Success = false;
+                    return string.Empty;
+                }
+                
+                throw;
+            }
+
             return code;
         }
 

@@ -46,15 +46,20 @@ namespace B1PP.Database.Attributes
             string objectName,
             BoUDOObjType objectType)
         {
+            // at the time of writing user-objects with spaces in their name
+            // cannot be serialized, to avoid this we replace the spaces in the original name
+            // with an '_'
+            string userObjectName = objectName.Replace(@" ", @"_");
+
             ObjectId = objectId;
-            ObjectName = objectName;
+            ObjectName = userObjectName;
             ObjectType = objectType;
         }
 
         internal void Apply(UserObjectsMD userObject, string tableName)
         {
             userObject.Code = ObjectId;
-            userObject.Name = ObjectName.Replace(@" ", @"_");
+            userObject.Name = ObjectName;
             userObject.ObjectType = ObjectType;
             userObject.TableName = tableName;
         }

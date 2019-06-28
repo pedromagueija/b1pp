@@ -1,0 +1,345 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wyam.Configuration</name>
+    </assembly>
+    <members>
+        <member name="T:Wyam.Configuration.Assemblies.AssemblyComparer">
+            <summary>
+            Compares two assemblies for equality by comparing at their full names.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.Assemblies.AssemblyComparer.Equals(System.Reflection.Assembly,System.Reflection.Assembly)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Wyam.Configuration.Assemblies.AssemblyComparer.GetHashCode(System.Reflection.Assembly)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Wyam.Configuration.Assemblies.AssemblyLoader.DirectAssemblies">
+            <summary>
+            Gets the assemblies that were directly referenced (as opposed to all recursively referenced assemblies).
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.Assemblies.AssemblyLoader.Add(System.String)">
+            <summary>
+            Adds a new assembly or pattern to those to be loaded.
+            </summary>
+            <param name="assembly">
+            The assembly or pattern to load. If the string contains a "*" then it is considered a globbing pattern, otherwise it's considered an assembly.
+            </param>
+        </member>
+        <member name="M:Wyam.Configuration.Assemblies.AssemblyLoader.Load">
+            <summary>
+            Loads all specified assemblies and their references.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.Assemblies.AssemblyLoader.AssemblyDependencyComparer">
+            <summary>
+            Returns assemblies in dependency order.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.Assemblies.ClassCatalog">
+            <summary>
+            Responsible for iterating over a set of assemblies
+            looking for implementations of predefined interfaces.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.Assemblies.ClassCatalog.GetClasses``1">
+            <summary>
+            Gets all classes of a specified type.
+            </summary>
+            <typeparam name="T">The type of classes to get.</typeparam>
+            <returns>All classes of type <c>T</c>.</returns>
+        </member>
+        <member name="M:Wyam.Configuration.Assemblies.ClassCatalog.GetInstances``1">
+            <summary>
+            Gets instances for all classes of a specified type..
+            </summary>
+            <typeparam name="T">The type of instances to get.</typeparam>
+            <returns>Instances for all classes of type <c>T</c>.</returns>
+        </member>
+        <member name="M:Wyam.Configuration.Assemblies.ClassCatalog.GetInstance``1(System.String,System.Boolean)">
+            <summary>
+            Gets an instance for a class of a specified type and name.
+            </summary>
+            <typeparam name="T">The type of the instance to get.</typeparam>
+            <param name="typeName">The name of the type.</param>
+            <param name="ignoreCase">if set to <c>true</c> ignore the case of the type name.</param>
+            <returns>
+            An instance of the first class that matches the specified type and name.
+            </returns>
+        </member>
+        <member name="T:Wyam.Configuration.ClassEnum`1">
+            <summary>
+            A base class that can be used to create more powerful "enum" classes that
+            use fields to store the values, which are instances of the class.
+            </summary>
+            <typeparam name="T">The derived class type.</typeparam>
+        </member>
+        <member name="T:Wyam.Configuration.ConfigScript.ScriptBase">
+            <summary>
+            This is the base class used for the generated configuration script. Put any properties or
+            methods you want the configuration script to have access to in here.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.Configurator">
+            <summary>
+            Manages configuration of an engine and coordinates configuration script processing.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.Configurator.#ctor(Wyam.Core.Execution.Engine)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Wyam.Configuration.Configurator"/> class.
+            </summary>
+            <param name="engine">The engine to configure.</param>
+        </member>
+        <member name="M:Wyam.Configuration.Configurator.#ctor(Wyam.Core.Execution.Engine,Wyam.Configuration.Preprocessing.Preprocessor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Wyam.Configuration.Configurator"/> class. This overload
+            allows passing in a <see cref="T:Wyam.Configuration.Preprocessing.Preprocessor"/> that can be reused and pre-configured
+            with directives not sourced from the script.
+            </summary>
+            <param name="engine">The engine to configure.</param>
+            <param name="preprocessor">The preprocessor.</param>
+        </member>
+        <member name="M:Wyam.Configuration.Configurator.Configure(Wyam.Common.IO.FilePath)">
+            <summary>
+            Configures the engine using the specified config file.
+            </summary>
+            <param name="configFilePath">The path to the config file.</param>
+            <returns><c>true</c> if the file exists and the engine was configured, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Wyam.Configuration.Configurator.Configure(Wyam.Common.IO.IFile)">
+            <summary>
+            Configures the engine using the specified config file.
+            </summary>
+            <param name="configFile">The config file.</param>
+            <returns><c>true</c> if the file exists and the engine was configured, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Wyam.Configuration.Configurator.Configure(System.String,Wyam.Common.IO.FilePath)">
+            <summary>
+            Configures the engine using the specified script.
+            </summary>
+            <param name="script">The script.</param>
+            <param name="configFilePath">
+            The path to the config file. This is used for calculating file names and paths for caching files.
+            If it is not supplied, no cache files will be generated.
+            </param>
+        </member>
+        <member name="T:Wyam.Configuration.Directives.ArgumentSyntaxDirective`1">
+            <summary>
+            Helps support directives that can use CLI-style options and arguments.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.KnownExtension">
+            <summary>
+            Lookup data for all known extensions.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.KnownExtension.PackageId">
+            <summary>
+            Gets the package that contains the extension.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.KnownRecipe">
+            <summary>
+            Lookup data for all known recipes.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.KnownRecipe.PackageId">
+            <summary>
+            Gets the package that the recipe class is in. If the recipe is in the
+            core library, this will be null.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.KnownRecipe.DefaultTheme">
+            <summary>
+            Gets the default theme for this recipe (or null). This should map
+            to a theme in the <see cref="T:Wyam.Configuration.KnownTheme" /> lookup.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.KnownTheme">
+            <summary>
+            Lookup data for all known themes.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.KnownTheme.Recipe">
+            <summary>
+            Gets the recipe that this theme supports. A null value indicates the theme
+            is not recipe specific.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.KnownTheme.InputPath">
+            <summary>
+            Path to insert into input paths. If the theme is just a NuGet content package,
+            the content folder will be automatically included and this can be null. Useful
+            if the theme exists somewhere else like a GitHub repository.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.KnownTheme.PackageId">
+            <summary>
+            Gets the package containing this theme.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.CachedPackage.VerifyPackage(NuGet.PackageManagement.NuGetPackageManager)">
+            <summary>
+            Verifies that the package and all of it's dependencies exist locally
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.InstalledPackagesCache.GetInstalledPackagesAndDependencies">
+            <summary>
+            Gets all installed packages from this session and their dependencies.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.InstalledPackagesCache.VerifyPackage(NuGet.Packaging.Core.PackageIdentity,NuGet.PackageManagement.NuGetPackageManager)">
+            <summary>
+            Verifies that a package has been previously installed as well as
+            currently existing locally with all dependencies, and if so,
+            adds it back to the outgoing cache file along with all it's
+            previously calculated dependencies.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.PackageInstaller.AddPackageSource(System.String)">
+            <summary>
+            Adds the specified package source. Sources added this way will be searched before any global sources.
+            </summary>
+            <param name="packageSource">The package source to add.</param>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.PackageInstaller.AddPackage(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Adds a package.
+            </summary>
+            <param name="packageId">The package identifier.</param>
+            <param name="packageSources">The package sources.</param>
+            <param name="versionRange">The version range.</param>
+            <param name="getLatest">If set to <c>true</c>, the latest version of the package will always be downloaded.</param>
+            <param name="allowPrereleaseVersions">If set to <c>true</c>, allow prerelease versions.</param>
+            <param name="allowUnlisted">If set to <c>true</c>, allow unlisted versions.</param>
+            <param name="exclusive">If set to <c>true</c>, only use the package sources defined for this package.</param>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.PackageInstaller.ContainsPackage(System.String)">
+            <summary>
+            Determines whether the specified package has already been added.
+            </summary>
+            <param name="packageId">The package identifier.</param>
+        </member>
+        <member name="T:Wyam.Configuration.NuGet.SourceRepositoryProvider">
+            <summary>
+            Creates and caches SourceRepository objects, which are
+            the combination of PackageSource instances with a set
+            of supported resource providers. It also manages the set
+            of default source repositories.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.SourceRepositoryProvider.AddGlobalDefaults">
+            <summary>
+            Add the global sources to the default repositories.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.SourceRepositoryProvider.AddDefaultRepository(System.String)">
+            <summary>
+            Adds a default source repository to the front of the list.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.SourceRepositoryProvider.CreateRepository(System.String)">
+            <summary>
+            Creates or gets a non-default source repository.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.SourceRepositoryProvider.CreateRepository(NuGet.Configuration.PackageSource)">
+            <summary>
+            Creates or gets a non-default source repository by PackageSource.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.SourceRepositoryProvider.CreateRepository(NuGet.Configuration.PackageSource,NuGet.Protocol.FeedType)">
+            <summary>
+            Creates or gets a non-default source repository by PackageSource.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.NuGet.SourceRepositoryProvider.GetRepositories">
+            <summary>
+            Gets all cached repositories.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.Preprocessing.DirectiveValue">
+            <summary>
+            Represents the use of a directive.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.DirectiveValue.Line">
+             <summary>
+             Gets the line where the directive was specified
+             (or <c>null</c> if created outside the configuration file).
+             </summary>
+            
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.DirectiveValue.Name">
+            <summary>
+            Gets the directive name.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.DirectiveValue.Value">
+            <summary>
+            Gets the directive value.
+            </summary>
+        </member>
+        <member name="T:Wyam.Configuration.Preprocessing.IDirective">
+            <summary>
+            A directive that can be used in the configuration file and optionally on the
+            command line.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.IDirective.Name">
+            <summary>
+            Gets the directive name.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.IDirective.ShortName">
+            <summary>
+            Gets the short directive name.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.IDirective.SupportsMultiple">
+            <summary>
+            Gets a value indicating whether the directive supports multiple values.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.IDirective.Description">
+            <summary>
+            Gets a description of the directive.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.IDirective.ValueComparer">
+            <summary>
+            Gets a string comparer that can be used to compare values of one directive to another for equality.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.Preprocessing.IDirective.Process(Wyam.Configuration.Configurator,System.String)">
+            <summary>
+            Processes the directive.
+            </summary>
+            <param name="configurator">The configurator.</param>
+            <param name="value">The value of the directive.</param>
+        </member>
+        <member name="M:Wyam.Configuration.Preprocessing.IDirective.GetHelpText">
+            <summary>
+            Gets the help text.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.Preprocessing.Preprocessor.AddValue(Wyam.Configuration.Preprocessing.DirectiveValue)">
+            <summary>
+            Adds values that will be persistent from one configuration to the next.
+            </summary>
+        </member>
+        <member name="P:Wyam.Configuration.Preprocessing.Preprocessor.Values">
+            <summary>
+            Gets the current directive values.
+            </summary>
+        </member>
+        <member name="M:Wyam.Configuration.Preprocessing.Preprocessor.ProcessDirectives(Wyam.Configuration.Configurator,System.Collections.Generic.IEnumerable{Wyam.Configuration.Preprocessing.DirectiveValue})">
+            <summary>
+            Processes both directives that were added to the preprocessor plus any additional ones passed in.
+            </summary>
+        </member>
+    </members>
+</doc>

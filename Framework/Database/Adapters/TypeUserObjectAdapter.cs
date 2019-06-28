@@ -12,6 +12,9 @@ using SAPbobsCOM;
 
 namespace B1PP.Database.Adapters
 {
+    using System.Linq;
+    using Extensions.Common;
+
     internal class TypeUserObjectAdapter
     {
         private readonly string tableName;
@@ -61,7 +64,14 @@ namespace B1PP.Database.Adapters
 
         private IEnumerable<PropertyInfo> GetProperties(Type userTable)
         {
-            return userTable.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var properties = userTable.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var userFields = properties.Where(HasUserFieldAttribute);
+            return userFields;
+        }
+
+        private bool HasUserFieldAttribute(PropertyInfo property)
+        {
+            return property.HasAttribute<UserFieldAttribute>();
         }
 
         private void SetChildTables(PropertyInfo property)

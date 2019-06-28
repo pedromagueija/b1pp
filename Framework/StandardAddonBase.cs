@@ -25,6 +25,11 @@ namespace B1PP
         private IMainMenuInstance mainMenu = new DefaultMainMenu();
 
         /// <summary>
+        /// When true, no message will be displayed after add-on connection.
+        /// </summary>
+        protected bool SuppressReadyMessage { get; set; }
+
+        /// <summary>
         /// Stops the add-on and terminates the process.
         /// </summary>
         public void Exit()
@@ -102,6 +107,11 @@ namespace B1PP
 
         private void ShowReady()
         {
+            if (SuppressReadyMessage)
+            {
+                return;
+            }
+
             var app = Connection.Application;
             string companyName = app.Company.Name;
 

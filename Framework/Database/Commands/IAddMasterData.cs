@@ -13,6 +13,16 @@ namespace B1PP.Database.Commands
     public interface IAddMasterData<in T> where T : IMasterDataRecord
     {
         /// <summary>
+        /// True when the action completes with success, false otherwise.
+        /// </summary>
+        bool Success { get; }
+
+        /// <summary>
+        /// Contains the error, if any, that caused the action to fail.
+        /// </summary>
+        string Error { get; }
+
+        /// <summary>
         /// Invokes the command.
         /// </summary>
         /// <param name="instance">
@@ -21,6 +31,6 @@ namespace B1PP.Database.Commands
         /// <returns>
         /// The key of the added record.
         /// </returns>
-        string Invoke(T instance);
+        string Execute(T instance);
     }
 }
