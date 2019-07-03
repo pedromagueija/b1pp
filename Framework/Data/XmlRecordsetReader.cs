@@ -18,11 +18,9 @@ namespace B1PP.Data
     /// <summary>
     /// Allows you to read the data in the recordset.
     /// </summary>
-    internal class XmlRecordsetReader : IRecordsetReader
+    internal sealed class XmlRecordsetReader : IRecordsetReader
     {
         private const string SapNamespace = "xmlns=\"http://www.sap.com/SBO/SDK/DI\"";
-
-        private readonly XmlDocument xmlDoc;
 
         private List<Column> columns = new List<Column>();
 
@@ -38,13 +36,9 @@ namespace B1PP.Data
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XmlRecordsetReader" /> class.
-        /// </summary>
         private XmlRecordsetReader()
         {
-            xmlDoc = new XmlDocument();
-            rowEnumerator = xmlDoc.GetEnumerator();
+            
         }
 
         public DateTime? GetDateTime(string columnName)
@@ -55,12 +49,19 @@ namespace B1PP.Data
                 return null;
             }
 
-            return DateTime.ParseExact(value, GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture);
+            try
+            {
+                return DateTime.ParseExact(value, GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture);
+            }
+            catch (FormatException)
+            {
+                throw CreateFormatException(value, typeof(DateTime));
+            }
         }
 
         public DateTime GetDateTimeOrDefault(string columnName)
         {
-            return GetDateTime(columnName) ?? default(DateTime);
+            return GetDateTime(columnName) ?? default;
         }
 
         public double? GetDouble(string columnName)
@@ -71,12 +72,24 @@ namespace B1PP.Data
                 return null;
             }
 
-            return double.Parse(value, CultureInfo.InvariantCulture);
+            bool success = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double returnValue);
+            if (success)
+            {
+                return returnValue;
+            }
+
+            throw CreateFormatException(value, typeof(double));
         }
 
         public double GetDoubleOrDefault(string columnName)
         {
-            return GetDouble(columnName) ?? default(double);
+            return GetDouble(columnName) ?? default;
+        }
+
+        private FormatException CreateFormatException(string value, Type target)
+        {
+            string message = $@"String value {value} cannot be parsed into an {target} value.";
+            return new FormatException(message);
         }
 
         public int? GetInt(string columnName)
@@ -87,17 +100,23 @@ namespace B1PP.Data
                 return null;
             }
 
-            return int.Parse(value, CultureInfo.InvariantCulture);
+            bool success = int.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out int returnValue);
+            if (success)
+            {
+                return returnValue;
+            }
+
+            throw CreateFormatException(value, typeof(int));
         }
 
         public int GetIntOrDefault(string columnName)
         {
-            return GetInt(columnName) ?? default(int);
+            return GetInt(columnName) ?? default;
         }
 
         public bool GetBoolOrDefault(string columnName)
         {
-            return GetBool(columnName) ?? default(bool);
+            return GetBool(columnName) ?? default;
         }
 
         public bool? GetBool(string columnName)
@@ -108,24 +127,18 @@ namespace B1PP.Data
                 return null;
             }
 
-            return bool.Parse(value);
+            bool success = bool.TryParse(value, out bool returnValue);
+            if (success)
+            {
+                return returnValue;
+            }
+
+            throw CreateFormatException(value, typeof(bool));
         }
 
         public string GetString(string columnName)
         {
-            if (string.IsNullOrEmpty(columnName))
-            {
-                throw new ArgumentException($"Parameter {nameof(columnName)} cannot be null or empty");
-            }
-
-            var valueNode = GetItemXmlNode(columnName);
-
-            if (valueNode != null)
-            {
-                return valueNode.InnerText;
-            }
-
-            throw new ArgumentException($"No column with name {columnName} was found.");
+            return GetValue(columnName);
         }
 
         public string GetStringOrEmpty(string columnName)
@@ -145,7 +158,7 @@ namespace B1PP.Data
             return retVal;
         }
 
-        public static XmlRecordsetReader CreateNew(IRecordset data)
+        public static XmlRecordsetReader CreateNew(Recordset data)
         {
             if (data == null)
             {
@@ -158,47 +171,50 @@ namespace B1PP.Data
             return reader;
         }
 
-        private string ExtractXmlFromRecordset(IRecordset data)
+        private XmlDocument ToXmlDocument(Recordset data)
         {
             string fixedXml = data.GetFixedXML(RecordsetXMLModeEnum.rxmData);
             if (string.IsNullOrEmpty(fixedXml))
             {
-                return string.Empty;
+                return null;
             }
 
-            return fixedXml.Replace(SapNamespace, string.Empty);
+            string xmlData = fixedXml.Replace(SapNamespace, string.Empty);
+            var xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(xmlData);
+            return xmlDocument;
         }
 
-        private XmlNode GetItemXmlNode(string columnName)
+        private string GetValue(string columnName)
         {
-            XmlNode valueNode;
+            if (string.IsNullOrEmpty(columnName))
+            {
+                throw new ArgumentException($@"Parameter {nameof(columnName)} cannot be null or empty.");
+            }
 
             try
             {
-                string xpath = $"Fields/Field/Value[../Alias = '{columnName}']";
-                valueNode = currentRow.SelectSingleNode(xpath);
+                string xpath = $@"Fields/Field/Value[../Alias = '{columnName}']";
+                var valueNode = currentRow.SelectSingleNode(xpath);
+                if (valueNode != null)
+                {
+                    return valueNode.InnerText;
+                }
+
+                throw new ArgumentException($@"No column with name {columnName} was found.");
             }
             catch (XPathException)
             {
-                valueNode = null;
+                // TODO: log the exception
+                return string.Empty;
             }
-
-            return valueNode;
         }
 
-        private void Load(IRecordset data)
+        private void Load(Recordset data)
         {
-            // get data
-            string xmlData = ExtractXmlFromRecordset(data);
+            var xmlDoc = ToXmlDocument(data);
 
-            if (string.IsNullOrEmpty(xmlData))
-            {
-                return;
-            }
-
-            xmlDoc.LoadXml(xmlData);
-
-            var rows = xmlDoc.SelectNodes(@"//Row");
+            var rows = xmlDoc?.SelectNodes(@"//Row");
             if (rows == null || rows.Count == 0)
             {
                 return;

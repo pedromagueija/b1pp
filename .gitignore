@@ -252,3 +252,4 @@ out/
 !SAPBusinessOneSDK.dll
 output/
 .sonarqube/
+/NDependOut

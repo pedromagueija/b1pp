@@ -1,16 +1,15 @@
-// <copyright filename="GetFieldNameFromProperty.cs" project="Framework">
+// <copyright filename="GetFieldName.cs" project="Framework">
 //   This file is licensed to you under the MIT License.
 //   Full license in the project root.
 // </copyright>
 
-using System;
-using System.Reflection;
-using B1PP.Database;
-using B1PP.Database.Attributes;
-using B1PP.Extensions.Common;
-
 namespace B1PP
 {
+    using System.Reflection;
+    using Database;
+    using Database.Attributes;
+    using Extensions.Common;
+
     /// <summary>
     /// Gets the field name.
     /// </summary>
@@ -49,10 +48,11 @@ namespace B1PP
         private string GetName(PropertyInfo property)
         {
             if (property.HasAttribute<FieldNameAttribute>())
+            {
                 return property.GetCustomAttribute<FieldNameAttribute>().FieldName;
+            }
 
             return property.Name;
         }
-        
     }
 }

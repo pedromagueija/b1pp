@@ -20,9 +20,9 @@ namespace B1PP.Data
     /// <remarks>
     /// Calling any method on an instance of this class after disposing may result in an exception.
     /// </remarks>
-    /// <seealso cref="SAPbobsCOM.IRecordset" />
+    /// <seealso cref="SAPbobsCOM.Recordset" />
     /// <seealso cref="System.IDisposable" />
-    internal class DisposableRecordset : IRecordset, IDisposable
+    internal sealed class DisposableRecordset : Recordset, IDisposable
     {
         private readonly Recordset recordset;
 
@@ -82,12 +82,7 @@ namespace B1PP.Data
         /// </exception>
         public DisposableRecordset(Recordset recordset)
         {
-            if (recordset == null)
-            {
-                throw new ArgumentNullException(nameof(recordset));
-            }
-
-            this.recordset = recordset;
+            this.recordset = recordset ?? throw new ArgumentNullException(nameof(recordset));
         }
 
         public void Dispose()
@@ -146,7 +141,7 @@ namespace B1PP.Data
             return recordset.GetFixedSchema();
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing)
             {

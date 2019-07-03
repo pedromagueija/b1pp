@@ -63,6 +63,7 @@
     <Compile Include="Connections\UiApiConnectionTests.cs" />
     <Compile Include="Database\AttributeMetadataTests.cs" />
     <Compile Include="Data\QueryTests.cs" />
+    <Compile Include="Data\XmlRecordsetReaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
