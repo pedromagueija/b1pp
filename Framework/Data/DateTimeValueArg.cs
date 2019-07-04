@@ -11,7 +11,7 @@ namespace B1PP.Data
     /// Represents a query parameter of DateTime type.
     /// </summary>
     /// <remarks>
-    /// The DateTime will be converted automatically to the universal SQL date format ('yyyyMMdd').
+    /// The DateTime will be converted automatically to the universal SQL date format.
     /// </remarks>
     /// <seealso cref="QueryArgBase" />
     internal class DateTimeValueArg : QueryArgBase

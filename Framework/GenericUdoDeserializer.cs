@@ -18,7 +18,7 @@ using SAPbobsCOM;
 
 namespace B1PP
 {
-    internal class GenericUdoDeserializer<T> : IUdoDeserializer<T> where T : class, new()
+    internal sealed class GenericUdoDeserializer<T> : IUdoDeserializer<T> where T : class, new()
     {
         private bool IsSystemTimeProperty(PropertyInfo property)
         {

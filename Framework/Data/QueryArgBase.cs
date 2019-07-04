@@ -108,7 +108,7 @@ namespace B1PP.Data
         /// </returns>
         protected string ToSqlParameter(DateTime value)
         {
-            var stringValue = value.ToString(@"yyyyMMdd");
+            string stringValue = value.ToString(GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture);
             return SingleQuote(stringValue);
         }
 

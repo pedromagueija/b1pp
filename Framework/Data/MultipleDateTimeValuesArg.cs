@@ -13,7 +13,7 @@ namespace B1PP.Data
     /// Represents multiple date time values that can be used as parameters for a query.
     /// </summary>
     /// <remarks>
-    /// The DateTime values will be converted automatically to the universal SQL date format ('yyyyMMdd').
+    /// The DateTime values will be converted automatically to the universal SQL date format.
     /// </remarks>
     /// <seealso cref="B1PP.Data.QueryArgBase" />
     internal class MultipleDateTimeValuesArg : QueryArgBase

@@ -260,7 +260,7 @@ namespace B1PP.Extensions.SDK.UI
 
             if (type == typeof(DateTime))
             {
-                return DateTime.ParseExact(textValue, @"yyyyMMdd", CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(textValue, GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture);
             }
 
             if (type == typeof(int))
@@ -374,7 +374,7 @@ namespace B1PP.Extensions.SDK.UI
 
             if (propertyValue is DateTime dateTime)
             {
-                return dateTime.ToString("yyyyMMdd");
+                return dateTime.ToString(GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture);
             }
 
             return Convert.ToString(propertyValue, CultureInfo.InvariantCulture);

@@ -64,7 +64,7 @@ namespace B1PP.Data
                     yield break;
                 }
 
-                var reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = RecordsetReader.CreateNew(recordset);
 
                 while (reader.MoveNext())
                 {
@@ -89,7 +89,7 @@ namespace B1PP.Data
                     yield break;
                 }
 
-                var reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = RecordsetReader.CreateNew(recordset);
 
                 while (reader.MoveNext())
                 {
@@ -115,7 +115,7 @@ namespace B1PP.Data
                     yield break;
                 }
 
-                var reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = RecordsetReader.CreateNew(recordset);
 
                 while (reader.MoveNext())
                 {
@@ -143,7 +143,7 @@ namespace B1PP.Data
                     return @default;
                 }
 
-                var reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = RecordsetReader.CreateNew(recordset);
 
                 if (reader.MoveNext())
                 {
@@ -171,7 +171,7 @@ namespace B1PP.Data
                     return null;
                 }
 
-                var reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = RecordsetReader.CreateNew(recordset);
 
                 if (reader.MoveNext())
                 {
@@ -197,7 +197,7 @@ namespace B1PP.Data
                     return null;
                 }
 
-                var reader = XmlRecordsetReader.CreateNew(recordset);
+                var reader = RecordsetReader.CreateNew(recordset);
 
                 if (reader.MoveNext())
                 {

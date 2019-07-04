@@ -213,9 +213,10 @@ namespace B1PP.Extensions.SDK.UI
         /// <param name="value">The value.</param>
         public static void SetValue(this UserDataSources datasource, string userDataSourceId, DateTime? value)
         {
-            if (value != null)
+            if (value.HasValue)
             {
-                datasource.Item(userDataSourceId).ValueEx = ((DateTime) value).ToString("yyyyMMdd");
+                var dateTime = value.Value;
+                datasource.Item(userDataSourceId).ValueEx = dateTime.ToString(GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture);
             }
         }
 

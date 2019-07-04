@@ -19,12 +19,14 @@ namespace Tests.Feature.Data
             var b1 = ConnectionFactory.CreateStandardConnection();
             b1.Connect();
 
-            var rs = (Recordset)b1.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
-            rs.DoQuery(@"SELECT TOP 1 2147483647+1 AS ""Number"" FROM ""OCRD"" ");
-            var reader = XmlRecordsetReader.CreateNew(rs);
-            reader.MoveNext();
+            using (var rs = new DisposableRecordset(b1.Company))
+            {
+                rs.DoQuery(@"SELECT TOP 1 2147483647+1 AS ""Number"" FROM ""OCRD"" ");
+                var reader = RecordsetReader.CreateNew(rs);
+                reader.MoveNext();
 
-            Assert.Throws<OverflowException>(() => reader.GetInt(@"Number"));
+                Assert.Throws<OverflowException>(() => reader.GetInt(@"Number"));
+            }
 
             b1.Disconnect();
         }
@@ -34,17 +36,19 @@ namespace Tests.Feature.Data
         {
             var b1 = ConnectionFactory.CreateStandardConnection();
             b1.Connect();
-            var rs = (Recordset) b1.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
-            rs.DoQuery(@"SELECT * FROM ""OCRD"" ");
-            var reader = XmlRecordsetReader.CreateNew(rs);
-
-            while (reader.MoveNext())
+            using (var rs = new DisposableRecordset(b1.Company))
             {
-                string name = reader.GetString(@"CardName");
-                string code = reader.GetString(@"CardCode");
-                int group = reader.GetInt(@"GroupCode").GetValueOrDefault();
+                rs.DoQuery(@"SELECT * FROM ""OCRD"" ");
+                var reader = RecordsetReader.CreateNew(rs);
 
-                Console.WriteLine($@"{name} {code} {group}");
+                while (reader.MoveNext())
+                {
+                    string name = reader.GetString(@"CardName");
+                    string code = reader.GetString(@"CardCode");
+                    int group = reader.GetInt(@"GroupCode").GetValueOrDefault();
+
+                    Console.WriteLine($@"{name} {code} {group}");
+                }
             }
 
             b1.Disconnect();

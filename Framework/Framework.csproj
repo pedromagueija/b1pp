@@ -90,6 +90,9 @@
     <Compile Include="Data\IQuery.cs" />
     <Compile Include="Data\ISelectStatement.cs" />
     <Compile Include="Data\QueryFactory.cs" />
+    <Compile Include="Data\RecordsetResult.cs" />
+    <Compile Include="Data\RecordsetRow.cs" />
+    <Compile Include="Data\RecordsetRowField.cs" />
     <Compile Include="Data\SelectStatement.cs" />
     <Compile Include="Data\SqlStatementFactory.cs" />
     <Compile Include="Data\SystemTableAttribute.cs" />
@@ -147,7 +150,6 @@
     <Compile Include="Database\ISimpleAutoIncrementRecord.cs" />
     <Compile Include="Database\ISimpleRecord.cs" />
     <Compile Include="Database\ManifestResourceReader.cs" />
-    <Compile Include="Database\PropertyUserFieldAdapter.cs" />
     <Compile Include="Database\SchemaManager.cs" />
     <Compile Include="Database\SetPropertyException.cs" />
     <Compile Include="Database\SimpleAutoIncrementRecord.cs" />
@@ -173,7 +175,7 @@
     <Compile Include="Data\QueryArgBase.cs" />
     <Compile Include="Data\QueryBase.cs" />
     <Compile Include="Data\StringValueArg.cs" />
-    <Compile Include="Data\XmlRecordsetReader.cs" />
+    <Compile Include="Data\RecordsetReader.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="Extensions\Common\DoubleExtensions.cs" />
     <Compile Include="Extensions\Common\IntegerExtensions.cs" />
@@ -228,7 +230,6 @@
     <Compile Include="Forms\Events\LayoutKeyEvents\LayoutKeyEventHandlerAttribute.cs" />
     <Compile Include="Forms\Events\LayoutKeyEvents\LayoutKeyEventListener.cs" />
     <Compile Include="Forms\Events\MenuEvents\B1MenuEventDispatcher.cs" />
-    <Compile Include="Forms\Events\MenuEvents\EventHandlerAlreadyExistsException.cs" />
     <Compile Include="Forms\Events\MenuEvents\FormMenuEventListener.cs" />
     <Compile Include="Forms\Events\MenuEvents\IFormMenuEventListener.cs" />
     <Compile Include="Forms\Events\MenuEvents\IMainMenuEventListener.cs" />

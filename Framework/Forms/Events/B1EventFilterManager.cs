@@ -16,7 +16,7 @@ namespace B1PP.Forms.Events
     /// </summary>
     internal static class B1EventFilterManager
     {
-        private static Application app;
+        private static Application App;
 
         /// <summary>
         /// Helper to handle the xml filter format.
@@ -47,7 +47,7 @@ namespace B1PP.Forms.Events
         /// </summary>
         public static void Initialize(Application application)
         {
-            app = application;
+            App = application;
             DisableEventSending();
             XmlFilter.Load(application.GetFilter().GetAsXML());
         }
@@ -70,7 +70,7 @@ namespace B1PP.Forms.Events
         /// </summary>
         private static void DisableEventSending()
         {
-            app.SetFilter();
+            App.SetFilter();
         }
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace B1PP.Forms.Events
         /// </summary>
         private static void SetEventSending()
         {
-            var eventFilters = app.GetFilter();
+            var eventFilters = App.GetFilter();
             eventFilters.LoadFromXML(XmlFilter.ToString());
-            app.SetFilter(eventFilters);
+            App.SetFilter(eventFilters);
         }
     }
 }

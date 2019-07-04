@@ -98,7 +98,7 @@ namespace B1PP
                 if (date < new DateTime(32, 01, 01)) // the sdk has an issue when the date is before the year 32
                     return string.Empty;
 
-                return date.ToString(@"yyyy-MM-dd");
+                return date.ToString(@"yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
 
             if (property.PropertyType.IsEnum)

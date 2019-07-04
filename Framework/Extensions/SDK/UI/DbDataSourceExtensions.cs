@@ -35,7 +35,7 @@ namespace B1PP.Extensions.SDK.UI
                 return null;
             }
 
-            var value = DateTime.ParseExact(sourceValue, "yyyyMMdd", CultureInfo.InvariantCulture);
+            var value = DateTime.ParseExact(sourceValue, GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture);
             return value;
         }
 
@@ -149,9 +149,10 @@ namespace B1PP.Extensions.SDK.UI
         /// <param name="value">The value.</param>
         public static void Set(this DBDataSource source, string columnId, int rowIndex, DateTime? value)
         {
-            if (value != null)
+            if (value.HasValue)
             {
-                source.SetValue(columnId, rowIndex, ((DateTime) value).ToString("yyyyMMdd"));
+                var dateTime = value.Value;
+                source.SetValue(columnId, rowIndex, dateTime.ToString(GlobalConstants.BusinessOneDateTimeFormat, CultureInfo.InvariantCulture));
             }
         }
 
